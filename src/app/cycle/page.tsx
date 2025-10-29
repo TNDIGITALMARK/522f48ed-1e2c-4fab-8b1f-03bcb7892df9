@@ -8,10 +8,54 @@ import { Calendar, Heart, Zap, CloudRain, Sun, Moon, Sparkles } from 'lucide-rea
 import { useState } from 'react';
 
 const cyclePhases = [
-  { name: 'Menstruation', icon: CloudRain, days: '1-5', color: 'bg-accent', description: 'Rest and renew' },
-  { name: 'Follicular', icon: Sun, days: '6-13', color: 'bg-primary', description: 'Energy rising' },
-  { name: 'Ovulation', icon: Sparkles, days: '14-16', color: 'bg-secondary', description: 'Peak energy' },
-  { name: 'Luteal', icon: Moon, days: '17-28', color: 'bg-muted', description: 'Wind down' },
+  {
+    name: 'Menstruation',
+    icon: CloudRain,
+    days: '1-5',
+    color: 'bg-accent',
+    description: 'Rest and renew',
+    workout: 'Restorative yoga, walking',
+    nutrition: 'Iron-rich foods, warm meals',
+    energy: 'Lower activity',
+    affirmation: 'It\'s okay to rest — your body is working hard for you.',
+    calorieAdjustment: '-100 kcal/day',
+  },
+  {
+    name: 'Follicular',
+    icon: Sun,
+    days: '6-13',
+    color: 'bg-primary',
+    description: 'Energy rising',
+    workout: 'Light strength training, HIIT',
+    nutrition: 'Higher carb meals to fuel energy',
+    energy: 'Elevated',
+    affirmation: 'Strength training and higher carb meals will fuel your energy best!',
+    calorieAdjustment: '+100 kcal/day',
+  },
+  {
+    name: 'Ovulation',
+    icon: Sparkles,
+    days: '14-16',
+    color: 'bg-secondary',
+    description: 'Peak energy',
+    workout: 'Peak intensity workouts',
+    nutrition: 'Balanced macros',
+    energy: 'Peak',
+    affirmation: 'You\'re at your peak - tackle those challenging goals!',
+    calorieAdjustment: 'Baseline',
+  },
+  {
+    name: 'Luteal',
+    icon: Moon,
+    days: '17-28',
+    color: 'bg-muted',
+    description: 'Wind down',
+    workout: 'Low impact & mobility',
+    nutrition: 'Magnesium-rich foods (sweet potato, avocado)',
+    energy: 'Moderate to low',
+    affirmation: 'Your body needs gentleness right now - honor that.',
+    calorieAdjustment: '+200 kcal/day',
+  },
 ];
 
 const moodOptions = [
@@ -161,32 +205,52 @@ export default function CyclePage() {
         </div>
 
         {/* Cycle Insights */}
-        <Card className="bloom-card bg-gradient-to-br from-primary/5 to-primary/10 border-none">
-          <h3 className="text-xl font-semibold mb-3">Phase Insights</h3>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            You're in your ovulation phase - peak energy and confidence! This is the perfect time for:
-          </p>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" />
+        {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
+          const PhaseIcon = phase.icon;
+          return (
+            <Card key={phase.name} className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-none mb-6">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
+                  <PhaseIcon className="w-7 h-7 text-secondary-foreground" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-1">{phase.name} Phase Guidance</h3>
+                  <p className="text-muted-foreground italic">&quot;{phase.affirmation}&quot;</p>
+                </div>
               </div>
-              <p className="text-muted-foreground">Social activities and important conversations</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" />
+
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div className="bg-white rounded-xl p-4">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-secondary" />
+                    Recommended Workouts
+                  </h4>
+                  <p className="text-sm text-muted-foreground">{phase.workout}</p>
+                </div>
+                <div className="bg-white rounded-xl p-4">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-primary" />
+                    Nutrition Focus
+                  </h4>
+                  <p className="text-sm text-muted-foreground">{phase.nutrition}</p>
+                </div>
               </div>
-              <p className="text-muted-foreground">High-intensity workouts and physical challenges</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                <Sparkles className="w-3.5 h-3.5 text-primary-foreground" />
+
+              <div className="bg-white rounded-xl p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold mb-1">Energy Level Expected</h4>
+                    <p className="text-sm text-muted-foreground">{phase.energy}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-1">Calorie Adjustment</h4>
+                    <p className="text-sm font-medium text-secondary">{phase.calorieAdjustment}</p>
+                  </div>
+                </div>
               </div>
-              <p className="text-muted-foreground">Creative projects and problem-solving</p>
-            </li>
-          </ul>
-        </Card>
+            </Card>
+          );
+        })}
 
         {/* Past Cycles Summary */}
         <div className="mt-8">
