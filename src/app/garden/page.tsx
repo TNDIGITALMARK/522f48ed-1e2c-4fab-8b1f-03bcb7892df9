@@ -6,12 +6,14 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star } from 'lucide-react';
+import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star, Dumbbell } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { GardenGrid } from '@/components/garden-grid';
+import { EnhancedGardenGrid } from '@/components/enhanced-garden-grid';
+import { MultiplayerActivities } from '@/components/multiplayer-activities';
 import { FriendsManager } from '@/components/friends-manager';
 import { SendGiftDialog } from '@/components/send-gift-dialog';
+import { GardenTutorial } from '@/components/garden-tutorial';
 
 const gardenThemes = [
   { name: 'Sunflower Meadow', icon: Sun, locked: false, color: 'from-yellow-100 to-orange-100' },
@@ -47,6 +49,7 @@ export default function GardenPage() {
   const [gardenLevel] = useState(8);
   const [giftDialogOpen, setGiftDialogOpen] = useState(false);
   const [selectedFriendForGift, setSelectedFriendForGift] = useState<{ id: string; name: string } | null>(null);
+  const [showTutorial, setShowTutorial] = useState(false);
 
   const nextLevelPoints = 400;
   const currentPoints = 342;
@@ -64,10 +67,22 @@ export default function GardenPage() {
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
         <div className="mb-8">
-          <h1 className="text-4xl mb-2">Your Bloom Garden</h1>
-          <p className="text-muted-foreground text-lg">
-            Watch your habits grow into a beautiful garden
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl mb-2">Your Bloom Garden</h1>
+              <p className="text-muted-foreground text-lg">
+                Build, grow, and compete - Hay Day style!
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowTutorial(true)}
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Tutorial
+            </Button>
+          </div>
         </div>
 
         {/* Garden Stats & Coins */}
@@ -309,8 +324,9 @@ export default function GardenPage() {
         {/* Interactive Garden & Social Features */}
         <div className="mb-6">
           <Tabs defaultValue="garden" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="grid w-full grid-cols-4 mb-6">
               <TabsTrigger value="garden">My Garden</TabsTrigger>
+              <TabsTrigger value="activities">Activities</TabsTrigger>
               <TabsTrigger value="friends">Friends</TabsTrigger>
               <TabsTrigger value="visits">Garden Visits</TabsTrigger>
             </TabsList>
@@ -319,18 +335,34 @@ export default function GardenPage() {
               <Card className="bloom-card">
                 <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
                   <Leaf className="w-6 h-6 text-primary" />
-                  Build Your Garden
+                  Build Your Garden - Hay Day Style
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Place plants, buildings, and decorations. Watch them grow as you complete wellness activities!
+                  🌱 Drag and place plants anywhere! Water them, give them sunlight, and fertilize to help them grow.
+                  Build structures like greenhouses and workshops to boost your garden.
+                  Complete wellness activities to earn coins and watch your garden flourish!
                 </p>
-                <GardenGrid
-                  gridWidth={10}
-                  gridHeight={10}
+                <EnhancedGardenGrid
+                  gridWidth={12}
+                  gridHeight={12}
                   gardenLevel={gardenLevel}
                   coins={bloomCoins}
                   onCoinsChange={setBloomCoins}
                 />
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="activities">
+              <Card className="bloom-card">
+                <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                  <Dumbbell className="w-6 h-6 text-primary" />
+                  Multiplayer Activities
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Join group workouts, hikes, and runs! Complete HYROX challenges, conquer mountain trails,
+                  and compete with friends to climb the leaderboard. Earn coins and XP while building a healthier you!
+                </p>
+                <MultiplayerActivities />
               </Card>
             </TabsContent>
 
@@ -397,6 +429,11 @@ export default function GardenPage() {
             alert(`Sent ${gift.name} to ${selectedFriendForGift.name}!${message ? `\nMessage: ${message}` : ''}`);
           }}
         />
+      )}
+
+      {/* Garden Tutorial */}
+      {showTutorial && (
+        <GardenTutorial onComplete={() => setShowTutorial(false)} />
       )}
     </div>
   );
