@@ -1,5 +1,6 @@
 "use client";
 
+import Link from 'next/link';
 import { Navigation } from '@/components/navigation';
 import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
