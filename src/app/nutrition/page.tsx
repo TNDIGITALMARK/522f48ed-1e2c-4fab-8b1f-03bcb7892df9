@@ -590,10 +590,24 @@ export default function NutritionPage() {
                 ))}
               </div>
 
-              <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
-                <p className="text-sm text-center text-muted-foreground">
-                  <strong>Pro Tip:</strong> Click on any empty meal slot to search and add foods with custom serving sizes (grams, oz, cups, etc.)
-                </p>
+              <div className="mt-6 space-y-3">
+                <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
+                  <p className="text-sm text-center text-muted-foreground">
+                    <strong>Pro Tip:</strong> Click on any empty meal slot to search and add foods with custom serving sizes (grams, oz, cups, etc.)
+                  </p>
+                </div>
+
+                <div className="p-4 bg-secondary/10 rounded-xl border border-secondary/20">
+                  <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
+                    🍔 Popular Restaurant Menus Available
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Browse nutrition info from Tim Hortons, Starbucks, McDonald's, Wendy's, and more!
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    <strong>Community-Powered:</strong> Add your own custom foods and they'll be available for all users. Help us build the most comprehensive food database together!
+                  </p>
+                </div>
               </div>
             </Card>
           </TabsContent>

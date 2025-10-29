@@ -1,12 +1,18 @@
 import { FoodItem } from './supabase/client';
 import { getCommonServingSizes } from './serving-conversions';
+import { RESTAURANT_FOODS } from './restaurant-foods';
 
 /**
- * Sample food database - resembling MyFitnessPal's structure
+ * Combined food database - includes common foods and restaurant menus
  * All nutritional values are per 100g for consistency
+ *
+ * Features:
+ * - Custom serving sizes support
+ * - Restaurant menu items (Tim Hortons, Starbucks, McDonalds, Wendys)
+ * - User-contributed foods (stored locally and sharable)
  */
 
-export const SAMPLE_FOODS: Omit<FoodItem, 'id' | 'tenantid' | 'projectid' | 'created_at' | 'updated_at'>[] = [
+const COMMON_FOODS: Omit<FoodItem, 'id' | 'tenantid' | 'projectid' | 'created_at' | 'updated_at'>[] = [
   // PROTEINS
   {
     name: 'Chicken Breast, Grilled',
@@ -308,3 +314,22 @@ export const SAMPLE_FOODS: Omit<FoodItem, 'id' | 'tenantid' | 'projectid' | 'cre
     source: 'USDA',
   },
 ];
+
+// Merge common foods with restaurant menu items
+export const SAMPLE_FOODS = [...COMMON_FOODS, ...RESTAURANT_FOODS];
+
+// Export restaurant names for filtering
+export const RESTAURANTS = ['Tim Hortons', 'Starbucks', 'McDonalds', 'Wendys'] as const;
+
+// Helper function to get foods by restaurant
+export function getFoodsByRestaurant(restaurant: string) {
+  return SAMPLE_FOODS.filter(food => food.brand === restaurant);
+}
+
+// Helper function to get all restaurants with food counts
+export function getRestaurantCounts() {
+  return RESTAURANTS.map(restaurant => ({
+    name: restaurant,
+    count: SAMPLE_FOODS.filter(food => food.brand === restaurant).length,
+  }));
+}

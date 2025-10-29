@@ -7,10 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, Flame, Apple } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Search, Flame, Apple, Plus, Store } from 'lucide-react';
 import { ServingSize } from '@/lib/supabase/client';
-import { SAMPLE_FOODS } from '@/lib/sample-foods';
+import { SAMPLE_FOODS, RESTAURANTS } from '@/lib/sample-foods';
 import { calculateNutrition, formatServingSize } from '@/lib/serving-conversions';
+import { AddCustomFoodDialog } from './add-custom-food-dialog';
+import { CustomServingInput } from './custom-serving-input';
 
 interface FoodLookupDialogProps {
   open: boolean;
@@ -32,24 +35,33 @@ interface FoodLookupDialogProps {
 export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDialogProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedRestaurant, setSelectedRestaurant] = useState<string>('all');
   const [selectedFoodIndex, setSelectedFoodIndex] = useState<number | null>(null);
   const [selectedServing, setSelectedServing] = useState<ServingSize | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
+  const [customServings, setCustomServings] = useState<ServingSize[]>([]);
+  const [addFoodDialogOpen, setAddFoodDialogOpen] = useState(false);
+  const [localFoods, setLocalFoods] = useState<typeof SAMPLE_FOODS>([]);
 
-  // Filter foods based on search and category
+  // Filter foods based on search, category, and restaurant
   const filteredFoods = useMemo(() => {
-    return SAMPLE_FOODS.filter((food) => {
+    const allFoods = [...SAMPLE_FOODS, ...localFoods];
+    return allFoods.filter((food) => {
       const matchesSearch = food.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (food.brand?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
         food.description?.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesCategory = selectedCategory === 'all' || food.category === selectedCategory;
 
-      return matchesSearch && matchesCategory;
-    });
-  }, [searchQuery, selectedCategory]);
+      const matchesRestaurant = selectedRestaurant === 'all' ||
+        (selectedRestaurant === 'restaurants' && RESTAURANTS.includes(food.brand as any)) ||
+        food.brand === selectedRestaurant;
 
-  const categories = ['all', 'protein', 'grains', 'vegetables', 'fruits', 'dairy', 'nuts'];
+      return matchesSearch && matchesCategory && matchesRestaurant;
+    });
+  }, [searchQuery, selectedCategory, selectedRestaurant, localFoods]);
+
+  const categories = ['all', 'protein', 'grains', 'vegetables', 'fruits', 'dairy', 'nuts', 'snacks', 'beverages', 'meals', 'breakfast', 'sides'];
 
   const selectedFood = selectedFoodIndex !== null ? filteredFoods[selectedFoodIndex] : null;
 
@@ -58,6 +70,23 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
     const food = filteredFoods[index];
     setSelectedServing(food.default_serving_size || food.serving_sizes[0]);
     setQuantity(1);
+    setCustomServings([]);
+  };
+
+  const handleAddCustomServing = (serving: ServingSize) => {
+    setCustomServings((prev) => [...prev, serving]);
+    setSelectedServing(serving);
+  };
+
+  const handleAddCustomFood = (foodData: any) => {
+    const newFood = {
+      ...foodData,
+      is_custom: true,
+      added_by: 'current_user',
+      verified: false,
+      source: 'User Contributed',
+    };
+    setLocalFoods((prev) => [...prev, newFood]);
   };
 
   const handleAddFood = () => {
@@ -102,28 +131,45 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
 
         <div className="flex flex-col gap-4 flex-1 overflow-hidden">
           {/* Search and Filters */}
-          <div className="flex gap-3">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Search foods (e.g., chicken breast, banana)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search foods (e.g., chicken breast, banana)..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-40">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>
-                    {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+
+            {/* Restaurant Filter */}
+            <Tabs value={selectedRestaurant} onValueChange={setSelectedRestaurant} className="w-full">
+              <TabsList className="grid w-full grid-cols-6 h-auto">
+                <TabsTrigger value="all" className="text-xs">All</TabsTrigger>
+                <TabsTrigger value="Tim Hortons" className="text-xs">Tim's</TabsTrigger>
+                <TabsTrigger value="Starbucks" className="text-xs">Starbucks</TabsTrigger>
+                <TabsTrigger value="McDonalds" className="text-xs">McDonald's</TabsTrigger>
+                <TabsTrigger value="Wendys" className="text-xs">Wendy's</TabsTrigger>
+                <TabsTrigger value="restaurants" className="text-xs">
+                  <Store className="w-3 h-3 mr-1" />
+                  All Restaurants
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
           </div>
 
           {/* Two-column layout */}
@@ -201,7 +247,8 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
                         <Select
                           value={selectedServing?.label || ''}
                           onValueChange={(label) => {
-                            const serving = selectedFood.serving_sizes.find(s => s.label === label);
+                            const allServings = [...selectedFood.serving_sizes, ...customServings];
+                            const serving = allServings.find(s => s.label === label);
                             if (serving) setSelectedServing(serving);
                           }}
                         >
@@ -214,6 +261,16 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
                                 {formatServingSize(serving)}
                               </SelectItem>
                             ))}
+                            {customServings.length > 0 && (
+                              <>
+                                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">Custom Servings</div>
+                                {customServings.map((serving, idx) => (
+                                  <SelectItem key={`custom-${idx}`} value={serving.label}>
+                                    {formatServingSize(serving)} ⭐
+                                  </SelectItem>
+                                ))}
+                              </>
+                            )}
                           </SelectContent>
                         </Select>
                       </div>
@@ -229,6 +286,9 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
                           className="w-full"
                         />
                       </div>
+
+                      {/* Custom Serving Input */}
+                      <CustomServingInput onAdd={handleAddCustomServing} />
                     </div>
                   </div>
 
@@ -297,12 +357,27 @@ export function FoodLookupDialog({ open, onOpenChange, onSelect }: FoodLookupDia
           </div>
         </div>
 
-        <DialogFooter>
+        <DialogFooter className="flex justify-between">
+          <Button
+            variant="outline"
+            onClick={() => setAddFoodDialogOpen(true)}
+            className="mr-auto"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Add Custom Food
+          </Button>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
         </DialogFooter>
       </DialogContent>
+
+      {/* Add Custom Food Dialog */}
+      <AddCustomFoodDialog
+        open={addFoodDialogOpen}
+        onOpenChange={setAddFoodDialogOpen}
+        onSubmit={handleAddCustomFood}
+      />
     </Dialog>
   );
 }
