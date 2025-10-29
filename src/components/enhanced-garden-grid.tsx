@@ -8,9 +8,10 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Progress } from '@/components/ui/progress';
 import {
   Leaf, Flower2, Home, Fence, Plus, X, Sprout, TreeDeciduous,
-  Droplets, Sun, Zap, Package, Sparkles, Award, Clock
+  Droplets, Sun, Zap, Package, Sparkles, Award, Clock, Brain
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { TreeOfWisdom } from './tree-of-wisdom';
 
 interface PlantCareStats {
   water: number; // 0-100
@@ -22,7 +23,7 @@ interface PlantCareStats {
 
 interface GardenItem {
   id: string;
-  type: 'plant' | 'building' | 'decoration';
+  type: 'plant' | 'building' | 'decoration' | 'wisdom';
   name: string;
   gridX: number;
   gridY: number;
@@ -35,6 +36,8 @@ interface GardenItem {
   color: string;
   producesCoins?: number;
   buildingLevel?: number;
+  emoji?: string;
+  isSpecial?: boolean;
 }
 
 interface GardenGridProps {
@@ -46,12 +49,29 @@ interface GardenGridProps {
 }
 
 const AVAILABLE_ITEMS = [
+  // Special - Tree of Wisdom (Featured)
+  { type: 'wisdom', name: 'Tree of Wisdom', icon: Brain, color: 'text-purple-600', cost: 200, width: 3, height: 3, emoji: '🌳', isSpecial: true, description: 'Sacred tree for meditation, journaling & daily wisdom' },
+
+  // Basic Flowers
   { type: 'plant', name: 'Sunflower', icon: Flower2, color: 'text-yellow-500', cost: 10, width: 1, height: 1, producesCoins: 25, growthTime: 120 },
   { type: 'plant', name: 'Rose Bush', icon: Flower2, color: 'text-pink-500', cost: 15, width: 1, height: 1, producesCoins: 35, growthTime: 180 },
-  { type: 'plant', name: 'Oak Tree', icon: TreeDeciduous, color: 'text-green-600', cost: 30, width: 2, height: 2, producesCoins: 80, growthTime: 300 },
   { type: 'plant', name: 'Flower Bed', icon: Sprout, color: 'text-purple-500', cost: 20, width: 2, height: 1, producesCoins: 50, growthTime: 150 },
   { type: 'plant', name: 'Berry Bush', icon: Leaf, color: 'text-red-500', cost: 12, width: 1, height: 1, producesCoins: 30, growthTime: 100 },
+
+  // Fruit Trees - Higher Value
+  { type: 'plant', name: 'Apple Tree', icon: TreeDeciduous, color: 'text-red-600', cost: 50, width: 2, height: 2, producesCoins: 150, growthTime: 400, emoji: '🍎' },
+  { type: 'plant', name: 'Peach Tree', icon: TreeDeciduous, color: 'text-orange-400', cost: 55, width: 2, height: 2, producesCoins: 160, growthTime: 420, emoji: '🍑' },
+  { type: 'plant', name: 'Cherry Tree', icon: TreeDeciduous, color: 'text-pink-600', cost: 60, width: 2, height: 2, producesCoins: 170, growthTime: 450, emoji: '🍒' },
+  { type: 'plant', name: 'Orange Tree', icon: TreeDeciduous, color: 'text-orange-500', cost: 65, width: 2, height: 2, producesCoins: 180, growthTime: 480, emoji: '🍊' },
+  { type: 'plant', name: 'Lemon Tree', icon: TreeDeciduous, color: 'text-yellow-400', cost: 45, width: 2, height: 2, producesCoins: 140, growthTime: 380, emoji: '🍋' },
+
+  // Regular Trees
+  { type: 'plant', name: 'Oak Tree', icon: TreeDeciduous, color: 'text-green-600', cost: 30, width: 2, height: 2, producesCoins: 80, growthTime: 300 },
+
+  // Decorations
   { type: 'decoration', name: 'Garden Fence', icon: Fence, color: 'text-amber-700', cost: 5, width: 1, height: 1 },
+
+  // Buildings
   { type: 'building', name: 'Greenhouse', icon: Home, color: 'text-emerald-600', cost: 100, width: 3, height: 2 },
   { type: 'building', name: 'Storage Shed', icon: Package, color: 'text-blue-600', cost: 50, width: 2, height: 2 },
   { type: 'building', name: 'Workshop', icon: Zap, color: 'text-orange-600', cost: 75, width: 2, height: 2 },
@@ -64,6 +84,7 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
   const [selectedItem, setSelectedItem] = useState<GardenItem | null>(null);
   const [draggedItem, setDraggedItem] = useState<GardenItem | null>(null);
   const [time, setTime] = useState(Date.now());
+  const [showWisdomTree, setShowWisdomTree] = useState(false);
 
   // Simulate time passing for plant growth
   useEffect(() => {
@@ -120,7 +141,12 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
     );
 
     if (clickedItem) {
-      setSelectedItem(clickedItem);
+      // Special handling for Tree of Wisdom
+      if (clickedItem.type === 'wisdom') {
+        setShowWisdomTree(true);
+      } else {
+        setSelectedItem(clickedItem);
+      }
     } else {
       setSelectedCell({ x, y });
       setShowItemSelector(true);
@@ -158,6 +184,8 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
       color: itemTemplate.color,
       producesCoins: itemTemplate.producesCoins,
       buildingLevel: 1,
+      emoji: 'emoji' in itemTemplate ? itemTemplate.emoji : undefined,
+      isSpecial: 'isSpecial' in itemTemplate ? itemTemplate.isSpecial : false,
     };
 
     setItems([...items, newItem]);
@@ -368,23 +396,51 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
                   {item && (
                     <div
                       className={cn(
-                        "absolute inset-0 flex flex-col items-center justify-center bg-white/90 rounded-lg cursor-move",
+                        "absolute inset-0 flex flex-col items-center justify-center rounded-lg cursor-move transition-all",
                         draggedItem?.id === item.id && "dragging",
-                        item.type === 'plant' && item.growthStage === 4 && "plant-interactive"
+                        item.type === 'plant' && item.growthStage === 4 && "plant-interactive",
+                        item.type === 'wisdom' ? "bg-gradient-to-br from-purple-100 via-indigo-100 to-violet-100 border-2 border-purple-300 shadow-lg" : "bg-white/90"
                       )}
                       draggable
                       onDragStart={() => handleDragStart(item)}
                     >
-                      <item.icon
-                        className={cn(
-                          'w-10 h-10 transition-all',
-                          item.color,
-                          item.type === 'plant' && item.growthStage < 4 && `opacity-${30 + item.growthStage * 15}`
-                        )}
-                        style={{
-                          fontSize: `${1 + item.growthStage * 0.2}rem`
-                        }}
-                      />
+                      {item.type === 'wisdom' ? (
+                        <div className="text-center relative">
+                          <div
+                            className="text-6xl animate-pulse"
+                            style={{
+                              filter: 'drop-shadow(0 4px 8px rgba(124, 58, 237, 0.3))'
+                            }}
+                          >
+                            {item.emoji}
+                          </div>
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
+                            <Sparkles className="w-3 h-3 text-white" />
+                          </div>
+                          <p className="text-xs font-medium text-purple-700 mt-2">Wisdom</p>
+                        </div>
+                      ) : item.emoji && item.growthStage >= 3 ? (
+                        <div
+                          className="text-4xl transition-all"
+                          style={{
+                            fontSize: `${2 + item.growthStage * 0.3}rem`,
+                            opacity: 0.3 + item.growthStage * 0.17
+                          }}
+                        >
+                          {item.emoji}
+                        </div>
+                      ) : (
+                        <item.icon
+                          className={cn(
+                            'w-10 h-10 transition-all',
+                            item.color,
+                            item.type === 'plant' && item.growthStage < 4 && `opacity-${30 + item.growthStage * 15}`
+                          )}
+                          style={{
+                            fontSize: `${1 + item.growthStage * 0.2}rem`
+                          }}
+                        />
+                      )}
 
                       {item.type === 'plant' && item.careStats && (
                         <div className="text-xs mt-1 space-y-1 w-full px-2">
@@ -434,14 +490,29 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
                 key={index}
                 className={cn(
                   'p-4 cursor-pointer hover:shadow-bloom transition-all',
-                  coins < item.cost && 'opacity-50 cursor-not-allowed'
+                  coins < item.cost && 'opacity-50 cursor-not-allowed',
+                  'isSpecial' in item && item.isSpecial && 'bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-300 relative'
                 )}
                 onClick={() => coins >= item.cost && selectedCell && placeItem(item)}
               >
+                {'isSpecial' in item && item.isSpecial && (
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center z-10">
+                    <Sparkles className="w-3 h-3 text-white" />
+                  </div>
+                )}
                 <div className="flex flex-col items-center gap-3">
-                  <item.icon className={cn('w-12 h-12', item.color)} />
+                  {'emoji' in item && item.emoji ? (
+                    <div className="text-5xl">{item.emoji}</div>
+                  ) : (
+                    <item.icon className={cn('w-12 h-12', item.color)} />
+                  )}
                   <div className="text-center">
                     <div className="font-medium text-sm">{item.name}</div>
+                    {'description' in item && item.description && (
+                      <div className="text-xs text-muted-foreground mt-1 mb-2">
+                        {item.description}
+                      </div>
+                    )}
                     <div className="text-xs text-muted-foreground">
                       {item.width}x{item.height} tiles
                     </div>
@@ -584,6 +655,16 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Tree of Wisdom Dialog */}
+      <TreeOfWisdom
+        open={showWisdomTree}
+        onOpenChange={setShowWisdomTree}
+        onComplete={() => {
+          // Award coins for completing wisdom activities
+          onCoinsChange?.(coins + 20);
+        }}
+      />
     </div>
   );
 }

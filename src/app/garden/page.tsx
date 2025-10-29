@@ -337,11 +337,30 @@ export default function GardenPage() {
                   <Leaf className="w-6 h-6 text-primary" />
                   Build Your Garden - Hay Day Style
                 </h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-muted-foreground mb-4">
                   🌱 Drag and place plants anywhere! Water them, give them sunlight, and fertilize to help them grow.
                   Build structures like greenhouses and workshops to boost your garden.
                   Complete wellness activities to earn coins and watch your garden flourish!
                 </p>
+
+                {/* New Features Highlight */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
+                  <div className="flex items-start gap-3">
+                    <div className="text-3xl">🍎</div>
+                    <div>
+                      <h4 className="font-semibold text-sm">Fruit Trees</h4>
+                      <p className="text-xs text-muted-foreground">Plant apple, peach, cherry & orange trees for higher coin rewards!</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="text-3xl">🌳</div>
+                    <div>
+                      <h4 className="font-semibold text-sm">Tree of Wisdom</h4>
+                      <p className="text-xs text-muted-foreground">Click the sacred tree for meditation, journaling & daily AI-powered inspiration!</p>
+                    </div>
+                  </div>
+                </div>
+
                 <EnhancedGardenGrid
                   gridWidth={12}
                   gridHeight={12}
