@@ -207,3 +207,353 @@ export async function getDashboardSummary(userId: string) {
     weeklyStreak: streak,
   };
 }
+
+// ============================================
+// GROCERY LIST TYPES & QUERIES
+// ============================================
+
+export interface GroceryList {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GroceryItem {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  list_id: string;
+  name: string;
+  quantity: string | null;
+  category: string | null;
+  checked: boolean;
+  created_at: string;
+}
+
+export async function getGroceryLists() {
+  const { data, error } = await supabase
+    .from('grocery_lists')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) throw error;
+  return data as GroceryList[];
+}
+
+export async function createGroceryList(name: string = 'My Grocery List') {
+  const { data, error } = await supabase
+    .from('grocery_lists')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      name,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as GroceryList;
+}
+
+export async function getGroceryItems(listId: string) {
+  const { data, error } = await supabase
+    .from('grocery_items')
+    .select('*')
+    .eq('list_id', listId)
+    .order('created_at', { ascending: true });
+
+  if (error) throw error;
+  return data as GroceryItem[];
+}
+
+export async function addGroceryItem(item: Omit<GroceryItem, 'id' | 'tenantid' | 'projectid' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('grocery_items')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      ...item,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as GroceryItem;
+}
+
+export async function toggleGroceryItem(id: string, checked: boolean) {
+  const { data, error } = await supabase
+    .from('grocery_items')
+    .update({ checked })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as GroceryItem;
+}
+
+export async function deleteGroceryItem(id: string) {
+  const { error } = await supabase
+    .from('grocery_items')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+}
+
+export async function deleteGroceryList(id: string) {
+  const { error } = await supabase
+    .from('grocery_lists')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+}
+
+// ============================================
+// MEAL PLANNING TYPES & QUERIES
+// ============================================
+
+export interface MealPlan {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  week_start_date: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Meal {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  meal_plan_id: string;
+  day_of_week: 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+  meal_type: 'breakfast' | 'lunch' | 'dinner' | 'snack';
+  name: string;
+  description: string | null;
+  calories: number | null;
+  protein: number | null;
+  fiber: number | null;
+  created_at: string;
+}
+
+export async function getCurrentWeekMealPlan() {
+  const today = new Date();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - today.getDay() + 1);
+  const weekStart = monday.toISOString().split('T')[0];
+
+  const { data, error } = await supabase
+    .from('meal_plans')
+    .select('*')
+    .eq('week_start_date', weekStart)
+    .single();
+
+  if (error && error.code !== 'PGRST116') throw error;
+  return data as MealPlan | null;
+}
+
+export async function createMealPlan(weekStartDate: string) {
+  const { data, error } = await supabase
+    .from('meal_plans')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      week_start_date: weekStartDate,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as MealPlan;
+}
+
+export async function getMealsForPlan(mealPlanId: string) {
+  const { data, error } = await supabase
+    .from('meals')
+    .select('*')
+    .eq('meal_plan_id', mealPlanId)
+    .order('created_at', { ascending: true });
+
+  if (error) throw error;
+  return data as Meal[];
+}
+
+export async function addMeal(meal: Omit<Meal, 'id' | 'tenantid' | 'projectid' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('meals')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      ...meal,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as Meal;
+}
+
+export async function updateMeal(id: string, updates: Partial<Meal>) {
+  const { data, error } = await supabase
+    .from('meals')
+    .update(updates)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as Meal;
+}
+
+export async function deleteMeal(id: string) {
+  const { error } = await supabase
+    .from('meals')
+    .delete()
+    .eq('id', id);
+
+  if (error) throw error;
+}
+
+// ============================================
+// WORKOUT PLANNING TYPES & QUERIES
+// ============================================
+
+export interface WorkoutPlan {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  name: string;
+  description: string | null;
+  phase: 'menstruation' | 'follicular' | 'ovulation' | 'luteal' | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WorkoutExercise {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  workout_plan_id: string;
+  name: string;
+  description: string | null;
+  muscle_group: string | null;
+  equipment: string | null;
+  order_index: number;
+  created_at: string;
+}
+
+export interface WorkoutLog {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  exercise_id: string;
+  logged_at: string;
+  sets: number | null;
+  reps: number | null;
+  weight: number | null;
+  notes: string | null;
+}
+
+export async function getWorkoutPlans(phase?: string) {
+  let query = supabase
+    .from('workout_plans')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (phase) {
+    query = query.eq('phase', phase);
+  }
+
+  const { data, error } = await query;
+
+  if (error) throw error;
+  return data as WorkoutPlan[];
+}
+
+export async function createWorkoutPlan(plan: Omit<WorkoutPlan, 'id' | 'tenantid' | 'projectid' | 'created_at' | 'updated_at'>) {
+  const { data, error } = await supabase
+    .from('workout_plans')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      ...plan,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as WorkoutPlan;
+}
+
+export async function getWorkoutExercises(workoutPlanId: string) {
+  const { data, error } = await supabase
+    .from('workout_exercises')
+    .select('*')
+    .eq('workout_plan_id', workoutPlanId)
+    .order('order_index', { ascending: true });
+
+  if (error) throw error;
+  return data as WorkoutExercise[];
+}
+
+export async function addWorkoutExercise(exercise: Omit<WorkoutExercise, 'id' | 'tenantid' | 'projectid' | 'created_at'>) {
+  const { data, error } = await supabase
+    .from('workout_exercises')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      ...exercise,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as WorkoutExercise;
+}
+
+export async function logWorkout(log: Omit<WorkoutLog, 'id' | 'tenantid' | 'projectid' | 'logged_at'>) {
+  const { data, error } = await supabase
+    .from('workout_logs')
+    .insert({
+      tenantid: TENANT_ID,
+      projectid: PROJECT_ID,
+      ...log,
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
+  return data as WorkoutLog;
+}
+
+export async function getWorkoutLogs(exerciseId: string, limit: number = 10) {
+  const { data, error } = await supabase
+    .from('workout_logs')
+    .select('*')
+    .eq('exercise_id', exerciseId)
+    .order('logged_at', { ascending: false })
+    .limit(limit);
+
+  if (error) throw error;
+  return data as WorkoutLog[];
+}
+
+export async function getRecentWorkoutLogs(days: number = 7) {
+  const startDate = new Date();
+  startDate.setDate(startDate.getDate() - days);
+
+  const { data, error } = await supabase
+    .from('workout_logs')
+    .select('*, workout_exercises!inner(*)')
+    .gte('logged_at', startDate.toISOString())
+    .order('logged_at', { ascending: false });
+
+  if (error) throw error;
+  return data;
+}

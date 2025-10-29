@@ -6,7 +6,11 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, ShoppingCart, Plus, X, Check } from 'lucide-react';
 import { useState } from 'react';
 
 const mealSuggestions = [
@@ -48,10 +52,60 @@ const weeklyProgress = {
 
 export default function NutritionPage() {
   const [selectedDay, setSelectedDay] = useState('today');
+  const [groceryItems, setGroceryItems] = useState([
+    { id: '1', name: 'Bananas', quantity: '6', category: 'Produce', checked: false },
+    { id: '2', name: 'Greek Yogurt', quantity: '2 containers', category: 'Dairy', checked: true },
+    { id: '3', name: 'Chicken Breast', quantity: '2 lbs', category: 'Protein', checked: false },
+    { id: '4', name: 'Quinoa', quantity: '1 bag', category: 'Grains', checked: false },
+  ]);
+  const [newItem, setNewItem] = useState('');
+  const [newQuantity, setNewQuantity] = useState('');
+  const [isAddingItem, setIsAddingItem] = useState(false);
 
-  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const caloriesRemaining = weeklyProgress.targetCalories - weeklyProgress.currentCalories;
   const weekProgress = (weeklyProgress.currentCalories / weeklyProgress.targetCalories) * 100;
+
+  const [weekMeals, setWeekMeals] = useState<Record<string, Record<string, any>>>({
+    Monday: {
+      breakfast: { name: 'Overnight Oats', calories: 320, protein: 12 },
+      lunch: { name: 'Grilled Chicken Salad', calories: 420, protein: 35 },
+      dinner: { name: 'Salmon with Veggies', calories: 480, protein: 38 },
+    },
+    Tuesday: {},
+    Wednesday: {},
+    Thursday: {},
+    Friday: {},
+    Saturday: {},
+    Sunday: {},
+  });
+
+  const addGroceryItem = () => {
+    if (newItem.trim()) {
+      setGroceryItems([...groceryItems, {
+        id: Date.now().toString(),
+        name: newItem,
+        quantity: newQuantity,
+        category: 'Other',
+        checked: false
+      }]);
+      setNewItem('');
+      setNewQuantity('');
+      setIsAddingItem(false);
+    }
+  };
+
+  const toggleItem = (id: string) => {
+    setGroceryItems(items =>
+      items.map(item =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
+  };
+
+  const deleteItem = (id: string) => {
+    setGroceryItems(items => items.filter(item => item.id !== id));
+  };
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -70,6 +124,17 @@ export default function NutritionPage() {
             Your personalized meal planner synced to your cycle
           </p>
         </div>
+
+        {/* Tabs for different sections */}
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="grocery">Grocery List</TabsTrigger>
+            <TabsTrigger value="meals">Meal Planning</TabsTrigger>
+          </TabsList>
+
+          {/* OVERVIEW TAB */}
+          <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Calorie Balance */}
         <Card className="bloom-card mb-6 bg-gradient-to-br from-primary/10 to-primary/5 border-none">
@@ -267,6 +332,184 @@ export default function NutritionPage() {
             </div>
           </div>
         </Card>
+          </TabsContent>
+
+          {/* GROCERY LIST TAB */}
+          <TabsContent value="grocery" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-semibold flex items-center gap-2">
+                    <ShoppingCart className="w-6 h-6 text-primary" />
+                    My Grocery List
+                  </h3>
+                  <p className="text-muted-foreground mt-1">
+                    {groceryItems.filter(item => !item.checked).length} items remaining
+                  </p>
+                </div>
+                <Button
+                  onClick={() => setIsAddingItem(!isAddingItem)}
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Item
+                </Button>
+              </div>
+
+              {isAddingItem && (
+                <div className="mb-6 p-4 bg-muted/30 rounded-xl space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
+                      placeholder="Item name"
+                      value={newItem}
+                      onChange={(e) => setNewItem(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && addGroceryItem()}
+                      className="rounded-lg"
+                    />
+                    <Input
+                      placeholder="Quantity"
+                      value={newQuantity}
+                      onChange={(e) => setNewQuantity(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && addGroceryItem()}
+                      className="rounded-lg"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button onClick={addGroceryItem} className="flex-1 rounded-lg">
+                      <Check className="w-4 h-4 mr-2" />
+                      Add
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setIsAddingItem(false);
+                        setNewItem('');
+                        setNewQuantity('');
+                      }}
+                      variant="outline"
+                      className="flex-1 rounded-lg"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              <div className="space-y-2">
+                {groceryItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${
+                      item.checked
+                        ? 'bg-muted/30 border-muted opacity-60'
+                        : 'bg-white border-border hover:shadow-sm'
+                    }`}
+                  >
+                    <Checkbox
+                      checked={item.checked}
+                      onCheckedChange={() => toggleItem(item.id)}
+                      className="w-5 h-5"
+                    />
+                    <div className="flex-1">
+                      <p className={`font-medium ${item.checked ? 'line-through text-muted-foreground' : ''}`}>
+                        {item.name}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{item.quantity}</p>
+                    </div>
+                    <Badge variant="outline" className="text-xs">
+                      {item.category}
+                    </Badge>
+                    <Button
+                      onClick={() => deleteItem(item.id)}
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+
+              {groceryItems.length === 0 && (
+                <div className="text-center py-12">
+                  <ShoppingCart className="w-16 h-16 mx-auto text-muted-foreground/30 mb-4" />
+                  <p className="text-muted-foreground">Your grocery list is empty</p>
+                  <p className="text-sm text-muted-foreground mt-1">Add items to get started</p>
+                </div>
+              )}
+            </Card>
+          </TabsContent>
+
+          {/* MEAL PLANNING TAB */}
+          <TabsContent value="meals" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="mb-6">
+                <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
+                  <Calendar className="w-6 h-6 text-primary" />
+                  Weekly Meal Plan
+                </h3>
+                <p className="text-muted-foreground">
+                  Plan your meals for the week ahead
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                {weekDays.map((day) => (
+                  <div key={day} className="border-l-4 border-primary/30 pl-4 py-2">
+                    <h4 className="text-lg font-semibold mb-3">{day}</h4>
+                    <div className="grid md:grid-cols-3 gap-3">
+                      {['breakfast', 'lunch', 'dinner'].map((mealType) => {
+                        const meal = weekMeals[day]?.[mealType];
+                        return (
+                          <div
+                            key={mealType}
+                            className="p-4 bg-muted/20 rounded-lg border border-border hover:border-primary/50 transition-all cursor-pointer group"
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <Badge variant="outline" className="text-xs capitalize">
+                                {mealType}
+                              </Badge>
+                              {meal && (
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  <X className="w-3 h-3" />
+                                </Button>
+                              )}
+                            </div>
+                            {meal ? (
+                              <div>
+                                <p className="font-semibold text-sm mb-1">{meal.name}</p>
+                                <div className="flex gap-2 text-xs text-muted-foreground">
+                                  <span>{meal.calories} cal</span>
+                                  <span>•</span>
+                                  <span>{meal.protein}g protein</span>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="text-center py-2">
+                                <Plus className="w-5 h-5 mx-auto text-muted-foreground/50 mb-1" />
+                                <p className="text-xs text-muted-foreground">Add meal</p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                <p className="text-sm text-center text-muted-foreground">
+                  <strong>Pro Tip:</strong> Click on any meal slot to add or edit meals for the week
+                </p>
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </main>
 
       <Navigation />

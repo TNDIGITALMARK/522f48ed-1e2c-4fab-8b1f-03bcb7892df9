@@ -5,7 +5,9 @@ import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 
 const phaseWorkouts = {
@@ -82,6 +84,17 @@ const weeklyProgress = {
   minutesActive: 165,
 };
 
+const gymExercises = [
+  { id: '1', name: 'Barbell Squat', muscle: 'Legs', equipment: 'Barbell' },
+  { id: '2', name: 'Bench Press', muscle: 'Chest', equipment: 'Barbell' },
+  { id: '3', name: 'Deadlift', muscle: 'Back', equipment: 'Barbell' },
+  { id: '4', name: 'Overhead Press', muscle: 'Shoulders', equipment: 'Barbell' },
+  { id: '5', name: 'Pull-ups', muscle: 'Back', equipment: 'Bodyweight' },
+  { id: '6', name: 'Dumbbell Row', muscle: 'Back', equipment: 'Dumbbells' },
+  { id: '7', name: 'Leg Press', muscle: 'Legs', equipment: 'Machine' },
+  { id: '8', name: 'Lat Pulldown', muscle: 'Back', equipment: 'Cable' },
+];
+
 export default function WorkoutPage() {
   const [currentPhase] = useState<keyof typeof phaseWorkouts>('Follicular');
   const workouts = phaseWorkouts[currentPhase];
@@ -91,6 +104,18 @@ export default function WorkoutPage() {
     { day: 'Wednesday', workout: 'HIIT Cardio Blast', duration: '20 min', calories: 280 },
     { day: 'Friday', workout: 'Yoga Flow', duration: '25 min', calories: 150 },
   ];
+
+  const [workoutPlan, setWorkoutPlan] = useState([
+    { id: '1', exercise: 'Barbell Squat', sets: 4, reps: 8, weight: 135, notes: '' },
+    { id: '2', exercise: 'Bench Press', sets: 4, reps: 10, weight: 95, notes: '' },
+    { id: '3', exercise: 'Deadlift', sets: 3, reps: 6, weight: 185, notes: 'Increase next week' },
+  ]);
+
+  const [workoutLogs, setWorkoutLogs] = useState([
+    { id: '1', exercise: 'Barbell Squat', sets: 4, reps: 8, weight: 135, date: '2025-10-28' },
+    { id: '2', exercise: 'Bench Press', sets: 4, reps: 10, weight: 95, date: '2025-10-28' },
+    { id: '3', exercise: 'Deadlift', sets: 3, reps: 6, weight: 185, date: '2025-10-26' },
+  ]);
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -109,6 +134,17 @@ export default function WorkoutPage() {
             Phase-based training that adapts to your body
           </p>
         </div>
+
+        {/* Tabs for different sections */}
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="plan">Workout Plan</TabsTrigger>
+            <TabsTrigger value="log">Workout Log</TabsTrigger>
+          </TabsList>
+
+          {/* OVERVIEW TAB */}
+          <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Progress */}
         <Card className="bloom-card mb-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-none">
@@ -264,6 +300,157 @@ export default function WorkoutPage() {
             </div>
           </div>
         </Card>
+          </TabsContent>
+
+          {/* WORKOUT PLAN TAB */}
+          <TabsContent value="plan" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-semibold flex items-center gap-2">
+                    <ListChecks className="w-6 h-6 text-primary" />
+                    My Workout Plan
+                  </h3>
+                  <p className="text-muted-foreground mt-1">
+                    {workoutPlan.length} exercises in your plan
+                  </p>
+                </div>
+                <Button
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Exercise
+                </Button>
+              </div>
+
+              <div className="mb-6 p-4 bg-accent/10 rounded-xl border border-accent/20">
+                <div className="flex items-start gap-3">
+                  <Zap className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-sm mb-1">AI-Synced to Follicular Phase</h4>
+                    <p className="text-sm text-muted-foreground">
+                      This workout is optimized for your current cycle phase. Focus on compound movements and progressive overload.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {workoutPlan.map((exercise, index) => (
+                  <Card key={exercise.id} className="p-4 hover:shadow-sm transition-shadow">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-sm font-bold text-primary">{index + 1}</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1">{exercise.exercise}</h4>
+                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.sets}</span> sets
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.reps}</span> reps
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.weight}</span> lbs
+                          </span>
+                        </div>
+                        {exercise.notes && (
+                          <p className="text-xs text-muted-foreground mt-1 italic">{exercise.notes}</p>
+                        )}
+                      </div>
+                      <Button
+                        size="sm"
+                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+                      >
+                        Log
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-muted/20 rounded-xl">
+                <h4 className="font-semibold text-sm mb-3">Suggested Exercises for Your Phase</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {gymExercises.slice(0, 6).map((exercise) => (
+                    <button
+                      key={exercise.id}
+                      className="p-3 bg-white rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all text-left"
+                    >
+                      <p className="font-medium text-sm">{exercise.name}</p>
+                      <p className="text-xs text-muted-foreground">{exercise.muscle} • {exercise.equipment}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </TabsContent>
+
+          {/* WORKOUT LOG TAB */}
+          <TabsContent value="log" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="mb-6">
+                <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
+                  <TrendingUp className="w-6 h-6 text-primary" />
+                  Workout History
+                </h3>
+                <p className="text-muted-foreground">
+                  Track your progress and see your strength gains
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {workoutLogs.map((log) => (
+                  <Card key={log.id} className="p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                          <CheckCircle2 className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold">{log.exercise}</h4>
+                          <p className="text-xs text-muted-foreground">
+                            {new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </p>
+                        </div>
+                      </div>
+                      <Badge variant="outline">Completed</Badge>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-2 bg-muted/30 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Sets</p>
+                        <p className="font-semibold">{log.sets}</p>
+                      </div>
+                      <div className="text-center p-2 bg-muted/30 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Reps</p>
+                        <p className="font-semibold">{log.reps}</p>
+                      </div>
+                      <div className="text-center p-2 bg-muted/30 rounded-lg">
+                        <p className="text-xs text-muted-foreground mb-1">Weight</p>
+                        <p className="font-semibold">{log.weight} lbs</p>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                <div className="flex items-start gap-3">
+                  <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-sm mb-1">Progress Tracking</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Keep logging your workouts to track strength gains and see your progress over time. The app automatically tracks your personal records!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </main>
 
       <Navigation />
