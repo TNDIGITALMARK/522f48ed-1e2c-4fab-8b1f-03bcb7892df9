@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
 import { useRouter } from 'next/navigation';
 import { FoodLookupDialog } from '@/components/food-lookup-dialog';
+import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 
 const mealSuggestions = [
   {
@@ -204,11 +205,12 @@ export default function NutritionPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
+          <TabsList className="grid w-full grid-cols-5 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="health">Apple Health</TabsTrigger>
             <TabsTrigger value="grocery">Grocery List</TabsTrigger>
             <TabsTrigger value="meals">Meal Planning</TabsTrigger>
+            <TabsTrigger value="ai-meals">AI Meal Ideas</TabsTrigger>
           </TabsList>
 
           {/* OVERVIEW TAB */}
@@ -609,6 +611,76 @@ export default function NutritionPage() {
                   </p>
                 </div>
               </div>
+            </Card>
+          </TabsContent>
+
+          {/* AI MEAL IDEAS TAB */}
+          <TabsContent value="ai-meals" className="space-y-6">
+            <Card className="bloom-card">
+              <Tabs defaultValue="breakfast" className="w-full">
+                <TabsList className="grid w-full grid-cols-5 mb-6">
+                  <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
+                  <TabsTrigger value="lunch">Lunch</TabsTrigger>
+                  <TabsTrigger value="dinner">Dinner</TabsTrigger>
+                  <TabsTrigger value="snack">Snacks</TabsTrigger>
+                  <TabsTrigger value="dessert">Desserts</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="breakfast">
+                  <AIMealSuggestions
+                    mealType="breakfast"
+                    groceryItems={groceryItems.map(item => item.name)}
+                    onAddToMeal={(suggestion) => {
+                      console.log('Add to meal plan:', suggestion);
+                      alert(`Added ${suggestion.meal_name} to your meal plan!`);
+                    }}
+                  />
+                </TabsContent>
+
+                <TabsContent value="lunch">
+                  <AIMealSuggestions
+                    mealType="lunch"
+                    groceryItems={groceryItems.map(item => item.name)}
+                    onAddToMeal={(suggestion) => {
+                      console.log('Add to meal plan:', suggestion);
+                      alert(`Added ${suggestion.meal_name} to your meal plan!`);
+                    }}
+                  />
+                </TabsContent>
+
+                <TabsContent value="dinner">
+                  <AIMealSuggestions
+                    mealType="dinner"
+                    groceryItems={groceryItems.map(item => item.name)}
+                    onAddToMeal={(suggestion) => {
+                      console.log('Add to meal plan:', suggestion);
+                      alert(`Added ${suggestion.meal_name} to your meal plan!`);
+                    }}
+                  />
+                </TabsContent>
+
+                <TabsContent value="snack">
+                  <AIMealSuggestions
+                    mealType="snack"
+                    groceryItems={groceryItems.map(item => item.name)}
+                    onAddToMeal={(suggestion) => {
+                      console.log('Add to meal plan:', suggestion);
+                      alert(`Added ${suggestion.meal_name} to your meal plan!`);
+                    }}
+                  />
+                </TabsContent>
+
+                <TabsContent value="dessert">
+                  <AIMealSuggestions
+                    mealType="dessert"
+                    groceryItems={groceryItems.map(item => item.name)}
+                    onAddToMeal={(suggestion) => {
+                      console.log('Add to meal plan:', suggestion);
+                      alert(`Added ${suggestion.meal_name} to your meal plan!`);
+                    }}
+                  />
+                </TabsContent>
+              </Tabs>
             </Card>
           </TabsContent>
         </Tabs>

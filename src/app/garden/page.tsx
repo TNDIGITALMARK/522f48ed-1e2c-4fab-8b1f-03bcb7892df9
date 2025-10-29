@@ -8,6 +8,10 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star } from 'lucide-react';
 import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { GardenGrid } from '@/components/garden-grid';
+import { FriendsManager } from '@/components/friends-manager';
+import { SendGiftDialog } from '@/components/send-gift-dialog';
 
 const gardenThemes = [
   { name: 'Sunflower Meadow', icon: Sun, locked: false, color: 'from-yellow-100 to-orange-100' },
@@ -38,9 +42,11 @@ const rewards = [
 ];
 
 export default function GardenPage() {
-  const [bloomCoins] = useState(342);
+  const [bloomCoins, setBloomCoins] = useState(342);
   const [currentTheme] = useState('Sunflower Meadow');
   const [gardenLevel] = useState(8);
+  const [giftDialogOpen, setGiftDialogOpen] = useState(false);
+  const [selectedFriendForGift, setSelectedFriendForGift] = useState<{ id: string; name: string } | null>(null);
 
   const nextLevelPoints = 400;
   const currentPoints = 342;
@@ -299,9 +305,99 @@ export default function GardenPage() {
             })}
           </div>
         </div>
+
+        {/* Interactive Garden & Social Features */}
+        <div className="mb-6">
+          <Tabs defaultValue="garden" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
+              <TabsTrigger value="garden">My Garden</TabsTrigger>
+              <TabsTrigger value="friends">Friends</TabsTrigger>
+              <TabsTrigger value="visits">Garden Visits</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="garden">
+              <Card className="bloom-card">
+                <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                  <Leaf className="w-6 h-6 text-primary" />
+                  Build Your Garden
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Place plants, buildings, and decorations. Watch them grow as you complete wellness activities!
+                </p>
+                <GardenGrid
+                  gridWidth={10}
+                  gridHeight={10}
+                  gardenLevel={gardenLevel}
+                  coins={bloomCoins}
+                  onCoinsChange={setBloomCoins}
+                />
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="friends">
+              <FriendsManager
+                onVisitGarden={(friendId) => {
+                  alert(`Visiting ${friendId}'s garden! This would open their garden view.`);
+                }}
+                onSendGift={(friendId) => {
+                  const friendData = { id: friendId, name: 'Friend' };
+                  setSelectedFriendForGift(friendData);
+                  setGiftDialogOpen(true);
+                }}
+              />
+            </TabsContent>
+
+            <TabsContent value="visits">
+              <Card className="bloom-card">
+                <h3 className="text-2xl font-semibold mb-4">Recent Garden Visits</h3>
+                <p className="text-muted-foreground mb-6">
+                  See who's been visiting your garden and check out your friends' gardens!
+                </p>
+                <div className="space-y-4">
+                  {[
+                    { name: 'Sarah Johnson', action: 'watered your roses', time: '2 hours ago' },
+                    { name: 'Emma Williams', action: 'visited your garden', time: '5 hours ago' },
+                    { name: 'Olivia Brown', action: 'sent you a gift', time: '1 day ago' },
+                  ].map((visit, index) => (
+                    <Card key={index} className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="font-semibold text-primary text-sm">
+                              {visit.name.split(' ').map((n) => n[0]).join('')}
+                            </span>
+                          </div>
+                          <div>
+                            <p className="font-medium">{visit.name}</p>
+                            <p className="text-sm text-muted-foreground">{visit.action}</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-muted-foreground">{visit.time}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
       </main>
 
       <Navigation />
+
+      {/* Gift Dialog */}
+      {selectedFriendForGift && (
+        <SendGiftDialog
+          open={giftDialogOpen}
+          onOpenChange={setGiftDialogOpen}
+          friendName={selectedFriendForGift.name}
+          userCoins={bloomCoins}
+          onSend={(gift, message) => {
+            setBloomCoins(bloomCoins - gift.cost);
+            alert(`Sent ${gift.name} to ${selectedFriendForGift.name}!${message ? `\nMessage: ${message}` : ''}`);
+          }}
+        />
+      )}
     </div>
   );
 }
