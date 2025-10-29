@@ -12,14 +12,24 @@ interface TreeOfLifeProps {
 
 export function TreeOfLife3D({ position = [0, 0, 0], scale = 1 }: TreeOfLifeProps) {
   const treeRef = useRef<THREE.Group>(null);
+  const canopyRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const router = useRouter();
 
-  // Gentle floating animation
+  // Hay Day-style gentle floating and swaying animation
   useFrame((state) => {
     if (treeRef.current) {
-      treeRef.current.rotation.y += 0.002;
-      treeRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      // Gentle rotation - tree slowly turns
+      treeRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.15) * 0.1;
+
+      // Subtle floating motion
+      treeRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8) * 0.08;
+    }
+
+    // Canopy sway animation - like wind blowing
+    if (canopyRef.current) {
+      canopyRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.6) * 0.05;
+      canopyRef.current.scale.y = 1 + Math.sin(state.clock.elapsedTime * 0.4) * 0.02;
     }
   });
 
@@ -36,87 +46,189 @@ export function TreeOfLife3D({ position = [0, 0, 0], scale = 1 }: TreeOfLifeProp
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      {/* Tree trunk */}
-      <mesh position={[0, 0, 0]}>
-        <cylinderGeometry args={[0.3, 0.4, 2, 8]} />
-        <meshStandardMaterial
-          color={hovered ? "#6B4423" : "#8B6F47"}
-          roughness={0.8}
-        />
-      </mesh>
+      {/* Tree trunk - Hay Day style with texture depth */}
+      <group position={[0, 0.8, 0]}>
+        <mesh castShadow>
+          <cylinderGeometry args={[0.35, 0.5, 2.5, 12]} />
+          <meshStandardMaterial
+            color={hovered ? "#6B4423" : "#7D5A3C"}
+            roughness={0.9}
+            metalness={0}
+          />
+        </mesh>
 
-      {/* Main canopy - large sphere */}
-      <mesh position={[0, 2, 0]}>
-        <sphereGeometry args={[1.5, 16, 16]} />
-        <meshStandardMaterial
-          color={hovered ? "#7C3AED" : "#9333EA"}
-          emissive={hovered ? "#7C3AED" : "#5B21B6"}
-          emissiveIntensity={hovered ? 0.5 : 0.3}
-          roughness={0.5}
-        />
-      </mesh>
+        {/* Bark texture highlights */}
+        <mesh position={[0, 0.3, 0]}>
+          <cylinderGeometry args={[0.36, 0.51, 2, 12]} />
+          <meshStandardMaterial
+            color="#5D4129"
+            roughness={0.95}
+            transparent
+            opacity={0.4}
+          />
+        </mesh>
 
-      {/* Secondary canopy layers */}
-      <mesh position={[0.8, 1.8, 0]}>
-        <sphereGeometry args={[1, 12, 12]} />
-        <meshStandardMaterial
-          color={hovered ? "#8B5CF6" : "#A78BFA"}
-          emissive={hovered ? "#7C3AED" : "#6D28D9"}
-          emissiveIntensity={hovered ? 0.4 : 0.2}
-          roughness={0.6}
-        />
-      </mesh>
+        {/* Tree knots/details */}
+        <mesh position={[0.25, 0.5, 0]}>
+          <sphereGeometry args={[0.12, 8, 8]} />
+          <meshStandardMaterial color="#6B4423" roughness={0.9} />
+        </mesh>
+        <mesh position={[-0.2, -0.3, 0.2]}>
+          <sphereGeometry args={[0.1, 8, 8]} />
+          <meshStandardMaterial color="#6B4423" roughness={0.9} />
+        </mesh>
+      </group>
 
-      <mesh position={[-0.8, 1.8, 0]}>
-        <sphereGeometry args={[1, 12, 12]} />
-        <meshStandardMaterial
-          color={hovered ? "#8B5CF6" : "#A78BFA"}
-          emissive={hovered ? "#7C3AED" : "#6D28D9"}
-          emissiveIntensity={hovered ? 0.4 : 0.2}
-          roughness={0.6}
-        />
-      </mesh>
+      {/* Canopy group with animation */}
+      <group ref={canopyRef} position={[0, 2.5, 0]}>
+        {/* Main central canopy - large purple sphere */}
+        <mesh castShadow>
+          <sphereGeometry args={[1.8, 24, 24]} />
+          <meshStandardMaterial
+            color={hovered ? "#7C3AED" : "#8B5CF6"}
+            emissive={hovered ? "#7C3AED" : "#6D28D9"}
+            emissiveIntensity={hovered ? 0.6 : 0.4}
+            roughness={0.6}
+            metalness={0.1}
+          />
+        </mesh>
 
-      <mesh position={[0, 1.5, 0.8]}>
-        <sphereGeometry args={[0.8, 12, 12]} />
-        <meshStandardMaterial
-          color={hovered ? "#A78BFA" : "#C4B5FD"}
-          emissive={hovered ? "#8B5CF6" : "#7C3AED"}
-          emissiveIntensity={hovered ? 0.3 : 0.15}
-          roughness={0.6}
-        />
-      </mesh>
+        {/* Secondary canopy layers - create depth */}
+        <mesh position={[1.2, -0.3, 0.2]} castShadow>
+          <sphereGeometry args={[1.2, 16, 16]} />
+          <meshStandardMaterial
+            color={hovered ? "#8B5CF6" : "#A78BFA"}
+            emissive={hovered ? "#7C3AED" : "#6D28D9"}
+            emissiveIntensity={hovered ? 0.5 : 0.3}
+            roughness={0.65}
+            metalness={0.05}
+          />
+        </mesh>
 
-      <mesh position={[0, 1.5, -0.8]}>
-        <sphereGeometry args={[0.8, 12, 12]} />
-        <meshStandardMaterial
-          color={hovered ? "#A78BFA" : "#C4B5FD"}
-          emissive={hovered ? "#8B5CF6" : "#7C3AED"}
-          emissiveIntensity={hovered ? 0.3 : 0.15}
-          roughness={0.6}
-        />
-      </mesh>
+        <mesh position={[-1.2, -0.3, -0.2]} castShadow>
+          <sphereGeometry args={[1.2, 16, 16]} />
+          <meshStandardMaterial
+            color={hovered ? "#8B5CF6" : "#A78BFA"}
+            emissive={hovered ? "#7C3AED" : "#6D28D9"}
+            emissiveIntensity={hovered ? 0.5 : 0.3}
+            roughness={0.65}
+            metalness={0.05}
+          />
+        </mesh>
 
-      {/* Glowing particles around tree */}
+        <mesh position={[0, -0.2, 1.2]} castShadow>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial
+            color={hovered ? "#A78BFA" : "#C4B5FD"}
+            emissive={hovered ? "#8B5CF6" : "#7C3AED"}
+            emissiveIntensity={hovered ? 0.4 : 0.25}
+            roughness={0.7}
+          />
+        </mesh>
+
+        <mesh position={[0, -0.2, -1.2]} castShadow>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshStandardMaterial
+            color={hovered ? "#A78BFA" : "#C4B5FD"}
+            emissive={hovered ? "#8B5CF6" : "#7C3AED"}
+            emissiveIntensity={hovered ? 0.4 : 0.25}
+            roughness={0.7}
+          />
+        </mesh>
+
+        {/* Smaller accent canopy pieces */}
+        <mesh position={[0.8, 0.5, 0.8]} castShadow>
+          <sphereGeometry args={[0.7, 12, 12]} />
+          <meshStandardMaterial
+            color={hovered ? "#C4B5FD" : "#DDD6FE"}
+            emissive={hovered ? "#A78BFA" : "#8B5CF6"}
+            emissiveIntensity={hovered ? 0.3 : 0.2}
+            roughness={0.65}
+          />
+        </mesh>
+
+        <mesh position={[-0.8, 0.5, -0.8]} castShadow>
+          <sphereGeometry args={[0.7, 12, 12]} />
+          <meshStandardMaterial
+            color={hovered ? "#C4B5FD" : "#DDD6FE"}
+            emissive={hovered ? "#A78BFA" : "#8B5CF6"}
+            emissiveIntensity={hovered ? 0.3 : 0.2}
+            roughness={0.65}
+          />
+        </mesh>
+
+        <mesh position={[0.8, 0.5, -0.8]} castShadow>
+          <sphereGeometry args={[0.6, 12, 12]} />
+          <meshStandardMaterial
+            color={hovered ? "#C4B5FD" : "#DDD6FE"}
+            emissive={hovered ? "#A78BFA" : "#8B5CF6"}
+            emissiveIntensity={hovered ? 0.3 : 0.2}
+            roughness={0.65}
+          />
+        </mesh>
+
+        <mesh position={[-0.8, 0.5, 0.8]} castShadow>
+          <sphereGeometry args={[0.6, 12, 12]} />
+          <meshStandardMaterial
+            color={hovered ? "#C4B5FD" : "#DDD6FE"}
+            emissive={hovered ? "#A78BFA" : "#8B5CF6"}
+            emissiveIntensity={hovered ? 0.3 : 0.2}
+            roughness={0.65}
+          />
+        </mesh>
+      </group>
+
+      {/* Magical glowing particles around tree - Hay Day sparkle effect */}
+      {Array.from({ length: 16 }).map((_, i) => {
+        const angle = (i / 16) * Math.PI * 2;
+        const radius = 2.8;
+        const height = 2.5 + Math.sin(i * 0.8) * 0.8;
+
+        return (
+          <mesh
+            key={i}
+            position={[
+              Math.cos(angle) * radius,
+              height,
+              Math.sin(angle) * radius,
+            ]}
+          >
+            <sphereGeometry args={[0.06, 6, 6]} />
+            <meshStandardMaterial
+              color="#FDE047"
+              emissive="#FDE047"
+              emissiveIntensity={hovered ? 1.5 : 1}
+              transparent
+              opacity={hovered ? 1 : 0.8}
+            />
+          </mesh>
+        );
+      })}
+
+      {/* Magical fireflies/sparkles that float around when hovered */}
       {hovered && (
         <>
-          {Array.from({ length: 12 }).map((_, i) => {
-            const angle = (i / 12) * Math.PI * 2;
-            const radius = 2.5;
+          {Array.from({ length: 8 }).map((_, i) => {
+            const angle = (i / 8) * Math.PI * 2 + Date.now() * 0.0005;
+            const radius = 3.5;
+            const height = 2 + Math.sin(Date.now() * 0.001 + i) * 1.5;
+
             return (
               <mesh
-                key={i}
+                key={`firefly-${i}`}
                 position={[
                   Math.cos(angle) * radius,
-                  2 + Math.sin(i * 0.5) * 0.5,
+                  height,
                   Math.sin(angle) * radius,
                 ]}
               >
-                <sphereGeometry args={[0.08, 8, 8]} />
+                <sphereGeometry args={[0.08, 6, 6]} />
                 <meshStandardMaterial
                   color="#FCD34D"
                   emissive="#FCD34D"
-                  emissiveIntensity={1}
+                  emissiveIntensity={2}
+                  transparent
+                  opacity={0.9}
                 />
               </mesh>
             );
@@ -124,15 +236,36 @@ export function TreeOfLife3D({ position = [0, 0, 0], scale = 1 }: TreeOfLifeProp
         </>
       )}
 
-      {/* Glow effect when hovered */}
+      {/* Glow effect when hovered - magical aura */}
       {hovered && (
-        <pointLight
-          position={[0, 2, 0]}
-          color="#A78BFA"
-          intensity={3}
-          distance={8}
-        />
+        <>
+          <pointLight
+            position={[0, 2.5, 0]}
+            color="#A78BFA"
+            intensity={4}
+            distance={10}
+          />
+          <pointLight
+            position={[0, 1.5, 0]}
+            color="#FDE047"
+            intensity={2}
+            distance={6}
+          />
+        </>
       )}
+
+      {/* Ground glow beneath tree */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.48, 0]}>
+        <circleGeometry args={[2.5, 32]} />
+        <meshStandardMaterial
+          color={hovered ? "#E1BEE7" : "#F3E5F5"}
+          emissive={hovered ? "#CE93D8" : "#BA68C8"}
+          emissiveIntensity={hovered ? 0.4 : 0.2}
+          transparent
+          opacity={0.6}
+          roughness={0.8}
+        />
+      </mesh>
     </group>
   );
 }

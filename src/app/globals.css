@@ -844,7 +844,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ============================================
-   3D GARDEN SCENE ENHANCEMENTS
+   3D GARDEN SCENE ENHANCEMENTS - HAY DAY STYLE
    ============================================ */
 
 /* Make 3D canvas responsive */
@@ -868,6 +868,100 @@ canvas {
 
 .garden-3d-container {
   animation: garden-fade-in 0.6s ease-out;
+  position: relative;
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Hay Day style bounce animation for interactive elements */
+@keyframes hay-day-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.02);
+  }
+  75% {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+.hay-day-bounce {
+  animation: hay-day-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Hay Day style pop animation */
+@keyframes hay-day-pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hay-day-pop {
+  animation: hay-day-pop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Hay Day style wobble animation */
+@keyframes hay-day-wobble {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+.hay-day-wobble {
+  animation: hay-day-wobble 0.5s ease-in-out;
+}
+
+/* 3D depth shadow effect */
+.depth-shadow-3d {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.depth-shadow-3d::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 10%;
+  right: 10%;
+  height: 12px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(4px);
+}
+
+/* Isometric tile effect for grid elements */
+.isometric-tile {
+  transform: rotateX(60deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.isometric-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
 }
 
 /* Loading shimmer effect */

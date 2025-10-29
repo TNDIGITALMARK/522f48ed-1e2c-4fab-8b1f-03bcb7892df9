@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star, Dumbbell } from 'lucide-react';
+import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star, Dumbbell, TreeDeciduous } from 'lucide-react';
 import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EnhancedGardenGrid } from '@/components/enhanced-garden-grid';
@@ -74,16 +74,44 @@ export default function GardenPage() {
                 Build, grow, and compete - Hay Day style!
               </p>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowTutorial(true)}
-            >
-              <Sparkles className="w-4 h-4 mr-2" />
-              Tutorial
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowTutorial(true)}
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Tutorial
+              </Button>
+            </div>
           </div>
         </div>
+
+        {/* 3D Garden Feature Card */}
+        <Card className="bloom-card mb-6 bg-gradient-to-br from-purple-500 to-pink-500 text-white border-none overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0 shadow-bloom">
+              <TreeDeciduous className="w-12 h-12 text-white" />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <Badge className="mb-3 bg-white/20 text-white border-white/30 backdrop-blur-sm">New Experience</Badge>
+              <h2 className="text-2xl font-semibold mb-2">Explore Your Garden in 3D!</h2>
+              <p className="text-white/90 mb-4">
+                Experience your magical Tree of Life in a beautiful 3D world with Hay Day-style graphics.
+                Rotate, zoom, and explore your blooming garden paradise!
+              </p>
+              <Link href="/garden-3d">
+                <Button className="gap-2 bg-white text-purple-600 hover:bg-white/90 shadow-bloom">
+                  <TreeDeciduous className="w-5 h-5" />
+                  View 3D Garden
+                  <Sparkles className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Card>
 
         {/* Garden Stats & Coins */}
         <Card className="bloom-card mb-6 bg-gradient-to-br from-primary/10 to-secondary/10 border-none">
