@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
+import { AppleHealthSync } from '@/components/apple-health-sync';
 
 const phaseWorkouts = {
   Menstruation: [
@@ -137,8 +138,9 @@ export default function WorkoutPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="health">Apple Health</TabsTrigger>
             <TabsTrigger value="plan">Workout Plan</TabsTrigger>
             <TabsTrigger value="log">Workout Log</TabsTrigger>
           </TabsList>
@@ -300,6 +302,11 @@ export default function WorkoutPage() {
             </div>
           </div>
         </Card>
+          </TabsContent>
+
+          {/* APPLE HEALTH TAB */}
+          <TabsContent value="health" className="space-y-6">
+            <AppleHealthSync />
           </TabsContent>
 
           {/* WORKOUT PLAN TAB */}

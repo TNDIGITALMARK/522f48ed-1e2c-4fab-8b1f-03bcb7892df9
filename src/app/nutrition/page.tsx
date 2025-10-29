@@ -12,7 +12,6 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, ShoppingCart, Plus, X, Check } from 'lucide-react';
 import { useState } from 'react';
-import { AppleHealthSync } from '@/components/apple-health-sync';
 import { useRouter } from 'next/navigation';
 import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
@@ -205,9 +204,8 @@ export default function NutritionPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="health">Apple Health</TabsTrigger>
             <TabsTrigger value="grocery">Grocery List</TabsTrigger>
             <TabsTrigger value="meals">Meal Planning</TabsTrigger>
             <TabsTrigger value="ai-meals">AI Meal Ideas</TabsTrigger>
@@ -412,11 +410,6 @@ export default function NutritionPage() {
             </div>
           </div>
         </Card>
-          </TabsContent>
-
-          {/* APPLE HEALTH TAB */}
-          <TabsContent value="health" className="space-y-6">
-            <AppleHealthSync />
           </TabsContent>
 
           {/* GROCERY LIST TAB */}
