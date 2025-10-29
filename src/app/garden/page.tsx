@@ -7,13 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Leaf, Sun, Droplets, Sparkles, Award, TrendingUp, Gift, Star, Dumbbell } from 'lucide-react';
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EnhancedGardenGrid } from '@/components/enhanced-garden-grid';
 import { MultiplayerActivities } from '@/components/multiplayer-activities';
 import { FriendsManager } from '@/components/friends-manager';
 import { SendGiftDialog } from '@/components/send-gift-dialog';
 import { GardenTutorial } from '@/components/garden-tutorial';
+import dynamic from 'next/dynamic';
+
+// Dynamically import 3D scene to avoid SSR issues
+const Garden3DScene = dynamic(
+  () => import('@/components/3d-garden-scene').then((mod) => mod.Garden3DScene),
+  { ssr: false, loading: () => <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl flex items-center justify-center"><p className="text-muted-foreground">Loading your magical garden...</p></div> }
+);
 
 const gardenThemes = [
   { name: 'Sunflower Meadow', icon: Sun, locked: false, color: 'from-yellow-100 to-orange-100' },
@@ -332,43 +339,71 @@ export default function GardenPage() {
             </TabsList>
 
             <TabsContent value="garden">
-              <Card className="bloom-card">
-                <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-                  <Leaf className="w-6 h-6 text-primary" />
-                  Build Your Garden - Hay Day Style
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  🌱 Drag and place plants anywhere! Water them, give them sunlight, and fertilize to help them grow.
-                  Build structures like greenhouses and workshops to boost your garden.
-                  Complete wellness activities to earn coins and watch your garden flourish!
-                </p>
+              <div className="space-y-6">
+                {/* 3D Garden Scene with Tree of Life */}
+                <Card className="bloom-card bg-gradient-to-br from-purple-50/50 via-green-50/50 to-blue-50/50 border-2 border-purple-200">
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-semibold mb-2 flex items-center gap-2">
+                      <Sparkles className="w-6 h-6 text-purple-600" />
+                      Your 3D Wellness Garden
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Click and drag to explore your garden. Click the glowing Tree of Life to access meditation, journaling, and wellness rituals! 🌳✨
+                    </p>
+                  </div>
 
-                {/* New Features Highlight */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-200">
-                  <div className="flex items-start gap-3">
-                    <div className="text-3xl">🍎</div>
-                    <div>
-                      <h4 className="font-semibold text-sm">Fruit Trees</h4>
-                      <p className="text-xs text-muted-foreground">Plant apple, peach, cherry & orange trees for higher coin rewards!</p>
+                  {/* Feature callout */}
+                  <div className="mb-6 p-4 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-xl border border-purple-300">
+                    <div className="flex items-center gap-3">
+                      <div className="text-4xl">🌳</div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-purple-900 mb-1">Tree of Life - Your Wellness Portal</h4>
+                        <p className="text-sm text-purple-700">
+                          Click the sacred purple tree in the center to access wellness rituals, meditation sessions, journaling prompts, and daily inspiration!
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="text-3xl">🌳</div>
-                    <div>
-                      <h4 className="font-semibold text-sm">Tree of Wisdom</h4>
-                      <p className="text-xs text-muted-foreground">Click the sacred tree for meditation, journaling & daily AI-powered inspiration!</p>
-                    </div>
-                  </div>
-                </div>
 
-                <EnhancedGardenGrid
-                  gridWidth={12}
-                  gridHeight={12}
-                  gardenLevel={gardenLevel}
-                  coins={bloomCoins}
-                  onCoinsChange={setBloomCoins}
-                />
-              </Card>
+                  {/* 3D Garden Scene */}
+                  <Suspense fallback={
+                    <div className="w-full h-[600px] bg-gradient-to-br from-green-100 to-emerald-100 rounded-3xl flex items-center justify-center">
+                      <div className="text-center">
+                        <Sparkles className="w-12 h-12 text-purple-500 mx-auto mb-4 animate-pulse" />
+                        <p className="text-muted-foreground">Loading your magical garden...</p>
+                      </div>
+                    </div>
+                  }>
+                    <Garden3DScene className="shadow-bloom-lg" />
+                  </Suspense>
+
+                  {/* Controls hint */}
+                  <div className="mt-4 p-3 bg-white/80 rounded-lg border border-border">
+                    <p className="text-sm text-muted-foreground text-center">
+                      <span className="font-medium">Controls:</span> Left-click + drag to rotate • Scroll to zoom • Right-click + drag to pan • Click the Tree of Life to enter wellness rituals
+                    </p>
+                  </div>
+                </Card>
+
+                {/* Traditional Grid Builder (optional) */}
+                <Card className="bloom-card">
+                  <h3 className="text-2xl font-semibold mb-4 flex items-center gap-2">
+                    <Leaf className="w-6 h-6 text-primary" />
+                    Classic Garden Builder
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    🌱 Prefer the classic view? Drag and place plants anywhere! Water them, give them sunlight, and fertilize to help them grow.
+                  </p>
+
+                  <EnhancedGardenGrid
+                    gridWidth={12}
+                    gridHeight={12}
+                    gardenLevel={gardenLevel}
+                    coins={bloomCoins}
+                    onCoinsChange={setBloomCoins}
+                  />
+                </Card>
+              </div>
             </TabsContent>
 
             <TabsContent value="activities">

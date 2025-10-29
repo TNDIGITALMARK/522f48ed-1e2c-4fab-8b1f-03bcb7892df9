@@ -4,8 +4,10 @@ import { Navigation } from '@/components/navigation';
 import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Play, Clock, Users, Sparkles, Sun, Moon, Heart, Leaf } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Play, Clock, Users, Sparkles, Sun, Moon, Heart, Leaf, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ritualCategories = [
   { name: 'All', icon: Sparkles },
@@ -95,11 +97,25 @@ export default function RitualsPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
+        {/* Back to Garden Button */}
+        <div className="mb-6">
+          <Link href="/garden">
+            <Button variant="outline" className="gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Garden
+            </Button>
+          </Link>
+        </div>
+
         {/* Page Title */}
         <div className="mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full mb-4 border border-purple-300">
+            <span className="text-2xl">🌳</span>
+            <span className="text-sm font-medium text-purple-900">Connected to your Tree of Life</span>
+          </div>
           <h1 className="text-4xl mb-2">Wellness Rituals</h1>
           <p className="text-muted-foreground text-lg">
-            Curated practices designed for your unique journey
+            Curated practices designed for your unique journey. Access these anytime from the Tree of Life in your 3D Garden! 🌳✨
           </p>
         </div>
 
