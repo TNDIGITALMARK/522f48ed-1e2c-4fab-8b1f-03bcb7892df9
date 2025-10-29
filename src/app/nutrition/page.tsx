@@ -12,6 +12,8 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, ShoppingCart, Plus, X, Check } from 'lucide-react';
 import { useState } from 'react';
+import { AppleHealthSync } from '@/components/apple-health-sync';
+import { useRouter } from 'next/navigation';
 
 const mealSuggestions = [
   {
@@ -51,6 +53,7 @@ const weeklyProgress = {
 };
 
 export default function NutritionPage() {
+  const router = useRouter();
   const [selectedDay, setSelectedDay] = useState('today');
   const [groceryItems, setGroceryItems] = useState([
     { id: '1', name: 'Bananas', quantity: '6', category: 'Produce', checked: false },
@@ -125,10 +128,30 @@ export default function NutritionPage() {
           </p>
         </div>
 
+        {/* Food Quiz CTA */}
+        <Card className="bloom-card bg-gradient-to-br from-primary/10 to-secondary/5 border-primary/20 mb-6">
+          <div className="flex items-center gap-4">
+            <div className="text-5xl">🍽️</div>
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-1">Personalize Your Meal Plans</h3>
+              <p className="text-sm text-muted-foreground">
+                Take our quick food quiz to get AI-generated meal plans tailored to your preferences
+              </p>
+            </div>
+            <Button
+              onClick={() => router.push('/nutrition/quiz')}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6"
+            >
+              Take Quiz
+            </Button>
+          </div>
+        </Card>
+
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="health">Apple Health</TabsTrigger>
             <TabsTrigger value="grocery">Grocery List</TabsTrigger>
             <TabsTrigger value="meals">Meal Planning</TabsTrigger>
           </TabsList>
@@ -332,6 +355,11 @@ export default function NutritionPage() {
             </div>
           </div>
         </Card>
+          </TabsContent>
+
+          {/* APPLE HEALTH TAB */}
+          <TabsContent value="health" className="space-y-6">
+            <AppleHealthSync />
           </TabsContent>
 
           {/* GROCERY LIST TAB */}
