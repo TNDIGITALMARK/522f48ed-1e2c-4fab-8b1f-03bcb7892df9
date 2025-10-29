@@ -14,6 +14,7 @@ import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, Shoppi
 import { useState } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
 import { useRouter } from 'next/navigation';
+import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 
 const mealSuggestions = [
   {
@@ -65,6 +66,10 @@ export default function NutritionPage() {
   const [newQuantity, setNewQuantity] = useState('');
   const [isAddingItem, setIsAddingItem] = useState(false);
 
+  // Food lookup state
+  const [foodLookupOpen, setFoodLookupOpen] = useState(false);
+  const [selectedMealSlot, setSelectedMealSlot] = useState<{ day: string; mealType: string } | null>(null);
+
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const caloriesRemaining = weeklyProgress.targetCalories - weeklyProgress.currentCalories;
   const weekProgress = (weeklyProgress.currentCalories / weeklyProgress.targetCalories) * 100;
@@ -108,6 +113,56 @@ export default function NutritionPage() {
 
   const deleteItem = (id: string) => {
     setGroceryItems(items => items.filter(item => item.id !== id));
+  };
+
+  const handleOpenFoodLookup = (day: string, mealType: string) => {
+    setSelectedMealSlot({ day, mealType });
+    setFoodLookupOpen(true);
+  };
+
+  const handleAddFood = (food: {
+    name: string;
+    servingSize: any;
+    quantity: number;
+    nutrition: {
+      calories: number;
+      protein: number;
+      carbs: number;
+      fat: number;
+      fiber: number;
+    };
+  }) => {
+    if (!selectedMealSlot) return;
+
+    const { day, mealType } = selectedMealSlot;
+
+    setWeekMeals((prev) => ({
+      ...prev,
+      [day]: {
+        ...prev[day],
+        [mealType]: {
+          name: `${food.name} (${food.servingSize.label} × ${food.quantity})`,
+          calories: food.nutrition.calories,
+          protein: food.nutrition.protein,
+          carbs: food.nutrition.carbs,
+          fat: food.nutrition.fat,
+          fiber: food.nutrition.fiber,
+        },
+      },
+    }));
+
+    setSelectedMealSlot(null);
+  };
+
+  const handleRemoveMeal = (day: string, mealType: string) => {
+    setWeekMeals((prev) => {
+      const updatedDay = { ...prev[day] };
+      delete updatedDay[mealType];
+      return {
+        ...prev,
+        [day]: updatedDay,
+      };
+    });
   };
 
   return (
@@ -491,6 +546,7 @@ export default function NutritionPage() {
                         return (
                           <div
                             key={mealType}
+                            onClick={() => !meal && handleOpenFoodLookup(day, mealType)}
                             className="p-4 bg-muted/20 rounded-lg border border-border hover:border-primary/50 transition-all cursor-pointer group"
                           >
                             <div className="flex items-center justify-between mb-2">
@@ -501,6 +557,10 @@ export default function NutritionPage() {
                                 <Button
                                   variant="ghost"
                                   size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRemoveMeal(day, mealType);
+                                  }}
                                   className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
                                 >
                                   <X className="w-3 h-3" />
@@ -532,7 +592,7 @@ export default function NutritionPage() {
 
               <div className="mt-6 p-4 bg-primary/5 rounded-xl border border-primary/20">
                 <p className="text-sm text-center text-muted-foreground">
-                  <strong>Pro Tip:</strong> Click on any meal slot to add or edit meals for the week
+                  <strong>Pro Tip:</strong> Click on any empty meal slot to search and add foods with custom serving sizes (grams, oz, cups, etc.)
                 </p>
               </div>
             </Card>
@@ -541,6 +601,13 @@ export default function NutritionPage() {
       </main>
 
       <Navigation />
+
+      {/* Food Lookup Dialog */}
+      <FoodLookupDialog
+        open={foodLookupOpen}
+        onOpenChange={setFoodLookupOpen}
+        onSelect={handleAddFood}
+      />
     </div>
   );
 }

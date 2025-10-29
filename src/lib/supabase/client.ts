@@ -16,3 +16,57 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 
 export const TENANT_ID = 'F7oiAnbgkFO4Kaxftd6EI6aD3WX2';
 export const PROJECT_ID = '522f48ed-1e2c-4fab-8b1f-03bcb7892df9';
+
+// Food database types
+export interface ServingSize {
+  unit: string;
+  amount: number;
+  grams: number;
+  label: string;
+}
+
+export interface FoodItem {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  name: string;
+  brand?: string | null;
+  category: string;
+  description?: string | null;
+  calories_per_100g: number;
+  protein_per_100g: number;
+  carbs_per_100g: number;
+  fat_per_100g: number;
+  fiber_per_100g: number;
+  sugar_per_100g: number;
+  sodium_per_100g: number;
+  serving_sizes: ServingSize[];
+  default_serving_size?: ServingSize | null;
+  bloom_score?: number | null;
+  is_custom: boolean;
+  added_by?: string | null;
+  verified: boolean;
+  source?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserMealEntry {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  user_id: string;
+  food_id: string;
+  meal_type: string;
+  meal_date: string;
+  serving_size: ServingSize;
+  quantity: number;
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  notes?: string | null;
+  created_at: string;
+  updated_at: string;
+}
