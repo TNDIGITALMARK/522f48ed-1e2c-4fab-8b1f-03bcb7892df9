@@ -83,7 +83,7 @@ export default function HomePage() {
               <span className="text-sm font-medium text-primary">Wellness Rooted in Self-Compassion</span>
             </div>
             <h1 className="text-5xl md:text-6xl mb-6 leading-tight">
-              Not a Diet — a Dialogue with Your Body
+              Your Body's Wellness Partner
             </h1>
             <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
               Bloom empowers women to reconnect with their bodies through smart, intuitive wellness — blending holistic nutrition, emotional awareness, and cycle-synced care.
@@ -187,85 +187,170 @@ export default function HomePage() {
       </section>
 
       {/* Smart Weekly Calorie System */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-block mb-4 px-4 py-2 bg-accent/20 rounded-full">
-                <span className="text-sm font-medium text-accent-foreground">Revolutionary Approach</span>
+      <section className="relative overflow-hidden py-24 bg-gradient-to-br from-cream via-white to-accent/5">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20">
+              <span className="text-sm font-semibold text-primary">Intelligent Nutrition</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              Smart Weekly Calorie Balance
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Your life has plans — dinners out, celebrations, weekends with friends. Stay on track while enjoying life with AI that adapts to your schedule, cycle, and goals.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10 items-start mb-12">
+            <div className="space-y-6">
+              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-primary/5">
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
+                    <Calendar className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-lg font-semibold mb-2">Verified Plans? No Problem</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Going out this week? Our AI automatically rebalances your meal plans around drinking, eating out, and special events while keeping you on track with your fitness goals.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h2 className="text-4xl mb-6">Smart Weekly Calorie Balance</h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                Most calorie trackers judge your day in isolation, causing guilt or binge–restrict cycles.
-                Bloom tracks calories weekly, allowing flexibility and smart adaptation.
-              </p>
-              <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <TrendingUp className="w-5 h-5 text-primary" />
+
+              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-secondary/5">
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
+                    <Activity className="w-6 h-6 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Flexible Distribution</h4>
-                    <p className="text-muted-foreground text-sm">
-                      Redistributes weekly calories based on your cycle phase automatically
+                  <div className="flex-1">
+                    <h4 className="text-lg font-semibold mb-2">Cycle-Synced Intelligence</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Integrates cycle tracking to adjust nutrition needs based on where you are hormonally — because your body's needs change throughout the month.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
-                    <Heart className="w-5 h-5 text-secondary" />
+              </div>
+
+              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-accent/10">
+                <div className="flex gap-4 items-start">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-400 to-accent flex items-center justify-center flex-shrink-0 shadow-bloom">
+                    <TrendingUp className="w-6 h-6 text-white" />
                   </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Eliminates Guilt</h4>
-                    <p className="text-muted-foreground text-sm">
-                      Had 200 extra calories? We adjust tomorrow's target — you're still on track
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                    <Activity className="w-5 h-5 text-accent-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Hormonal Alignment</h4>
-                    <p className="text-muted-foreground text-sm">
-                      Aligns with your body's natural changes throughout your cycle
+                  <div className="flex-1">
+                    <h4 className="text-lg font-semibold mb-2">Healthy Balance of Living</h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Fitness goals shouldn't mean sacrificing your social life. Find the sweet spot between wellness and enjoying life's moments.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl p-8">
-              <h3 className="text-2xl mb-6 text-center">How It Works</h3>
-              <div className="space-y-6">
-                <div className="bg-white rounded-2xl p-6 shadow-bloom">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">1</div>
-                    <h4 className="font-semibold">Set Your Goal</h4>
-                  </div>
-                  <p className="text-sm text-muted-foreground ml-11">
-                    Choose your objective (lose, maintain, or gain)
-                  </p>
+
+            <div className="bloom-card bg-gradient-to-br from-white via-primary/5 to-secondary/5 border-2 border-primary/20">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <Sparkles className="w-5 h-5 text-primary" />
+                  <h3 className="text-2xl font-semibold">How It Works</h3>
+                  <Sparkles className="w-5 h-5 text-primary" />
                 </div>
-                <div className="bg-white rounded-2xl p-6 shadow-bloom">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center text-sm font-bold">2</div>
-                    <h4 className="font-semibold">Weekly Total Set</h4>
+                <p className="text-sm text-muted-foreground">AI-powered rebalancing in three steps</p>
+              </div>
+
+              <div className="space-y-5">
+                <div className="relative">
+                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                        1
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1.5 text-base">Share Your Week</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Tell Bloom about upcoming dinners, drinks, or events
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground ml-11">
-                    Bloom calculates your optimal weekly calorie budget
-                  </p>
                 </div>
-                <div className="bg-white rounded-2xl p-6 shadow-bloom">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-accent/50 text-accent-foreground flex items-center justify-center text-sm font-bold">3</div>
-                    <h4 className="font-semibold">Smart Redistribution</h4>
+
+                <div className="relative">
+                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                        2
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1.5 text-base">AI Rebalances</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Your meal plans adjust based on your social calendar and cycle phase
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground ml-11">
-                    Daily targets adjust based on your cycle and yesterday's intake
-                  </p>
+                </div>
+
+                <div className="relative">
+                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-pink-400 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                        3
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1.5 text-base">Stay On Track</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Hit your fitness goals while enjoying life — no guilt, no restrictions
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <div className="mt-8 p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl border border-primary/20">
+                <p className="text-sm text-center text-foreground/80 italic">
+                  <Heart className="w-4 h-4 inline-block mr-1 text-secondary" />
+                  "Because wellness is about balance, not perfection"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional benefits row */}
+          <div className="grid md:grid-cols-4 gap-6 mt-12">
+            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <Award className="w-6 h-6 text-primary" />
+              </div>
+              <h5 className="font-semibold mb-1 text-sm">Weekly Tracking</h5>
+              <p className="text-xs text-muted-foreground">Flexible daily goals that balance out over 7 days</p>
+            </div>
+
+            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-secondary/10">
+              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3">
+                <Brain className="w-6 h-6 text-secondary" />
+              </div>
+              <h5 className="font-semibold mb-1 text-sm">Smart AI</h5>
+              <p className="text-xs text-muted-foreground">Learns your patterns and preferences over time</p>
+            </div>
+
+            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-accent/20">
+              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-3">
+                <Heart className="w-6 h-6 text-accent-foreground" />
+              </div>
+              <h5 className="font-semibold mb-1 text-sm">Zero Guilt</h5>
+              <p className="text-xs text-muted-foreground">Enjoy life's moments without derailing progress</p>
+            </div>
+
+            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <Leaf className="w-6 h-6 text-primary" />
+              </div>
+              <h5 className="font-semibold mb-1 text-sm">Sustainable</h5>
+              <p className="text-xs text-muted-foreground">Build habits that work with your lifestyle</p>
             </div>
           </div>
         </div>
