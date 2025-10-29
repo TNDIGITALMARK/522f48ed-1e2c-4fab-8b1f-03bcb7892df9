@@ -355,7 +355,19 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
         </Button>
       </div>
 
-      <Card className="p-4 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 shadow-bloom">
+      <Card
+        className="p-4 shadow-bloom border-2"
+        style={{
+          background: `
+            radial-gradient(ellipse at 20% 30%, rgba(165, 214, 167, 0.3) 0%, transparent 40%),
+            radial-gradient(ellipse at 80% 70%, rgba(129, 199, 132, 0.25) 0%, transparent 35%),
+            radial-gradient(circle at 50% 90%, rgba(104, 159, 56, 0.2) 0%, transparent 50%),
+            linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 30%, #a5d6a7 70%, #81c784 100%)
+          `,
+          borderColor: 'rgba(85, 139, 47, 0.25)',
+          boxShadow: '0 8px 24px rgba(76, 175, 80, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.8)'
+        }}
+      >
         <div
           className="grid gap-2"
           style={{
@@ -399,8 +411,16 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
                         "absolute inset-0 flex flex-col items-center justify-center rounded-lg cursor-move transition-all",
                         draggedItem?.id === item.id && "dragging",
                         item.type === 'plant' && item.growthStage === 4 && "plant-interactive",
-                        item.type === 'wisdom' ? "bg-gradient-to-br from-purple-100 via-indigo-100 to-violet-100 border-2 border-purple-300 shadow-lg" : "bg-white/90"
+                        item.type === 'wisdom' ? "bg-gradient-to-br from-purple-100 via-indigo-100 to-violet-100 border-2 border-purple-300 shadow-lg" :
+                        item.type === 'plant' ? "bg-gradient-to-br from-green-50/40 to-emerald-50/40 backdrop-blur-sm" :
+                        item.type === 'building' ? "bg-gradient-to-br from-stone-100 to-stone-200 border border-stone-300" :
+                        "bg-white/70 backdrop-blur-sm"
                       )}
+                      style={{
+                        boxShadow: item.type === 'plant' ?
+                          '0 4px 8px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.5)' :
+                          '0 6px 12px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3)'
+                      }}
                       draggable
                       onDragStart={() => handleDragStart(item)}
                     >
@@ -419,25 +439,34 @@ export function EnhancedGardenGrid({ gridWidth = 12, gridHeight = 12, gardenLeve
                           </div>
                           <p className="text-xs font-medium text-purple-700 mt-2">Wisdom</p>
                         </div>
-                      ) : item.emoji && item.growthStage >= 3 ? (
+                      ) : item.emoji && item.growthStage >= 2 ? (
                         <div
-                          className="text-4xl transition-all"
+                          className="relative transition-all"
                           style={{
-                            fontSize: `${2 + item.growthStage * 0.3}rem`,
-                            opacity: 0.3 + item.growthStage * 0.17
+                            fontSize: `${1.5 + item.growthStage * 0.5}rem`,
+                            opacity: 0.5 + item.growthStage * 0.125,
+                            filter: item.growthStage === 4 ?
+                              'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 8px rgba(255, 215, 0, 0.3))' :
+                              'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2))',
+                            transform: `scale(${0.8 + item.growthStage * 0.05})`,
                           }}
                         >
                           {item.emoji}
+                          {item.growthStage === 4 && (
+                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full animate-pulse" />
+                          )}
                         </div>
                       ) : (
                         <item.icon
                           className={cn(
-                            'w-10 h-10 transition-all',
-                            item.color,
-                            item.type === 'plant' && item.growthStage < 4 && `opacity-${30 + item.growthStage * 15}`
+                            'w-8 h-8 transition-all',
+                            item.color
                           )}
                           style={{
-                            fontSize: `${1 + item.growthStage * 0.2}rem`
+                            fontSize: `${1.2 + item.growthStage * 0.25}rem`,
+                            opacity: 0.4 + item.growthStage * 0.15,
+                            filter: 'drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25))',
+                            transform: `scale(${0.85 + item.growthStage * 0.04})`
                           }}
                         />
                       )}

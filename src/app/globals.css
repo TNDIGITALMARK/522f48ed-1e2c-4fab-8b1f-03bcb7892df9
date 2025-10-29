@@ -358,19 +358,41 @@ input:focus, textarea:focus, select:focus {
    GARDEN GAME MECHANICS - HAY DAY STYLE
    ============================================ */
 
-/* Garden grid styling - Hay Day inspired realistic grass */
+/* Garden grid styling - Hay Day inspired realistic grass with isometric depth */
 .garden-grid-cell {
   position: relative;
   background:
-    radial-gradient(circle at 20% 30%, rgba(139, 195, 74, 0.3) 0%, transparent 25%),
-    radial-gradient(circle at 80% 70%, rgba(104, 159, 56, 0.3) 0%, transparent 25%),
-    radial-gradient(circle at 40% 80%, rgba(124, 179, 66, 0.2) 0%, transparent 20%),
-    linear-gradient(135deg, #7cb342 0%, #8bc34a 50%, #9ccc65 100%);
-  border: 1px solid rgba(85, 139, 47, 0.3);
-  border-radius: 8px;
+    /* Grass texture overlay */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(85, 139, 47, 0.08) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(85, 139, 47, 0.06) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    /* Depth and lighting for isometric feel */
+    radial-gradient(ellipse at 40% 40%, rgba(165, 214, 167, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(129, 199, 132, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(104, 159, 56, 0.25) 0%, transparent 35%),
+    /* Base gradient for depth */
+    linear-gradient(145deg, #8bc34a 0%, #7cb342 30%, #689f38 70%, #558b2f 100%);
+  border: 2px solid rgba(69, 90, 100, 0.15);
+  border-bottom-color: rgba(85, 139, 47, 0.4);
+  border-right-color: rgba(85, 139, 47, 0.35);
+  border-radius: 6px;
   transition: all 0.2s ease;
   cursor: pointer;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .garden-grid-cell::after {
@@ -378,44 +400,112 @@ input:focus, textarea:focus, select:focus {
   position: absolute;
   inset: 0;
   background:
+    /* Subtle grass blade patterns */
     repeating-linear-gradient(
-      90deg,
+      45deg,
       transparent 0px,
-      rgba(56, 142, 60, 0.05) 1px,
-      transparent 2px
+      rgba(139, 195, 74, 0.1) 1px,
+      transparent 2px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      rgba(104, 159, 56, 0.08) 1px,
+      transparent 2px,
+      transparent 6px
     );
   pointer-events: none;
-  border-radius: 8px;
+  border-radius: 6px;
+}
+
+.garden-grid-cell::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+  border-radius: 4px;
+  pointer-events: none;
 }
 
 .garden-grid-cell:hover {
-  border-color: rgba(85, 139, 47, 0.6);
-  transform: scale(1.03);
-  box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-color: rgba(139, 195, 74, 0.7);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 3px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(76, 175, 80, 0.35);
 }
 
+/* Occupied cell - tilled soil with depth */
 .garden-grid-cell.occupied {
   background:
-    radial-gradient(circle at 50% 50%, rgba(255, 235, 59, 0.2) 0%, transparent 40%),
-    linear-gradient(135deg, #a1887f 0%, #bcaaa4 50%, #d7ccc8 100%);
-  border: 1px solid rgba(121, 85, 72, 0.4);
+    /* Soil texture */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(78, 52, 46, 0.1) 1px,
+      transparent 2px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      rgba(93, 64, 55, 0.08) 1px,
+      transparent 3px,
+      transparent 7px
+    ),
+    /* Lighting for depth */
+    radial-gradient(ellipse at 30% 30%, rgba(188, 170, 164, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(161, 136, 127, 0.4) 0%, transparent 45%),
+    /* Base soil gradient */
+    linear-gradient(145deg, #bcaaa4 0%, #a1887f 40%, #8d6e63 80%, #795548 100%);
+  border: 2px solid rgba(93, 64, 55, 0.3);
+  border-bottom-color: rgba(78, 52, 46, 0.5);
+  border-right-color: rgba(78, 52, 46, 0.45);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .garden-grid-cell.selected {
   border-color: hsl(var(--primary));
+  border-width: 3px;
   background:
-    radial-gradient(circle at 50% 50%, rgba(139, 195, 74, 0.4) 0%, transparent 50%),
-    linear-gradient(135deg, #7cb342 0%, #8bc34a 50%, #9ccc65 100%);
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.3), 0 4px 12px rgba(76, 175, 80, 0.4);
+    /* Enhanced grass for selected state */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(139, 195, 74, 0.15) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    radial-gradient(circle at 50% 50%, rgba(139, 195, 74, 0.5) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 40%, rgba(165, 214, 167, 0.4) 0%, transparent 50%),
+    linear-gradient(145deg, #9ccc65 0%, #8bc34a 30%, #7cb342 70%, #689f38 100%);
+  box-shadow:
+    0 0 0 3px hsl(var(--primary) / 0.35),
+    0 0 20px rgba(139, 195, 74, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 4px 12px rgba(76, 175, 80, 0.45);
   animation: selected-pulse 1.5s infinite;
 }
 
 @keyframes selected-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.3), 0 4px 12px rgba(76, 175, 80, 0.4);
+    box-shadow:
+      0 0 0 3px hsl(var(--primary) / 0.35),
+      0 0 20px rgba(139, 195, 74, 0.4),
+      inset 0 1px 2px rgba(255, 255, 255, 0.3),
+      0 4px 12px rgba(76, 175, 80, 0.45);
   }
   50% {
-    box-shadow: 0 0 0 5px hsl(var(--primary) / 0.2), 0 6px 16px rgba(76, 175, 80, 0.5);
+    box-shadow:
+      0 0 0 5px hsl(var(--primary) / 0.25),
+      0 0 30px rgba(139, 195, 74, 0.5),
+      inset 0 1px 2px rgba(255, 255, 255, 0.35),
+      0 6px 16px rgba(76, 175, 80, 0.55);
   }
 }
 
@@ -682,6 +772,74 @@ input:focus, textarea:focus, select:focus {
   50% {
     opacity: 1;
     transform: scale(1.2);
+  }
+}
+
+/* Hay Day style realistic item shadows */
+.garden-item-shadow {
+  position: relative;
+}
+
+.garden-item-shadow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 10%;
+  right: 10%;
+  height: 8px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+/* Building depth effect - isometric style */
+.building-isometric {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.building-isometric::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Enhanced plant growth stages with realistic appearance */
+.plant-stage-0 {
+  filter: grayscale(0.5) brightness(0.9);
+  opacity: 0.5;
+}
+
+.plant-stage-1 {
+  filter: grayscale(0.3) brightness(0.95);
+  opacity: 0.65;
+}
+
+.plant-stage-2 {
+  filter: grayscale(0.1) brightness(1);
+  opacity: 0.8;
+}
+
+.plant-stage-3 {
+  filter: brightness(1.05) saturate(1.1);
+  opacity: 0.95;
+}
+
+.plant-stage-4 {
+  filter: brightness(1.1) saturate(1.2) drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+  opacity: 1;
+  animation: mature-glow 3s ease-in-out infinite;
+}
+
+@keyframes mature-glow {
+  0%, 100% {
+    filter: brightness(1.1) saturate(1.2) drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
+  }
+  50% {
+    filter: brightness(1.15) saturate(1.25) drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
   }
 }
 
