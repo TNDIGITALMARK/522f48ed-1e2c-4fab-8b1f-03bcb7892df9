@@ -1,158 +1,354 @@
 "use client";
 
-import { Navigation } from '@/components/navigation';
-import { BloomLogo } from '@/components/bloom-logo';
+import { DashboardLayout } from '@/components/dashboard-layout';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Heart, Droplets, Footprints, Brain, TrendingUp } from 'lucide-react';
-import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import {
+  Heart,
+  Droplets,
+  Footprints,
+  Brain,
+  TrendingUp,
+  Calendar,
+  Flame,
+  Moon,
+  Sun,
+  Activity,
+  Apple,
+  Clock,
+  Target,
+  Award,
+  Zap,
+  Plus
+} from 'lucide-react';
 
 export default function DashboardPage() {
-  // Mock data for Sarah Thompson
+  // Mock wellness data
   const userData = {
     name: "Sarah Thompson",
     cycleDay: 14,
     phase: "Ovulation Phase",
-    mood: 7,
+    mood: 8,
     energy: "Elevated",
+    sleepHours: 7.5,
+    sleepQuality: "Good",
     meditation: { completed: 12, goal: 15 },
     steps: { completed: 8000, goal: 10000 },
     water: { completed: 6, goal: 8 },
+    calories: { consumed: 1850, goal: 2000 },
+    weeklyStreak: 12,
   };
 
-  return (
-    <div className="min-h-screen bg-background pb-24">
-      {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <BloomLogo />
-          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-            <Image
-              src="/generated/wellness-coach-1.png"
-              alt="Profile"
-              width={40}
-              height={40}
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </header>
+  const recentActivities = [
+    { time: "2h ago", activity: "Completed 30 min yoga session", icon: Activity, color: "text-primary" },
+    { time: "5h ago", activity: "Logged healthy breakfast", icon: Apple, color: "text-secondary" },
+    { time: "Yesterday", activity: "Meditation streak: 5 days", icon: Brain, color: "text-accent-foreground" },
+  ];
 
-      <main className="max-w-4xl mx-auto px-6 py-8">
+  const upcomingGoals = [
+    { title: "Complete water intake", progress: 75, icon: Droplets },
+    { title: "Reach step goal", progress: 80, icon: Footprints },
+    { title: "Finish meditation", progress: 80, icon: Brain },
+  ];
+
+  return (
+    <DashboardLayout>
+      <div className="space-y-6">
         {/* Welcome Section */}
-        <div className="mb-8">
+        <div>
           <h1 className="text-4xl mb-2">Welcome back, Sarah</h1>
           <p className="text-muted-foreground text-lg">
-            Here's your wellness snapshot for today
+            Here's your holistic wellness snapshot for {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
           </p>
         </div>
 
-        {/* Cycle Status Card */}
-        <Card className="bloom-card mb-6 bg-gradient-to-br from-accent/20 to-accent/5 border-none">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="text-xl mb-1">Cycle Day {userData.cycleDay}</h3>
-              <p className="text-muted-foreground">{userData.phase}</p>
-            </div>
-            <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
-              <Heart className="w-8 h-8 text-primary-foreground" />
-            </div>
-          </div>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Energy Level</span>
-              <span className="font-medium text-primary">{userData.energy}</span>
-            </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Mood Rating</span>
-              <span className="font-medium">{userData.mood}/10</span>
-            </div>
-          </div>
-        </Card>
-
-        {/* Daily Rituals */}
-        <div className="mb-6">
-          <h2 className="text-2xl mb-4">Today's Rituals</h2>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {/* Meditation */}
-            <Card className="bloom-card">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Brain className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-semibold">Meditation</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {userData.meditation.completed} / {userData.meditation.goal} min
-                  </p>
-                </div>
+        {/* Key Metrics Grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {/* Cycle Status */}
+          <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Cycle Day</p>
+                <h3 className="text-3xl font-bold text-primary">{userData.cycleDay}</h3>
               </div>
-              <Progress
-                value={(userData.meditation.completed / userData.meditation.goal) * 100}
-                className="h-2"
-              />
+              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center">
+                <Heart className="w-7 h-7 text-primary-foreground" />
+              </div>
+            </div>
+            <p className="text-sm font-medium">{userData.phase}</p>
+          </Card>
+
+          {/* Energy Level */}
+          <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Energy Level</p>
+                <h3 className="text-3xl font-bold text-secondary">{userData.energy}</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center">
+                <Zap className="w-7 h-7 text-secondary-foreground" />
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2 h-6 rounded ${
+                      i < 4 ? 'bg-secondary' : 'bg-secondary/20'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </Card>
+
+          {/* Sleep Quality */}
+          <Card className="bloom-card bg-gradient-to-br from-accent/20 to-accent/10 border-accent/30">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Sleep Quality</p>
+                <h3 className="text-3xl font-bold text-accent-foreground">{userData.sleepHours}h</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center">
+                <Moon className="w-7 h-7 text-accent-foreground" />
+              </div>
+            </div>
+            <p className="text-sm font-medium">{userData.sleepQuality}</p>
+          </Card>
+
+          {/* Weekly Streak */}
+          <Card className="bloom-card bg-gradient-to-br from-orange-100 to-orange-50 border-orange-200">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Weekly Streak</p>
+                <h3 className="text-3xl font-bold text-orange-600">{userData.weeklyStreak}</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-orange-500 flex items-center justify-center">
+                <Flame className="w-7 h-7 text-white" />
+              </div>
+            </div>
+            <p className="text-sm font-medium text-orange-700">Days Active</p>
+          </Card>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Left Column - Daily Progress */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Today's Goals */}
+            <Card className="bloom-card">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-semibold">Today's Goals</h2>
+                <Badge variant="secondary" className="px-3 py-1">
+                  <Target className="w-3 h-3 mr-1" />
+                  3/5 Complete
+                </Badge>
+              </div>
+
+              <div className="space-y-5">
+                {upcomingGoals.map((goal, index) => {
+                  const Icon = goal.icon;
+                  return (
+                    <div key={index} className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                            <Icon className="w-5 h-5 text-primary" />
+                          </div>
+                          <span className="font-medium">{goal.title}</span>
+                        </div>
+                        <span className="text-sm text-muted-foreground">{goal.progress}%</span>
+                      </div>
+                      <Progress value={goal.progress} className="h-2" />
+                    </div>
+                  );
+                })}
+              </div>
             </Card>
 
-            {/* Steps */}
+            {/* Daily Rituals Progress */}
             <Card className="bloom-card">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
-                  <Footprints className="w-6 h-6 text-secondary" />
+              <h2 className="text-2xl font-semibold mb-6">Daily Rituals</h2>
+
+              <div className="grid gap-4 md:grid-cols-3">
+                {/* Meditation */}
+                <div className="bg-gradient-to-br from-primary/5 to-transparent p-4 rounded-xl border border-primary/10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Brain className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Meditation</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {userData.meditation.completed}/{userData.meditation.goal} min
+                      </p>
+                    </div>
+                  </div>
+                  <Progress
+                    value={(userData.meditation.completed / userData.meditation.goal) * 100}
+                    className="h-2 mb-3"
+                  />
+                  <Button size="sm" variant="outline" className="w-full">
+                    <Plus className="w-4 h-4 mr-1" />
+                    Log Session
+                  </Button>
                 </div>
-                <div>
-                  <h4 className="font-semibold">Movement</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {userData.steps.completed.toLocaleString()} / {userData.steps.goal.toLocaleString()} steps
-                  </p>
+
+                {/* Movement */}
+                <div className="bg-gradient-to-br from-secondary/5 to-transparent p-4 rounded-xl border border-secondary/10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
+                      <Footprints className="w-6 h-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Movement</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {userData.steps.completed.toLocaleString()}/{userData.steps.goal.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  <Progress
+                    value={(userData.steps.completed / userData.steps.goal) * 100}
+                    className="h-2 mb-3"
+                  />
+                  <Button size="sm" variant="outline" className="w-full">
+                    <Activity className="w-4 h-4 mr-1" />
+                    Track Activity
+                  </Button>
+                </div>
+
+                {/* Hydration */}
+                <div className="bg-gradient-to-br from-accent/10 to-transparent p-4 rounded-xl border border-accent/20">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
+                      <Droplets className="w-6 h-6 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">Hydration</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {userData.water.completed}/{userData.water.goal} glasses
+                      </p>
+                    </div>
+                  </div>
+                  <Progress
+                    value={(userData.water.completed / userData.water.goal) * 100}
+                    className="h-2 mb-3"
+                  />
+                  <Button size="sm" variant="outline" className="w-full">
+                    <Plus className="w-4 h-4 mr-1" />
+                    Add Glass
+                  </Button>
                 </div>
               </div>
-              <Progress
-                value={(userData.steps.completed / userData.steps.goal) * 100}
-                className="h-2"
-              />
             </Card>
 
-            {/* Water */}
-            <Card className="bloom-card">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                  <Droplets className="w-6 h-6 text-accent-foreground" />
+            {/* Personalized Insight */}
+            <Card className="bloom-card bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-6 h-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <h4 className="font-semibold">Hydration</h4>
-                  <p className="text-sm text-muted-foreground">
-                    {userData.water.completed} / {userData.water.goal} glasses
+                  <h3 className="text-lg font-semibold mb-2">Personalized Insight</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Your energy levels are typically elevated during the ovulation phase.
+                    This is a great time to schedule important meetings, tackle challenging workouts,
+                    and focus on high-priority tasks. Keep up your meditation practice to maintain
+                    emotional balance throughout your cycle.
                   </p>
+                  <Button variant="link" className="mt-3 px-0">
+                    Learn more about your cycle phase →
+                  </Button>
                 </div>
               </div>
-              <Progress
-                value={(userData.water.completed / userData.water.goal) * 100}
-                className="h-2"
-              />
+            </Card>
+          </div>
+
+          {/* Right Column - Activity & Quick Actions */}
+          <div className="space-y-6">
+            {/* Quick Actions */}
+            <Card className="bloom-card">
+              <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+              <div className="space-y-2">
+                <Button className="w-full justify-start" variant="outline">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Log Today's Entry
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Activity className="w-4 h-4 mr-2" />
+                  Start Workout
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Apple className="w-4 h-4 mr-2" />
+                  Log Meal
+                </Button>
+                <Button className="w-full justify-start" variant="outline">
+                  <Brain className="w-4 h-4 mr-2" />
+                  Guided Meditation
+                </Button>
+              </div>
+            </Card>
+
+            {/* Recent Activity */}
+            <Card className="bloom-card">
+              <h3 className="text-lg font-semibold mb-4">Recent Activity</h3>
+              <div className="space-y-4">
+                {recentActivities.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className={`w-10 h-10 rounded-xl bg-muted flex items-center justify-center flex-shrink-0 ${item.color}`}>
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{item.activity}</p>
+                        <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
+                          <Clock className="w-3 h-3" />
+                          {item.time}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <Button variant="link" className="w-full mt-4">
+                View All Activity
+              </Button>
+            </Card>
+
+            {/* Achievements */}
+            <Card className="bloom-card bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center">
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-orange-900">Achievement Unlocked!</h3>
+                  <p className="text-sm text-orange-700">12-Day Wellness Streak</p>
+                </div>
+              </div>
+              <p className="text-sm text-orange-800">
+                You've logged wellness activities for 12 consecutive days. Keep up the amazing work!
+              </p>
+            </Card>
+
+            {/* Daily Tip */}
+            <Card className="bloom-card bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20">
+              <div className="flex items-center gap-3 mb-3">
+                <Sun className="w-6 h-6 text-accent-foreground" />
+                <h3 className="font-semibold text-accent-foreground">Daily Wellness Tip</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Morning sunlight exposure helps regulate your circadian rhythm. Try to get 10-15 minutes
+                of natural light within the first hour of waking.
+              </p>
             </Card>
           </div>
         </div>
-
-        {/* Insights */}
-        <Card className="bloom-card bg-gradient-to-br from-primary/5 to-primary/10 border-none">
-          <div className="flex items-start gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-              <TrendingUp className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Personalized Insight</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Your energy levels are typically elevated during the ovulation phase.
-                This is a great time to schedule important meetings or tackle challenging workouts.
-                Keep up your meditation practice to maintain emotional balance.
-              </p>
-            </div>
-          </div>
-        </Card>
-      </main>
-
-      <Navigation />
-    </div>
+      </div>
+    </DashboardLayout>
   );
 }
