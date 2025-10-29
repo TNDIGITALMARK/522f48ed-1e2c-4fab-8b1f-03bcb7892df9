@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Elegant Flora Boutique",
-  description: "Beautiful AI-powered website creation platform",
+  title: "Bloom by Rooted - Holistic Wellness for Women",
+  description: "Comprehensive wellness platform designed for women. Track cycles, practice mindfulness, and build healthy daily rituals.",
 };
 
 export default function RootLayout({
