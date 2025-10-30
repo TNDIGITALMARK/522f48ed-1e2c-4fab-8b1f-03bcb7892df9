@@ -39,6 +39,8 @@ import {
   type GoalProgress,
   type WeightChange
 } from '@/lib/weight-tracking';
+import { GoalsManager, type Goal } from '@/components/goals-manager';
+import { calculateCalories, type CalorieRecommendation } from '@/lib/calorie-calculator';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -49,6 +51,8 @@ export default function DashboardPage() {
   const [activeGoal, setActiveGoal] = useState<WeightGoal | null>(null);
   const [goalProgress, setGoalProgress] = useState<GoalProgress | null>(null);
   const [weightChange, setWeightChange] = useState<WeightChange | null>(null);
+  const [userGoals, setUserGoals] = useState<Goal[]>([]);
+  const [calorieRecommendation, setCalorieRecommendation] = useState<CalorieRecommendation | null>(null);
 
   // Load weight and goals data on mount
   useEffect(() => {
@@ -63,7 +67,35 @@ export default function DashboardPage() {
 
     const change = calculateWeightChange(MOCK_USER_ID);
     setWeightChange(change);
+
+    // Load user goals from localStorage
+    const storedGoals = localStorage.getItem(`userGoals_${MOCK_USER_ID}`);
+    if (storedGoals) {
+      setUserGoals(JSON.parse(storedGoals));
+    }
+
+    // Calculate calorie recommendation if we have the necessary data
+    if (goal && latest) {
+      const recommendation = calculateCalories({
+        currentWeight: latest.weight,
+        targetWeight: goal.targetWeight,
+        weightUnit: latest.unit,
+        heightInches: 67, // 5'7" default - would come from user profile
+        age: 30, // Default - would come from user profile
+        sex: 'female',
+        goalType: goal.goalType,
+        weeklyWeightGoal: goal.weeklyGoal,
+        activityLevel: goal.activityLevel || 'moderate'
+      });
+      setCalorieRecommendation(recommendation);
+    }
   }, []);
+
+  // Save goals to localStorage when they change
+  const handleGoalsChange = (newGoals: Goal[]) => {
+    setUserGoals(newGoals);
+    localStorage.setItem(`userGoals_${MOCK_USER_ID}`, JSON.stringify(newGoals));
+  };
 
   // Mock wellness data
   const userData = {
@@ -424,6 +456,76 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Card>
+
+            {/* Weekly Calorie Balance */}
+            {calorieRecommendation && (
+              <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center flex-shrink-0">
+                    <Flame className="w-6 h-6 text-secondary-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Weekly Calorie Balance</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Automatically curated from your weight and fitness goals
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/60 rounded-xl p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Daily Target</p>
+                      <p className="text-2xl font-bold text-secondary">
+                        {calorieRecommendation.dailyCalories.toLocaleString()}
+                      </p>
+                      <p className="text-xs text-muted-foreground">calories</p>
+                    </div>
+                    <div className="bg-white/60 rounded-xl p-4">
+                      <p className="text-sm text-muted-foreground mb-1">Weekly Total</p>
+                      <p className="text-2xl font-bold text-primary">
+                        {calorieRecommendation.weeklyCalories.toLocaleString()}
+                      </p>
+                      <p className="text-xs text-muted-foreground">calories</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Protein</span>
+                      <span className="font-medium">{calorieRecommendation.proteinGrams}g/day</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Carbs</span>
+                      <span className="font-medium">{calorieRecommendation.carbsGrams}g/day</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-muted-foreground">Fat</span>
+                      <span className="font-medium">{calorieRecommendation.fatGrams}g/day</span>
+                    </div>
+                  </div>
+
+                  {!calorieRecommendation.isCustom && (
+                    <div className="flex items-start gap-2 p-3 bg-primary/10 rounded-lg border border-primary/20 text-sm">
+                      <Sparkles className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <p className="text-foreground/80">
+                        Based on your {goalTypeInfo?.label.toLowerCase()} goal of {calorieRecommendation.weeklyWeightChange.toFixed(1)} lbs/week
+                      </p>
+                    </div>
+                  )}
+
+                  <Button variant="outline" className="w-full rounded-full text-sm">
+                    Set Custom Calorie Goal
+                  </Button>
+                </div>
+              </Card>
+            )}
+
+            {/* Goals Manager */}
+            <GoalsManager
+              activeGoals={userGoals}
+              onGoalsChange={handleGoalsChange}
+            />
           </div>
 
           {/* Right Column - Activity & Quick Actions */}
