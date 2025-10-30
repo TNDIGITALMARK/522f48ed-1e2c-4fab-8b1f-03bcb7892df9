@@ -3,25 +3,25 @@
 
 /*
 =============================================================================
-NEUTRAL FITNESS COLOR PALETTE - DESIGN SYSTEM SPECIFICATION
+BLOOM - PASTEL FLORAL FITNESS COLOR PALETTE (18-30 DEMOGRAPHIC)
 =============================================================================
 
-EXTRACTED FROM DESIGN REFERENCE (Neutral Fitness Color Palette)
-
-COLOR PALETTE (EXACT VALUES):
-- Onyx (Primary): #1C1C1B / HSL 60 4% 11% - Deep charcoal black
-- Walnut (Accent): #7B6F5E / HSL 38 13% 42% - Warm brown/taupe
-- Greige (Muted): #F7ECDB / HSL 38 53% 91% - Beige-grey blend
-- Ash (Secondary): #979086 / HSL 40 5% 55% - Medium grey
-- Stucco (Background): #F2E9E4 / HSL 24 33% 93% - Light cream/off-white
-- White: #FFFFFF / HSL 0 0% 100%
-- Pure Black: #000000 / HSL 0 0% 0%
-
 DESIGN PHILOSOPHY:
-- Sophisticated neutral palette with warm, earthy tones
-- Minimal, modern aesthetic inspired by fitness and wellness
-- Clean, professional appearance with natural warmth
-- Strong contrast for excellent readability
+- Soft pastel floral tones inspired by blooming flowers
+- Warm beige neutrals for sophistication and calm
+- Youthful, fresh palette appealing to 18-30 age group
+- Light, airy feel with natural warmth
+- Gentle contrast for comfortable reading
+
+COLOR PALETTE (PASTEL BLOOM):
+- Soft Lavender (Primary): #C8B6D6 / HSL 273 32% 78% - Gentle purple bloom
+- Peachy Blush (Secondary): #F5D5CB / HSL 18 63% 88% - Warm peach petal
+- Sage Green (Accent): #C4D9C7 / HSL 130 20% 81% - Fresh garden sage
+- Dusty Rose (Highlight): #E8C5D1 / HSL 340 38% 84% - Romantic rose petal
+- Soft Beige (Background): #F7F3EE / HSL 32 30% 95% - Warm cream
+- Warm Sand (Muted): #EBE3DB / HSL 32 24% 90% - Sandy beige
+- Soft Charcoal (Text): #6B6561 / HSL 30 5% 40% - Gentle dark neutral
+- Pure White: #FFFFFF / HSL 0 0% 100% - Clean white
 
 TYPOGRAPHY:
 - Headings: Playfair Display (serif, elegant, slightly decorative)
@@ -35,128 +35,129 @@ SPACING SYSTEM (GENEROUS, BREATHING ROOM):
 - Grid gaps: 24-32px
 
 COMPONENT STYLING:
-- Border Radius: 16-20px (modern, clean feel)
-- Shadows: Subtle, soft (0 4px 16px rgba(0,0,0,0.08))
+- Border Radius: 16-20px (soft, rounded feel)
+- Shadows: Very subtle, soft (0 4px 16px rgba(107,101,97,0.08))
 - Buttons: Rounded corners (12-16px), medium weight text
 - Cards: Soft shadows, ample padding, rounded corners
 
 VISUAL EFFECTS:
-- Clean, minimal shapes with subtle warmth
-- Subtle shadows for depth without harshness
-- Gentle transitions (200-300ms ease)
-- Neutral, sophisticated color overlays
+- Soft, dreamy shapes with floral warmth
+- Very subtle shadows for gentle depth
+- Smooth transitions (200-300ms ease)
+- Pastel, romantic color overlays
 
 =============================================================================
 */
 
 :root {
-  /* Neutral Fitness Color System */
-  --neutral-onyx: 60 4% 11%; /* #1C1C1B */
-  --neutral-walnut: 38 13% 42%; /* #7B6F5E */
-  --neutral-greige: 38 53% 91%; /* #F7ECDB */
-  --neutral-ash: 40 5% 55%; /* #979086 */
-  --neutral-stucco: 24 33% 93%; /* #F2E9E4 */
-  --neutral-white: 0 0% 100%; /* #FFFFFF */
-  --neutral-black: 0 0% 0%; /* #000000 */
+  /* Bloom Pastel Floral Color System */
+  --bloom-lavender: 273 32% 78%; /* #C8B6D6 - Soft purple bloom */
+  --bloom-peach: 18 63% 88%; /* #F5D5CB - Peachy blush petal */
+  --bloom-sage: 130 20% 81%; /* #C4D9C7 - Fresh sage green */
+  --bloom-rose: 340 38% 84%; /* #E8C5D1 - Dusty rose petal */
+  --bloom-beige: 32 30% 95%; /* #F7F3EE - Soft warm beige */
+  --bloom-sand: 32 24% 90%; /* #EBE3DB - Warm sandy beige */
+  --bloom-charcoal: 30 5% 40%; /* #6B6561 - Soft charcoal text */
+  --bloom-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
-  /* Stucco backgrounds with Onyx text */
-  --background: 24 33% 93%;
-  --foreground: 60 4% 11%;
+  /* Soft beige backgrounds with charcoal text */
+  --background: 32 30% 95%;
+  --foreground: 30 5% 40%;
 
-  /* White cards with Onyx text */
+  /* White cards with charcoal text */
   --card: 0 0% 100%;
-  --card-foreground: 60 4% 11%;
+  --card-foreground: 30 5% 40%;
 
   /* Popovers */
   --popover: 0 0% 100%;
-  --popover-foreground: 60 4% 11%;
+  --popover-foreground: 30 5% 40%;
 
-  /* Primary: Onyx (deep charcoal) */
-  --primary: 60 4% 11%;
-  --primary-foreground: 0 0% 100%;
+  /* Primary: Soft Lavender (gentle purple bloom) */
+  --primary: 273 32% 78%;
+  --primary-foreground: 30 5% 25%;
 
-  /* Secondary: Ash (medium grey) */
-  --secondary: 40 5% 55%;
-  --secondary-foreground: 0 0% 100%;
+  /* Secondary: Peachy Blush (warm peach petal) */
+  --secondary: 18 63% 88%;
+  --secondary-foreground: 30 5% 25%;
 
-  /* Muted: Greige (beige-grey blend) */
-  --muted: 38 53% 91%;
-  --muted-foreground: 60 4% 25%;
+  /* Muted: Warm Sand (sandy beige) */
+  --muted: 32 24% 90%;
+  --muted-foreground: 30 5% 45%;
 
-  /* Accent: Walnut (warm brown/taupe) */
-  --accent: 38 13% 42%;
-  --accent-foreground: 0 0% 100%;
+  /* Accent: Sage Green (fresh garden sage) */
+  --accent: 130 20% 81%;
+  --accent-foreground: 30 5% 25%;
 
-  /* Destructive */
-  --destructive: 0 70% 50%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive - Soft coral for errors */
+  --destructive: 0 60% 75%;
+  --destructive-foreground: 30 5% 25%;
 
-  /* Borders: Greige */
-  --border: 38 53% 91%;
-  --input: 38 53% 91%;
-  --ring: 60 4% 11%;
+  /* Borders: Light sandy beige */
+  --border: 32 24% 88%;
+  --input: 32 24% 88%;
+  --ring: 273 32% 78%;
 
   /* Modern rounded corners */
   --radius: 1rem;
 
   /* Sidebar */
   --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 60 4% 11%;
-  --sidebar-primary: 60 4% 11%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 38 53% 91%;
-  --sidebar-accent-foreground: 60 4% 11%;
-  --sidebar-border: 38 53% 91%;
-  --sidebar-ring: 60 4% 11%;
+  --sidebar-foreground: 30 5% 40%;
+  --sidebar-primary: 273 32% 78%;
+  --sidebar-primary-foreground: 30 5% 25%;
+  --sidebar-accent: 32 24% 90%;
+  --sidebar-accent-foreground: 30 5% 40%;
+  --sidebar-border: 32 24% 88%;
+  --sidebar-ring: 273 32% 78%;
 }
 
 .dark {
-  /* Dark mode: Onyx background with Stucco text */
-  --background: 60 4% 11%;
-  --foreground: 24 33% 93%;
+  /* Dark mode: Deep plum background with soft cream text */
+  --background: 273 20% 15%;
+  --foreground: 32 30% 90%;
 
-  /* Dark cards */
-  --card: 60 4% 15%;
-  --card-foreground: 24 33% 93%;
+  /* Dark cards with subtle warmth */
+  --card: 273 15% 20%;
+  --card-foreground: 32 30% 90%;
 
   /* Dark popovers */
-  --popover: 60 4% 15%;
-  --popover-foreground: 24 33% 93%;
+  --popover: 273 15% 20%;
+  --popover-foreground: 32 30% 90%;
 
-  /* Primary: Light neutral */
-  --primary: 24 33% 93%;
-  --primary-foreground: 60 4% 11%;
+  /* Primary: Brightened lavender */
+  --primary: 273 35% 75%;
+  --primary-foreground: 273 20% 15%;
 
-  /* Secondary: Ash */
-  --secondary: 40 5% 55%;
-  --secondary-foreground: 0 0% 100%;
+  /* Secondary: Warm peach */
+  --secondary: 18 55% 80%;
+  --secondary-foreground: 273 20% 15%;
 
-  /* Muted: Dark greige */
-  --muted: 40 5% 25%;
-  --muted-foreground: 40 5% 70%;
+  /* Muted: Deep warm grey */
+  --muted: 30 8% 30%;
+  --muted-foreground: 32 20% 70%;
 
-  /* Accent: Walnut lightened */
-  --accent: 38 13% 50%;
-  --accent-foreground: 0 0% 100%;
+  /* Accent: Sage green lightened */
+  --accent: 130 25% 75%;
+  --accent-foreground: 273 20% 15%;
 
-  /* Destructive */
-  --destructive: 0 62.8% 50%;
-  --destructive-foreground: 0 0% 100%;
+  /* Destructive - Soft warm coral */
+  --destructive: 0 55% 70%;
+  --destructive-foreground: 273 20% 15%;
 
   /* Borders */
-  --border: 40 5% 25%;
-  --input: 40 5% 25%;
-  --ring: 24 33% 93%;
+  --border: 30 8% 30%;
+  --input: 30 8% 30%;
+  --ring: 273 35% 75%;
 
   /* Sidebar dark */
-  --sidebar-background: 60 4% 8%;
-  --sidebar-foreground: 24 33% 93%;
-  --sidebar-primary: 24 33% 93%;
-  --sidebar-primary-foreground: 60 4% 11%;
-  --sidebar-accent: 40 5% 20%;
-  --sidebar-accent-foreground: 24 33% 93%;
-  --sidebar-border: 40 5% 20%;
-  --sidebar-ring: 24 33% 93%;
+  --sidebar-background: 273 18% 12%;
+  --sidebar-foreground: 32 30% 90%;
+  --sidebar-primary: 273 35% 75%;
+  --sidebar-primary-foreground: 273 20% 15%;
+  --sidebar-accent: 30 8% 25%;
+  --sidebar-accent-foreground: 32 30% 90%;
+  --sidebar-border: 30 8% 25%;
+  --sidebar-ring: 273 35% 75%;
 }
 
 @theme {

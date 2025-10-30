@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { HeightInput } from '@/components/height-input';
+import { FitnessGoals } from '@/components/fitness-goals';
 import { User, Save, Scale, Ruler, Calendar, Activity } from 'lucide-react';
 import { type HeightValue } from '@/lib/height-conversions';
 import { type WeightUnit, type ActivityLevel } from '@/lib/weight-tracking';
@@ -227,6 +228,16 @@ export default function ProfilePage() {
             </div>
           </div>
         </Card>
+
+        {/* Fitness Goals Section */}
+        <div className="max-w-2xl">
+          <FitnessGoals
+            userId={MOCK_USER_ID}
+            currentHeight={height}
+            currentWeight={weight}
+            currentWeightUnit={weightUnit}
+          />
+        </div>
       </div>
     </DashboardLayout>
   );
