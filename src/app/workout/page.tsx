@@ -7,9 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp } from 'lucide-react';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info } from 'lucide-react';
 import { useState } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { toast } from 'sonner';
 
 const phaseWorkouts = {
   Menstruation: [
@@ -78,6 +81,73 @@ const phaseWorkouts = {
   ],
 };
 
+const cycleGuidance = {
+  Menstruation: {
+    title: 'Menstruation Phase Training',
+    focus: 'Rest, Restore, and Gentle Movement',
+    description: 'Your body is working hard during menstruation. Energy levels are naturally lower, and that\'s completely normal. This is not the time to push yourself with intense workouts.',
+    recommendations: [
+      'Focus on gentle, restorative movements like yoga and walking',
+      'Prioritize stretching and flexibility over intensity',
+      'Listen to your body - if you need rest, take it',
+      'Avoid heavy lifting and high-intensity cardio',
+      'Stay hydrated and consume iron-rich foods to support recovery'
+    ],
+    optimal: 'Light yoga, walking, gentle stretching',
+    avoid: 'Heavy strength training, intense HIIT, long endurance runs',
+    intensity: 'Keep it to 40-50% of your max effort',
+    recovery: 'Prioritize sleep and stress management'
+  },
+  Follicular: {
+    title: 'Follicular Phase Training',
+    focus: 'Build Strength and Increase Intensity',
+    description: 'Your energy is rising! Estrogen levels are increasing, which means better muscle recovery, higher pain tolerance, and improved endurance. This is your power phase for building strength.',
+    recommendations: [
+      'Focus on progressive overload in strength training',
+      'Great time to increase weights and challenge yourself with new PRs',
+      'HIIT workouts are effective during this phase',
+      'Your body recovers faster, so you can train more frequently',
+      'Fuel with complex carbs to support your increased energy output'
+    ],
+    optimal: 'Compound lifts (squats, deadlifts), HIIT cardio, interval training',
+    avoid: 'Under-eating - your body needs fuel for this intensity',
+    intensity: 'Push yourself to 80-90% of your max effort',
+    recovery: 'You\'ll recover faster, but still prioritize 7-9 hours of sleep'
+  },
+  Ovulation: {
+    title: 'Ovulation Phase Training',
+    focus: 'Peak Performance and Maximum Intensity',
+    description: 'You\'re at your strongest! Testosterone and estrogen peak during ovulation, giving you maximum strength, endurance, and pain tolerance. This is when you can hit your hardest workouts.',
+    recommendations: [
+      'Go for personal records and maximum lifts',
+      'High-intensity interval training at peak capacity',
+      'Complex, challenging movements and heavy compound lifts',
+      'Your coordination and reaction time are at their best',
+      'Take advantage of this peak window - it only lasts 2-3 days'
+    ],
+    optimal: 'Maximal strength training, plyometrics, sprints, competitive workouts',
+    avoid: 'Wasting this peak phase with low-intensity workouts',
+    intensity: 'Push to 90-100% of your max effort',
+    recovery: 'Your body can handle more, but still listen to fatigue signals'
+  },
+  Luteal: {
+    title: 'Luteal Phase Training',
+    focus: 'Moderate Intensity and Recovery Focus',
+    description: 'Progesterone is rising, which can make you feel warmer, more fatigued, and less explosive. Your body is preparing for menstruation, so it\'s time to dial back intensity and focus on sustainability.',
+    recommendations: [
+      'Shift to lower-impact workouts like Pilates, barre, and yoga',
+      'Focus on mobility, flexibility, and functional movements',
+      'Moderate-intensity strength training is fine, but avoid maximal lifts',
+      'Your metabolism is slightly higher, so you may need more calories',
+      'Prioritize stress management and restorative activities'
+    ],
+    optimal: 'Pilates, yoga, moderate strength training, steady-state cardio',
+    avoid: 'Maximal lifting, intense HIIT, pushing through fatigue',
+    intensity: 'Keep it to 60-70% of your max effort',
+    recovery: 'Prioritize magnesium, good sleep, and stress reduction'
+  }
+};
+
 const weeklyProgress = {
   workoutsCompleted: 4,
   workoutsGoal: 5,
@@ -99,6 +169,7 @@ const gymExercises = [
 export default function WorkoutPage() {
   const [currentPhase] = useState<keyof typeof phaseWorkouts>('Follicular');
   const workouts = phaseWorkouts[currentPhase];
+  const guidance = cycleGuidance[currentPhase];
 
   const completedWorkouts = [
     { day: 'Monday', workout: 'Full Body Strength', duration: '30 min', calories: 250 },
@@ -117,6 +188,39 @@ export default function WorkoutPage() {
     { id: '2', exercise: 'Bench Press', sets: 4, reps: 10, weight: 95, date: '2025-10-28' },
     { id: '3', exercise: 'Deadlift', sets: 3, reps: 6, weight: 185, date: '2025-10-26' },
   ]);
+
+  const [showLogDialog, setShowLogDialog] = useState(false);
+  const [logExercise, setLogExercise] = useState('');
+  const [logSets, setLogSets] = useState('');
+  const [logReps, setLogReps] = useState('');
+  const [logWeight, setLogWeight] = useState('');
+
+  const handleLogWorkout = (exerciseName?: string, exerciseSets?: number, exerciseReps?: number, exerciseWeight?: number) => {
+    const today = new Date().toISOString().split('T')[0];
+
+    const newLog = {
+      id: Date.now().toString(),
+      exercise: exerciseName || logExercise,
+      sets: exerciseSets || parseInt(logSets),
+      reps: exerciseReps || parseInt(logReps),
+      weight: exerciseWeight || parseInt(logWeight),
+      date: today
+    };
+
+    setWorkoutLogs([newLog, ...workoutLogs]);
+
+    // Show success toast
+    toast.success('Workout logged successfully!', {
+      description: `${newLog.exercise} - ${newLog.sets} sets × ${newLog.reps} reps @ ${newLog.weight} lbs`,
+    });
+
+    // Reset form
+    setLogExercise('');
+    setLogSets('');
+    setLogReps('');
+    setLogWeight('');
+    setShowLogDialog(false);
+  };
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -332,13 +436,83 @@ export default function WorkoutPage() {
 
               <div className="mb-6 p-4 bg-accent/10 rounded-xl border border-accent/20">
                 <div className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="font-semibold text-sm mb-1">AI-Synced to Follicular Phase</h4>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Zap className="w-5 h-5 text-secondary flex-shrink-0" />
+                      <h4 className="font-semibold text-sm">AI-Synced to {currentPhase} Phase</h4>
+                    </div>
                     <p className="text-sm text-muted-foreground">
-                      This workout is optimized for your current cycle phase. Focus on compound movements and progressive overload.
+                      This workout is optimized for your current cycle phase. Click the lightning bolt for detailed guidance.
                     </p>
                   </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        size="sm"
+                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-3 py-1 flex items-center gap-2"
+                      >
+                        <Zap className="w-4 h-4" />
+                        View Guidance
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl flex items-center gap-2">
+                          <Zap className="w-6 h-6 text-secondary" />
+                          {guidance.title}
+                        </DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-6 py-4">
+                        <div className="bg-secondary/10 p-4 rounded-xl">
+                          <h4 className="font-semibold text-lg mb-2 text-secondary">{guidance.focus}</h4>
+                          <p className="text-muted-foreground leading-relaxed">{guidance.description}</p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-3 flex items-center gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
+                            Key Recommendations
+                          </h4>
+                          <ul className="space-y-2">
+                            {guidance.recommendations.map((rec, index) => (
+                              <li key={index} className="flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-sm text-muted-foreground">{rec}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
+                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-primary" />
+                              Optimal Workouts
+                            </h4>
+                            <p className="text-sm text-muted-foreground">{guidance.optimal}</p>
+                          </div>
+                          <div className="bg-destructive/5 p-4 rounded-xl border border-destructive/20">
+                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
+                              <Info className="w-4 h-4 text-destructive" />
+                              What to Avoid
+                            </h4>
+                            <p className="text-sm text-muted-foreground">{guidance.avoid}</p>
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="bg-muted/30 p-4 rounded-xl">
+                            <h4 className="font-semibold mb-2 text-sm">Intensity Level</h4>
+                            <p className="text-sm text-muted-foreground">{guidance.intensity}</p>
+                          </div>
+                          <div className="bg-muted/30 p-4 rounded-xl">
+                            <h4 className="font-semibold mb-2 text-sm">Recovery Focus</h4>
+                            <p className="text-sm text-muted-foreground">{guidance.recovery}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
 
@@ -370,6 +544,7 @@ export default function WorkoutPage() {
                       </div>
                       <Button
                         size="sm"
+                        onClick={() => handleLogWorkout(exercise.exercise, exercise.sets, exercise.reps, exercise.weight)}
                         className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
                       >
                         Log
@@ -399,14 +574,99 @@ export default function WorkoutPage() {
           {/* WORKOUT LOG TAB */}
           <TabsContent value="log" className="space-y-6">
             <Card className="bloom-card">
-              <div className="mb-6">
-                <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-6 h-6 text-primary" />
-                  Workout History
-                </h3>
-                <p className="text-muted-foreground">
-                  Track your progress and see your strength gains
-                </p>
+              <div className="mb-6 flex items-start justify-between">
+                <div>
+                  <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
+                    <TrendingUp className="w-6 h-6 text-primary" />
+                    Workout History
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Track your progress and see your strength gains
+                  </p>
+                </div>
+                <Dialog open={showLogDialog} onOpenChange={setShowLogDialog}>
+                  <DialogTrigger asChild>
+                    <Button
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Log Workout
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl flex items-center gap-2">
+                        <Plus className="w-6 h-6 text-primary" />
+                        Log Manual Workout
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div>
+                        <Label htmlFor="exercise" className="text-sm font-semibold mb-2 block">
+                          Exercise Name
+                        </Label>
+                        <Input
+                          id="exercise"
+                          placeholder="e.g., Barbell Squat"
+                          value={logExercise}
+                          onChange={(e) => setLogExercise(e.target.value)}
+                          className="w-full"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3">
+                        <div>
+                          <Label htmlFor="sets" className="text-sm font-semibold mb-2 block">
+                            Sets
+                          </Label>
+                          <Input
+                            id="sets"
+                            type="number"
+                            placeholder="4"
+                            value={logSets}
+                            onChange={(e) => setLogSets(e.target.value)}
+                            className="w-full"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="reps" className="text-sm font-semibold mb-2 block">
+                            Reps
+                          </Label>
+                          <Input
+                            id="reps"
+                            type="number"
+                            placeholder="8"
+                            value={logReps}
+                            onChange={(e) => setLogReps(e.target.value)}
+                            className="w-full"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="weight" className="text-sm font-semibold mb-2 block">
+                            Weight (lbs)
+                          </Label>
+                          <Input
+                            id="weight"
+                            type="number"
+                            placeholder="135"
+                            value={logWeight}
+                            onChange={(e) => setLogWeight(e.target.value)}
+                            className="w-full"
+                          />
+                        </div>
+                      </div>
+
+                      <Button
+                        onClick={() => handleLogWorkout()}
+                        disabled={!logExercise || !logSets || !logReps || !logWeight}
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                      >
+                        <CheckCircle2 className="w-4 h-4 mr-2" />
+                        Save Workout
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               <div className="space-y-4">
