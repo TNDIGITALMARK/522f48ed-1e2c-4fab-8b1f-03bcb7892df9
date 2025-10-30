@@ -11,11 +11,14 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, ShoppingCart, Plus, X, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
+import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
+
+const MOCK_USER_ID = 'demo-user-001';
 
 const mealSuggestions = [
   {
@@ -47,16 +50,26 @@ const mealSuggestions = [
   },
 ];
 
-const weeklyProgress = {
-  currentCalories: 8400,
-  targetCalories: 9800,
-  protein: { current: 520, target: 600 },
-  fiber: { current: 180, target: 210 },
-};
-
 export default function NutritionPage() {
   const router = useRouter();
+
+  // Use centralized nutrition and calorie data - syncs with dashboard!
+  const { todaysNutrition, weeklyData, addMeal, getWeeklySummary } = useNutritionData(MOCK_USER_ID);
+  const calorieRecommendation = useCalorieRecommendation(MOCK_USER_ID);
+
   const [selectedDay, setSelectedDay] = useState('today');
+
+  // Calculate weekly progress from synced data
+  const weeklySummary = getWeeklySummary();
+  const weeklyProgress = {
+    currentCalories: weeklySummary.totalCalories,
+    targetCalories: calorieRecommendation ? calorieRecommendation.weeklyCalories : 9800,
+    protein: {
+      current: weeklySummary.totalProtein,
+      target: calorieRecommendation ? calorieRecommendation.proteinGrams * 7 : 600
+    },
+    fiber: { current: 180, target: 210 },
+  };
   const [groceryItems, setGroceryItems] = useState([
     { id: '1', name: 'Bananas', quantity: '6', category: 'Produce', checked: false },
     { id: '2', name: 'Greek Yogurt', quantity: '2 containers', category: 'Dairy', checked: true },

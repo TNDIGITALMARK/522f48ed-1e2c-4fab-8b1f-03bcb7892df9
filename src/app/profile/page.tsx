@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,30 +17,50 @@ import { HeightInput } from '@/components/height-input';
 import { User, Save, Scale, Ruler, Calendar, Activity } from 'lucide-react';
 import { type HeightValue } from '@/lib/height-conversions';
 import { type WeightUnit, type ActivityLevel } from '@/lib/weight-tracking';
+import { useUserProfile } from '@/hooks/use-user-profile';
+
+const MOCK_USER_ID = 'demo-user-001';
 
 export default function ProfilePage() {
+  // Use centralized profile hook - auto-syncs with dashboard and nutrition!
+  const { profile, updatePhysical, updateProfile, isLoading } = useUserProfile(MOCK_USER_ID);
+
+  // Local state for form
   const [height, setHeight] = useState<HeightValue>({
     value: 67,
     unit: 'in'
   });
-
   const [weight, setWeight] = useState<number>(152.4);
   const [weightUnit, setWeightUnit] = useState<WeightUnit>('lbs');
   const [age, setAge] = useState<number>(30);
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('moderate');
 
+  // Load profile data into form
+  useEffect(() => {
+    if (profile) {
+      setHeight(profile.height);
+      setWeight(profile.weight);
+      setWeightUnit(profile.weightUnit);
+      setAge(profile.age);
+      setActivityLevel(profile.activityLevel);
+    }
+  }, [profile]);
+
   const handleSaveProfile = () => {
-    // Save profile data to localStorage
-    const profileData = {
+    // Update physical attributes - automatically syncs everywhere!
+    updatePhysical({
       height,
       weight,
       weightUnit,
-      age,
-      activityLevel
-    };
+      age
+    });
 
-    localStorage.setItem('userProfile_demo-user-001', JSON.stringify(profileData));
-    alert('Profile saved successfully!');
+    // Update activity level
+    updateProfile({
+      activityLevel
+    });
+
+    alert('Profile saved and synced across all pages!');
   };
 
   return (

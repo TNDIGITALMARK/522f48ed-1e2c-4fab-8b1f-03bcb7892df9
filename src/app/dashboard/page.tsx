@@ -41,19 +41,28 @@ import {
   type WeightChange
 } from '@/lib/weight-tracking';
 import { GoalsManager, type Goal } from '@/components/goals-manager';
-import { calculateCalories, type CalorieRecommendation } from '@/lib/calorie-calculator';
+import { useDashboardData } from '@/hooks/use-user-profile';
+import { SyncDemoWidget } from '@/components/sync-demo-widget';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
 
 export default function DashboardPage() {
-  // Weight and Goals state
+  // Use centralized dashboard data hook - auto-syncs everything!
+  const {
+    profile,
+    updateWellness,
+    calorieRecommendation,
+    syncFromWeightTracking,
+    isLoading
+  } = useDashboardData(MOCK_USER_ID);
+
+  // Weight and Goals state (from existing weight tracking system)
   const [latestWeight, setLatestWeight] = useState<WeightLog | null>(null);
   const [activeGoal, setActiveGoal] = useState<WeightGoal | null>(null);
   const [goalProgress, setGoalProgress] = useState<GoalProgress | null>(null);
   const [weightChange, setWeightChange] = useState<WeightChange | null>(null);
   const [userGoals, setUserGoals] = useState<Goal[]>([]);
-  const [calorieRecommendation, setCalorieRecommendation] = useState<CalorieRecommendation | null>(null);
 
   // Load weight and goals data on mount
   useEffect(() => {
@@ -75,22 +84,9 @@ export default function DashboardPage() {
       setUserGoals(JSON.parse(storedGoals));
     }
 
-    // Calculate calorie recommendation if we have the necessary data
-    if (goal && latest) {
-      const recommendation = calculateCalories({
-        currentWeight: latest.weight,
-        targetWeight: goal.targetWeight,
-        weightUnit: latest.unit,
-        heightInches: 67, // 5'7" default - would come from user profile
-        age: 30, // Default - would come from user profile
-        sex: 'female',
-        goalType: goal.goalType,
-        weeklyWeightGoal: goal.weeklyGoal,
-        activityLevel: goal.activityLevel || 'moderate'
-      });
-      setCalorieRecommendation(recommendation);
-    }
-  }, []);
+    // Sync weight tracking data into profile
+    syncFromWeightTracking();
+  }, [syncFromWeightTracking]);
 
   // Save goals to localStorage when they change
   const handleGoalsChange = (newGoals: Goal[]) => {
@@ -98,18 +94,46 @@ export default function DashboardPage() {
     localStorage.setItem(`userGoals_${MOCK_USER_ID}`, JSON.stringify(newGoals));
   };
 
-  // Mock wellness data
+  // Handler for updating water intake
+  const handleAddWater = () => {
+    if (profile) {
+      updateWellness({
+        waterConsumed: Math.min(profile.waterConsumed + 1, profile.waterGoal)
+      });
+    }
+  };
+
+  // Handler for updating steps
+  const handleUpdateSteps = (steps: number) => {
+    updateWellness({ stepsCompleted: steps });
+  };
+
+  // Handler for updating meditation
+  const handleUpdateMeditation = (minutes: number) => {
+    updateWellness({ meditationCompleted: minutes });
+  };
+
+  // Mock wellness data (will be replaced by profile data where available)
   const userData = {
     name: "Sarah Thompson",
     cycleDay: 14,
     phase: "Ovulation Phase",
     mood: 8,
     energy: "Elevated",
-    sleepHours: 7.5,
+    sleepHours: profile?.sleepHours || 7.5,
     sleepQuality: "Good",
-    meditation: { completed: 12, goal: 15 },
-    steps: { completed: 8000, goal: 10000 },
-    water: { completed: 6, goal: 8 },
+    meditation: {
+      completed: profile?.meditationCompleted || 12,
+      goal: profile?.meditationGoal || 15
+    },
+    steps: {
+      completed: profile?.stepsCompleted || 8000,
+      goal: profile?.stepsGoal || 10000
+    },
+    water: {
+      completed: profile?.waterConsumed || 6,
+      goal: profile?.waterGoal || 8
+    },
     calories: { consumed: 1850, goal: 2000 },
     weeklyStreak: 12,
   };
@@ -429,7 +453,12 @@ export default function DashboardPage() {
                     value={(userData.water.completed / userData.water.goal) * 100}
                     className="h-2 mb-3"
                   />
-                  <Button size="sm" variant="outline" className="w-full">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="w-full"
+                    onClick={handleAddWater}
+                  >
                     <Plus className="w-4 h-4 mr-1" />
                     Add Glass
                   </Button>
@@ -531,6 +560,9 @@ export default function DashboardPage() {
 
           {/* Right Column - Activity & Quick Actions */}
           <div className="space-y-6">
+            {/* Live Sync Demo */}
+            <SyncDemoWidget userId={MOCK_USER_ID} />
+
             {/* Quick Actions */}
             <Card className="bloom-card">
               <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
