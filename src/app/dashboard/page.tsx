@@ -21,10 +21,50 @@ import {
   Target,
   Award,
   Zap,
-  Plus
+  Plus,
+  Scale,
+  TrendingDown,
+  CheckCircle2
 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import {
+  getLatestWeight,
+  getActiveGoal,
+  calculateGoalProgress,
+  calculateWeightChange,
+  getGoalTypeInfo,
+  formatWeight,
+  type WeightLog,
+  type WeightGoal,
+  type GoalProgress,
+  type WeightChange
+} from '@/lib/weight-tracking';
+import Link from 'next/link';
+
+const MOCK_USER_ID = 'demo-user-001';
 
 export default function DashboardPage() {
+  // Weight and Goals state
+  const [latestWeight, setLatestWeight] = useState<WeightLog | null>(null);
+  const [activeGoal, setActiveGoal] = useState<WeightGoal | null>(null);
+  const [goalProgress, setGoalProgress] = useState<GoalProgress | null>(null);
+  const [weightChange, setWeightChange] = useState<WeightChange | null>(null);
+
+  // Load weight and goals data on mount
+  useEffect(() => {
+    const latest = getLatestWeight(MOCK_USER_ID);
+    setLatestWeight(latest);
+
+    const goal = getActiveGoal(MOCK_USER_ID);
+    setActiveGoal(goal);
+
+    const progress = calculateGoalProgress(MOCK_USER_ID);
+    setGoalProgress(progress);
+
+    const change = calculateWeightChange(MOCK_USER_ID);
+    setWeightChange(change);
+  }, []);
+
   // Mock wellness data
   const userData = {
     name: "Sarah Thompson",
@@ -40,6 +80,8 @@ export default function DashboardPage() {
     calories: { consumed: 1850, goal: 2000 },
     weeklyStreak: 12,
   };
+
+  const goalTypeInfo = activeGoal ? getGoalTypeInfo(activeGoal.goalType) : null;
 
   const recentActivities = [
     { time: "2h ago", activity: "Completed 30 min yoga session", icon: Activity, color: "text-primary" },
@@ -131,6 +173,123 @@ export default function DashboardPage() {
               </div>
             </div>
             <p className="text-sm font-medium text-orange-700">Days Active</p>
+          </Card>
+        </div>
+
+        {/* Weight & Goals Section */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Current Weight Card */}
+          <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+            <div className="flex items-start justify-between mb-4">
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Current Weight</h3>
+                {latestWeight ? (
+                  <>
+                    <p className="text-4xl font-bold text-primary mb-1">
+                      {formatWeight(latestWeight.weight, latestWeight.unit, 1)}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Logged {new Date(latestWeight.loggedAt).toLocaleDateString()}
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-muted-foreground">No weight logged yet</p>
+                )}
+              </div>
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                <Scale className="w-6 h-6 text-primary" />
+              </div>
+            </div>
+
+            {weightChange && (
+              <div className="flex items-center gap-2 text-sm mb-4">
+                {weightChange.change < 0 ? (
+                  <>
+                    <TrendingDown className="w-4 h-4 text-secondary" />
+                    <span className="text-secondary font-medium">
+                      {Math.abs(weightChange.change).toFixed(1)} lbs lost
+                    </span>
+                  </>
+                ) : weightChange.change > 0 ? (
+                  <>
+                    <TrendingUp className="w-4 h-4 text-primary" />
+                    <span className="text-primary font-medium">
+                      {weightChange.change.toFixed(1)} lbs gained
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-muted-foreground">No change</span>
+                )}
+                <span className="text-muted-foreground">over {weightChange.period}</span>
+              </div>
+            )}
+
+            <Link href="/weight">
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
+                <Scale className="w-4 h-4 mr-2" />
+                View Full Details
+              </Button>
+            </Link>
+          </Card>
+
+          {/* Active Goal Card */}
+          <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold mb-1">Active Goal</h3>
+                {activeGoal && goalTypeInfo ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-3xl">{goalTypeInfo.icon}</span>
+                      <div>
+                        <p className="text-xl font-bold">{goalTypeInfo.label}</p>
+                        <p className="text-sm text-muted-foreground">{goalTypeInfo.description}</p>
+                      </div>
+                    </div>
+                    {goalProgress && (
+                      <div className="space-y-2 mt-4">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Target:</span>
+                          <span className="font-medium">{formatWeight(goalProgress.targetWeight, activeGoal.weightUnit)}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-muted-foreground">Progress:</span>
+                          <span className="font-medium">{goalProgress.percentComplete.toFixed(0)}%</span>
+                        </div>
+                        <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-gradient-to-r from-secondary to-primary rounded-full transition-all"
+                            style={{ width: `${Math.min(Math.abs(goalProgress.percentComplete), 100)}%` }}
+                          />
+                        </div>
+                        {goalProgress.onTrack ? (
+                          <Badge variant="secondary" className="mt-2">
+                            <CheckCircle2 className="w-3 h-3 mr-1" />
+                            On Track
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="mt-2">
+                            Adjust your plan
+                          </Badge>
+                        )}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-muted-foreground mb-4">No active goal set</p>
+                )}
+              </div>
+              <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                <Target className="w-6 h-6 text-secondary" />
+              </div>
+            </div>
+
+            <Link href="/weight">
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full">
+                <Target className="w-4 h-4 mr-2" />
+                {activeGoal ? 'Manage Goal' : 'Set Goal'}
+              </Button>
+            </Link>
           </Card>
         </div>
 
