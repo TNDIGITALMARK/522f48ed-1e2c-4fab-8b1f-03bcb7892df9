@@ -29,16 +29,16 @@ import {
 import Link from 'next/link';
 
 const colorPalette = [
-  '#8B9D8A', // Sage
-  '#C4968C', // Terracotta
-  '#D9B5AC', // Pink
-  '#F5F2ED', // Cream
-  '#FFB6C1', // Light Pink
-  '#87CEEB', // Sky Blue
+  '#1C1C1B', // Onyx
+  '#7B6F5E', // Walnut
+  '#979086', // Ash
+  '#F7ECDB', // Greige
+  '#F2E9E4', // Stucco
+  '#FFFFFF', // White
   '#FFD700', // Gold
   '#E6E6FA', // Lavender
   '#FFE4B5', // Moccasin
-  '#98FB98', // Pale Green
+  '#D4AF37', // Antique Gold
 ];
 
 const stickerCategories = {
@@ -90,9 +90,9 @@ interface CanvasElement {
 export default function JournalingPage() {
   const [canvasElements, setCanvasElements] = useState<CanvasElement[]>([]);
   const [selectedTool, setSelectedTool] = useState<'text' | 'sticker' | 'image' | 'background'>('text');
-  const [backgroundColor, setBackgroundColor] = useState('#F5F2ED');
+  const [backgroundColor, setBackgroundColor] = useState('#F2E9E4');
   const [selectedSticker, setSelectedSticker] = useState('');
-  const [textColor, setTextColor] = useState('#3D3D3D');
+  const [textColor, setTextColor] = useState('#1C1C1B');
   const [textFont, setTextFont] = useState('font-sans');
 
   const addTextElement = () => {
@@ -127,7 +127,7 @@ export default function JournalingPage() {
 
   const clearCanvas = () => {
     setCanvasElements([]);
-    setBackgroundColor('#F5F2ED');
+    setBackgroundColor('#F2E9E4');
   };
 
   return (
@@ -166,7 +166,7 @@ export default function JournalingPage() {
           {/* Tools Panel */}
           <div className="lg:col-span-3 space-y-4">
             {/* Tool Selection */}
-            <Card className="bloom-card">
+            <Card className="neutral-card">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Palette className="w-5 h-5" />
                 Tools
@@ -209,7 +209,7 @@ export default function JournalingPage() {
 
             {/* Text Options */}
             {selectedTool === 'text' && (
-              <Card className="bloom-card">
+              <Card className="neutral-card">
                 <h3 className="font-semibold mb-4">Text Options</h3>
                 <div className="space-y-4">
                   <div>
@@ -237,7 +237,7 @@ export default function JournalingPage() {
                           className="w-10 h-10 rounded-lg border-2 transition-all hover:scale-110"
                           style={{
                             backgroundColor: color,
-                            borderColor: textColor === color ? '#3D3D3D' : 'transparent'
+                            borderColor: textColor === color ? '#1C1C1B' : 'transparent'
                           }}
                           onClick={() => setTextColor(color)}
                         />
@@ -254,7 +254,7 @@ export default function JournalingPage() {
 
             {/* Sticker Options */}
             {selectedTool === 'sticker' && (
-              <Card className="bloom-card">
+              <Card className="neutral-card">
                 <h3 className="font-semibold mb-4">Stickers</h3>
                 <div className="space-y-4">
                   {Object.entries(stickerCategories).map(([category, stickers]) => (
@@ -280,7 +280,7 @@ export default function JournalingPage() {
 
             {/* Background Options */}
             {selectedTool === 'background' && (
-              <Card className="bloom-card">
+              <Card className="neutral-card">
                 <h3 className="font-semibold mb-4">Background Color</h3>
                 <div className="grid grid-cols-5 gap-2">
                   {colorPalette.map((color) => (
@@ -289,7 +289,7 @@ export default function JournalingPage() {
                       className="w-full aspect-square rounded-lg border-2 transition-all hover:scale-110"
                       style={{
                         backgroundColor: color,
-                        borderColor: backgroundColor === color ? '#3D3D3D' : 'transparent'
+                        borderColor: backgroundColor === color ? '#1C1C1B' : 'transparent'
                       }}
                       onClick={() => setBackgroundColor(color)}
                     />
@@ -300,7 +300,7 @@ export default function JournalingPage() {
 
             {/* Photo Upload */}
             {selectedTool === 'image' && (
-              <Card className="bloom-card">
+              <Card className="neutral-card">
                 <h3 className="font-semibold mb-4">Add Photo</h3>
                 <div className="space-y-3">
                   <Button className="w-full gap-2" variant="outline">
@@ -321,7 +321,7 @@ export default function JournalingPage() {
 
           {/* Canvas Area */}
           <div className="lg:col-span-9">
-            <Card className="bloom-card p-0 overflow-hidden">
+            <Card className="neutral-card p-0 overflow-hidden">
               <div className="p-4 border-b border-border flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">Canvas</Badge>
@@ -364,7 +364,7 @@ export default function JournalingPage() {
                   canvasElements.map((element) => (
                     <div
                       key={element.id}
-                      className="absolute group cursor-move hover:shadow-bloom transition-shadow"
+                      className="absolute group cursor-move hover:shadow-neutral transition-shadow"
                       style={{
                         left: element.x,
                         top: element.y,
@@ -401,7 +401,7 @@ export default function JournalingPage() {
             </Card>
 
             {/* Tips Card */}
-            <Card className="bloom-card mt-4 bg-gradient-to-br from-accent/20 to-accent/5 border-none">
+            <Card className="neutral-card mt-4 bg-gradient-to-br from-accent/20 to-accent/5 border-none">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
                   <Sparkles className="w-5 h-5 text-accent-foreground" />

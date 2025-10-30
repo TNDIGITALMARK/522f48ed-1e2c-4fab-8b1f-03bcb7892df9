@@ -3,19 +3,25 @@
 
 /*
 =============================================================================
-BLOOM BY ROOTED - DESIGN SYSTEM SPECIFICATION
+NEUTRAL FITNESS COLOR PALETTE - DESIGN SYSTEM SPECIFICATION
 =============================================================================
 
-EXTRACTED FROM DESIGN REFERENCE (ai-generated-preview.png)
+EXTRACTED FROM DESIGN REFERENCE (Neutral Fitness Color Palette)
 
 COLOR PALETTE (EXACT VALUES):
-- Sage Green (Primary): #8B9D8A / HSL 114 13% 58%
-- Warm Terracotta (Accent): #C4968C / HSL 12 32% 66%
-- Soft Pink (Secondary): #D9B5AC / HSL 15 30% 76%
-- Cream (Background): #F5F2ED / HSL 35 25% 95%
-- Warm Beige: #E8DFD3 / HSL 38 28% 87%
-- White: #FFFFFF
-- Charcoal Text: #3D3D3D / HSL 0 0% 24%
+- Onyx (Primary): #1C1C1B / HSL 60 4% 11% - Deep charcoal black
+- Walnut (Accent): #7B6F5E / HSL 38 13% 42% - Warm brown/taupe
+- Greige (Muted): #F7ECDB / HSL 38 53% 91% - Beige-grey blend
+- Ash (Secondary): #979086 / HSL 40 5% 55% - Medium grey
+- Stucco (Background): #F2E9E4 / HSL 24 33% 93% - Light cream/off-white
+- White: #FFFFFF / HSL 0 0% 100%
+- Pure Black: #000000 / HSL 0 0% 0%
+
+DESIGN PHILOSOPHY:
+- Sophisticated neutral palette with warm, earthy tones
+- Minimal, modern aesthetic inspired by fitness and wellness
+- Clean, professional appearance with natural warmth
+- Strong contrast for excellent readability
 
 TYPOGRAPHY:
 - Headings: Playfair Display (serif, elegant, slightly decorative)
@@ -29,117 +35,128 @@ SPACING SYSTEM (GENEROUS, BREATHING ROOM):
 - Grid gaps: 24-32px
 
 COMPONENT STYLING:
-- Border Radius: 20-24px (very rounded, organic feel)
+- Border Radius: 16-20px (modern, clean feel)
 - Shadows: Subtle, soft (0 4px 16px rgba(0,0,0,0.08))
 - Buttons: Rounded corners (12-16px), medium weight text
 - Cards: Soft shadows, ample padding, rounded corners
 
 VISUAL EFFECTS:
-- Organic, flowing shapes with soft edges
+- Clean, minimal shapes with subtle warmth
 - Subtle shadows for depth without harshness
 - Gentle transitions (200-300ms ease)
-- Warm, inviting color overlays
+- Neutral, sophisticated color overlays
 
 =============================================================================
 */
 
 :root {
-  /* Bloom by Rooted Color System */
-  --bloom-sage: 114 13% 58%; /* #8B9D8A */
-  --bloom-terracotta: 12 32% 66%; /* #C4968C */
-  --bloom-pink: 15 30% 76%; /* #D9B5AC */
-  --bloom-cream: 35 25% 95%; /* #F5F2ED */
-  --bloom-beige: 38 28% 87%; /* #E8DFD3 */
-  --bloom-white: 0 0% 100%; /* #FFFFFF */
-  --bloom-charcoal: 0 0% 24%; /* #3D3D3D */
+  /* Neutral Fitness Color System */
+  --neutral-onyx: 60 4% 11%; /* #1C1C1B */
+  --neutral-walnut: 38 13% 42%; /* #7B6F5E */
+  --neutral-greige: 38 53% 91%; /* #F7ECDB */
+  --neutral-ash: 40 5% 55%; /* #979086 */
+  --neutral-stucco: 24 33% 93%; /* #F2E9E4 */
+  --neutral-white: 0 0% 100%; /* #FFFFFF */
+  --neutral-black: 0 0% 0%; /* #000000 */
 
-  /* Cream backgrounds with charcoal text */
-  --background: 35 25% 95%;
-  --foreground: 0 0% 24%;
+  /* Stucco backgrounds with Onyx text */
+  --background: 24 33% 93%;
+  --foreground: 60 4% 11%;
 
-  /* White cards with charcoal text */
+  /* White cards with Onyx text */
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 24%;
+  --card-foreground: 60 4% 11%;
 
   /* Popovers */
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 24%;
+  --popover-foreground: 60 4% 11%;
 
-  /* Primary: Sage green */
-  --primary: 114 13% 58%;
+  /* Primary: Onyx (deep charcoal) */
+  --primary: 60 4% 11%;
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Warm terracotta */
-  --secondary: 12 32% 66%;
+  /* Secondary: Ash (medium grey) */
+  --secondary: 40 5% 55%;
   --secondary-foreground: 0 0% 100%;
 
-  /* Muted: Warm beige */
-  --muted: 38 28% 87%;
-  --muted-foreground: 0 0% 40%;
+  /* Muted: Greige (beige-grey blend) */
+  --muted: 38 53% 91%;
+  --muted-foreground: 60 4% 25%;
 
-  /* Accent: Soft pink */
-  --accent: 15 30% 76%;
-  --accent-foreground: 0 0% 24%;
+  /* Accent: Walnut (warm brown/taupe) */
+  --accent: 38 13% 42%;
+  --accent-foreground: 0 0% 100%;
 
   /* Destructive */
   --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Subtle beige */
-  --border: 38 28% 87%;
-  --input: 38 28% 87%;
-  --ring: 114 13% 58%;
+  /* Borders: Greige */
+  --border: 38 53% 91%;
+  --input: 38 53% 91%;
+  --ring: 60 4% 11%;
 
-  /* Generous rounded corners */
-  --radius: 1.25rem;
+  /* Modern rounded corners */
+  --radius: 1rem;
 
   /* Sidebar */
   --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 0 0% 24%;
-  --sidebar-primary: 114 13% 58%;
+  --sidebar-foreground: 60 4% 11%;
+  --sidebar-primary: 60 4% 11%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 38 28% 87%;
-  --sidebar-accent-foreground: 0 0% 24%;
-  --sidebar-border: 38 28% 87%;
-  --sidebar-ring: 114 13% 58%;
+  --sidebar-accent: 38 53% 91%;
+  --sidebar-accent-foreground: 60 4% 11%;
+  --sidebar-border: 38 53% 91%;
+  --sidebar-ring: 60 4% 11%;
 }
 
 .dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
+  /* Dark mode: Onyx background with Stucco text */
+  --background: 60 4% 11%;
+  --foreground: 24 33% 93%;
 
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
+  /* Dark cards */
+  --card: 60 4% 15%;
+  --card-foreground: 24 33% 93%;
 
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
+  /* Dark popovers */
+  --popover: 60 4% 15%;
+  --popover-foreground: 24 33% 93%;
 
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
+  /* Primary: Light neutral */
+  --primary: 24 33% 93%;
+  --primary-foreground: 60 4% 11%;
 
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
+  /* Secondary: Ash */
+  --secondary: 40 5% 55%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
+  /* Muted: Dark greige */
+  --muted: 40 5% 25%;
+  --muted-foreground: 40 5% 70%;
 
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  /* Accent: Walnut lightened */
+  --accent: 38 13% 50%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
+  /* Destructive */
+  --destructive: 0 62.8% 50%;
+  --destructive-foreground: 0 0% 100%;
 
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
-  --sidebar-background: 240 5.9% 10%;
-  --sidebar-foreground: 240 4.8% 95.9%;
-  --sidebar-primary: 224.3 76.3% 48%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 3.7% 15.9%;
-  --sidebar-accent-foreground: 240 4.8% 95.9%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Borders */
+  --border: 40 5% 25%;
+  --input: 40 5% 25%;
+  --ring: 24 33% 93%;
+
+  /* Sidebar dark */
+  --sidebar-background: 60 4% 8%;
+  --sidebar-foreground: 24 33% 93%;
+  --sidebar-primary: 24 33% 93%;
+  --sidebar-primary-foreground: 60 4% 11%;
+  --sidebar-accent: 40 5% 20%;
+  --sidebar-accent-foreground: 24 33% 93%;
+  --sidebar-border: 40 5% 20%;
+  --sidebar-ring: 24 33% 93%;
 }
 
 @theme {
@@ -327,31 +344,36 @@ input:focus, textarea:focus, select:focus {
   box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
 }
 
-/* Bloom-specific shadows (soft, organic) */
+/* Neutral fitness shadows (soft, clean) */
+.shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(28, 28, 27, 0.06);
 }
 
+.shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(28, 28, 27, 0.08);
 }
 
+.shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 8px 24px rgba(28, 28, 27, 0.10);
 }
 
 /* Card styling */
+.neutral-card,
 .bloom-card {
   background: hsl(var(--card));
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(28, 28, 27, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.neutral-card:hover,
 .bloom-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 24px rgba(28, 28, 27, 0.12);
 }
 
 /* ============================================
@@ -646,7 +668,7 @@ input:focus, textarea:focus, select:focus {
 
 /* Multiplayer activity cards */
 .activity-card {
-  background: linear-gradient(135deg, rgba(139, 157, 138, 0.1) 0%, rgba(196, 150, 140, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(28, 28, 27, 0.03) 0%, rgba(123, 111, 94, 0.05) 100%);
   border: 2px solid hsl(var(--border));
   border-radius: 1rem;
   padding: 1.5rem;
@@ -656,13 +678,13 @@ input:focus, textarea:focus, select:focus {
 
 .activity-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 16px rgba(28, 28, 27, 0.15);
   border-color: hsl(var(--primary));
 }
 
 .activity-card.active {
-  border-color: hsl(var(--secondary));
-  background: linear-gradient(135deg, rgba(196, 150, 140, 0.2) 0%, rgba(217, 181, 172, 0.2) 100%);
+  border-color: hsl(var(--accent));
+  background: linear-gradient(135deg, rgba(123, 111, 94, 0.1) 0%, rgba(151, 144, 134, 0.08) 100%);
 }
 
 /* Garden tile patterns */
@@ -977,9 +999,9 @@ canvas {
 .loading-shimmer {
   background: linear-gradient(
     90deg,
-    rgba(139, 157, 138, 0.1) 0%,
-    rgba(139, 157, 138, 0.3) 50%,
-    rgba(139, 157, 138, 0.1) 100%
+    rgba(151, 144, 134, 0.1) 0%,
+    rgba(151, 144, 134, 0.3) 50%,
+    rgba(151, 144, 134, 0.1) 100%
   );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
