@@ -38,7 +38,7 @@ export default function ProfilePage() {
 
   // Load profile data into form
   useEffect(() => {
-    if (profile) {
+    if (profile && profile.height) {
       setHeight(profile.height);
       setWeight(profile.weight);
       setWeightUnit(profile.weightUnit);
@@ -207,7 +207,7 @@ export default function ProfilePage() {
               <p className="text-xl font-bold text-primary">
                 {height && height.unit === 'ft' && height.feet !== undefined
                   ? `${height.feet}' ${(height.inches || 0).toFixed(1)}"`
-                  : height ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
+                  : height && height.unit && height.value ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
               </p>
             </div>
             <div className="bg-white/60 rounded-xl p-4">
