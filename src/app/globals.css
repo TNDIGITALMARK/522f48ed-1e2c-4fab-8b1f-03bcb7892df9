@@ -13,14 +13,14 @@ DESIGN PHILOSOPHY:
 - Light, airy feel with natural warmth
 - Gentle contrast for comfortable reading
 
-COLOR PALETTE (PASTEL BLOOM):
-- Soft Lavender (Primary): #C8B6D6 / HSL 273 32% 78% - Gentle purple bloom
-- Peachy Blush (Secondary): #F5D5CB / HSL 18 63% 88% - Warm peach petal
-- Sage Green (Accent): #C4D9C7 / HSL 130 20% 81% - Fresh garden sage
-- Dusty Rose (Highlight): #E8C5D1 / HSL 340 38% 84% - Romantic rose petal
-- Soft Beige (Background): #F7F3EE / HSL 32 30% 95% - Warm cream
-- Warm Sand (Muted): #EBE3DB / HSL 32 24% 90% - Sandy beige
-- Soft Charcoal (Text): #6B6561 / HSL 30 5% 40% - Gentle dark neutral
+COLOR PALETTE (LIGHT PASTEL FLOWER BLOOM):
+- Soft Lilac (Primary): #E4D4F4 / HSL 280 45% 82% - Delicate lavender bloom
+- Peach Blossom (Secondary): #FCE3D9 / HSL 15 70% 90% - Gentle peach flower
+- Soft Mint (Accent): #D4E8D8 / HSL 135 25% 85% - Fresh garden mint
+- Pale Pink Rose (Highlight): #F5D9E3 / HSL 345 50% 88% - Romantic rose petal
+- Light Cream (Background): #FBF8F4 / HSL 35 35% 96% - Soft warm cream
+- Warm Sand (Muted): #F3EDE5 / HSL 35 28% 92% - Sandy beige
+- Warm Charcoal (Text): #6E6965 / HSL 30 8% 42% - Soft warm text
 - Pure White: #FFFFFF / HSL 0 0% 100% - Clean white
 
 TYPOGRAPHY:
@@ -50,114 +50,114 @@ VISUAL EFFECTS:
 */
 
 :root {
-  /* Bloom Pastel Floral Color System */
-  --bloom-lavender: 273 32% 78%; /* #C8B6D6 - Soft purple bloom */
-  --bloom-peach: 18 63% 88%; /* #F5D5CB - Peachy blush petal */
-  --bloom-sage: 130 20% 81%; /* #C4D9C7 - Fresh sage green */
-  --bloom-rose: 340 38% 84%; /* #E8C5D1 - Dusty rose petal */
-  --bloom-beige: 32 30% 95%; /* #F7F3EE - Soft warm beige */
-  --bloom-sand: 32 24% 90%; /* #EBE3DB - Warm sandy beige */
-  --bloom-charcoal: 30 5% 40%; /* #6B6561 - Soft charcoal text */
+  /* Bloom Pastel Floral Color System - Light Pastel Flower Bloom Theme */
+  --bloom-lavender: 280 45% 82%; /* #E4D4F4 - Soft lilac bloom */
+  --bloom-peach: 15 70% 90%; /* #FCE3D9 - Delicate peach blossom */
+  --bloom-sage: 135 25% 85%; /* #D4E8D8 - Soft mint green */
+  --bloom-rose: 345 50% 88%; /* #F5D9E3 - Pale pink rose */
+  --bloom-beige: 35 35% 96%; /* #FBF8F4 - Light cream */
+  --bloom-sand: 35 28% 92%; /* #F3EDE5 - Warm sand */
+  --bloom-charcoal: 30 8% 42%; /* #6E6965 - Soft warm charcoal */
   --bloom-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
-  /* Soft beige backgrounds with charcoal text */
-  --background: 32 30% 95%;
-  --foreground: 30 5% 40%;
+  /* Light cream backgrounds with warm charcoal text */
+  --background: 35 35% 96%;
+  --foreground: 30 8% 42%;
 
   /* White cards with charcoal text */
   --card: 0 0% 100%;
-  --card-foreground: 30 5% 40%;
+  --card-foreground: 30 8% 42%;
 
   /* Popovers */
   --popover: 0 0% 100%;
-  --popover-foreground: 30 5% 40%;
+  --popover-foreground: 30 8% 42%;
 
-  /* Primary: Soft Lavender (gentle purple bloom) */
-  --primary: 273 32% 78%;
-  --primary-foreground: 30 5% 25%;
+  /* Primary: Soft Lilac (gentle lavender bloom) */
+  --primary: 280 45% 82%;
+  --primary-foreground: 30 8% 25%;
 
-  /* Secondary: Peachy Blush (warm peach petal) */
-  --secondary: 18 63% 88%;
-  --secondary-foreground: 30 5% 25%;
+  /* Secondary: Peach Blossom (warm peachy pink) */
+  --secondary: 15 70% 90%;
+  --secondary-foreground: 30 8% 25%;
 
   /* Muted: Warm Sand (sandy beige) */
-  --muted: 32 24% 90%;
-  --muted-foreground: 30 5% 45%;
+  --muted: 35 28% 92%;
+  --muted-foreground: 30 8% 48%;
 
-  /* Accent: Sage Green (fresh garden sage) */
-  --accent: 130 20% 81%;
-  --accent-foreground: 30 5% 25%;
+  /* Accent: Soft Mint (fresh garden green) */
+  --accent: 135 25% 85%;
+  --accent-foreground: 30 8% 25%;
 
   /* Destructive - Soft coral for errors */
-  --destructive: 0 60% 75%;
-  --destructive-foreground: 30 5% 25%;
+  --destructive: 0 65% 78%;
+  --destructive-foreground: 30 8% 25%;
 
-  /* Borders: Light sandy beige */
-  --border: 32 24% 88%;
-  --input: 32 24% 88%;
-  --ring: 273 32% 78%;
+  /* Borders: Light beige */
+  --border: 35 25% 90%;
+  --input: 35 25% 90%;
+  --ring: 280 45% 82%;
 
   /* Modern rounded corners */
   --radius: 1rem;
 
   /* Sidebar */
   --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 30 5% 40%;
-  --sidebar-primary: 273 32% 78%;
-  --sidebar-primary-foreground: 30 5% 25%;
-  --sidebar-accent: 32 24% 90%;
-  --sidebar-accent-foreground: 30 5% 40%;
-  --sidebar-border: 32 24% 88%;
-  --sidebar-ring: 273 32% 78%;
+  --sidebar-foreground: 30 8% 42%;
+  --sidebar-primary: 280 45% 82%;
+  --sidebar-primary-foreground: 30 8% 25%;
+  --sidebar-accent: 35 28% 92%;
+  --sidebar-accent-foreground: 30 8% 42%;
+  --sidebar-border: 35 25% 90%;
+  --sidebar-ring: 280 45% 82%;
 }
 
 .dark {
   /* Dark mode: Deep plum background with soft cream text */
-  --background: 273 20% 15%;
-  --foreground: 32 30% 90%;
+  --background: 280 25% 18%;
+  --foreground: 35 30% 92%;
 
   /* Dark cards with subtle warmth */
-  --card: 273 15% 20%;
-  --card-foreground: 32 30% 90%;
+  --card: 280 20% 22%;
+  --card-foreground: 35 30% 92%;
 
   /* Dark popovers */
-  --popover: 273 15% 20%;
-  --popover-foreground: 32 30% 90%;
+  --popover: 280 20% 22%;
+  --popover-foreground: 35 30% 92%;
 
-  /* Primary: Brightened lavender */
-  --primary: 273 35% 75%;
-  --primary-foreground: 273 20% 15%;
+  /* Primary: Brightened lilac */
+  --primary: 280 40% 78%;
+  --primary-foreground: 280 25% 18%;
 
-  /* Secondary: Warm peach */
-  --secondary: 18 55% 80%;
-  --secondary-foreground: 273 20% 15%;
+  /* Secondary: Warm peach blossom */
+  --secondary: 15 65% 85%;
+  --secondary-foreground: 280 25% 18%;
 
   /* Muted: Deep warm grey */
-  --muted: 30 8% 30%;
-  --muted-foreground: 32 20% 70%;
+  --muted: 30 10% 32%;
+  --muted-foreground: 35 25% 75%;
 
-  /* Accent: Sage green lightened */
-  --accent: 130 25% 75%;
-  --accent-foreground: 273 20% 15%;
+  /* Accent: Soft mint lightened */
+  --accent: 135 30% 78%;
+  --accent-foreground: 280 25% 18%;
 
   /* Destructive - Soft warm coral */
-  --destructive: 0 55% 70%;
-  --destructive-foreground: 273 20% 15%;
+  --destructive: 0 60% 75%;
+  --destructive-foreground: 280 25% 18%;
 
   /* Borders */
-  --border: 30 8% 30%;
-  --input: 30 8% 30%;
-  --ring: 273 35% 75%;
+  --border: 30 10% 32%;
+  --input: 30 10% 32%;
+  --ring: 280 40% 78%;
 
   /* Sidebar dark */
-  --sidebar-background: 273 18% 12%;
-  --sidebar-foreground: 32 30% 90%;
-  --sidebar-primary: 273 35% 75%;
-  --sidebar-primary-foreground: 273 20% 15%;
-  --sidebar-accent: 30 8% 25%;
-  --sidebar-accent-foreground: 32 30% 90%;
-  --sidebar-border: 30 8% 25%;
-  --sidebar-ring: 273 35% 75%;
+  --sidebar-background: 280 22% 15%;
+  --sidebar-foreground: 35 30% 92%;
+  --sidebar-primary: 280 40% 78%;
+  --sidebar-primary-foreground: 280 25% 18%;
+  --sidebar-accent: 30 10% 28%;
+  --sidebar-accent-foreground: 35 30% 92%;
+  --sidebar-border: 30 10% 28%;
+  --sidebar-ring: 280 40% 78%;
 }
 
 @theme {

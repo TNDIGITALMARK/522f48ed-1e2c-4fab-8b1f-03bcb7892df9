@@ -26,7 +26,10 @@ export default function ProfilePage() {
   // Use centralized profile hook - auto-syncs with dashboard and nutrition!
   const { profile, updatePhysical, updateProfile, isLoading } = useUserProfile(MOCK_USER_ID);
 
-  // Local state for form
+  // Track if component has mounted (client-side only)
+  const [mounted, setMounted] = useState(false);
+
+  // Local state for form with safe defaults
   const [height, setHeight] = useState<HeightValue>({
     value: 67,
     unit: 'in'
@@ -36,14 +39,29 @@ export default function ProfilePage() {
   const [age, setAge] = useState<number>(30);
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('moderate');
 
+  // Set mounted flag on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Load profile data into form
   useEffect(() => {
-    if (profile && profile.height) {
-      setHeight(profile.height);
-      setWeight(profile.weight);
-      setWeightUnit(profile.weightUnit);
-      setAge(profile.age);
-      setActivityLevel(profile.activityLevel);
+    if (profile) {
+      if (profile.height) {
+        setHeight(profile.height);
+      }
+      if (profile.weight) {
+        setWeight(profile.weight);
+      }
+      if (profile.weightUnit) {
+        setWeightUnit(profile.weightUnit);
+      }
+      if (profile.age) {
+        setAge(profile.age);
+      }
+      if (profile.activityLevel) {
+        setActivityLevel(profile.activityLevel);
+      }
     }
   }, [profile]);
 
@@ -63,6 +81,20 @@ export default function ProfilePage() {
 
     alert('Profile saved and synced across all pages!');
   };
+
+  // Prevent SSR hydration issues - only render on client
+  if (!mounted) {
+    return (
+      <DashboardLayout>
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <p className="mt-4 text-muted-foreground">Loading profile...</p>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>
@@ -205,25 +237,25 @@ export default function ProfilePage() {
             <div className="bg-white/60 rounded-xl p-4">
               <p className="text-sm text-muted-foreground mb-1">Height</p>
               <p className="text-xl font-bold text-primary">
-                {height && height.unit === 'ft' && height.feet !== undefined
+                {height?.unit === 'ft' && height.feet !== undefined
                   ? `${height.feet}' ${(height.inches || 0).toFixed(1)}"`
-                  : height && height.unit && height.value ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
+                  : height?.unit && height.value ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
               </p>
             </div>
             <div className="bg-white/60 rounded-xl p-4">
               <p className="text-sm text-muted-foreground mb-1">Weight</p>
               <p className="text-xl font-bold text-secondary">
-                {weight.toFixed(1)} {weightUnit}
+                {weight ? weight.toFixed(1) : '0.0'} {weightUnit}
               </p>
             </div>
             <div className="bg-white/60 rounded-xl p-4">
               <p className="text-sm text-muted-foreground mb-1">Age</p>
-              <p className="text-xl font-bold text-accent-foreground">{age} years</p>
+              <p className="text-xl font-bold text-accent-foreground">{age || 0} years</p>
             </div>
             <div className="bg-white/60 rounded-xl p-4">
               <p className="text-sm text-muted-foreground mb-1">Activity</p>
               <p className="text-base font-bold capitalize text-primary">
-                {activityLevel.replace('_', ' ')}
+                {activityLevel ? activityLevel.replace('_', ' ') : '-'}
               </p>
             </div>
           </div>
