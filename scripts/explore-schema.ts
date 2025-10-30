@@ -6,38 +6,32 @@ const supabase = createClient(
   {
     global: {
       headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJyb2xlIjoiYW5vbiIsInRlbmFudF9pZCI6IkY3b2lBbmJna0ZPNEtheGZ0ZDZFSTZhRDNXWDIiLCJwcm9qZWN0X2lkIjoiNTIyZjQ4ZWQtMWUyYy00ZmFiLThiMWYtMDNiY2I3ODkyZGY5IiwianRpIjoiOWVkZmY4MTItZDM0Yi00M2Y5LTg2OWUtMGYzYjI2NDEyMWNjIiwiaWF0IjoxNzYxNzgzNTc1LCJleHAiOjE3NjE3ODYyNzV9.VUDcdNMAqVAci1euC1ucauivLmWXfKy0VW-fXE5PYNc'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJyb2xlIjoiYW5vbiIsInRlbmFudF9pZCI6IkY3b2lBbmJna0ZPNEtheGZ0ZDZFSTZhRDNXWDIiLCJwcm9qZWN0X2lkIjoiNTIyZjQ4ZWQtMWUyYy00ZmFiLThiMWYtMDNiY2I3ODkyZGY5IiwianRpIjoiNzk0Yjc4ZDItMTA3OC00YjA5LWE4ZDMtM2QyNTg0YzRjMTU0IiwiaWF0IjoxNzYxNzg3NDU3LCJleHAiOjE3NjE3OTAxNTd9.rBdEbI0IAypLODANItIoEVyZs_SETFhPE5Uhb561YtQ'
       }
     }
   }
 );
 
 async function exploreSchema() {
-  console.log('=== DATABASE SCHEMA EXPLORATION ===\n');
+  console.log('=== EXPLORING DATABASE SCHEMA ===\n');
 
-  const tablesToCheck = [
-    'weight_logs',
-    'user_goals',
-    'health_metrics',
-    'fitness_goals',
-    'users',
-    'profiles',
-    'user_profiles'
-  ];
+  const tables = ['user_profiles', 'users', 'health_data', 'health_metrics', 'fitness_goals'];
 
-  for (const tableName of tablesToCheck) {
+  for (const tableName of tables) {
     const { error, count } = await supabase
       .from(tableName)
       .select('*', { count: 'exact', head: true });
 
     if (!error) {
-      console.log(`✅ ${tableName}: ${count} rows (table exists)`);
+      console.log(`✅ '${tableName}' exists - ${count} rows`);
+      const { data: sample } = await supabase.from(tableName).select('*').limit(1);
+      if (sample && sample.length > 0) {
+        console.log('   Columns:', Object.keys(sample[0]).join(', '));
+      }
     } else {
-      console.log(`❌ ${tableName}: ${error.message}`);
+      console.log(`❌ '${tableName}' not found`);
     }
   }
-
-  console.log('\nDone!');
 }
 
-exploreSchema();
+exploreSchema().catch(console.error);

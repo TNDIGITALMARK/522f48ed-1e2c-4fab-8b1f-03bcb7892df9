@@ -597,6 +597,23 @@ export default function DashboardPage() {
               </p>
             </Card>
 
+            {/* AI Calorie Tracking */}
+            <Card className="bloom-card bg-gradient-to-br from-primary/10 to-secondary/5 border-primary/20">
+              <div className="flex items-center gap-3 mb-3">
+                <Sparkles className="w-6 h-6 text-primary" />
+                <h3 className="font-semibold text-primary">AI Calorie Tracking</h3>
+              </div>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                Get personalized calorie targets based on your height, weight, and fitness goals. AI automatically adjusts your daily calories to keep you on track.
+              </p>
+              <Link href="/fitness-setup">
+                <Button className="w-full" size="sm">
+                  <Target className="w-4 h-4 mr-2" />
+                  Set Up Fitness Profile
+                </Button>
+              </Link>
+            </Card>
+
             {/* Daily Tip */}
             <Card className="bloom-card bg-gradient-to-br from-accent/10 to-accent/5 border-accent/20">
               <div className="flex items-center gap-3 mb-3">
