@@ -7,12 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info } from 'lucide-react';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity } from 'lucide-react';
 import { useState } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { CardioLogDialog } from '@/components/cardio-log-dialog';
+import type { CardioLog } from '@/lib/cardio-machines';
 
 const phaseWorkouts = {
   Menstruation: [
@@ -194,8 +196,13 @@ export default function WorkoutPage() {
   const [logSets, setLogSets] = useState('');
   const [logReps, setLogReps] = useState('');
   const [logWeight, setLogWeight] = useState('');
+  const [logWeightCalories, setLogWeightCalories] = useState('');
+  const [useManualWeightCalories, setUseManualWeightCalories] = useState(false);
 
-  const handleLogWorkout = (exerciseName?: string, exerciseSets?: number, exerciseReps?: number, exerciseWeight?: number) => {
+  const [showCardioLogDialog, setShowCardioLogDialog] = useState(false);
+  const [cardioLogs, setCardioLogs] = useState<CardioLog[]>([]);
+
+  const handleLogWorkout = (exerciseName?: string, exerciseSets?: number, exerciseReps?: number, exerciseWeight?: number, manualCalories?: number) => {
     const today = new Date().toISOString().split('T')[0];
 
     const newLog = {
@@ -204,14 +211,16 @@ export default function WorkoutPage() {
       sets: exerciseSets || parseInt(logSets),
       reps: exerciseReps || parseInt(logReps),
       weight: exerciseWeight || parseInt(logWeight),
+      calories: manualCalories || (useManualWeightCalories && logWeightCalories ? parseInt(logWeightCalories) : undefined),
       date: today
     };
 
     setWorkoutLogs([newLog, ...workoutLogs]);
 
     // Show success toast
+    const caloriesMsg = newLog.calories ? `, ${newLog.calories} cal` : '';
     toast.success('Workout logged successfully!', {
-      description: `${newLog.exercise} - ${newLog.sets} sets × ${newLog.reps} reps @ ${newLog.weight} lbs`,
+      description: `${newLog.exercise} - ${newLog.sets} sets × ${newLog.reps} reps @ ${newLog.weight} lbs${caloriesMsg}`,
     });
 
     // Reset form
@@ -219,7 +228,18 @@ export default function WorkoutPage() {
     setLogSets('');
     setLogReps('');
     setLogWeight('');
+    setLogWeightCalories('');
+    setUseManualWeightCalories(false);
     setShowLogDialog(false);
+  };
+
+  const handleLogCardio = (log: Omit<CardioLog, 'id' | 'createdAt'>) => {
+    const newCardioLog: CardioLog = {
+      ...log,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString()
+    };
+    setCardioLogs([newCardioLog, ...cardioLogs]);
   };
 
   return (
@@ -242,11 +262,12 @@ export default function WorkoutPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
+          <TabsList className="grid w-full grid-cols-5 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="health">Apple Health</TabsTrigger>
-            <TabsTrigger value="plan">Workout Plan</TabsTrigger>
-            <TabsTrigger value="log">Workout Log</TabsTrigger>
+            <TabsTrigger value="cardio">Cardio</TabsTrigger>
+            <TabsTrigger value="plan">Plan</TabsTrigger>
+            <TabsTrigger value="log">Weights</TabsTrigger>
           </TabsList>
 
           {/* OVERVIEW TAB */}
@@ -411,6 +432,128 @@ export default function WorkoutPage() {
           {/* APPLE HEALTH TAB */}
           <TabsContent value="health" className="space-y-6">
             <AppleHealthSync />
+          </TabsContent>
+
+          {/* CARDIO TAB */}
+          <TabsContent value="cardio" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="mb-6 flex items-start justify-between">
+                <div>
+                  <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
+                    <Activity className="w-6 h-6 text-secondary" />
+                    Cardio Workouts
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Log your cardio sessions with automatic calorie tracking
+                  </p>
+                </div>
+                <Button
+                  onClick={() => setShowCardioLogDialog(true)}
+                  className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Log Cardio
+                </Button>
+              </div>
+
+              {cardioLogs.length === 0 ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                    <Activity className="w-10 h-10 text-secondary" />
+                  </div>
+                  <h4 className="text-lg font-semibold mb-2">No cardio workouts logged yet</h4>
+                  <p className="text-muted-foreground mb-6">
+                    Start tracking your cardio sessions to see your progress
+                  </p>
+                  <Button
+                    onClick={() => setShowCardioLogDialog(true)}
+                    className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Log Your First Cardio Workout
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {cardioLogs.map((log) => (
+                    <Card key={log.id} className="p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                            <Activity className="w-6 h-6 text-secondary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">{log.machineName}</h4>
+                            <p className="text-xs text-muted-foreground">
+                              {new Date(log.workoutDate).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                        <Badge variant={log.caloriesManualOverride ? 'secondary' : 'outline'}>
+                          {log.caloriesManualOverride ? 'Manual' : 'Auto-calculated'}
+                        </Badge>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3 mb-3">
+                        <div className="text-center p-3 bg-muted/30 rounded-lg">
+                          <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
+                          <p className="font-semibold text-sm">{log.durationMinutes} min</p>
+                          <p className="text-xs text-muted-foreground">Duration</p>
+                        </div>
+                        <div className="text-center p-3 bg-secondary/10 rounded-lg">
+                          <Flame className="w-4 h-4 mx-auto mb-1 text-secondary" />
+                          <p className="font-semibold text-sm">{Math.round(log.caloriesBurned)}</p>
+                          <p className="text-xs text-muted-foreground">Calories</p>
+                        </div>
+                        {log.distance && (
+                          <div className="text-center p-3 bg-muted/30 rounded-lg">
+                            <TrendingUp className="w-4 h-4 mx-auto mb-1 text-primary" />
+                            <p className="font-semibold text-sm">
+                              {log.distance} {log.distanceUnit}
+                            </p>
+                            <p className="text-xs text-muted-foreground">Distance</p>
+                          </div>
+                        )}
+                      </div>
+
+                      {(log.averageHeartRate || log.notes) && (
+                        <div className="pt-3 border-t border-border space-y-2">
+                          {log.averageHeartRate && (
+                            <div className="flex items-center gap-2 text-sm">
+                              <Heart className="w-4 h-4 text-secondary" />
+                              <span className="text-muted-foreground">
+                                Avg HR: <span className="font-medium text-foreground">{log.averageHeartRate} bpm</span>
+                              </span>
+                            </div>
+                          )}
+                          {log.notes && (
+                            <p className="text-sm text-muted-foreground italic">
+                              &ldquo;{log.notes}&rdquo;
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-6 p-4 bg-secondary/5 rounded-xl border border-secondary/20">
+                <div className="flex items-start gap-3">
+                  <Flame className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-sm mb-1">Calorie Tracking</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Calories are automatically calculated based on duration and machine type. You can override with your own measurements for more accuracy!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Card>
           </TabsContent>
 
           {/* WORKOUT PLAN TAB */}
@@ -656,6 +799,37 @@ export default function WorkoutPage() {
                         </div>
                       </div>
 
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <Label htmlFor="weight-calories" className="text-sm font-semibold">
+                            Calories Burned (optional)
+                          </Label>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setUseManualWeightCalories(!useManualWeightCalories);
+                              if (useManualWeightCalories) setLogWeightCalories('');
+                            }}
+                            className="text-xs h-auto py-1"
+                          >
+                            {useManualWeightCalories ? 'Clear' : 'Add Calories'}
+                          </Button>
+                        </div>
+                        {useManualWeightCalories && (
+                          <Input
+                            id="weight-calories"
+                            type="number"
+                            placeholder="e.g., 250"
+                            value={logWeightCalories}
+                            onChange={(e) => setLogWeightCalories(e.target.value)}
+                            className="w-full"
+                            min="0"
+                          />
+                        )}
+                      </div>
+
                       <Button
                         onClick={() => handleLogWorkout()}
                         disabled={!logExercise || !logSets || !logReps || !logWeight}
@@ -686,7 +860,7 @@ export default function WorkoutPage() {
                       </div>
                       <Badge variant="outline">Completed</Badge>
                     </div>
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className={`grid ${log.calories ? 'grid-cols-4' : 'grid-cols-3'} gap-4`}>
                       <div className="text-center p-2 bg-muted/30 rounded-lg">
                         <p className="text-xs text-muted-foreground mb-1">Sets</p>
                         <p className="font-semibold">{log.sets}</p>
@@ -699,6 +873,12 @@ export default function WorkoutPage() {
                         <p className="text-xs text-muted-foreground mb-1">Weight</p>
                         <p className="font-semibold">{log.weight} lbs</p>
                       </div>
+                      {log.calories && (
+                        <div className="text-center p-2 bg-secondary/10 rounded-lg">
+                          <p className="text-xs text-muted-foreground mb-1">Calories</p>
+                          <p className="font-semibold">{log.calories}</p>
+                        </div>
+                      )}
                     </div>
                   </Card>
                 ))}
@@ -721,6 +901,13 @@ export default function WorkoutPage() {
       </main>
 
       <Navigation />
+
+      {/* Cardio Log Dialog */}
+      <CardioLogDialog
+        open={showCardioLogDialog}
+        onOpenChange={setShowCardioLogDialog}
+        onLogCardio={handleLogCardio}
+      />
     </div>
   );
 }
