@@ -2,6 +2,7 @@
 // Provides functions for managing user weight logs and fitness goals
 
 export type WeightUnit = 'lbs' | 'kg';
+export type HeightUnit = 'inches' | 'cm';
 export type GoalType = 'cutting' | 'bulking' | 'maintaining';
 
 export interface WeightLog {
@@ -9,6 +10,8 @@ export interface WeightLog {
   userId: string;
   weight: number;
   unit: WeightUnit;
+  height?: number;
+  heightUnit?: HeightUnit;
   loggedAt: string;
   notes?: string;
 }
@@ -67,13 +70,17 @@ export async function addWeightLog(
   userId: string,
   weight: number,
   unit: WeightUnit,
-  notes?: string
+  notes?: string,
+  height?: number,
+  heightUnit?: HeightUnit
 ): Promise<WeightLog> {
   const newLog: WeightLog = {
     id: Date.now().toString(),
     userId,
     weight,
     unit,
+    height,
+    heightUnit,
     loggedAt: new Date().toISOString(),
     notes,
   };
@@ -230,6 +237,59 @@ export function getGoalTypeInfo(goalType: GoalType): GoalTypeInfo {
 // Format weight for display
 export function formatWeight(weight: number, unit: WeightUnit, decimals: number = 1): string {
   return `${weight.toFixed(decimals)} ${unit}`;
+}
+
+// Format height for display
+export function formatHeight(height: number, unit: HeightUnit): string {
+  if (unit === 'inches') {
+    const feet = Math.floor(height / 12);
+    const inches = Math.round(height % 12);
+    return `${feet}'${inches}"`;
+  }
+  return `${height.toFixed(1)} cm`;
+}
+
+// Convert height between units
+export function convertHeight(height: number, fromUnit: HeightUnit, toUnit: HeightUnit): number {
+  if (fromUnit === toUnit) return height;
+
+  if (fromUnit === 'inches' && toUnit === 'cm') {
+    return height * 2.54;
+  }
+  if (fromUnit === 'cm' && toUnit === 'inches') {
+    return height / 2.54;
+  }
+
+  return height;
+}
+
+// Get latest height for a user
+export function getLatestHeight(userId: string): { height: number; unit: HeightUnit } | null {
+  const logs = loadWeightLogs(userId);
+  const logWithHeight = logs.find((log) => log.height && log.heightUnit);
+  return logWithHeight && logWithHeight.height && logWithHeight.heightUnit
+    ? { height: logWithHeight.height, unit: logWithHeight.heightUnit }
+    : null;
+}
+
+// Calculate BMI (Body Mass Index)
+export function calculateBMI(weight: number, weightUnit: WeightUnit, height: number, heightUnit: HeightUnit): number | null {
+  if (!weight || !height) return null;
+
+  // Convert to metric (kg and cm)
+  const weightKg = weightUnit === 'kg' ? weight : weight * 0.453592;
+  const heightCm = heightUnit === 'cm' ? height : height * 2.54;
+  const heightM = heightCm / 100;
+
+  return weightKg / (heightM * heightM);
+}
+
+// Get BMI category
+export function getBMICategory(bmi: number): { category: string; color: string } {
+  if (bmi < 18.5) return { category: 'Underweight', color: 'text-blue-600' };
+  if (bmi < 25) return { category: 'Normal', color: 'text-green-600' };
+  if (bmi < 30) return { category: 'Overweight', color: 'text-yellow-600' };
+  return { category: 'Obese', color: 'text-red-600' };
 }
 
 // Delete a weight log

@@ -25,10 +25,15 @@ import {
   calculateGoalProgress,
   getGoalTypeInfo,
   formatWeight,
+  formatHeight,
+  getLatestHeight,
+  calculateBMI,
+  getBMICategory,
   deleteWeightLog,
   type WeightLog,
   type GoalType,
-  type WeightUnit
+  type WeightUnit,
+  type HeightUnit
 } from '@/lib/weight-tracking';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -44,6 +49,8 @@ export default function WeightTrackingPage() {
   const [showLogDialog, setShowLogDialog] = useState(false);
   const [newWeight, setNewWeight] = useState('');
   const [newWeightUnit, setNewWeightUnit] = useState<WeightUnit>('lbs');
+  const [newHeight, setNewHeight] = useState('');
+  const [newHeightUnit, setNewHeightUnit] = useState<HeightUnit>('inches');
   const [newWeightNotes, setNewWeightNotes] = useState('');
 
   // Set goal dialog state
@@ -75,11 +82,18 @@ export default function WeightTrackingPage() {
     const change = calculateWeightChange(MOCK_USER_ID);
     setWeightChange(change);
 
-    // Pre-fill current weight if we have it
+    // Pre-fill current weight and height if we have them
     if (latest && !currentWeight) {
       setCurrentWeight(latest.weight.toString());
       setNewWeightUnit(latest.unit);
       setGoalWeightUnit(latest.unit);
+    }
+
+    // Pre-fill height from latest log
+    const latestHeightData = getLatestHeight(MOCK_USER_ID);
+    if (latestHeightData && !newHeight) {
+      setNewHeight(latestHeightData.height.toString());
+      setNewHeightUnit(latestHeightData.unit);
     }
   };
 
@@ -94,14 +108,17 @@ export default function WeightTrackingPage() {
         MOCK_USER_ID,
         parseFloat(newWeight),
         newWeightUnit,
-        newWeightNotes || undefined
+        newWeightNotes || undefined,
+        newHeight ? parseFloat(newHeight) : undefined,
+        newHeight ? newHeightUnit : undefined
       );
 
       toast.success('Weight logged successfully!', {
-        description: `${newWeight} ${newWeightUnit} recorded`
+        description: `${newWeight} ${newWeightUnit}${newHeight ? ` • ${formatHeight(parseFloat(newHeight), newHeightUnit)}` : ''}`
       });
 
       setNewWeight('');
+      setNewHeight('');
       setNewWeightNotes('');
       setShowLogDialog(false);
       loadData();
@@ -146,6 +163,13 @@ export default function WeightTrackingPage() {
 
   const goalTypeInfo = activeGoal ? getGoalTypeInfo(activeGoal.goalType) : null;
   const trend = getWeightTrend(MOCK_USER_ID, 30);
+  const latestHeightData = getLatestHeight(MOCK_USER_ID);
+
+  // Calculate BMI if we have both weight and height
+  const bmi = latestWeight && latestHeightData
+    ? calculateBMI(latestWeight.weight, latestWeight.unit, latestHeightData.height, latestHeightData.unit)
+    : null;
+  const bmiCategory = bmi ? getBMICategory(bmi) : null;
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -162,6 +186,27 @@ export default function WeightTrackingPage() {
             Track your progress and achieve your fitness goals
           </p>
         </div>
+
+        {/* BMI Card - Show if height is available */}
+        {latestHeightData && bmi && bmiCategory && (
+          <Card className="bloom-card bg-gradient-to-br from-accent/10 to-accent/5 mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Body Mass Index (BMI)</h3>
+                <div className="flex items-baseline gap-3">
+                  <p className="text-4xl font-bold text-accent-foreground">{bmi.toFixed(1)}</p>
+                  <Badge variant="outline" className={bmiCategory.color}>
+                    {bmiCategory.category}
+                  </Badge>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Height: {formatHeight(latestHeightData.height, latestHeightData.unit)}
+                </p>
+              </div>
+              <div className="text-5xl">📊</div>
+            </div>
+          </Card>
+        )}
 
         {/* Current Weight & Goal Overview */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -228,7 +273,7 @@ export default function WeightTrackingPage() {
                 <div className="space-y-4 py-4">
                   <div className="flex gap-3">
                     <div className="flex-1">
-                      <Label htmlFor="weight">Weight</Label>
+                      <Label htmlFor="weight">Weight *</Label>
                       <Input
                         id="weight"
                         type="number"
@@ -248,6 +293,33 @@ export default function WeightTrackingPage() {
                         <SelectContent>
                           <SelectItem value="lbs">lbs</SelectItem>
                           <SelectItem value="kg">kg</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <div className="flex-1">
+                      <Label htmlFor="height">Height (optional)</Label>
+                      <Input
+                        id="height"
+                        type="number"
+                        step="0.1"
+                        placeholder={newHeightUnit === 'inches' ? '66' : '168'}
+                        value={newHeight}
+                        onChange={(e) => setNewHeight(e.target.value)}
+                        className="mt-1"
+                      />
+                    </div>
+                    <div className="w-28">
+                      <Label htmlFor="height-unit">Unit</Label>
+                      <Select value={newHeightUnit} onValueChange={(v) => setNewHeightUnit(v as HeightUnit)}>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="inches">inches</SelectItem>
+                          <SelectItem value="cm">cm</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
