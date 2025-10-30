@@ -205,9 +205,9 @@ export default function ProfilePage() {
             <div className="bg-white/60 rounded-xl p-4">
               <p className="text-sm text-muted-foreground mb-1">Height</p>
               <p className="text-xl font-bold text-primary">
-                {height && height.unit === 'ft' && height.feet !== undefined
+                {height?.unit === 'ft' && height.feet !== undefined
                   ? `${height.feet}' ${(height.inches || 0).toFixed(1)}"`
-                  : height && height.unit && height.value ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
+                  : height?.unit && height?.value ? `${height.value.toFixed(1)} ${height.unit}` : '-'}
               </p>
             </div>
             <div className="bg-white/60 rounded-xl p-4">
