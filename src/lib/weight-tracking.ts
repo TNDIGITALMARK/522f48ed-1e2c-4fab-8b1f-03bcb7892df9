@@ -4,6 +4,7 @@
 export type WeightUnit = 'lbs' | 'kg';
 export type HeightUnit = 'inches' | 'cm';
 export type GoalType = 'cutting' | 'bulking' | 'maintaining';
+export type ActivityLevel = 'sedentary' | 'light' | 'moderate' | 'active' | 'very_active';
 
 export interface WeightLog {
   id: string;
