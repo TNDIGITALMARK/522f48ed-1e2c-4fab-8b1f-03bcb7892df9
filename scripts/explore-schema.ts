@@ -6,30 +6,38 @@ const supabase = createClient(
   {
     global: {
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJyb2xlIjoiYW5vbiIsInRlbmFudF9pZCI6IkY3b2lBbmJna0ZPNEtheGZ0ZDZFSTZhRDNXWDIiLCJwcm9qZWN0X2lkIjoiNTIyZjQ4ZWQtMWUyYy00ZmFiLThiMWYtMDNiY2I3ODkyZGY5IiwianRpIjoiODk1MjdhMmMtMWQ5Yi00MjA1LWI3ZjQtMmYwY2Q5ZjUyM2UzIiwiaWF0IjoxNzYxNzcyNDg0LCJleHAiOjE3NjE3NzUxODR9.f2EZLhKbaRxVq0mqJEEKdw7jXf7AiiXdr92MwJh4IYk`
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsImF1ZCI6ImF1dGhlbnRpY2F0ZWQiLCJyb2xlIjoiYW5vbiIsInRlbmFudF9pZCI6IkY3b2lBbmJna0ZPNEtheGZ0ZDZFSTZhRDNXWDIiLCJwcm9qZWN0X2lkIjoiNTIyZjQ4ZWQtMWUyYy00ZmFiLThiMWYtMDNiY2I3ODkyZGY5IiwianRpIjoiOWVkZmY4MTItZDM0Yi00M2Y5LTg2OWUtMGYzYjI2NDEyMWNjIiwiaWF0IjoxNzYxNzgzNTc1LCJleHAiOjE3NjE3ODYyNzV9.VUDcdNMAqVAci1euC1ucauivLmWXfKy0VW-fXE5PYNc'
       }
     }
   }
 );
 
 async function exploreSchema() {
-  console.log('=== EXPLORING DATABASE SCHEMA ===\n');
+  console.log('=== DATABASE SCHEMA EXPLORATION ===\n');
 
-  const tablesToCheck = ['meal_plans', 'meals', 'foods', 'recipes', 'nutrition_data', 'user_meals', 'food_database'];
+  const tablesToCheck = [
+    'weight_logs',
+    'user_goals',
+    'health_metrics',
+    'fitness_goals',
+    'users',
+    'profiles',
+    'user_profiles'
+  ];
 
   for (const tableName of tablesToCheck) {
-    const { data, error, count } = await supabase
+    const { error, count } = await supabase
       .from(tableName)
       .select('*', { count: 'exact', head: true });
 
     if (!error) {
-      console.log(`✅ ${tableName}: ${count} rows`);
-    } else if (error.message.includes('does not exist')) {
-      console.log(`❌ ${tableName}: Table does not exist`);
+      console.log(`✅ ${tableName}: ${count} rows (table exists)`);
     } else {
-      console.log(`⚠️ ${tableName}: ${error.message}`);
+      console.log(`❌ ${tableName}: ${error.message}`);
     }
   }
+
+  console.log('\nDone!');
 }
 
 exploreSchema();

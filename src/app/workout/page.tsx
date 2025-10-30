@@ -7,14 +7,16 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity } from 'lucide-react';
-import { useState } from 'react';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { CardioLogDialog } from '@/components/cardio-log-dialog';
 import type { CardioLog } from '@/lib/cardio-machines';
+import { getLatestWeight, getActiveGoal, formatWeight, getGoalTypeInfo } from '@/lib/weight-tracking';
+import Link from 'next/link';
 
 const phaseWorkouts = {
   Menstruation: [
@@ -168,10 +170,23 @@ const gymExercises = [
   { id: '8', name: 'Lat Pulldown', muscle: 'Back', equipment: 'Cable' },
 ];
 
+const MOCK_USER_ID = 'demo-user-001';
+
 export default function WorkoutPage() {
   const [currentPhase] = useState<keyof typeof phaseWorkouts>('Follicular');
   const workouts = phaseWorkouts[currentPhase];
   const guidance = cycleGuidance[currentPhase];
+
+  // Weight and goal state
+  const [latestWeight, setLatestWeight] = useState<ReturnType<typeof getLatestWeight>>(null);
+  const [activeGoal, setActiveGoal] = useState<ReturnType<typeof getActiveGoal>>(null);
+
+  useEffect(() => {
+    const weight = getLatestWeight(MOCK_USER_ID);
+    const goal = getActiveGoal(MOCK_USER_ID);
+    setLatestWeight(weight);
+    setActiveGoal(goal);
+  }, []);
 
   const completedWorkouts = [
     { day: 'Monday', workout: 'Full Body Strength', duration: '30 min', calories: 250 },
@@ -324,6 +339,58 @@ export default function WorkoutPage() {
             </div>
           </div>
         </Card>
+
+        {/* Weight & Goals Widget */}
+        {(latestWeight || activeGoal) && (
+          <Card className="bloom-card mb-6 bg-gradient-to-br from-accent/10 to-accent/5 border-none">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold">Weight & Goals</h3>
+              <Link href="/weight">
+                <Button variant="outline" size="sm" className="rounded-full">
+                  View Details
+                </Button>
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {latestWeight && (
+                <div className="flex items-center gap-3 p-3 bg-white rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Scale className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Current Weight</p>
+                    <p className="text-lg font-bold">{formatWeight(latestWeight.weight, latestWeight.unit)}</p>
+                  </div>
+                </div>
+              )}
+
+              {activeGoal && (
+                <div className="flex items-center gap-3 p-3 bg-white rounded-xl">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                    <Target className="w-5 h-5 text-secondary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Goal</p>
+                    <p className="text-lg font-bold">{getGoalTypeInfo(activeGoal.goalType).label}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {!latestWeight && !activeGoal && (
+              <div className="text-center py-4">
+                <p className="text-muted-foreground mb-3">Track your weight and set fitness goals</p>
+                <Link href="/weight">
+                  <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Get Started
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </Card>
+        )}
 
         {/* Recommended Workouts for Current Phase */}
         <div className="mb-8">
