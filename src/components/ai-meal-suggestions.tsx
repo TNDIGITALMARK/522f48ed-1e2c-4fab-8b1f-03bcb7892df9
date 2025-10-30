@@ -5,7 +5,9 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { ChefHat, Sparkles, Clock, Heart, Info } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ChefHat, Sparkles, Clock, Heart, Info, Package } from 'lucide-react';
+import { PantryItemsManager, PantryItem } from '@/components/pantry-items-manager';
 
 interface MealSuggestion {
   id: string;
@@ -26,19 +28,33 @@ interface AIMealSuggestionsProps {
   mealType: string;
   groceryItems: string[];
   onAddToMeal?: (suggestion: MealSuggestion) => void;
+  pantryItems?: PantryItem[];
+  onPantryItemsChange?: (items: PantryItem[]) => void;
 }
 
-export function AIMealSuggestions({ mealType, groceryItems, onAddToMeal }: AIMealSuggestionsProps) {
+export function AIMealSuggestions({
+  mealType,
+  groceryItems,
+  onAddToMeal,
+  pantryItems = [],
+  onPantryItemsChange
+}: AIMealSuggestionsProps) {
   const [suggestions, setSuggestions] = useState<MealSuggestion[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedSuggestion, setSelectedSuggestion] = useState<MealSuggestion | null>(null);
+
+  // Combine grocery items and pantry items for suggestions
+  const allAvailableItems = [
+    ...groceryItems,
+    ...pantryItems.map(item => item.name)
+  ].filter((item, index, self) => self.indexOf(item) === index); // Remove duplicates
 
   const generateSuggestions = () => {
     setLoading(true);
 
     // Simulate AI generation - in production, this would call an AI API
     setTimeout(() => {
-      const mockSuggestions = getMockSuggestions(mealType, groceryItems);
+      const mockSuggestions = getMockSuggestions(mealType, allAvailableItems);
       setSuggestions(mockSuggestions);
       setLoading(false);
     }, 1500);
@@ -175,34 +191,59 @@ export function AIMealSuggestions({ mealType, groceryItems, onAddToMeal }: AIMea
 
   return (
     <div className="space-y-6">
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10">
-          <ChefHat className="w-5 h-5 text-primary" />
-          <span className="font-medium text-primary">AI Meal Planning</span>
-        </div>
+      <Tabs defaultValue="suggestions" className="w-full">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="suggestions" className="gap-2">
+            <Sparkles className="w-4 h-4" />
+            AI Suggestions
+          </TabsTrigger>
+          <TabsTrigger value="pantry" className="gap-2">
+            <Package className="w-4 h-4" />
+            My Pantry ({pantryItems.length})
+          </TabsTrigger>
+        </TabsList>
 
-        <h2 className="text-2xl font-semibold">
-          {mealType.charAt(0).toUpperCase() + mealType.slice(1)} Ideas
-        </h2>
+        <TabsContent value="suggestions" className="space-y-6">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10">
+              <ChefHat className="w-5 h-5 text-primary" />
+              <span className="font-medium text-primary">AI Meal Planning</span>
+            </div>
 
-        <p className="text-muted-foreground">
-          {groceryItems.length > 0
-            ? `Based on ${groceryItems.length} items in your pantry`
-            : 'Add grocery items to get personalized suggestions'}
-        </p>
+            <h2 className="text-2xl font-semibold">
+              {mealType.charAt(0).toUpperCase() + mealType.slice(1)} Ideas
+            </h2>
 
-        {groceryItems.length > 0 && (
-          <Button
-            onClick={generateSuggestions}
-            disabled={loading}
-            size="lg"
-            className="gap-2"
-          >
-            <Sparkles className="w-5 h-5" />
-            {loading ? 'Generating Ideas...' : 'Generate Meal Ideas'}
-          </Button>
-        )}
-      </div>
+            <p className="text-muted-foreground">
+              {allAvailableItems.length > 0
+                ? `Based on ${allAvailableItems.length} items available`
+                : 'Add items to your pantry to get personalized suggestions'}
+            </p>
+
+            {allAvailableItems.length > 0 && (
+              <Button
+                onClick={generateSuggestions}
+                disabled={loading}
+                size="lg"
+                className="gap-2"
+              >
+                <Sparkles className="w-5 h-5" />
+                {loading ? 'Generating Ideas...' : 'Generate Meal Ideas'}
+              </Button>
+            )}
+
+            {allAvailableItems.length === 0 && (
+              <Card className="p-6 bg-muted/20 border-dashed">
+                <Package className="w-12 h-12 mx-auto text-muted-foreground/50 mb-3" />
+                <p className="text-muted-foreground mb-2">
+                  Start by adding items to your pantry!
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  Switch to the "My Pantry" tab to add ingredients you have on hand.
+                </p>
+              </Card>
+            )}
+          </div>
 
       {suggestions.length > 0 && (
         <div className="grid gap-4 md:grid-cols-2">
@@ -278,6 +319,23 @@ export function AIMealSuggestions({ mealType, groceryItems, onAddToMeal }: AIMea
           ))}
         </div>
       )}
+        </TabsContent>
+
+        <TabsContent value="pantry" className="space-y-6">
+          {onPantryItemsChange ? (
+            <PantryItemsManager
+              items={pantryItems}
+              onItemsChange={onPantryItemsChange}
+            />
+          ) : (
+            <Card className="p-8 text-center bg-muted/20">
+              <p className="text-muted-foreground">
+                Pantry management is not available in this view.
+              </p>
+            </Card>
+          )}
+        </TabsContent>
+      </Tabs>
 
       {/* Recipe Detail Dialog */}
       <Dialog open={!!selectedSuggestion} onOpenChange={() => setSelectedSuggestion(null)}>

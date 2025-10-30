@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
+import { PantryItem } from '@/components/pantry-items-manager';
 
 const mealSuggestions = [
   {
@@ -65,6 +66,13 @@ export default function NutritionPage() {
   const [newItem, setNewItem] = useState('');
   const [newQuantity, setNewQuantity] = useState('');
   const [isAddingItem, setIsAddingItem] = useState(false);
+
+  // Pantry items state
+  const [pantryItems, setPantryItems] = useState<PantryItem[]>([
+    { id: '1', name: 'Olive Oil', category: 'Condiments', quantity: '1', unit: 'bottle' },
+    { id: '2', name: 'Rice', category: 'Grains', quantity: '2', unit: 'lbs' },
+    { id: '3', name: 'Eggs', category: 'Protein', quantity: '12', unit: 'pieces' },
+  ]);
 
   // Food lookup state
   const [foodLookupOpen, setFoodLookupOpen] = useState(false);
@@ -623,6 +631,8 @@ export default function NutritionPage() {
                   <AIMealSuggestions
                     mealType="breakfast"
                     groceryItems={groceryItems.map(item => item.name)}
+                    pantryItems={pantryItems}
+                    onPantryItemsChange={setPantryItems}
                     onAddToMeal={(suggestion) => {
                       console.log('Add to meal plan:', suggestion);
                       alert(`Added ${suggestion.meal_name} to your meal plan!`);
@@ -634,6 +644,8 @@ export default function NutritionPage() {
                   <AIMealSuggestions
                     mealType="lunch"
                     groceryItems={groceryItems.map(item => item.name)}
+                    pantryItems={pantryItems}
+                    onPantryItemsChange={setPantryItems}
                     onAddToMeal={(suggestion) => {
                       console.log('Add to meal plan:', suggestion);
                       alert(`Added ${suggestion.meal_name} to your meal plan!`);
@@ -645,6 +657,8 @@ export default function NutritionPage() {
                   <AIMealSuggestions
                     mealType="dinner"
                     groceryItems={groceryItems.map(item => item.name)}
+                    pantryItems={pantryItems}
+                    onPantryItemsChange={setPantryItems}
                     onAddToMeal={(suggestion) => {
                       console.log('Add to meal plan:', suggestion);
                       alert(`Added ${suggestion.meal_name} to your meal plan!`);
@@ -656,6 +670,8 @@ export default function NutritionPage() {
                   <AIMealSuggestions
                     mealType="snack"
                     groceryItems={groceryItems.map(item => item.name)}
+                    pantryItems={pantryItems}
+                    onPantryItemsChange={setPantryItems}
                     onAddToMeal={(suggestion) => {
                       console.log('Add to meal plan:', suggestion);
                       alert(`Added ${suggestion.meal_name} to your meal plan!`);
@@ -667,6 +683,8 @@ export default function NutritionPage() {
                   <AIMealSuggestions
                     mealType="dessert"
                     groceryItems={groceryItems.map(item => item.name)}
+                    pantryItems={pantryItems}
+                    onPantryItemsChange={setPantryItems}
                     onAddToMeal={(suggestion) => {
                       console.log('Add to meal plan:', suggestion);
                       alert(`Added ${suggestion.meal_name} to your meal plan!`);
