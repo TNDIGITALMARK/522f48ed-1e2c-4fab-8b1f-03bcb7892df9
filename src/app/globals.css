@@ -1,163 +1,164 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 /*
 =============================================================================
-BLOOM - PASTEL FLORAL FITNESS COLOR PALETTE (18-30 DEMOGRAPHIC)
+BLOOM - MODERN MATURE FITNESS COLOR PALETTE (YOUNG ADULTS 18-30)
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Soft pastel floral tones inspired by blooming flowers
-- Warm beige neutrals for sophistication and calm
-- Youthful, fresh palette appealing to 18-30 age group
-- Light, airy feel with natural warmth
-- Gentle contrast for comfortable reading
+- Sophisticated earth tones for mature young adults
+- Deep forest green as primary for vitality and growth
+- Warm beige neutrals for elegance and sophistication
+- Rich black for contrast and modern edge
+- Mature, grounded palette with natural warmth
+- Contemporary, professional feel with organic roots
 
-COLOR PALETTE (LIGHT PASTEL FLOWER BLOOM):
-- Soft Lilac (Primary): #E4D4F4 / HSL 280 45% 82% - Delicate lavender bloom
-- Peach Blossom (Secondary): #FCE3D9 / HSL 15 70% 90% - Gentle peach flower
-- Soft Mint (Accent): #D4E8D8 / HSL 135 25% 85% - Fresh garden mint
-- Pale Pink Rose (Highlight): #F5D9E3 / HSL 345 50% 88% - Romantic rose petal
-- Light Cream (Background): #FBF8F4 / HSL 35 35% 96% - Soft warm cream
-- Warm Sand (Muted): #F3EDE5 / HSL 35 28% 92% - Sandy beige
-- Warm Charcoal (Text): #6E6965 / HSL 30 8% 42% - Soft warm text
-- Pure White: #FFFFFF / HSL 0 0% 100% - Clean white
+COLOR PALETTE (MATURE EARTH & FOREST):
+- Forest Green (Primary): #2D5016 / HSL 95 55% 20% - Deep forest vitality
+- Sage Green (Secondary): #7A9B76 / HSL 112 15% 53% - Muted sage accent
+- Olive Green (Accent): #5C7A4D / HSL 100 23% 39% - Rich olive depth
+- Warm Beige (Surface): #E8DCC4 / HSL 38 44% 84% - Natural beige warmth
+- Light Cream (Background): #F5F1E8 / HSL 42 38% 93% - Soft cream base
+- Sand Beige (Muted): #D4C5A9 / HSL 40 35% 74% - Warm sand neutral
+- Charcoal Black (Text): #1C1C1C / HSL 0 0% 11% - Deep charcoal
+- Pure Black: #000000 / HSL 0 0% 0% - True black
 
 TYPOGRAPHY:
-- Headings: Playfair Display (serif, elegant, slightly decorative)
+- Headings: Inter (sans-serif, modern, clean, professional)
 - Body: Inter (sans-serif, clean, readable)
-- Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+- Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
 
-SPACING SYSTEM (GENEROUS, BREATHING ROOM):
-- Cards: 24-32px padding
-- Sections: 48-64px vertical spacing
-- Elements: 16-24px between components
-- Grid gaps: 24-32px
+SPACING SYSTEM (MODERN, PURPOSEFUL):
+- Cards: 20-28px padding
+- Sections: 40-56px vertical spacing
+- Elements: 12-20px between components
+- Grid gaps: 20-28px
 
 COMPONENT STYLING:
-- Border Radius: 16-20px (soft, rounded feel)
-- Shadows: Very subtle, soft (0 4px 16px rgba(107,101,97,0.08))
-- Buttons: Rounded corners (12-16px), medium weight text
-- Cards: Soft shadows, ample padding, rounded corners
+- Border Radius: 12-16px (modern, clean feel)
+- Shadows: Subtle depth (0 2px 12px rgba(0,0,0,0.08))
+- Buttons: Clean corners (10-14px), semibold text
+- Cards: Modern shadows, purposeful padding, defined edges
 
 VISUAL EFFECTS:
-- Soft, dreamy shapes with floral warmth
-- Very subtle shadows for gentle depth
-- Smooth transitions (200-300ms ease)
-- Pastel, romantic color overlays
+- Clean, modern shapes with natural warmth
+- Subtle shadows for contemporary depth
+- Smooth transitions (250ms ease)
+- Muted, sophisticated overlays
 
 =============================================================================
 */
 
 :root {
-  /* Bloom Pastel Floral Color System - Light Pastel Flower Bloom Theme */
-  --bloom-lavender: 280 45% 82%; /* #E4D4F4 - Soft lilac bloom */
-  --bloom-peach: 15 70% 90%; /* #FCE3D9 - Delicate peach blossom */
-  --bloom-sage: 135 25% 85%; /* #D4E8D8 - Soft mint green */
-  --bloom-rose: 345 50% 88%; /* #F5D9E3 - Pale pink rose */
-  --bloom-beige: 35 35% 96%; /* #FBF8F4 - Light cream */
-  --bloom-sand: 35 28% 92%; /* #F3EDE5 - Warm sand */
-  --bloom-charcoal: 30 8% 42%; /* #6E6965 - Soft warm charcoal */
-  --bloom-white: 0 0% 100%; /* #FFFFFF - Pure white */
+  /* Bloom Mature Earth & Forest Color System */
+  --bloom-forest: 95 55% 20%; /* #2D5016 - Deep forest green */
+  --bloom-sage: 112 15% 53%; /* #7A9B76 - Muted sage green */
+  --bloom-olive: 100 23% 39%; /* #5C7A4D - Rich olive green */
+  --bloom-warm-beige: 38 44% 84%; /* #E8DCC4 - Warm beige */
+  --bloom-cream: 42 38% 93%; /* #F5F1E8 - Light cream */
+  --bloom-sand: 40 35% 74%; /* #D4C5A9 - Sand beige */
+  --bloom-charcoal: 0 0% 11%; /* #1C1C1C - Deep charcoal */
+  --bloom-black: 0 0% 0%; /* #000000 - Pure black */
 
-  /* Light cream backgrounds with warm charcoal text */
-  --background: 35 35% 96%;
-  --foreground: 30 8% 42%;
+  /* Cream backgrounds with deep charcoal text */
+  --background: 42 38% 93%;
+  --foreground: 0 0% 11%;
 
-  /* White cards with charcoal text */
-  --card: 0 0% 100%;
-  --card-foreground: 30 8% 42%;
+  /* Warm beige cards with charcoal text */
+  --card: 38 44% 97%;
+  --card-foreground: 0 0% 11%;
 
   /* Popovers */
-  --popover: 0 0% 100%;
-  --popover-foreground: 30 8% 42%;
+  --popover: 38 44% 97%;
+  --popover-foreground: 0 0% 11%;
 
-  /* Primary: Soft Lilac (gentle lavender bloom) */
-  --primary: 280 45% 82%;
-  --primary-foreground: 30 8% 25%;
+  /* Primary: Forest Green (deep vitality) */
+  --primary: 95 55% 20%;
+  --primary-foreground: 42 38% 93%;
 
-  /* Secondary: Peach Blossom (warm peachy pink) */
-  --secondary: 15 70% 90%;
-  --secondary-foreground: 30 8% 25%;
+  /* Secondary: Sage Green (muted sophistication) */
+  --secondary: 112 15% 53%;
+  --secondary-foreground: 0 0% 11%;
 
-  /* Muted: Warm Sand (sandy beige) */
-  --muted: 35 28% 92%;
-  --muted-foreground: 30 8% 48%;
+  /* Muted: Sand Beige (warm neutral) */
+  --muted: 40 35% 74%;
+  --muted-foreground: 0 0% 25%;
 
-  /* Accent: Soft Mint (fresh garden green) */
-  --accent: 135 25% 85%;
-  --accent-foreground: 30 8% 25%;
+  /* Accent: Olive Green (rich depth) */
+  --accent: 100 23% 39%;
+  --accent-foreground: 42 38% 93%;
 
-  /* Destructive - Soft coral for errors */
-  --destructive: 0 65% 78%;
-  --destructive-foreground: 30 8% 25%;
+  /* Destructive - Earthy terracotta for errors */
+  --destructive: 12 60% 45%;
+  --destructive-foreground: 42 38% 93%;
 
-  /* Borders: Light beige */
-  --border: 35 25% 90%;
-  --input: 35 25% 90%;
-  --ring: 280 45% 82%;
+  /* Borders: Soft beige */
+  --border: 40 25% 85%;
+  --input: 40 25% 85%;
+  --ring: 95 55% 20%;
 
   /* Modern rounded corners */
-  --radius: 1rem;
+  --radius: 0.875rem;
 
   /* Sidebar */
-  --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 30 8% 42%;
-  --sidebar-primary: 280 45% 82%;
-  --sidebar-primary-foreground: 30 8% 25%;
-  --sidebar-accent: 35 28% 92%;
-  --sidebar-accent-foreground: 30 8% 42%;
-  --sidebar-border: 35 25% 90%;
-  --sidebar-ring: 280 45% 82%;
+  --sidebar-background: 38 44% 97%;
+  --sidebar-foreground: 0 0% 11%;
+  --sidebar-primary: 95 55% 20%;
+  --sidebar-primary-foreground: 42 38% 93%;
+  --sidebar-accent: 40 35% 74%;
+  --sidebar-accent-foreground: 0 0% 11%;
+  --sidebar-border: 40 25% 85%;
+  --sidebar-ring: 95 55% 20%;
 }
 
 .dark {
-  /* Dark mode: Deep plum background with soft cream text */
-  --background: 280 25% 18%;
-  --foreground: 35 30% 92%;
+  /* Dark mode: Deep forest with warm cream text */
+  --background: 95 30% 12%;
+  --foreground: 42 38% 93%;
 
-  /* Dark cards with subtle warmth */
-  --card: 280 20% 22%;
-  --card-foreground: 35 30% 92%;
+  /* Dark cards with forest warmth */
+  --card: 95 25% 15%;
+  --card-foreground: 42 38% 93%;
 
   /* Dark popovers */
-  --popover: 280 20% 22%;
-  --popover-foreground: 35 30% 92%;
+  --popover: 95 25% 15%;
+  --popover-foreground: 42 38% 93%;
 
-  /* Primary: Brightened lilac */
-  --primary: 280 40% 78%;
-  --primary-foreground: 280 25% 18%;
+  /* Primary: Brightened forest green */
+  --primary: 95 50% 35%;
+  --primary-foreground: 42 38% 93%;
 
-  /* Secondary: Warm peach blossom */
-  --secondary: 15 65% 85%;
-  --secondary-foreground: 280 25% 18%;
+  /* Secondary: Lighter sage */
+  --secondary: 112 25% 60%;
+  --secondary-foreground: 95 30% 12%;
 
-  /* Muted: Deep warm grey */
-  --muted: 30 10% 32%;
-  --muted-foreground: 35 25% 75%;
+  /* Muted: Deep olive grey */
+  --muted: 100 15% 25%;
+  --muted-foreground: 40 30% 75%;
 
-  /* Accent: Soft mint lightened */
-  --accent: 135 30% 78%;
-  --accent-foreground: 280 25% 18%;
+  /* Accent: Lighter olive */
+  --accent: 100 30% 50%;
+  --accent-foreground: 42 38% 93%;
 
-  /* Destructive - Soft warm coral */
-  --destructive: 0 60% 75%;
-  --destructive-foreground: 280 25% 18%;
+  /* Destructive - Warm terracotta */
+  --destructive: 12 70% 55%;
+  --destructive-foreground: 42 38% 93%;
 
   /* Borders */
-  --border: 30 10% 32%;
-  --input: 30 10% 32%;
-  --ring: 280 40% 78%;
+  --border: 100 15% 25%;
+  --input: 100 15% 25%;
+  --ring: 95 50% 35%;
 
   /* Sidebar dark */
-  --sidebar-background: 280 22% 15%;
-  --sidebar-foreground: 35 30% 92%;
-  --sidebar-primary: 280 40% 78%;
-  --sidebar-primary-foreground: 280 25% 18%;
-  --sidebar-accent: 30 10% 28%;
-  --sidebar-accent-foreground: 35 30% 92%;
-  --sidebar-border: 30 10% 28%;
-  --sidebar-ring: 280 40% 78%;
+  --sidebar-background: 95 28% 10%;
+  --sidebar-foreground: 42 38% 93%;
+  --sidebar-primary: 95 50% 35%;
+  --sidebar-primary-foreground: 42 38% 93%;
+  --sidebar-accent: 100 15% 22%;
+  --sidebar-accent-foreground: 42 38% 93%;
+  --sidebar-border: 100 15% 22%;
+  --sidebar-ring: 95 50% 35%;
 }
 
 @theme {
@@ -255,50 +256,50 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Typography System - Playfair Display for headings */
+/* Typography System - Inter for modern, clean headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-
-h2 {
-  font-size: 2.25rem;
-  font-weight: 600;
+  font-size: 2.75rem;
+  font-weight: 800;
   margin-bottom: 1.25rem;
 }
 
-h3 {
-  font-size: 1.75rem;
-  font-weight: 600;
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
-h4 {
+h3 {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.875rem;
 }
 
-h5 {
+h4 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
-h6 {
+h5 {
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 0.625rem;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 /* Body text */

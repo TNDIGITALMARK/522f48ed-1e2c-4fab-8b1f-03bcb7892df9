@@ -46,6 +46,7 @@ import { SyncDemoWidget } from '@/components/sync-demo-widget';
 import { PeriodCalendar } from '@/components/period-calendar';
 import { CycleInsightsWidget } from '@/components/cycle-insights-widget';
 import { WeeklyBalanceWidget } from '@/components/weekly-balance-widget';
+import { CycleWorkoutInsights } from '@/components/cycle-workout-insights';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -169,27 +170,27 @@ export default function DashboardPage() {
         {/* Key Metrics Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {/* Cycle Status */}
-          <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+          <Card className="bloom-card bg-gradient-to-br from-primary/8 to-accent/5 border-primary/20">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Cycle Day</p>
                 <h3 className="text-3xl font-bold text-primary">{userData.cycleDay}</h3>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-sm">
                 <Heart className="w-7 h-7 text-primary-foreground" />
               </div>
             </div>
-            <p className="text-sm font-medium">{userData.phase}</p>
+            <p className="text-sm font-semibold text-foreground">{userData.phase}</p>
           </Card>
 
           {/* Energy Level */}
-          <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+          <Card className="bloom-card bg-gradient-to-br from-secondary/15 to-secondary/5 border-secondary/25">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Energy Level</p>
-                <h3 className="text-3xl font-bold text-secondary">{userData.energy}</h3>
+                <h3 className="text-3xl font-bold text-secondary-foreground">{userData.energy}</h3>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center shadow-sm">
                 <Zap className="w-7 h-7 text-secondary-foreground" />
               </div>
             </div>
@@ -208,38 +209,38 @@ export default function DashboardPage() {
           </Card>
 
           {/* Sleep Quality */}
-          <Card className="bloom-card bg-gradient-to-br from-accent/20 to-accent/10 border-accent/30">
+          <Card className="bloom-card bg-gradient-to-br from-accent/12 to-accent/5 border-accent/25">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Sleep Quality</p>
                 <h3 className="text-3xl font-bold text-accent-foreground">{userData.sleepHours}h</h3>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shadow-sm">
                 <Moon className="w-7 h-7 text-accent-foreground" />
               </div>
             </div>
-            <p className="text-sm font-medium">{userData.sleepQuality}</p>
+            <p className="text-sm font-semibold text-foreground">{userData.sleepQuality}</p>
           </Card>
 
           {/* Weekly Streak */}
-          <Card className="bloom-card bg-gradient-to-br from-orange-100 to-orange-50 border-orange-200">
+          <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/25">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Weekly Streak</p>
-                <h3 className="text-3xl font-bold text-orange-600">{userData.weeklyStreak}</h3>
+                <h3 className="text-3xl font-bold text-primary">{userData.weeklyStreak}</h3>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-orange-500 flex items-center justify-center">
-                <Flame className="w-7 h-7 text-white" />
+              <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-sm">
+                <Flame className="w-7 h-7 text-primary-foreground" />
               </div>
             </div>
-            <p className="text-sm font-medium text-orange-700">Days Active</p>
+            <p className="text-sm font-semibold text-foreground">Days Active</p>
           </Card>
         </div>
 
         {/* Weight & Goals Section */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Current Weight Card */}
-          <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+          <Card className="bloom-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-secondary/25">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="text-lg font-semibold mb-1">Current Weight</h3>
@@ -293,7 +294,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Active Goal Card */}
-          <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+          <Card className="bloom-card bg-gradient-to-br from-accent/12 to-accent/5 border-accent/25">
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <h3 className="text-lg font-semibold mb-1">Active Goal</h3>
@@ -368,6 +369,9 @@ export default function DashboardPage() {
 
         {/* Weekly Balance Section */}
         <WeeklyBalanceWidget userId={MOCK_USER_ID} />
+
+        {/* Cycle-Based Workout Recommendations - Replaces Video Section */}
+        <CycleWorkoutInsights userId={MOCK_USER_ID} />
 
         {/* Main Content Grid */}
         <div className="grid gap-6 lg:grid-cols-3">
@@ -592,7 +596,7 @@ export default function DashboardPage() {
                 </Button>
                 <Button className="w-full justify-start" variant="outline">
                   <Activity className="w-4 h-4 mr-2" />
-                  Start Workout
+                  Track Activity
                 </Button>
                 <Button className="w-full justify-start" variant="outline">
                   <Apple className="w-4 h-4 mr-2" />
