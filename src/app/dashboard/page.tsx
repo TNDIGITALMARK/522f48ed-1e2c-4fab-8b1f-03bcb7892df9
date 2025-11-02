@@ -43,6 +43,9 @@ import {
 import { GoalsManager, type Goal } from '@/components/goals-manager';
 import { useDashboardData } from '@/hooks/use-user-profile';
 import { SyncDemoWidget } from '@/components/sync-demo-widget';
+import { PeriodCalendar } from '@/components/period-calendar';
+import { CycleInsightsWidget } from '@/components/cycle-insights-widget';
+import { WeeklyBalanceWidget } from '@/components/weekly-balance-widget';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -349,6 +352,22 @@ export default function DashboardPage() {
             </Link>
           </Card>
         </div>
+
+        {/* Period Calendar & Cycle Insights Section */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          {/* Period Calendar - Full Width */}
+          <div className="lg:col-span-2">
+            <PeriodCalendar userId={MOCK_USER_ID} />
+          </div>
+
+          {/* Cycle Insights - Right Column */}
+          <div className="space-y-6">
+            <CycleInsightsWidget userId={MOCK_USER_ID} />
+          </div>
+        </div>
+
+        {/* Weekly Balance Section */}
+        <WeeklyBalanceWidget userId={MOCK_USER_ID} />
 
         {/* Main Content Grid */}
         <div className="grid gap-6 lg:grid-cols-3">

@@ -867,6 +867,218 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ============================================
+   CALENDAR & PERIOD TRACKING STYLES
+   ============================================ */
+
+/* Calendar color system for cycle phases */
+:root {
+  /* Period tracking colors - soft, natural, organic */
+  --cycle-menstruation: 345 50% 88%; /* Pale pink rose - menstruation phase */
+  --cycle-follicular: 280 45% 82%; /* Soft lilac - follicular phase */
+  --cycle-ovulation: 135 25% 85%; /* Soft mint - ovulation phase */
+  --cycle-luteal: 15 70% 90%; /* Peach blossom - luteal phase */
+
+  /* Event type colors */
+  --event-fitness: 135 35% 75%; /* Fresh green for workouts */
+  --event-wellness: 280 50% 80%; /* Lavender for wellness activities */
+  --event-nutrition: 15 60% 85%; /* Warm peach for meals */
+  --event-personal: 345 45% 85%; /* Soft rose for personal time */
+}
+
+/* Calendar grid styling */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+/* Calendar day cell */
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  min-height: 48px;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid hsl(var(--border));
+  background: hsl(var(--card));
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 0.875rem;
+}
+
+.calendar-day:hover {
+  border-color: hsl(var(--primary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Today indicator */
+.calendar-day.today {
+  border-color: hsl(var(--primary));
+  border-width: 3px;
+  background: hsl(var(--primary) / 0.05);
+}
+
+.calendar-day.today .day-number {
+  font-weight: 700;
+  color: hsl(var(--primary));
+}
+
+/* Selected day */
+.calendar-day.selected {
+  background: hsl(var(--primary) / 0.15);
+  border-color: hsl(var(--primary));
+}
+
+/* Period phase indicators */
+.calendar-day.menstruation {
+  background: linear-gradient(135deg, hsl(var(--cycle-menstruation)) 0%, hsl(var(--cycle-menstruation) / 0.5) 100%);
+  border-color: hsl(345 50% 75%);
+}
+
+.calendar-day.follicular {
+  background: linear-gradient(135deg, hsl(var(--cycle-follicular)) 0%, hsl(var(--cycle-follicular) / 0.5) 100%);
+  border-color: hsl(280 45% 70%);
+}
+
+.calendar-day.ovulation {
+  background: linear-gradient(135deg, hsl(var(--cycle-ovulation)) 0%, hsl(var(--cycle-ovulation) / 0.5) 100%);
+  border-color: hsl(135 25% 70%);
+}
+
+.calendar-day.luteal {
+  background: linear-gradient(135deg, hsl(var(--cycle-luteal)) 0%, hsl(var(--cycle-luteal) / 0.5) 100%);
+  border-color: hsl(15 70% 80%);
+}
+
+/* Event dots indicator */
+.event-dots {
+  display: flex;
+  gap: 2px;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.event-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.event-dot.fitness {
+  background: hsl(var(--event-fitness));
+}
+
+.event-dot.wellness {
+  background: hsl(var(--event-wellness));
+}
+
+.event-dot.nutrition {
+  background: hsl(var(--event-nutrition));
+}
+
+.event-dot.personal {
+  background: hsl(var(--event-personal));
+}
+
+/* Cycle insights widget */
+.cycle-insight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.cycle-insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    hsl(var(--cycle-menstruation)) 0% 25%,
+    hsl(var(--cycle-follicular)) 25% 50%,
+    hsl(var(--cycle-ovulation)) 50% 75%,
+    hsl(var(--cycle-luteal)) 75% 100%
+  );
+}
+
+/* Phase progress indicator */
+.phase-progress {
+  position: relative;
+  height: 8px;
+  background: hsl(var(--muted));
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phase-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Calendar legend */
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background: hsl(var(--muted) / 0.3);
+  border-radius: 0.75rem;
+  margin-top: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 0.5rem;
+  border: 2px solid hsl(var(--border));
+}
+
+/* Event modal styling */
+.event-modal {
+  animation: slide-up 0.3s ease-out;
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive calendar adjustments */
+@media (max-width: 768px) {
+  .calendar-day {
+    min-height: 40px;
+    padding: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .event-dot {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* ============================================
    3D GARDEN SCENE ENHANCEMENTS - HAY DAY STYLE
    ============================================ */
 
