@@ -17,7 +17,8 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
-import { PeriodCalendar } from '@/components/period-calendar';
+import { SmartCalendar } from '@/components/smart-calendar';
+import { GoalsTodoList } from '@/components/goals-todo-list';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -116,44 +117,13 @@ export default function DashboardPage() {
           })}
         </div>
 
-        {/* Main Calendar Section */}
+        {/* Main Calendar Section - Now Smart Calendar */}
         <Card className="bloom-card p-8">
-          <PeriodCalendar userId={MOCK_USER_ID} />
+          <SmartCalendar userId={MOCK_USER_ID} />
         </Card>
 
-        {/* Todo List Section */}
-        <Card className="bloom-card">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-light" style={{ fontFamily: 'Georgia, serif' }}>
-              To Do List
-            </h2>
-            <button className="w-12 h-12 rounded-full border-2 border-muted hover:border-secondary transition-colors flex items-center justify-center">
-              <Plus className="w-6 h-6 text-muted-foreground" />
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              { text: "Morning meditation", completed: true },
-              { text: "Track water intake", completed: true },
-              { text: "Evening walk", completed: false }
-            ].map((task, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted/30 transition-colors cursor-pointer group"
-              >
-                {task.completed ? (
-                  <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0" />
-                ) : (
-                  <Circle className="w-6 h-6 text-muted-foreground flex-shrink-0 group-hover:text-secondary transition-colors" />
-                )}
-                <span className={`text-base ${task.completed ? 'line-through text-muted-foreground' : ''}`}>
-                  {task.text}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Card>
+        {/* Todo List Section - Now Goals Todo List */}
+        <GoalsTodoList userId={MOCK_USER_ID} />
 
         {/* Wellness Grid */}
         <div className="grid grid-cols-3 gap-6">
@@ -209,6 +179,17 @@ export default function DashboardPage() {
 
         {/* Circular Action Buttons - Inspired by Image 1 */}
         <div className="flex justify-center gap-6 pt-4">
+          <Link href="/recommendations">
+            <button className="flex flex-col items-center gap-3 group">
+              <div className="w-20 h-20 rounded-full border-2 border-primary bg-primary/5 hover:bg-primary/10 hover:shadow-lg transition-all flex items-center justify-center">
+                <Brain className="w-8 h-8 text-primary transition-colors" />
+              </div>
+              <span className="text-sm font-medium text-primary transition-colors">
+                AI PLAN
+              </span>
+            </button>
+          </Link>
+
           <Link href="/rituals">
             <button className="flex flex-col items-center gap-3 group">
               <div className="w-20 h-20 rounded-full border-2 border-muted hover:border-secondary hover:shadow-lg transition-all flex items-center justify-center">

@@ -70,3 +70,60 @@ export interface UserMealEntry {
   created_at: string;
   updated_at: string;
 }
+
+// Health Profile types (for onboarding quiz)
+export interface HealthProfile {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  user_id: string;
+  dietary_restrictions: string[];
+  allergies: string[];
+  diseases: string[];
+  medications: string[];
+  fitness_level: 'beginner' | 'intermediate' | 'advanced';
+  diet_type: string | null;
+  health_goals: string[];
+  ai_diet_recommendations: any;
+  ai_workout_recommendations: any;
+  last_ai_update: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// Calendar Event types
+export interface CalendarEvent {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  user_id: string;
+  title: string;
+  description: string | null;
+  event_type: 'fitness' | 'wellness' | 'nutrition' | 'personal';
+  start_datetime: string;
+  end_datetime: string | null;
+  all_day: boolean;
+  recurrence_rule: string | null;
+  metadata: any;
+  created_at: string;
+  updated_at: string;
+}
+
+// Goal types
+export interface Goal {
+  id: string;
+  tenantid: string;
+  projectid: string;
+  user_id: string;
+  title: string;
+  description: string | null;
+  category: string;
+  target_value: number | null;
+  current_value: number | null;
+  unit: string | null;
+  is_completed: boolean;
+  completed_at: string | null;
+  due_date: string | null;
+  created_at: string;
+  updated_at: string;
+}
