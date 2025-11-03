@@ -144,7 +144,7 @@ function getFallbackInsights(
         : 'Your body is in its renewal phase. Rest and gentle movement are your allies.',
       recommendations: {
         nutrition: [
-          'Iron-rich foods (leafy greens, red meat, lentils) to replenish what's lost',
+          'Iron-rich foods (leafy greens, red meat, lentils) to replenish what\'s lost',
           'Warm, nourishing soups and stews for comfort',
           'Ginger tea to ease cramping and inflammation'
         ],
