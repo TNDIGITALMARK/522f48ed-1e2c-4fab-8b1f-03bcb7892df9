@@ -78,55 +78,63 @@ VISUAL EFFECTS:
   --bloom-accent-rose: 345 40% 88%; /* Soft rose for feminine touches */
   --bloom-accent-sage: 135 20% 75%; /* Muted sage for calm accents */
 
-  /* Light theme - Off-white backgrounds with black text */
-  --background: 60 20% 98%;
-  --foreground: 0 0% 0%;
+  /* NEW: Brown/Beige Core Theme (Default) */
+  --theme-brown: 30 35% 45%; /* Warm brown - primary actions */
+  --theme-tan: 40 40% 75%; /* Tan/beige - secondary elements */
+  --theme-cream: 42 38% 93%; /* Cream - backgrounds */
+  --theme-sand: 35 30% 80%; /* Sand - muted elements */
+  --theme-mocha: 25 30% 35%; /* Dark mocha - text/borders */
+  --theme-latte: 35 35% 85%; /* Light latte - surfaces */
 
-  /* Warm beige cards with black text */
-  --card: 38 44% 93%;
-  --card-foreground: 0 0% 0%;
+  /* Light theme - Enhanced with brown/beige defaults */
+  --background: 42 38% 93%; /* Cream background (was off-white) */
+  --foreground: 25 30% 20%; /* Dark mocha text (was pure black) */
 
-  /* Popovers - clean white */
-  --popover: 60 20% 99%;
-  --popover-foreground: 0 0% 0%;
+  /* Warm beige cards with mocha text */
+  --card: 35 35% 88%; /* Latte cards (warmer) */
+  --card-foreground: 25 30% 20%;
 
-  /* Primary: Pure Black for emphasis */
-  --primary: 0 0% 0%;
+  /* Popovers - soft cream */
+  --popover: 42 38% 96%;
+  --popover-foreground: 25 30% 20%;
+
+  /* Primary: Warm Brown for emphasis */
+  --primary: 30 35% 45%; /* Brown primary (was black) */
   --primary-foreground: 60 20% 98%;
 
-  /* Secondary: Stone Gray */
-  --secondary: 0 0% 29%;
-  --secondary-foreground: 60 20% 98%;
+  /* Secondary: Tan/Beige */
+  --secondary: 40 40% 75%; /* Tan secondary (was stone gray) */
+  --secondary-foreground: 25 30% 20%;
 
-  /* Muted: Sand Beige (warm neutral) */
-  --muted: 40 35% 74%;
-  --muted-foreground: 0 0% 20%;
+  /* Muted: Sand Beige */
+  --muted: 35 30% 80%; /* Sand muted (lighter) */
+  --muted-foreground: 25 30% 35%;
 
-  /* Accent: Soft Sage for subtle highlights */
-  --accent: 135 20% 75%;
-  --accent-foreground: 0 0% 0%;
+  /* Accent: Mocha for subtle highlights */
+  --accent: 25 30% 55%; /* Mocha accent (was sage) */
+  --accent-foreground: 60 20% 98%;
 
-  /* Destructive - Subtle terracotta */
+  /* Destructive - Warm terracotta */
   --destructive: 12 50% 55%;
   --destructive-foreground: 60 20% 98%;
 
-  /* Borders: Soft gray borders */
-  --border: 40 15% 87%;
-  --input: 40 15% 87%;
-  --ring: 0 0% 0%;
+  /* Borders: Soft beige borders */
+  --border: 35 25% 82%; /* Beige border (warmer) */
+  --input: 35 25% 82%;
+  --ring: 30 35% 45%; /* Brown focus ring */
 
   /* Subtle rounded corners */
   --radius: 0.625rem;
 
-  /* Sidebar - minimal aesthetic */
-  --sidebar-background: 42 38% 96%;
-  --sidebar-foreground: 0 0% 0%;
-  --sidebar-primary: 0 0% 0%;
+  /* Sidebar - brown/beige aesthetic */
+  --sidebar-background: 38 35% 90%;
+  --sidebar-foreground: 25 30% 20%;
+  --sidebar-primary: 30 35% 45%;
   --sidebar-primary-foreground: 60 20% 98%;
-  --sidebar-accent: 40 35% 85%;
-  --sidebar-accent-foreground: 0 0% 0%;
-  --sidebar-border: 40 15% 87%;
-  --sidebar-ring: 0 0% 0%;
+  --sidebar-accent: 35 30% 82%;
+  --sidebar-accent-foreground: 25 30% 20%;
+  --sidebar-border: 35 25% 80%;
+  --sidebar-ring: 30 35% 45%;
 }
 
 .dark {
