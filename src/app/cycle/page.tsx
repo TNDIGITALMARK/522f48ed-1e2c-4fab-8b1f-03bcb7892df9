@@ -6,6 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Heart, Zap, CloudRain, Sun, Moon, Sparkles } from 'lucide-react';
 import { useState } from 'react';
+import { AICycleInsights } from '@/components/ai-cycle-insights';
+import { AISymptomTracker } from '@/components/ai-symptom-tracker';
 
 const cyclePhases = [
   {
@@ -77,7 +79,7 @@ export default function CyclePage() {
 
   const currentCycleDay = 14;
   const cycleLength = 28;
-  const currentPhase = 'Ovulation';
+  const currentPhase = 'Ovulation' as 'Menstruation' | 'Follicular' | 'Ovulation' | 'Luteal';
 
   const toggleSymptom = (symptom: string) => {
     setSelectedSymptoms(prev =>
@@ -150,58 +152,29 @@ export default function CyclePage() {
           </div>
         </Card>
 
-        {/* Mood Tracker */}
-        <div className="mb-6">
-          <h3 className="text-xl mb-4 flex items-center gap-2">
-            <Heart className="w-5 h-5 text-primary" />
-            How are you feeling today?
-          </h3>
-          <Card className="bloom-card">
-            <div className="grid grid-cols-5 gap-3">
-              {moodOptions.map((mood) => (
-                <button
-                  key={mood.label}
-                  onClick={() => setSelectedMood(mood.value)}
-                  className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all ${
-                    selectedMood === mood.value
-                      ? 'bg-primary/10 ring-2 ring-primary'
-                      : 'bg-muted/30 hover:bg-muted/50'
-                  }`}
-                >
-                  <span className="text-3xl">{mood.emoji}</span>
-                  <span className="text-xs font-medium">{mood.label}</span>
-                </button>
-              ))}
-            </div>
-          </Card>
+        {/* AI-Enhanced Symptom Tracking */}
+        <div className="mb-8">
+          <AISymptomTracker
+            cyclePhase={currentPhase}
+            cycleDay={currentCycleDay}
+            selectedSymptoms={selectedSymptoms}
+            onSymptomsChange={setSelectedSymptoms}
+            selectedMood={selectedMood}
+            onMoodChange={setSelectedMood}
+          />
         </div>
 
-        {/* Symptoms Tracker */}
-        <div className="mb-6">
-          <h3 className="text-xl mb-4 flex items-center gap-2">
-            <Zap className="w-5 h-5 text-secondary" />
-            Track your symptoms
-          </h3>
-          <Card className="bloom-card">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {symptoms.map((symptom) => {
-                const isSelected = selectedSymptoms.includes(symptom);
-                return (
-                  <button
-                    key={symptom}
-                    onClick={() => toggleSymptom(symptom)}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                      isSelected
-                        ? 'bg-primary text-primary-foreground shadow-bloom-sm'
-                        : 'bg-muted/30 text-foreground hover:bg-muted/50'
-                    }`}
-                  >
-                    {symptom}
-                  </button>
-                );
-              })}
-            </div>
-          </Card>
+        {/* AI-Powered Cycle Insights */}
+        <div className="mb-8">
+          <AICycleInsights
+            cyclePhase={currentPhase}
+            symptoms={selectedSymptoms}
+            mood={{
+              rating: selectedMood,
+              label: moodOptions.find(m => m.value === selectedMood)?.label || 'Neutral'
+            }}
+            cycleDay={currentCycleDay}
+          />
         </div>
 
         {/* Cycle Insights */}
