@@ -1,164 +1,181 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Modern Minimalist Font System - Inspired by planner aesthetics */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 
 /*
 =============================================================================
-BLOOM - MODERN MATURE FITNESS COLOR PALETTE (YOUNG ADULTS 18-30)
+BLOOM - MINIMALIST PLANNER AESTHETIC
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Sophisticated earth tones for mature young adults
-- Deep forest green as primary for vitality and growth
-- Warm beige neutrals for elegance and sophistication
-- Rich black for contrast and modern edge
-- Mature, grounded palette with natural warmth
-- Contemporary, professional feel with organic roots
+- Inspired by elegant planner and journal designs
+- Neutral, warm color palette with sophisticated contrast
+- Mix of bold display fonts and elegant serif accents
+- Clean, organized layouts with purposeful spacing
+- Emphasis on readability and visual hierarchy
 
-COLOR PALETTE (MATURE EARTH & FOREST):
-- Forest Green (Primary): #2D5016 / HSL 95 55% 20% - Deep forest vitality
-- Sage Green (Secondary): #7A9B76 / HSL 112 15% 53% - Muted sage accent
-- Olive Green (Accent): #5C7A4D / HSL 100 23% 39% - Rich olive depth
-- Warm Beige (Surface): #E8DCC4 / HSL 38 44% 84% - Natural beige warmth
-- Light Cream (Background): #F5F1E8 / HSL 42 38% 93% - Soft cream base
-- Sand Beige (Muted): #D4C5A9 / HSL 40 35% 74% - Warm sand neutral
-- Charcoal Black (Text): #1C1C1C / HSL 0 0% 11% - Deep charcoal
-- Pure Black: #000000 / HSL 0 0% 0% - True black
+COLOR PALETTE (MINIMALIST NEUTRAL):
+- Pure Black (Primary): #000000 / HSL 0 0% 0% - Bold headings and key text
+- Warm Black (Text): #1C1C1C / HSL 0 0% 11% - Body text
+- Stone Gray (Secondary): #4A4A4A / HSL 0 0% 29% - Secondary text
+- Light Beige (Background): #F5F1E8 / HSL 42 38% 93% - Soft cream base
+- Warm Beige (Surface): #E8DCC4 / HSL 38 44% 84% - Card backgrounds
+- Sand Beige (Muted): #D4C5A9 / HSL 40 35% 74% - Subtle accents
+- Off White: #FAFAF8 / HSL 60 20% 98% - Pure backgrounds
+- Border Gray: #E0DDD5 / HSL 40 15% 87% - Soft borders
 
-TYPOGRAPHY:
-- Headings: Inter (sans-serif, modern, clean, professional)
-- Body: Inter (sans-serif, clean, readable)
-- Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
+TYPOGRAPHY SYSTEM:
+- Display/Headings: Montserrat (bold, modern, clean sans-serif)
+- Elegant Accents: Playfair Display (serif for special headings)
+- Body Text: Lora (elegant serif for readability)
+- Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold), 900 (black)
 
-SPACING SYSTEM (MODERN, PURPOSEFUL):
-- Cards: 20-28px padding
-- Sections: 40-56px vertical spacing
-- Elements: 12-20px between components
+FONT USAGE:
+- Large Headings (h1): Montserrat 800-900 (bold, uppercase optional)
+- Section Headings (h2-h3): Montserrat 700-800 or Playfair Display 600-700
+- Subheadings (h4-h6): Montserrat 600-700
+- Body Text: Lora 400-500 (elegant readability)
+- UI Elements: Montserrat 500-600 (clean, modern)
+
+SPACING SYSTEM (PLANNER-INSPIRED):
+- Cards: 24-32px padding
+- Sections: 48-64px vertical spacing
+- Elements: 16-24px between components
 - Grid gaps: 20-28px
+- Tight line-height for headings (1.1-1.2)
+- Comfortable line-height for body (1.6-1.8)
 
 COMPONENT STYLING:
-- Border Radius: 12-16px (modern, clean feel)
-- Shadows: Subtle depth (0 2px 12px rgba(0,0,0,0.08))
-- Buttons: Clean corners (10-14px), semibold text
-- Cards: Modern shadows, purposeful padding, defined edges
+- Border Radius: 8-12px (subtle, refined)
+- Borders: 1-2px solid, minimal
+- Shadows: Very subtle (0 2px 8px rgba(0,0,0,0.04))
+- Buttons: Clean, flat design with hover states
+- Cards: Minimal shadows, defined borders
 
 VISUAL EFFECTS:
-- Clean, modern shapes with natural warmth
-- Subtle shadows for contemporary depth
-- Smooth transitions (250ms ease)
-- Muted, sophisticated overlays
+- Emphasize white space and negative space
+- Simple, clean lines and borders
+- Minimal use of color - mostly neutral tones
+- Focus on typography hierarchy
+- Smooth, subtle transitions (200ms ease)
 
 =============================================================================
 */
 
 :root {
-  /* Bloom Mature Earth & Forest Color System */
-  --bloom-forest: 95 55% 20%; /* #2D5016 - Deep forest green */
-  --bloom-sage: 112 15% 53%; /* #7A9B76 - Muted sage green */
-  --bloom-olive: 100 23% 39%; /* #5C7A4D - Rich olive green */
-  --bloom-warm-beige: 38 44% 84%; /* #E8DCC4 - Warm beige */
-  --bloom-cream: 42 38% 93%; /* #F5F1E8 - Light cream */
-  --bloom-sand: 40 35% 74%; /* #D4C5A9 - Sand beige */
-  --bloom-charcoal: 0 0% 11%; /* #1C1C1C - Deep charcoal */
-  --bloom-black: 0 0% 0%; /* #000000 - Pure black */
+  /* Minimalist Planner Color System */
+  --bloom-black: 0 0% 0%; /* #000000 - Pure black for headings */
+  --bloom-warm-black: 0 0% 11%; /* #1C1C1C - Warm black for body text */
+  --bloom-stone-gray: 0 0% 29%; /* #4A4A4A - Secondary text */
+  --bloom-cream: 42 38% 93%; /* #F5F1E8 - Light cream background */
+  --bloom-warm-beige: 38 44% 84%; /* #E8DCC4 - Warm beige cards */
+  --bloom-sand: 40 35% 74%; /* #D4C5A9 - Sand beige accents */
+  --bloom-off-white: 60 20% 98%; /* #FAFAF8 - Pure backgrounds */
+  --bloom-border-gray: 40 15% 87%; /* #E0DDD5 - Soft borders */
 
-  /* Cream backgrounds with deep charcoal text */
-  --background: 42 38% 93%;
-  --foreground: 0 0% 11%;
+  /* Soft accent colors for subtle highlights */
+  --bloom-accent-rose: 345 40% 88%; /* Soft rose for feminine touches */
+  --bloom-accent-sage: 135 20% 75%; /* Muted sage for calm accents */
 
-  /* Warm beige cards with charcoal text */
-  --card: 38 44% 97%;
-  --card-foreground: 0 0% 11%;
+  /* Light theme - Off-white backgrounds with black text */
+  --background: 60 20% 98%;
+  --foreground: 0 0% 0%;
 
-  /* Popovers */
-  --popover: 38 44% 97%;
-  --popover-foreground: 0 0% 11%;
+  /* Warm beige cards with black text */
+  --card: 38 44% 93%;
+  --card-foreground: 0 0% 0%;
 
-  /* Primary: Forest Green (deep vitality) */
-  --primary: 95 55% 20%;
-  --primary-foreground: 42 38% 93%;
+  /* Popovers - clean white */
+  --popover: 60 20% 99%;
+  --popover-foreground: 0 0% 0%;
 
-  /* Secondary: Sage Green (muted sophistication) */
-  --secondary: 112 15% 53%;
-  --secondary-foreground: 0 0% 11%;
+  /* Primary: Pure Black for emphasis */
+  --primary: 0 0% 0%;
+  --primary-foreground: 60 20% 98%;
+
+  /* Secondary: Stone Gray */
+  --secondary: 0 0% 29%;
+  --secondary-foreground: 60 20% 98%;
 
   /* Muted: Sand Beige (warm neutral) */
   --muted: 40 35% 74%;
-  --muted-foreground: 0 0% 25%;
+  --muted-foreground: 0 0% 20%;
 
-  /* Accent: Olive Green (rich depth) */
-  --accent: 100 23% 39%;
-  --accent-foreground: 42 38% 93%;
+  /* Accent: Soft Sage for subtle highlights */
+  --accent: 135 20% 75%;
+  --accent-foreground: 0 0% 0%;
 
-  /* Destructive - Earthy terracotta for errors */
-  --destructive: 12 60% 45%;
-  --destructive-foreground: 42 38% 93%;
+  /* Destructive - Subtle terracotta */
+  --destructive: 12 50% 55%;
+  --destructive-foreground: 60 20% 98%;
 
-  /* Borders: Soft beige */
-  --border: 40 25% 85%;
-  --input: 40 25% 85%;
-  --ring: 95 55% 20%;
+  /* Borders: Soft gray borders */
+  --border: 40 15% 87%;
+  --input: 40 15% 87%;
+  --ring: 0 0% 0%;
 
-  /* Modern rounded corners */
-  --radius: 0.875rem;
+  /* Subtle rounded corners */
+  --radius: 0.625rem;
 
-  /* Sidebar */
-  --sidebar-background: 38 44% 97%;
-  --sidebar-foreground: 0 0% 11%;
-  --sidebar-primary: 95 55% 20%;
-  --sidebar-primary-foreground: 42 38% 93%;
-  --sidebar-accent: 40 35% 74%;
-  --sidebar-accent-foreground: 0 0% 11%;
-  --sidebar-border: 40 25% 85%;
-  --sidebar-ring: 95 55% 20%;
+  /* Sidebar - minimal aesthetic */
+  --sidebar-background: 42 38% 96%;
+  --sidebar-foreground: 0 0% 0%;
+  --sidebar-primary: 0 0% 0%;
+  --sidebar-primary-foreground: 60 20% 98%;
+  --sidebar-accent: 40 35% 85%;
+  --sidebar-accent-foreground: 0 0% 0%;
+  --sidebar-border: 40 15% 87%;
+  --sidebar-ring: 0 0% 0%;
 }
 
 .dark {
-  /* Dark mode: Deep forest with warm cream text */
-  --background: 95 30% 12%;
+  /* Dark mode: Soft charcoal with cream text (minimalist dark) */
+  --background: 0 0% 8%;
   --foreground: 42 38% 93%;
 
-  /* Dark cards with forest warmth */
-  --card: 95 25% 15%;
+  /* Dark cards with subtle warmth */
+  --card: 0 0% 12%;
   --card-foreground: 42 38% 93%;
 
   /* Dark popovers */
-  --popover: 95 25% 15%;
+  --popover: 0 0% 12%;
   --popover-foreground: 42 38% 93%;
 
-  /* Primary: Brightened forest green */
-  --primary: 95 50% 35%;
-  --primary-foreground: 42 38% 93%;
+  /* Primary: White text on dark */
+  --primary: 60 20% 98%;
+  --primary-foreground: 0 0% 8%;
 
-  /* Secondary: Lighter sage */
-  --secondary: 112 25% 60%;
-  --secondary-foreground: 95 30% 12%;
+  /* Secondary: Light gray */
+  --secondary: 0 0% 70%;
+  --secondary-foreground: 0 0% 8%;
 
-  /* Muted: Deep olive grey */
-  --muted: 100 15% 25%;
+  /* Muted: Dark warm gray */
+  --muted: 0 0% 20%;
   --muted-foreground: 40 30% 75%;
 
-  /* Accent: Lighter olive */
-  --accent: 100 30% 50%;
-  --accent-foreground: 42 38% 93%;
+  /* Accent: Soft sage */
+  --accent: 135 20% 60%;
+  --accent-foreground: 0 0% 8%;
 
-  /* Destructive - Warm terracotta */
-  --destructive: 12 70% 55%;
-  --destructive-foreground: 42 38% 93%;
+  /* Destructive - Soft coral */
+  --destructive: 12 60% 65%;
+  --destructive-foreground: 0 0% 8%;
 
   /* Borders */
-  --border: 100 15% 25%;
-  --input: 100 15% 25%;
-  --ring: 95 50% 35%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
+  --ring: 60 20% 98%;
 
   /* Sidebar dark */
-  --sidebar-background: 95 28% 10%;
+  --sidebar-background: 0 0% 10%;
   --sidebar-foreground: 42 38% 93%;
-  --sidebar-primary: 95 50% 35%;
-  --sidebar-primary-foreground: 42 38% 93%;
-  --sidebar-accent: 100 15% 22%;
+  --sidebar-primary: 60 20% 98%;
+  --sidebar-primary-foreground: 0 0% 8%;
+  --sidebar-accent: 0 0% 18%;
   --sidebar-accent-foreground: 42 38% 93%;
-  --sidebar-border: 100 15% 22%;
-  --sidebar-ring: 95 50% 35%;
+  --sidebar-border: 0 0% 18%;
+  --sidebar-ring: 60 20% 98%;
 }
 
 @theme {
@@ -247,135 +264,181 @@ html {
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  letter-spacing: 0.01em;
 }
 
-/* Typography System - Inter for modern, clean headings */
+/* Typography System - Montserrat for bold headings, Playfair for elegant accents */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.25;
+  line-height: 1.15;
 }
 
 h1 {
-  font-size: 2.75rem;
-  font-weight: 800;
-  margin-bottom: 1.25rem;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+/* Optional: Use Playfair Display for elegant h2/h3 */
+h2.elegant,
+h3.elegant {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
-h3 {
-  font-size: 1.5rem;
+h4 {
+  font-size: 1.375rem;
   font-weight: 700;
   margin-bottom: 0.875rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
 }
 
 h5 {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.75rem;
 }
 
 h6 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Body text */
+/* Body text - Lora for elegant readability */
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
-  line-height: 1.7;
+  margin-bottom: 1.125rem;
+  line-height: 1.75;
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 400;
 }
 
 a {
-  color: hsl(var(--primary));
-  text-decoration: none;
-  transition: color 0.2s ease;
+  color: hsl(var(--foreground));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
 }
 
 a:hover {
-  color: hsl(var(--secondary));
+  opacity: 0.7;
 }
 
-strong {
+strong,
+b {
   font-weight: 600;
 }
 
-/* Button defaults */
-button {
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  border-radius: 1rem;
-  transition: all 0.2s ease;
+em,
+i {
+  font-style: italic;
+  font-family: 'Lora', Georgia, serif;
 }
 
-/* Input defaults */
+/* Button defaults - Minimalist styling */
+button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+/* Input defaults - Clean and simple */
 input, textarea, select {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lora', Georgia, serif;
   font-size: 1rem;
-  border-radius: 0.75rem;
-  border: 1px solid hsl(var(--border));
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 0.5rem;
+  border: 1.5px solid hsl(var(--border));
+  transition: border-color 0.2s ease, box-shadow 0.15s ease;
+  padding: 0.625rem 0.875rem;
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: hsl(var(--ring));
-  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+  border-color: hsl(var(--foreground));
+  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.08);
 }
 
-/* Neutral fitness shadows (soft, clean) */
+input::placeholder,
+textarea::placeholder {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+/* Labels */
+label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Minimalist shadows (very subtle) */
 .shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 2px 8px rgba(28, 28, 27, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 4px 16px rgba(28, 28, 27, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 8px 24px rgba(28, 28, 27, 0.10);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Card styling */
+/* Card styling - Minimal and clean */
 .neutral-card,
 .bloom-card {
   background: hsl(var(--card));
-  border-radius: 1.25rem;
+  border-radius: 0.75rem;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(28, 28, 27, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1.5px solid hsl(var(--border));
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .neutral-card:hover,
 .bloom-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(28, 28, 27, 0.12);
+  transform: translateY(-1px);
+  border-color: hsl(var(--foreground) / 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* ============================================
@@ -868,22 +931,75 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* ============================================
+   MINIMALIST UTILITY CLASSES
+   ============================================ */
+
+/* Text utilities */
+.text-display {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.text-elegant {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+}
+
+.text-body {
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 400;
+}
+
+.text-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Border utilities */
+.border-minimal {
+  border: 1.5px solid hsl(var(--border));
+}
+
+.border-emphasis {
+  border: 2px solid hsl(var(--foreground));
+}
+
+/* Divider line */
+.divider {
+  width: 100%;
+  height: 1.5px;
+  background: hsl(var(--border));
+  margin: 2rem 0;
+}
+
+.divider-thin {
+  width: 100%;
+  height: 1px;
+  background: hsl(var(--border) / 0.5);
+  margin: 1.5rem 0;
+}
+
+/* ============================================
    CALENDAR & PERIOD TRACKING STYLES
    ============================================ */
 
-/* Calendar color system for cycle phases */
+/* Calendar color system for cycle phases - Minimalist pastels */
 :root {
-  /* Period tracking colors - soft, natural, organic */
-  --cycle-menstruation: 345 50% 88%; /* Pale pink rose - menstruation phase */
-  --cycle-follicular: 280 45% 82%; /* Soft lilac - follicular phase */
-  --cycle-ovulation: 135 25% 85%; /* Soft mint - ovulation phase */
-  --cycle-luteal: 15 70% 90%; /* Peach blossom - luteal phase */
+  /* Period tracking colors - soft, muted, minimalist */
+  --cycle-menstruation: 345 40% 88%; /* Pale rose - menstruation phase */
+  --cycle-follicular: 280 35% 85%; /* Soft lilac - follicular phase */
+  --cycle-ovulation: 135 20% 85%; /* Subtle mint - ovulation phase */
+  --cycle-luteal: 15 50% 88%; /* Soft peach - luteal phase */
 
-  /* Event type colors */
-  --event-fitness: 135 35% 75%; /* Fresh green for workouts */
-  --event-wellness: 280 50% 80%; /* Lavender for wellness activities */
-  --event-nutrition: 15 60% 85%; /* Warm peach for meals */
-  --event-personal: 345 45% 85%; /* Soft rose for personal time */
+  /* Event type colors - muted tones */
+  --event-fitness: 135 25% 80%; /* Muted green for workouts */
+  --event-wellness: 280 30% 85%; /* Soft lavender for wellness */
+  --event-nutrition: 15 40% 88%; /* Gentle peach for meals */
+  --event-personal: 345 35% 88%; /* Soft rose for personal time */
 }
 
 /* Calendar grid styling */
@@ -894,46 +1010,49 @@ input:focus, textarea:focus, select:focus {
   margin-top: 0.5rem;
 }
 
-/* Calendar day cell */
+/* Calendar day cell - Minimalist styling */
 .calendar-day {
   position: relative;
   aspect-ratio: 1;
   min-height: 48px;
   padding: 0.5rem;
-  border-radius: 0.75rem;
-  border: 2px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  border: 1.5px solid hsl(var(--border));
   background: hsl(var(--card));
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   font-size: 0.875rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
 }
 
 .calendar-day:hover {
-  border-color: hsl(var(--primary));
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: hsl(var(--foreground) / 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Today indicator */
+/* Today indicator - Bold and minimal */
 .calendar-day.today {
-  border-color: hsl(var(--primary));
-  border-width: 3px;
-  background: hsl(var(--primary) / 0.05);
+  border-color: hsl(var(--foreground));
+  border-width: 2px;
+  background: hsl(var(--foreground) / 0.03);
 }
 
 .calendar-day.today .day-number {
-  font-weight: 700;
-  color: hsl(var(--primary));
+  font-weight: 800;
+  color: hsl(var(--foreground));
 }
 
-/* Selected day */
+/* Selected day - Clean emphasis */
 .calendar-day.selected {
-  background: hsl(var(--primary) / 0.15);
-  border-color: hsl(var(--primary));
+  background: hsl(var(--foreground) / 0.08);
+  border-color: hsl(var(--foreground));
+  border-width: 2px;
 }
 
 /* Period phase indicators */
@@ -1243,4 +1362,156 @@ canvas {
 
 .float-animation {
   animation: float-subtle 3s ease-in-out infinite;
+}
+
+/* ============================================
+   ADDITIONAL MINIMALIST ENHANCEMENTS
+   ============================================ */
+
+/* Section spacing utilities */
+.section-spacing {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.section-spacing-lg {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* Minimalist quote/callout styling */
+blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.6;
+  padding-left: 1.5rem;
+  border-left: 3px solid hsl(var(--foreground));
+  margin: 2rem 0;
+  color: hsl(var(--foreground) / 0.9);
+}
+
+/* Clean list styling */
+ul, ol {
+  font-family: 'Lora', Georgia, serif;
+  line-height: 1.75;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code/monospace elements */
+code, pre {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  background: hsl(var(--muted) / 0.2);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  border: 1px solid hsl(var(--border));
+}
+
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+pre code {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* Table styling - Clean and minimal */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-family: 'Lora', Georgia, serif;
+}
+
+th {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid hsl(var(--foreground));
+  background: hsl(var(--muted) / 0.1);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+tr:hover {
+  background: hsl(var(--muted) / 0.05);
+}
+
+/* Scrollbar styling - Minimal and clean */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground) / 0.5);
+}
+
+/* Selection styling */
+::selection {
+  background: hsl(var(--foreground) / 0.15);
+  color: hsl(var(--foreground));
+}
+
+::-moz-selection {
+  background: hsl(var(--foreground) / 0.15);
+  color: hsl(var(--foreground));
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid hsl(var(--foreground));
+  outline-offset: 2px;
+}
+
+/* Smooth page transitions */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    font-family: 'Lora', Georgia, serif;
+    color: #000;
+    background: #fff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    page-break-after: avoid;
+  }
+
+  .shadow-bloom,
+  .shadow-bloom-sm,
+  .shadow-bloom-lg {
+    box-shadow: none !important;
+  }
 }
