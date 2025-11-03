@@ -21,6 +21,19 @@ export function CustomThemeProvider({ children }: { children: React.ReactNode })
   const [availableSchemes, setAvailableSchemes] = useState<ColorScheme[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Load custom schemes from localStorage
+  const loadCustomSchemes = useCallback((): ColorScheme[] => {
+    try {
+      const stored = localStorage.getItem('bloom-custom-themes');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (error) {
+      console.error('Failed to load custom themes:', error);
+    }
+    return [];
+  }, []);
+
   // Initialize with default themes
   useEffect(() => {
     const defaultSchemes = Object.values(DEFAULT_THEMES);
@@ -50,19 +63,6 @@ export function CustomThemeProvider({ children }: { children: React.ReactNode })
 
     setIsLoading(false);
   }, [loadCustomSchemes]);
-
-  // Load custom schemes from localStorage
-  const loadCustomSchemes = useCallback((): ColorScheme[] => {
-    try {
-      const stored = localStorage.getItem('bloom-custom-themes');
-      if (stored) {
-        return JSON.parse(stored);
-      }
-    } catch (error) {
-      console.error('Failed to load custom themes:', error);
-    }
-    return [];
-  }, []);
 
   // Save custom schemes to localStorage
   const saveCustomSchemes = useCallback((schemes: ColorScheme[]) => {
