@@ -277,12 +277,11 @@ export default function WorkoutPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="health">Apple Health</TabsTrigger>
-            <TabsTrigger value="cardio">Cardio</TabsTrigger>
-            <TabsTrigger value="plan">Plan</TabsTrigger>
-            <TabsTrigger value="log">Weights</TabsTrigger>
+            <TabsTrigger value="plan">Plan Workout</TabsTrigger>
+            <TabsTrigger value="logging">Logging</TabsTrigger>
           </TabsList>
 
           {/* OVERVIEW TAB */}
@@ -448,33 +447,116 @@ export default function WorkoutPage() {
           </div>
         </div>
 
-        {/* Recent Workouts */}
+        {/* Recent Logged Workouts */}
         <div>
           <h3 className="text-xl mb-4 flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 text-primary" />
-            Completed This Week
+            Recent Logged Workouts
           </h3>
 
           <div className="space-y-3">
-            {completedWorkouts.map((workout, index) => (
-              <Card key={index} className="p-4 hover:shadow-bloom-sm transition-shadow">
-                <div className="flex items-center justify-between">
+            {/* Show Weight Training Logs */}
+            {workoutLogs.slice(0, 3).map((log) => (
+              <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                      <Dumbbell className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold">{workout.workout}</h4>
-                      <p className="text-sm text-muted-foreground">{workout.day}</p>
+                      <h4 className="font-semibold">{log.exercise}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold">{workout.duration}</p>
-                    <p className="text-sm text-muted-foreground">{workout.calories} cal</p>
-                  </div>
+                  <Badge variant="outline">Weights</Badge>
+                </div>
+                <div className="flex gap-4 text-sm">
+                  <span className="text-muted-foreground">
+                    {log.sets} sets × {log.reps} reps @ {log.weight} lbs
+                  </span>
+                  {log.calories && (
+                    <span className="text-secondary font-medium">
+                      {log.calories} cal
+                    </span>
+                  )}
                 </div>
               </Card>
             ))}
+
+            {/* Show Cardio Logs */}
+            {cardioLogs.slice(0, 3).map((log) => (
+              <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                      <Activity className="w-5 h-5 text-secondary" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{log.machineName}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {new Date(log.workoutDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge variant="outline">Cardio</Badge>
+                </div>
+                <div className="flex gap-4 text-sm">
+                  <span className="text-muted-foreground">
+                    {log.durationMinutes} min
+                  </span>
+                  <span className="text-secondary font-medium">
+                    {Math.round(log.caloriesBurned)} cal
+                  </span>
+                  {log.distance && (
+                    <span className="text-muted-foreground">
+                      {log.distance} {log.distanceUnit}
+                    </span>
+                  )}
+                </div>
+              </Card>
+            ))}
+
+            {/* Show empty state if no logs */}
+            {workoutLogs.length === 0 && cardioLogs.length === 0 && (
+              <div className="text-center py-12 bg-muted/10 rounded-xl">
+                <Dumbbell className="w-12 h-12 mx-auto mb-3 text-muted-foreground opacity-50" />
+                <p className="text-muted-foreground mb-4">No workouts logged yet</p>
+                <p className="text-sm text-muted-foreground mb-6">
+                  Start logging your workouts to see them here
+                </p>
+                <div className="flex gap-3 justify-center">
+                  <Button
+                    onClick={() => {
+                      // Switch to logging tab, weights sub-tab
+                      const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
+                      loggingTab?.click();
+                    }}
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Log Weights
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      // Switch to logging tab, cardio sub-tab
+                      const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
+                      loggingTab?.click();
+                      setTimeout(() => {
+                        const cardioTab = document.querySelector('[value="cardio"]') as HTMLElement;
+                        cardioTab?.click();
+                      }, 100);
+                    }}
+                    variant="outline"
+                    className="rounded-full"
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Log Cardio
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -501,8 +583,16 @@ export default function WorkoutPage() {
             <AppleHealthSync />
           </TabsContent>
 
-          {/* CARDIO TAB */}
-          <TabsContent value="cardio" className="space-y-6">
+          {/* LOGGING TAB - Combined Cardio and Weights */}
+          <TabsContent value="logging" className="space-y-6">
+            <Tabs defaultValue="cardio" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsTrigger value="cardio">Cardio</TabsTrigger>
+                <TabsTrigger value="weights">Weights</TabsTrigger>
+              </TabsList>
+
+              {/* CARDIO SUB-TAB */}
+              <TabsContent value="cardio" className="space-y-6">
             <Card className="bloom-card">
               <div className="mb-6 flex items-start justify-between">
                 <div>
@@ -621,174 +711,16 @@ export default function WorkoutPage() {
                 </div>
               </div>
             </Card>
-          </TabsContent>
+              </TabsContent>
 
-          {/* WORKOUT PLAN TAB */}
-          <TabsContent value="plan" className="space-y-6">
-            <Card className="bloom-card">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-2xl font-semibold flex items-center gap-2">
-                    <ListChecks className="w-6 h-6 text-primary" />
-                    My Workout Plan
-                  </h3>
-                  <p className="text-muted-foreground mt-1">
-                    {workoutPlan.length} exercises in your plan
-                  </p>
-                </div>
-                <Button
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Exercise
-                </Button>
-              </div>
-
-              <div className="mb-6 p-4 bg-accent/10 rounded-xl border border-accent/20">
-                <div className="flex items-start gap-3">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Zap className="w-5 h-5 text-secondary flex-shrink-0" />
-                      <h4 className="font-semibold text-sm">AI-Synced to {currentPhase} Phase</h4>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      This workout is optimized for your current cycle phase. Click the lightning bolt for detailed guidance.
-                    </p>
-                  </div>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        size="sm"
-                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-3 py-1 flex items-center gap-2"
-                      >
-                        <Zap className="w-4 h-4" />
-                        View Guidance
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-                      <DialogHeader>
-                        <DialogTitle className="text-2xl flex items-center gap-2">
-                          <Zap className="w-6 h-6 text-secondary" />
-                          {guidance.title}
-                        </DialogTitle>
-                      </DialogHeader>
-                      <div className="space-y-6 py-4">
-                        <div className="bg-secondary/10 p-4 rounded-xl">
-                          <h4 className="font-semibold text-lg mb-2 text-secondary">{guidance.focus}</h4>
-                          <p className="text-muted-foreground leading-relaxed">{guidance.description}</p>
-                        </div>
-
-                        <div>
-                          <h4 className="font-semibold mb-3 flex items-center gap-2">
-                            <CheckCircle2 className="w-5 h-5 text-primary" />
-                            Key Recommendations
-                          </h4>
-                          <ul className="space-y-2">
-                            {guidance.recommendations.map((rec, index) => (
-                              <li key={index} className="flex items-start gap-2">
-                                <span className="text-primary mt-1">•</span>
-                                <span className="text-sm text-muted-foreground">{rec}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
-                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
-                              <CheckCircle2 className="w-4 h-4 text-primary" />
-                              Optimal Workouts
-                            </h4>
-                            <p className="text-sm text-muted-foreground">{guidance.optimal}</p>
-                          </div>
-                          <div className="bg-destructive/5 p-4 rounded-xl border border-destructive/20">
-                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
-                              <Info className="w-4 h-4 text-destructive" />
-                              What to Avoid
-                            </h4>
-                            <p className="text-sm text-muted-foreground">{guidance.avoid}</p>
-                          </div>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div className="bg-muted/30 p-4 rounded-xl">
-                            <h4 className="font-semibold mb-2 text-sm">Intensity Level</h4>
-                            <p className="text-sm text-muted-foreground">{guidance.intensity}</p>
-                          </div>
-                          <div className="bg-muted/30 p-4 rounded-xl">
-                            <h4 className="font-semibold mb-2 text-sm">Recovery Focus</h4>
-                            <p className="text-sm text-muted-foreground">{guidance.recovery}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                {workoutPlan.map((exercise, index) => (
-                  <Card key={exercise.id} className="p-4 hover:shadow-sm transition-shadow">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-primary">{index + 1}</span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-semibold mb-1">{exercise.exercise}</h4>
-                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <span className="font-medium">{exercise.sets}</span> sets
-                          </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-1">
-                            <span className="font-medium">{exercise.reps}</span> reps
-                          </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-1">
-                            <span className="font-medium">{exercise.weight}</span> lbs
-                          </span>
-                        </div>
-                        {exercise.notes && (
-                          <p className="text-xs text-muted-foreground mt-1 italic">{exercise.notes}</p>
-                        )}
-                      </div>
-                      <Button
-                        size="sm"
-                        onClick={() => handleLogWorkout(exercise.exercise, exercise.sets, exercise.reps, exercise.weight)}
-                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
-                      >
-                        Log
-                      </Button>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-
-              <div className="mt-6 p-4 bg-muted/20 rounded-xl">
-                <h4 className="font-semibold text-sm mb-3">Suggested Exercises for Your Phase</h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {gymExercises.slice(0, 6).map((exercise) => (
-                    <button
-                      key={exercise.id}
-                      className="p-3 bg-white rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all text-left"
-                    >
-                      <p className="font-medium text-sm">{exercise.name}</p>
-                      <p className="text-xs text-muted-foreground">{exercise.muscle} • {exercise.equipment}</p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </TabsContent>
-
-          {/* WORKOUT LOG TAB */}
-          <TabsContent value="log" className="space-y-6">
+              {/* WEIGHTS SUB-TAB */}
+              <TabsContent value="weights" className="space-y-6">
             <Card className="bloom-card">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
                     <TrendingUp className="w-6 h-6 text-primary" />
-                    Workout History
+                    Weights Training
                   </h3>
                   <p className="text-muted-foreground">
                     Track your progress and see your strength gains
@@ -960,6 +892,166 @@ export default function WorkoutPage() {
                       Keep logging your workouts to track strength gains and see your progress over time. The app automatically tracks your personal records!
                     </p>
                   </div>
+                </div>
+              </div>
+            </Card>
+              </TabsContent>
+            </Tabs>
+          </TabsContent>
+
+          {/* WORKOUT PLAN TAB */}
+          <TabsContent value="plan" className="space-y-6">
+            <Card className="bloom-card">
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-2xl font-semibold flex items-center gap-2">
+                    <ListChecks className="w-6 h-6 text-primary" />
+                    My Workout Plan
+                  </h3>
+                  <p className="text-muted-foreground mt-1">
+                    {workoutPlan.length} exercises in your plan
+                  </p>
+                </div>
+                <Button
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Exercise
+                </Button>
+              </div>
+
+              <div className="mb-6 p-4 bg-accent/10 rounded-xl border border-accent/20">
+                <div className="flex items-start gap-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Zap className="w-5 h-5 text-secondary flex-shrink-0" />
+                      <h4 className="font-semibold text-sm">AI-Synced to {currentPhase} Phase</h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      This workout is optimized for your current cycle phase. Click the lightning bolt for detailed guidance.
+                    </p>
+                  </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        size="sm"
+                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-3 py-1 flex items-center gap-2"
+                      >
+                        <Zap className="w-4 h-4" />
+                        View Guidance
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle className="text-2xl flex items-center gap-2">
+                          <Zap className="w-6 h-6 text-secondary" />
+                          {guidance.title}
+                        </DialogTitle>
+                      </DialogHeader>
+                      <div className="space-y-6 py-4">
+                        <div className="bg-secondary/10 p-4 rounded-xl">
+                          <h4 className="font-semibold text-lg mb-2 text-secondary">{guidance.focus}</h4>
+                          <p className="text-muted-foreground leading-relaxed">{guidance.description}</p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold mb-3 flex items-center gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
+                            Key Recommendations
+                          </h4>
+                          <ul className="space-y-2">
+                            {guidance.recommendations.map((rec, index) => (
+                              <li key={index} className="flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-sm text-muted-foreground">{rec}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
+                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
+                              <CheckCircle2 className="w-4 h-4 text-primary" />
+                              Optimal Workouts
+                            </h4>
+                            <p className="text-sm text-muted-foreground">{guidance.optimal}</p>
+                          </div>
+                          <div className="bg-destructive/5 p-4 rounded-xl border border-destructive/20">
+                            <h4 className="font-semibold mb-2 text-sm flex items-center gap-2">
+                              <Info className="w-4 h-4 text-destructive" />
+                              What to Avoid
+                            </h4>
+                            <p className="text-sm text-muted-foreground">{guidance.avoid}</p>
+                          </div>
+                        </div>
+
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="bg-muted/30 p-4 rounded-xl">
+                            <h4 className="font-semibold mb-2 text-sm">Intensity Level</h4>
+                            <p className="text-sm text-muted-foreground">{guidance.intensity}</p>
+                          </div>
+                          <div className="bg-muted/30 p-4 rounded-xl">
+                            <h4 className="font-semibold mb-2 text-sm">Recovery Focus</h4>
+                            <p className="text-sm text-muted-foreground">{guidance.recovery}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {workoutPlan.map((exercise, index) => (
+                  <Card key={exercise.id} className="p-4 hover:shadow-sm transition-shadow">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-sm font-bold text-primary">{index + 1}</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-semibold mb-1">{exercise.exercise}</h4>
+                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.sets}</span> sets
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.reps}</span> reps
+                          </span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <span className="font-medium">{exercise.weight}</span> lbs
+                          </span>
+                        </div>
+                        {exercise.notes && (
+                          <p className="text-xs text-muted-foreground mt-1 italic">{exercise.notes}</p>
+                        )}
+                      </div>
+                      <Button
+                        size="sm"
+                        onClick={() => handleLogWorkout(exercise.exercise, exercise.sets, exercise.reps, exercise.weight)}
+                        className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full"
+                      >
+                        Log
+                      </Button>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+
+              <div className="mt-6 p-4 bg-muted/20 rounded-xl">
+                <h4 className="font-semibold text-sm mb-3">Suggested Exercises for Your Phase</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {gymExercises.slice(0, 6).map((exercise) => (
+                    <button
+                      key={exercise.id}
+                      className="p-3 bg-white rounded-lg border border-border hover:border-primary/50 hover:bg-primary/5 transition-all text-left"
+                    >
+                      <p className="font-medium text-sm">{exercise.name}</p>
+                      <p className="text-xs text-muted-foreground">{exercise.muscle} • {exercise.equipment}</p>
+                    </button>
+                  ))}
                 </div>
               </div>
             </Card>

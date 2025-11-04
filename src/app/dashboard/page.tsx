@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
 import { SmartCalendar } from '@/components/smart-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
+import { WorkoutSummary } from '@/components/workout-summary';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -79,6 +80,26 @@ export default function DashboardPage() {
 
   const weekDates = getWeekDates();
 
+  // Mock workout data (in real app, this would come from state management or API)
+  const mockWorkoutLogs = [
+    { id: '1', exercise: 'Barbell Squat', sets: 4, reps: 8, weight: 135, calories: 250, date: '2025-10-28' },
+    { id: '2', exercise: 'Bench Press', sets: 4, reps: 10, weight: 95, calories: 200, date: '2025-10-28' },
+    { id: '3', exercise: 'Deadlift', sets: 3, reps: 6, weight: 185, calories: 300, date: '2025-10-26' },
+  ];
+
+  const mockCardioLogs = [
+    {
+      id: '1',
+      machineName: 'Treadmill',
+      durationMinutes: 30,
+      caloriesBurned: 280,
+      distance: 3.2,
+      distanceUnit: 'mi',
+      workoutDate: '2025-10-27',
+      createdAt: '2025-10-27T10:00:00Z'
+    }
+  ];
+
   return (
     <DashboardLayout>
       <div className="max-w-5xl mx-auto space-y-8 pb-12">
@@ -124,6 +145,9 @@ export default function DashboardPage() {
 
         {/* Todo List Section - Now Goals Todo List */}
         <GoalsTodoList userId={MOCK_USER_ID} />
+
+        {/* Workout Summary Section */}
+        <WorkoutSummary workoutLogs={mockWorkoutLogs} cardioLogs={mockCardioLogs} />
 
         {/* Wellness Grid */}
         <div className="grid grid-cols-3 gap-6">
