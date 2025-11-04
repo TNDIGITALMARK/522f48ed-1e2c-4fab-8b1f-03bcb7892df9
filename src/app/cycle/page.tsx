@@ -4,10 +4,13 @@ import { Navigation } from '@/components/navigation';
 import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Heart, Zap, CloudRain, Sun, Moon, Sparkles } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Calendar, Heart, Zap, CloudRain, Sun, Moon, Sparkles, TrendingUp, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
 import { AICycleInsights } from '@/components/ai-cycle-insights';
 import { AISymptomTracker } from '@/components/ai-symptom-tracker';
+import { CycleHistory } from '@/components/cycle-history';
+import { CycleInsightsGraphs } from '@/components/cycle-insights-graphs';
 
 const cyclePhases = [
   {
@@ -106,6 +109,26 @@ export default function CyclePage() {
             Understanding your body's natural rhythm
           </p>
         </div>
+
+        {/* Tabs for different sections */}
+        <Tabs defaultValue="today" className="w-full mb-8">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsTrigger value="today">
+              <Heart className="w-4 h-4 mr-2" />
+              Today
+            </TabsTrigger>
+            <TabsTrigger value="insights">
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Insights
+            </TabsTrigger>
+            <TabsTrigger value="history">
+              <TrendingUp className="w-4 h-4 mr-2" />
+              History
+            </TabsTrigger>
+          </TabsList>
+
+          {/* Today Tab */}
+          <TabsContent value="today" className="space-y-6">
 
         {/* Current Cycle Status */}
         <Card className="bloom-card mb-6 bg-gradient-to-br from-secondary/20 to-secondary/5 border-none">
@@ -225,30 +248,22 @@ export default function CyclePage() {
           );
         })}
 
-        {/* Past Cycles Summary */}
-        <div className="mt-8">
-          <h3 className="text-xl mb-4 flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-primary" />
-            Past 3 Months
-          </h3>
-          <div className="grid gap-4 md:grid-cols-3">
-            {[
-              { month: 'December', length: 28, symptoms: 'Mild cramping' },
-              { month: 'November', length: 29, symptoms: 'Increased energy' },
-              { month: 'October', length: 27, symptoms: 'Mild headache' },
-            ].map((cycle) => (
-              <Card key={cycle.month} className="p-5 hover:shadow-bloom transition-shadow">
-                <h4 className="font-semibold mb-2">{cycle.month}</h4>
-                <p className="text-sm text-muted-foreground mb-1">
-                  Length: {cycle.length} days
-                </p>
-                <Badge variant="secondary" className="text-xs">
-                  {cycle.symptoms}
-                </Badge>
-              </Card>
-            ))}
-          </div>
-        </div>
+          </TabsContent>
+
+          {/* Insights Tab */}
+          <TabsContent value="insights" className="space-y-6">
+            <CycleInsightsGraphs
+              cycleDay={currentCycleDay}
+              cycleLength={cycleLength}
+              cyclePhase={currentPhase}
+            />
+          </TabsContent>
+
+          {/* History Tab */}
+          <TabsContent value="history" className="space-y-6">
+            <CycleHistory />
+          </TabsContent>
+        </Tabs>
       </main>
 
       <Navigation />

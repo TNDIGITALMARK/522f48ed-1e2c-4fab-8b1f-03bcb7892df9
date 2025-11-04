@@ -6,7 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CalorieStorage, DailyTracking, calculateSmartAdjustment, getWeeklySummary } from '@/lib/ai-calorie-system';
+import { PlateScanner } from '@/components/plate-scanner';
+import { Camera, Utensils } from 'lucide-react';
 
 export function CalorieDashboard() {
   const [todayTracking, setTodayTracking] = useState<DailyTracking | null>(null);
@@ -133,22 +136,42 @@ export function CalorieDashboard() {
         </div>
       </Card>
 
-      {/* Log Meal */}
+      {/* Log Meal - with tabs for manual vs plate scan */}
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Log Meal</h3>
-        <div className="flex gap-3">
-          <div className="flex-1">
-            <Input
-              type="number"
-              value={mealCalories}
-              onChange={(e) => setMealCalories(e.target.value)}
-              placeholder="Calories"
-            />
-          </div>
-          <Button onClick={handleLogMeal} disabled={!mealCalories}>
-            Log Meal
-          </Button>
-        </div>
+
+        <Tabs defaultValue="scan" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-4">
+            <TabsTrigger value="scan">
+              <Camera className="w-4 h-4 mr-2" />
+              Scan Plate
+            </TabsTrigger>
+            <TabsTrigger value="manual">
+              <Utensils className="w-4 h-4 mr-2" />
+              Manual Entry
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="scan">
+            <PlateScanner />
+          </TabsContent>
+
+          <TabsContent value="manual">
+            <div className="flex gap-3">
+              <div className="flex-1">
+                <Input
+                  type="number"
+                  value={mealCalories}
+                  onChange={(e) => setMealCalories(e.target.value)}
+                  placeholder="Enter calories"
+                />
+              </div>
+              <Button onClick={handleLogMeal} disabled={!mealCalories}>
+                Log Meal
+              </Button>
+            </div>
+          </TabsContent>
+        </Tabs>
       </Card>
 
       {/* Weekly Summary */}
