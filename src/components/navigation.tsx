@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Activity, Apple, Dumbbell, Scale, Leaf } from 'lucide-react';
+import { Home, Activity, Apple, Dumbbell, Users, Heart } from 'lucide-react';
 
 export function Navigation() {
   const pathname = usePathname();
 
   const navItems = [
     { href: '/dashboard', icon: Home, label: 'Home' },
+    { href: '/community', icon: Users, label: 'Community' },
     { href: '/nutrition', icon: Apple, label: 'Nutrition' },
     { href: '/workout', icon: Dumbbell, label: 'Workout' },
-    { href: '/weight', icon: Scale, label: 'Weight' },
-    { href: '/cycle', icon: Activity, label: 'Cycle' },
+    { href: '/cycle', icon: Heart, label: 'Cycle' },
   ];
 
   return (

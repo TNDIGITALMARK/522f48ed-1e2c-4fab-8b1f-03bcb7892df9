@@ -338,9 +338,13 @@ export default function JournalingPage() {
                     <Download className="w-4 h-4" />
                     Export
                   </Button>
-                  <Button size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2">
                     <Save className="w-4 h-4" />
                     Save Entry
+                  </Button>
+                  <Button size="sm" className="gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                    <Sparkles className="w-4 h-4" />
+                    Post to Community
                   </Button>
                 </div>
               </div>

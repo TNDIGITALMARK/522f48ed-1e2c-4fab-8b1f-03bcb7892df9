@@ -42,8 +42,8 @@ const navigationItems = [
     icon: Sparkles,
   },
   {
-    title: 'My Garden',
-    href: '/garden',
+    title: 'Community',
+    href: '/community',
     icon: Calendar,
   },
 ];
