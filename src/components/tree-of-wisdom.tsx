@@ -28,7 +28,7 @@ const DAILY_INSPIRATIONS = [
     category: "Wellness"
   },
   {
-    quote: "Your body is a garden; tend to it with love, nourishment, and patience.",
+    quote: "Your body deserves love, nourishment, and patience on this journey.",
     author: "Ancient Wisdom",
     category: "Self-Care"
   },

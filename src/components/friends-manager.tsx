@@ -12,7 +12,7 @@ import { Users, UserPlus, Check, X, Gift, Eye } from 'lucide-react';
 interface Friend {
   id: string;
   name: string;
-  gardenLevel: number;
+  level: number;
   lastActive: string;
   status: 'online' | 'offline';
 }
@@ -24,30 +24,30 @@ interface FriendRequest {
 }
 
 interface FriendsManagerProps {
-  onVisitGarden?: (friendId: string) => void;
+  onVisitProfile?: (friendId: string) => void;
   onSendGift?: (friendId: string) => void;
 }
 
-export function FriendsManager({ onVisitGarden, onSendGift }: FriendsManagerProps) {
+export function FriendsManager({ onVisitProfile, onSendGift }: FriendsManagerProps) {
   const [friends, setFriends] = useState<Friend[]>([
     {
       id: '1',
       name: 'Sarah Johnson',
-      gardenLevel: 12,
+      level: 12,
       lastActive: '2 hours ago',
       status: 'online',
     },
     {
       id: '2',
       name: 'Emma Williams',
-      gardenLevel: 8,
+      level: 8,
       lastActive: '1 day ago',
       status: 'offline',
     },
     {
       id: '3',
       name: 'Olivia Brown',
-      gardenLevel: 15,
+      level: 15,
       lastActive: '3 hours ago',
       status: 'online',
     },
@@ -78,7 +78,7 @@ export function FriendsManager({ onVisitGarden, onSendGift }: FriendsManagerProp
       {
         id: Date.now().toString(),
         name: request.name,
-        gardenLevel: 1,
+        level: 1,
         lastActive: 'Just now',
         status: 'online',
       },
@@ -186,7 +186,7 @@ export function FriendsManager({ onVisitGarden, onSendGift }: FriendsManagerProp
                           />
                         </div>
                         <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                          <span>Level {friend.gardenLevel}</span>
+                          <span>Level {friend.level}</span>
                           <span>•</span>
                           <span>{friend.lastActive}</span>
                         </div>
@@ -198,7 +198,7 @@ export function FriendsManager({ onVisitGarden, onSendGift }: FriendsManagerProp
                         variant="outline"
                         size="sm"
                         className="gap-1"
-                        onClick={() => onVisitGarden?.(friend.id)}
+                        onClick={() => onVisitProfile?.(friend.id)}
                       >
                         <Eye className="w-4 h-4" />
                         Visit

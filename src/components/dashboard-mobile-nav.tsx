@@ -9,7 +9,6 @@ import {
   Activity,
   Utensils,
   Sparkles,
-  Sprout,
   Menu,
   X
 } from 'lucide-react';
@@ -42,11 +41,6 @@ const navigationItems = [
     title: 'Rituals',
     href: '/rituals',
     icon: Sparkles,
-  },
-  {
-    title: 'Garden',
-    href: '/garden',
-    icon: Sprout,
   },
 ];
 

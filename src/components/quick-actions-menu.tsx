@@ -37,11 +37,6 @@ export function QuickActionsMenu({ onTutorial, onLeaderboard, onShare }: QuickAc
           <span>View Tutorial</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem>
-          <BookOpen className="w-4 h-4 mr-2" />
-          <span>Garden Guide</span>
-        </DropdownMenuItem>
-
         <DropdownMenuItem onClick={onLeaderboard}>
           <Trophy className="w-4 h-4 mr-2" />
           <span>Leaderboard</span>
@@ -56,7 +51,7 @@ export function QuickActionsMenu({ onTutorial, onLeaderboard, onShare }: QuickAc
 
         <DropdownMenuItem onClick={onShare}>
           <Share2 className="w-4 h-4 mr-2" />
-          <span>Share Garden</span>
+          <span>Share Progress</span>
         </DropdownMenuItem>
 
         <DropdownMenuItem>

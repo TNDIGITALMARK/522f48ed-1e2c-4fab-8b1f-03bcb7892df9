@@ -4,7 +4,7 @@ import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Sparkles, Calendar, ArrowRight, Activity, Brain, Users, Award, TrendingUp, Leaf, Scale, Target, TrendingDown } from 'lucide-react';
+import { Heart, Sparkles, Calendar, ArrowRight, Activity, Brain, Users, Award, TrendingUp, Scale, Target, TrendingDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -25,12 +25,6 @@ const features = [
     icon: Activity,
     title: 'Workout Sync System',
     description: 'Cycle-based training that adapts to your energy levels with personalized workouts for every phase.',
-    image: '/generated/wellness-coach-1.png',
-  },
-  {
-    icon: Leaf,
-    title: 'Gamified Garden',
-    description: 'Build your virtual garden as you grow habits. Each meal and workout blooms into beautiful rewards.',
     image: '/generated/wellness-coach-1.png',
   },
   {
@@ -508,7 +502,7 @@ export default function HomePage() {
 
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Leaf className="w-6 h-6 text-primary" />
+                <Activity className="w-6 h-6 text-primary" />
               </div>
               <h5 className="font-semibold mb-1 text-sm">Sustainable</h5>
               <p className="text-xs text-muted-foreground">Build habits that work with your lifestyle</p>
