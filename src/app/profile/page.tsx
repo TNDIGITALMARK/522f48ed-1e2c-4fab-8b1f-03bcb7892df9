@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,10 +15,11 @@ import {
 } from '@/components/ui/select';
 import { HeightInput } from '@/components/height-input';
 import { FitnessGoals } from '@/components/fitness-goals';
-import { User, Save, Scale, Ruler, Calendar, Activity } from 'lucide-react';
+import { User, Save, Scale, Ruler, Calendar, Activity, Camera, X } from 'lucide-react';
 import { type HeightValue } from '@/lib/height-conversions';
 import { type WeightUnit, type ActivityLevel } from '@/lib/weight-tracking';
 import { useUserProfile } from '@/hooks/use-user-profile';
+import { updateProfilePicture } from '@/lib/user-profile-store';
 
 const MOCK_USER_ID = 'demo-user-001';
 
@@ -38,6 +39,9 @@ export default function ProfilePage() {
   const [weightUnit, setWeightUnit] = useState<WeightUnit>('lbs');
   const [age, setAge] = useState<number>(30);
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>('moderate');
+  const [profilePicture, setProfilePicture] = useState<string | undefined>(undefined);
+  const [isUploadingPicture, setIsUploadingPicture] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Set mounted flag on client
   useEffect(() => {
@@ -62,8 +66,35 @@ export default function ProfilePage() {
       if (profile.activityLevel) {
         setActivityLevel(profile.activityLevel);
       }
+      if (profile.profilePicture) {
+        setProfilePicture(profile.profilePicture);
+      }
     }
   }, [profile]);
+
+  const handleProfilePictureUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsUploadingPicture(true);
+      const updatedProfile = await updateProfilePicture(MOCK_USER_ID, file);
+      setProfilePicture(updatedProfile.profilePicture);
+      alert('Profile picture updated successfully!');
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Failed to upload profile picture');
+    } finally {
+      setIsUploadingPicture(false);
+    }
+  };
+
+  const handleRemoveProfilePicture = () => {
+    setProfilePicture(undefined);
+    updateProfile({ profilePicture: undefined });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
 
   const handleSaveProfile = () => {
     // Update physical attributes - automatically syncs everywhere!
@@ -114,6 +145,60 @@ export default function ProfilePage() {
           <h2 className="text-2xl font-semibold mb-6">Personal Information</h2>
 
           <div className="space-y-6">
+            {/* Profile Picture Upload */}
+            <div className="space-y-3">
+              <Label className="text-base font-medium flex items-center gap-2">
+                <Camera className="w-4 h-4 text-primary" />
+                Profile Picture
+              </Label>
+              <div className="flex items-center gap-6">
+                <div className="relative">
+                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center overflow-hidden border-4 border-border shadow-bloom">
+                    {profilePicture ? (
+                      <img
+                        src={profilePicture}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <User className="w-16 h-16 text-muted-foreground" />
+                    )}
+                  </div>
+                  {profilePicture && (
+                    <button
+                      onClick={handleRemoveProfilePicture}
+                      className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-destructive text-destructive-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
+                      title="Remove profile picture"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+                <div className="flex-1 space-y-3">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleProfilePictureUpload}
+                    className="hidden"
+                    id="profile-picture-upload"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingPicture}
+                    className="w-full rounded-full"
+                  >
+                    <Camera className="w-4 h-4 mr-2" />
+                    {isUploadingPicture ? 'Uploading...' : profilePicture ? 'Change Picture' : 'Upload Picture'}
+                  </Button>
+                  <p className="text-xs text-muted-foreground">
+                    Recommended: Square image, max 5MB (JPG, PNG)
+                  </p>
+                </div>
+              </div>
+            </div>
             {/* Height Input */}
             <HeightInput
               value={height}

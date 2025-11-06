@@ -28,14 +28,12 @@ COLOR PALETTE (WARM NEUTRAL):
 
 TYPOGRAPHY SYSTEM:
 - Primary Font: Inter (clean, modern, excellent readability)
-- Display Font: Plus Jakarta Sans (rounded, friendly for headings)
+- Display Font: Playfair Display Italic (elegant "Bloom" brand font for all headings)
 - UI Font: DM Sans (geometric, clean for UI elements)
 - Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
 
 FONT USAGE:
-- Large Headings (h1): Plus Jakarta Sans 700-800 (friendly, rounded)
-- Section Headings (h2-h3): Plus Jakarta Sans 600-700
-- Subheadings (h4-h6): Inter 600-700
+- All Headings (h1-h6): Playfair Display Italic (elegant "Bloom by Rooted" style)
 - Body Text: Inter 400-500 (excellent readability)
 - UI Elements: DM Sans 500-600 (clean, modern)
 - Labels: Inter 500 (clear, concise)
@@ -282,28 +280,29 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Typography System - Plus Jakarta Sans for friendly headings */
+/* Typography System - Bloom Font (Playfair Display Italic) for headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.01em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 h1 {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 1.25rem;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 1rem;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.015em;
 }
 
 h3 {
@@ -328,8 +327,8 @@ h6 {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 /* Body text - Inter for clarity */
