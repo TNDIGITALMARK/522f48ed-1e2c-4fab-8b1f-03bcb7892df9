@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
-import { SmartCalendar } from '@/components/smart-calendar';
+import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
 import { WorkoutSummary } from '@/components/workout-summary';
 import Link from 'next/link';
@@ -117,6 +117,11 @@ export default function DashboardPage() {
             Welcome to your wellness dashboard
           </p>
         </div>
+
+        {/* Shared Calendar Section - At Top of Dashboard */}
+        <Card className="bloom-card">
+          <SharedCalendar userId={MOCK_USER_ID} />
+        </Card>
 
         {/* Horizontal Week Calendar - Rounded Pill Style */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -229,11 +234,6 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
-        </Card>
-
-        {/* Main Calendar Section */}
-        <Card className="bloom-card">
-          <SmartCalendar userId={MOCK_USER_ID} />
         </Card>
 
         {/* Quick Actions - Circular Buttons Inspired by Smart Home */}

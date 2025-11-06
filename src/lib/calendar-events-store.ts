@@ -8,7 +8,7 @@ export interface CalendarEvent {
   userId: string;
   title: string;
   description?: string;
-  eventType: 'fitness' | 'wellness' | 'nutrition' | 'personal';
+  eventType: 'fitness' | 'wellness' | 'nutrition' | 'personal' | 'work' | 'social';
   color?: string; // Custom color for the event (hex format)
   startDatetime: string;
   endDatetime?: string;
@@ -168,7 +168,9 @@ export function getEventsByType(userId: string): Record<string, CalendarEvent[]>
     fitness: [],
     wellness: [],
     nutrition: [],
-    personal: []
+    personal: [],
+    work: [],
+    social: []
   };
 
   events.forEach(event => {
