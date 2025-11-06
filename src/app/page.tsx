@@ -1,6 +1,7 @@
 "use client";
 
 import { BloomLogo } from '@/components/bloom-logo';
+import { AnimatedHeroBackground } from '@/components/animated-hero-background';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -70,54 +71,60 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="max-w-6xl mx-auto px-6 py-16 md:py-24">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Hero Section with Animated Background */}
+      <section className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 overflow-hidden">
+        {/* Animated Background Layer */}
+        <AnimatedHeroBackground />
+
+        {/* Hero Content */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full">
+            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full backdrop-blur-sm animate-fade-in-scale">
               <span className="text-sm font-medium text-primary">Wellness Rooted in Self-Compassion</span>
             </div>
-            <h1 className="text-5xl md:text-6xl mb-6 leading-tight">
+            <h1 className="text-5xl md:text-6xl mb-6 leading-tight animate-fade-in-up">
               Your Body's Wellness Partner
             </h1>
-            <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-200">
               Bloom empowers women to reconnect with their bodies through smart, intuitive wellness — blending holistic nutrition, emotional awareness, and cycle-synced care.
             </p>
-            <p className="text-lg mb-8 leading-relaxed text-foreground/80">
+            <p className="text-lg mb-8 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
               Make fitness a form of <strong>self-care</strong>, not self-control.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-600">
               <Link href="/dashboard">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-bloom">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
                   Start Your Journey
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
               <Link href="#features">
-                <Button size="lg" variant="outline" className="rounded-full px-8 border-2">
+                <Button size="lg" variant="outline" className="rounded-full px-8 border-2 backdrop-blur-sm bg-white/80 hover:bg-white transition-all hover:scale-105">
                   Learn More
                 </Button>
               </Link>
             </div>
           </div>
           <div className="order-1 md:order-2 flex flex-col gap-6 items-center justify-center">
-            {/* EMBODY Hero Image - Large featured image */}
-            <div className="relative w-full max-w-lg">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
-              <Image
-                src="/generated/embody-hero.png"
-                alt="EMBODY - Your Potential You"
-                width={600}
-                height={400}
-                className="relative z-10 rounded-2xl shadow-bloom-lg w-full h-auto"
-                priority
-              />
+            {/* EMBODY Hero Image - Large featured image with animation */}
+            <div className="relative w-full max-w-lg animate-fade-in-scale animation-delay-400">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse-slow" />
+              <div className="relative overflow-hidden rounded-2xl shadow-bloom-lg hover:shadow-bloom transition-all duration-500 hover:scale-105">
+                <Image
+                  src="/hero-images/embody-hero.png"
+                  alt="EMBODY - Your Potential You"
+                  width={600}
+                  height={400}
+                  className="relative z-10 w-full h-auto"
+                  priority
+                />
+              </div>
             </div>
 
-            {/* BLOOM Logo - Smaller accent below */}
-            <div className="relative w-48 h-48 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl shadow-bloom p-6">
+            {/* BLOOM Logo - Smaller accent below with animation */}
+            <div className="relative w-48 h-48 flex items-center justify-center bg-white/90 backdrop-blur-md rounded-2xl shadow-bloom p-6 animate-fade-in-scale animation-delay-800 hover:scale-110 transition-transform duration-500">
               <Image
-                src="/generated/bloom-logo.png"
+                src="/hero-images/bloom-logo.png"
                 alt="BLOOM Logo"
                 width={160}
                 height={160}

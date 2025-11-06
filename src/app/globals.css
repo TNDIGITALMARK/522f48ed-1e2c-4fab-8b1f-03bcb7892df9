@@ -860,6 +860,153 @@ tr:hover {
   }
 }
 
+/* ============================================
+   ANIMATED HERO BACKGROUND ANIMATIONS
+   ============================================ */
+
+/* Floating animation for hero images */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(0) translateX(-5px);
+  }
+  75% {
+    transform: translateY(10px) translateX(0);
+  }
+}
+
+/* Delayed floating animation */
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(15px) translateX(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(0) translateX(10px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(0) rotate(0.5deg);
+  }
+}
+
+/* Slow pulsing animation for gradient circles */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* Fade in from bottom animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in with scale animation */
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hero content animation utilities */
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 1.2s ease-out forwards;
+}
+
+/* Staggered animation delays */
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-600 {
+  animation-delay: 600ms;
+}
+
+.animation-delay-800 {
+  animation-delay: 800ms;
+}
+
+/* Mobile optimizations - reduce motion on smaller screens */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile for performance */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }
+
+  /* Faster, simpler animations on mobile */
+  .animate-fade-in-up {
+    animation-duration: 0.8s;
+  }
+
+  .animate-fade-in-scale {
+    animation-duration: 0.9s;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in-scale {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Print styles */
 @media print {
   body {
