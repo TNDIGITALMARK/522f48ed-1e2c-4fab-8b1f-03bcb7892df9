@@ -1,6 +1,5 @@
 "use client";
 
-import { BloomLogo } from '@/components/bloom-logo';
 import { AnimatedHeroBackground } from '@/components/animated-hero-background';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -48,7 +47,12 @@ export default function HomePage() {
       {/* Header/Navigation */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
           <nav className="hidden md:flex items-center gap-8">
             <Link href="#features" className="text-foreground hover:text-primary transition-colors font-medium">
               Features
@@ -526,7 +530,12 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <BloomLogo className="mb-4" />
+              <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight mb-4">
+                <span className="text-foreground italic">Bloom</span>
+                <span className="text-sm text-muted-foreground font-light ml-2">
+                  by <span className="font-medium">Rooted</span>
+                </span>
+              </div>
               <p className="text-sm text-muted-foreground">
                 Empowering women through holistic wellness and self-care.
               </p>

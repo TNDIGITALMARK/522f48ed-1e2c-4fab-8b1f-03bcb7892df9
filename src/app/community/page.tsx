@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/navigation';
-import { BloomLogo } from '@/components/bloom-logo';
+
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SocialFeed } from '@/components/social-feed';
@@ -181,15 +181,20 @@ export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4 sticky top-0 z-40">
+      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up sticky top-0 z-40">
         <div className="max-w-4xl mx-auto">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full mb-4 border border-purple-200">
             <Users className="w-4 h-4 text-purple-700" />
             <span className="text-sm font-medium text-purple-900">Connect & Share</span>

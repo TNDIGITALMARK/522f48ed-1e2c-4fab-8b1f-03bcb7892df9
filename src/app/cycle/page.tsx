@@ -1,7 +1,6 @@
 "use client";
 
 import { Navigation } from '@/components/navigation';
-import { BloomLogo } from '@/components/bloom-logo';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -95,15 +94,20 @@ export default function CyclePage() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4">
+      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
         <div className="max-w-4xl mx-auto">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <h1 className="text-4xl mb-2">Cycle Tracking</h1>
           <p className="text-muted-foreground text-lg">
             Understanding your body's natural rhythm
@@ -111,7 +115,7 @@ export default function CyclePage() {
         </div>
 
         {/* Tabs for different sections */}
-        <Tabs defaultValue="today" className="w-full mb-8">
+        <Tabs defaultValue="today" className="w-full mb-8 animate-fade-in-up animation-delay-400">
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="today">
               <Heart className="w-4 h-4 mr-2" />

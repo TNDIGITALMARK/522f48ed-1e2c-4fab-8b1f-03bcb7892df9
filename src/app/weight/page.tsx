@@ -1,6 +1,6 @@
 "use client";
 
-import { BloomLogo } from '@/components/bloom-logo';
+
 import { Navigation } from '@/components/navigation';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -173,14 +173,19 @@ export default function WeightTrackingPage() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <header className="bg-white border-b border-border px-6 py-4">
+      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
         <div className="max-w-4xl mx-auto">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <h1 className="text-4xl mb-2">Weight & Goals</h1>
           <p className="text-muted-foreground text-lg">
             Track your progress and achieve your fitness goals

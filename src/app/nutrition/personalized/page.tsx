@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { BloomLogo } from '@/components/bloom-logo';
+
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -60,7 +60,12 @@ export default function PersonalizedNutritionPage() {
     <div className="min-h-screen bg-background pb-24">
       <header className="bg-white border-b border-border px-6 py-4">
         <div className="max-w-4xl mx-auto">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
         </div>
       </header>
 

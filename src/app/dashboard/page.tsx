@@ -106,7 +106,7 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
         {/* Modern Header with Greeting */}
-        <div className="pt-6 pb-2">
+        <div className="pt-6 pb-2 animate-fade-in-up">
           <p className="text-sm text-muted-foreground mb-1">
             {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
           </p>
@@ -119,12 +119,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Shared Calendar Section - At Top of Dashboard */}
-        <Card className="bloom-card">
+        <Card className="bloom-card animate-fade-in-up animation-delay-200">
           <SharedCalendar userId={MOCK_USER_ID} />
         </Card>
 
         {/* Horizontal Week Calendar - Rounded Pill Style */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide animate-fade-in-up animation-delay-400">
           {weekDates.map((date, index) => {
             const isToday = date.toDateString() === now.toDateString();
             return (
@@ -148,7 +148,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Quick Stats Grid - Inspired by Smart Home Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in-up animation-delay-600">
           {/* Hydration Card */}
           <Card className="glass-card group hover:scale-105 transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
@@ -214,7 +214,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Cycle Phase Banner - Hero Card Style */}
-        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative">
+        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-800">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
           <div className="relative z-10 flex items-center justify-between">
             <div>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Quick Actions - Circular Buttons Inspired by Smart Home */}
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 gap-4 animate-fade-in-scale animation-delay-800">
           <Link href="/workout" className="group">
             <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">

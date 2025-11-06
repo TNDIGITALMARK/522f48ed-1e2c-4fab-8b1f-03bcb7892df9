@@ -12,10 +12,10 @@ export function AnimatedHeroBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* EMBODY image as full background */}
+      {/* EMBODY image as full background - Less transparent */}
       <div
         className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${
-          mounted ? 'opacity-25 scale-100' : 'opacity-0 scale-105'
+          mounted ? 'opacity-35 scale-100' : 'opacity-0 scale-105'
         }`}
       >
         <Image
@@ -27,9 +27,9 @@ export function AnimatedHeroBackground() {
         />
       </div>
 
-      {/* Gradient overlay for text readability and depth */}
+      {/* Gradient overlay for text readability and depth - Less transparent */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80 transition-opacity duration-[3000ms] ${
+        className={`absolute inset-0 bg-gradient-to-br from-background/85 via-background/70 to-background/85 transition-opacity duration-[3000ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       />

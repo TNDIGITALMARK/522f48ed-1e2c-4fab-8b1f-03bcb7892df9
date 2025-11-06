@@ -1,7 +1,7 @@
 "use client";
 
 import { Navigation } from '@/components/navigation';
-import { BloomLogo } from '@/components/bloom-logo';
+
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -70,15 +70,20 @@ export default function RitualsPage() {
   return (
     <div className="min-h-screen bg-background pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4">
+      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
         <div className="max-w-4xl mx-auto">
-          <BloomLogo />
+          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground italic">Bloom</span>
+            <span className="text-sm text-muted-foreground font-light ml-2">
+              by <span className="font-medium">Rooted</span>
+            </span>
+          </div>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-full mb-4 border border-purple-300">
             <span className="text-2xl">🌳</span>
             <span className="text-sm font-medium text-purple-900">Connected to your Tree of Life</span>
@@ -90,7 +95,7 @@ export default function RitualsPage() {
         </div>
 
         {/* Category Navigation */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {ritualCategories.map((category) => {
               const Icon = category.icon;
@@ -151,7 +156,7 @@ export default function RitualsPage() {
         </Card>
 
         {/* Quick Reflection Prompts */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl">Quick Reflection Prompts</h2>
             <Badge variant="secondary" className="gap-1">
