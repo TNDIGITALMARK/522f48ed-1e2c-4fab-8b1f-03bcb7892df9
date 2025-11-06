@@ -12,49 +12,24 @@ export function AnimatedHeroBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Animated EMBODY image - left side - responsive sizing */}
+      {/* EMBODY image as full background */}
       <div
-        className={`absolute left-0 top-1/2 -translate-y-1/2
-          w-[300px] h-[200px] sm:w-[400px] sm:h-[267px] md:w-[500px] md:h-[333px] lg:w-[600px] lg:h-[400px]
-          transition-all duration-[2000ms] ease-out ${
-          mounted ? 'opacity-15 translate-x-0' : 'opacity-0 -translate-x-20'
+        className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${
+          mounted ? 'opacity-25 scale-100' : 'opacity-0 scale-105'
         }`}
-        style={{
-          animation: mounted ? 'float 8s ease-in-out infinite' : 'none'
-        }}
       >
         <Image
           src="/hero-images/embody-hero.png"
           alt=""
           fill
-          className="object-cover rounded-2xl md:rounded-3xl"
+          className="object-cover"
           priority
         />
       </div>
 
-      {/* Animated BLOOM logo - right side - responsive sizing */}
+      {/* Gradient overlay for text readability and depth */}
       <div
-        className={`absolute right-0 bottom-1/4
-          w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] md:w-[350px] md:h-[350px] lg:w-[400px] lg:h-[400px]
-          transition-all duration-[2000ms] ease-out delay-300 ${
-          mounted ? 'opacity-10 translate-x-0' : 'opacity-0 translate-x-20'
-        }`}
-        style={{
-          animation: mounted ? 'float-delayed 10s ease-in-out infinite' : 'none'
-        }}
-      >
-        <Image
-          src="/hero-images/bloom-logo.png"
-          alt=""
-          fill
-          className="object-contain"
-          priority
-        />
-      </div>
-
-      {/* Animated gradient overlay for depth */}
-      <div
-        className={`absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 transition-opacity duration-[3000ms] ${
+        className={`absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80 transition-opacity duration-[3000ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       />

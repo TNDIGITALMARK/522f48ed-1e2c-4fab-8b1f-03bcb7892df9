@@ -77,60 +77,31 @@ export default function HomePage() {
         <AnimatedHeroBackground />
 
         {/* Hero Content */}
-        <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="order-2 md:order-1">
-            <div className="inline-block mb-4 px-4 py-2 bg-primary/10 rounded-full backdrop-blur-sm animate-fade-in-scale">
-              <span className="text-sm font-medium text-primary">Wellness Rooted in Self-Compassion</span>
-            </div>
-            <h1 className="text-5xl md:text-6xl mb-6 leading-tight animate-fade-in-up">
-              Your Body's Wellness Partner
-            </h1>
-            <p className="text-xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-200">
-              Bloom empowers women to reconnect with their bodies through smart, intuitive wellness — blending holistic nutrition, emotional awareness, and cycle-synced care.
-            </p>
-            <p className="text-lg mb-8 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
-              Make fitness a form of <strong>self-care</strong>, not self-control.
-            </p>
-            <div className="flex flex-wrap gap-4 animate-fade-in-up animation-delay-600">
-              <Link href="/dashboard">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
-                  Start Your Journey
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link href="#features">
-                <Button size="lg" variant="outline" className="rounded-full px-8 border-2 backdrop-blur-sm bg-white/80 hover:bg-white transition-all hover:scale-105">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <div className="inline-block mb-6 px-6 py-3 bg-primary/10 rounded-full backdrop-blur-sm animate-fade-in-scale">
+            <span className="text-base font-medium text-primary">Wellness Rooted in Self-Compassion</span>
           </div>
-          <div className="order-1 md:order-2 flex flex-col gap-6 items-center justify-center">
-            {/* EMBODY Hero Image - Large featured image with animation */}
-            <div className="relative w-full max-w-lg animate-fade-in-scale animation-delay-400">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl animate-pulse-slow" />
-              <div className="relative overflow-hidden rounded-2xl shadow-bloom-lg hover:shadow-bloom transition-all duration-500 hover:scale-105">
-                <Image
-                  src="/hero-images/embody-hero.png"
-                  alt="EMBODY - Your Potential You"
-                  width={600}
-                  height={400}
-                  className="relative z-10 w-full h-auto"
-                  priority
-                />
-              </div>
-            </div>
-
-            {/* BLOOM Logo - Smaller accent below with animation */}
-            <div className="relative w-48 h-48 flex items-center justify-center bg-white/90 backdrop-blur-md rounded-2xl shadow-bloom p-6 animate-fade-in-scale animation-delay-800 hover:scale-110 transition-transform duration-500">
-              <Image
-                src="/hero-images/bloom-logo.png"
-                alt="BLOOM Logo"
-                width={160}
-                height={160}
-                className="w-full h-auto"
-              />
-            </div>
+          <h1 className="text-5xl md:text-7xl mb-8 leading-tight animate-fade-in-up">
+            Your Body's Wellness Partner
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-200 max-w-2xl mx-auto">
+            Bloom empowers women to reconnect with their bodies through smart, intuitive wellness — blending holistic nutrition, emotional awareness, and cycle-synced care.
+          </p>
+          <p className="text-lg md:text-xl mb-10 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
+            Make fitness a form of <strong>self-care</strong>, not self-control.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center animate-fade-in-up animation-delay-600">
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 text-lg shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
+                Start Your Journey
+                <ArrowRight className="ml-2 w-6 h-6" />
+              </Button>
+            </Link>
+            <Link href="#features">
+              <Button size="lg" variant="outline" className="rounded-full px-10 py-6 text-lg border-2 backdrop-blur-sm bg-white/80 hover:bg-white transition-all hover:scale-105">
+                Learn More
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
