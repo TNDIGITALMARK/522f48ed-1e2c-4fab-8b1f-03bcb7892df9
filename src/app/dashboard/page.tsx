@@ -11,9 +11,11 @@ import {
   Brain,
   Calendar,
   Moon,
-  CheckCircle2,
-  Circle,
-  Plus
+  Sun,
+  Wind,
+  Sparkles,
+  Plus,
+  ArrowRight
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
@@ -102,35 +104,37 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-5xl mx-auto space-y-8 pb-12">
-        {/* Minimal Header */}
-        <div className="text-center pt-4">
-          <p className="text-sm text-muted-foreground uppercase tracking-wide mb-2">
-            {days[now.getDay()].toUpperCase()}
+      <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
+        {/* Modern Header with Greeting */}
+        <div className="pt-6 pb-2">
+          <p className="text-sm text-muted-foreground mb-1">
+            {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
           </p>
-          <h1 className="text-6xl font-light mb-1" style={{ fontFamily: 'Georgia, serif', letterSpacing: '-0.02em' }}>
-            {months[now.getMonth()]}
+          <h1 className="text-4xl font-bold mb-2">
+            Hi {userData.name} 👋
           </h1>
-          <p className="text-muted-foreground">{now.getFullYear()}</p>
+          <p className="text-muted-foreground">
+            Welcome to your wellness dashboard
+          </p>
         </div>
 
-        {/* Horizontal Week Calendar */}
-        <div className="flex justify-center gap-3 px-4">
+        {/* Horizontal Week Calendar - Rounded Pill Style */}
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {weekDates.map((date, index) => {
             const isToday = date.toDateString() === now.toDateString();
             return (
               <button
                 key={index}
-                className={`flex flex-col items-center justify-center w-16 h-20 rounded-2xl transition-all ${
+                className={`flex flex-col items-center justify-center min-w-[4.5rem] h-24 rounded-3xl transition-all duration-300 ${
                   isToday
-                    ? 'bg-secondary text-white shadow-lg scale-110'
-                    : 'bg-card hover:bg-muted/50'
+                    ? 'bg-primary text-primary-foreground shadow-bloom scale-105'
+                    : 'bg-card hover:bg-muted/80 hover:scale-105 hover:shadow-bloom-sm border border-border/50'
                 }`}
               >
-                <span className="text-xs font-medium mb-1 opacity-70">
+                <span className="text-xs font-medium mb-1.5 opacity-70 uppercase tracking-wider">
                   {days[date.getDay()]}
                 </span>
-                <span className={`text-2xl font-semibold ${isToday ? 'text-white' : ''}`}>
+                <span className="text-2xl font-bold">
                   {date.getDate()}
                 </span>
               </button>
@@ -138,115 +142,144 @@ export default function DashboardPage() {
           })}
         </div>
 
-        {/* Main Calendar Section - Now Smart Calendar */}
-        <Card className="bloom-card p-8">
+        {/* Quick Stats Grid - Inspired by Smart Home Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Hydration Card */}
+          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Hydration</p>
+                <p className="text-3xl font-bold">
+                  {userData.water.completed}<span className="text-lg text-muted-foreground">/{userData.water.goal}</span>
+                </p>
+              </div>
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <Droplets className="w-8 h-8 text-primary" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Progress value={(userData.water.completed / userData.water.goal) * 100} className="h-2" />
+              <p className="text-xs text-muted-foreground">
+                {userData.water.goal - userData.water.completed} glasses remaining
+              </p>
+            </div>
+          </Card>
+
+          {/* Steps Card */}
+          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Steps</p>
+                <p className="text-3xl font-bold">
+                  {(userData.steps.completed / 1000).toFixed(1)}k
+                </p>
+              </div>
+              <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center">
+                <Footprints className="w-8 h-8 text-secondary" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Progress value={(userData.steps.completed / userData.steps.goal) * 100} className="h-2" />
+              <p className="text-xs text-muted-foreground">
+                {((userData.steps.goal - userData.steps.completed) / 1000).toFixed(1)}k to goal
+              </p>
+            </div>
+          </Card>
+
+          {/* Sleep Card */}
+          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Sleep</p>
+                <p className="text-3xl font-bold">
+                  {userData.sleepHours}h
+                </p>
+              </div>
+              <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
+                <Moon className="w-8 h-8 text-accent-foreground" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Progress value={(userData.sleepHours / 8) * 100} className="h-2" />
+              <p className="text-xs text-muted-foreground">
+                {(8 - userData.sleepHours).toFixed(1)}h until target
+              </p>
+            </div>
+          </Card>
+        </div>
+
+        {/* Cycle Phase Banner - Hero Card Style */}
+        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
+              <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
+              <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
+              <Link href="/cycle">
+                <Button className="rounded-full">
+                  View Details
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+            <div className="hidden md:flex items-center gap-6">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
+                <Heart className="w-16 h-16 text-primary" />
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Main Calendar Section */}
+        <Card className="bloom-card">
           <SmartCalendar userId={MOCK_USER_ID} />
         </Card>
 
-        {/* Todo List Section - Now Goals Todo List */}
+        {/* Quick Actions - Circular Buttons Inspired by Smart Home */}
+        <div className="grid grid-cols-4 gap-4">
+          <Link href="/workout" className="group">
+            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Heart className="w-6 h-6 text-primary" />
+              </div>
+              <span className="text-sm font-semibold">Workout</span>
+            </Card>
+          </Link>
+
+          <Link href="/nutrition" className="group">
+            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Sparkles className="w-6 h-6 text-secondary" />
+              </div>
+              <span className="text-sm font-semibold">Nutrition</span>
+            </Card>
+          </Link>
+
+          <Link href="/rituals" className="group">
+            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Sun className="w-6 h-6 text-accent-foreground" />
+              </div>
+              <span className="text-sm font-semibold">Rituals</span>
+            </Card>
+          </Link>
+
+          <Link href="/recommendations" className="group">
+            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <Brain className="w-6 h-6 text-primary" />
+              </div>
+              <span className="text-sm font-semibold">AI Plan</span>
+            </Card>
+          </Link>
+        </div>
+
+        {/* Todo List Section */}
         <GoalsTodoList userId={MOCK_USER_ID} />
 
         {/* Workout Summary Section */}
         <WorkoutSummary workoutLogs={mockWorkoutLogs} cardioLogs={mockCardioLogs} />
-
-        {/* Wellness Grid */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* Hydration */}
-          <Card className="bloom-card flex flex-col items-center justify-center p-8 hover:shadow-lg transition-shadow">
-            <div className="w-24 h-24 rounded-full border-8 border-muted mb-4 relative flex items-center justify-center">
-              <div
-                className="absolute inset-0 rounded-full border-8 border-secondary"
-                style={{
-                  clipPath: `inset(${100 - (userData.water.completed / userData.water.goal) * 100}% 0 0 0)`
-                }}
-              />
-              <Droplets className="w-10 h-10 text-secondary z-10" />
-            </div>
-            <p className="text-2xl font-semibold mb-1">
-              {userData.water.completed}/{userData.water.goal}
-            </p>
-            <p className="text-sm text-muted-foreground">Glasses</p>
-          </Card>
-
-          {/* Steps */}
-          <Card className="bloom-card flex flex-col items-center justify-center p-8 hover:shadow-lg transition-shadow">
-            <div className="w-24 h-24 rounded-full border-8 border-muted mb-4 relative flex items-center justify-center">
-              <div
-                className="absolute inset-0 rounded-full border-8 border-secondary"
-                style={{
-                  clipPath: `inset(${100 - (userData.steps.completed / userData.steps.goal) * 100}% 0 0 0)`
-                }}
-              />
-              <Footprints className="w-10 h-10 text-secondary z-10" />
-            </div>
-            <p className="text-2xl font-semibold mb-1">
-              {(userData.steps.completed / 1000).toFixed(1)}k
-            </p>
-            <p className="text-sm text-muted-foreground">Steps</p>
-          </Card>
-
-          {/* Sleep */}
-          <Card className="bloom-card flex flex-col items-center justify-center p-8 hover:shadow-lg transition-shadow">
-            <div className="w-24 h-24 rounded-full border-8 border-muted mb-4 relative flex items-center justify-center">
-              <div
-                className="absolute inset-0 rounded-full border-8 border-secondary"
-                style={{
-                  clipPath: `inset(${100 - (userData.sleepHours / 8) * 100}% 0 0 0)`
-                }}
-              />
-              <Moon className="w-10 h-10 text-secondary z-10" />
-            </div>
-            <p className="text-2xl font-semibold mb-1">{userData.sleepHours}h</p>
-            <p className="text-sm text-muted-foreground">Sleep</p>
-          </Card>
-        </div>
-
-        {/* Circular Action Buttons - Inspired by Image 1 */}
-        <div className="flex justify-center gap-6 pt-4">
-          <Link href="/recommendations">
-            <button className="flex flex-col items-center gap-3 group">
-              <div className="w-20 h-20 rounded-full border-2 border-primary bg-primary/5 hover:bg-primary/10 hover:shadow-lg transition-all flex items-center justify-center">
-                <Brain className="w-8 h-8 text-primary transition-colors" />
-              </div>
-              <span className="text-sm font-medium text-primary transition-colors">
-                AI PLAN
-              </span>
-            </button>
-          </Link>
-
-          <Link href="/rituals">
-            <button className="flex flex-col items-center gap-3 group">
-              <div className="w-20 h-20 rounded-full border-2 border-muted hover:border-secondary hover:shadow-lg transition-all flex items-center justify-center">
-                <Calendar className="w-8 h-8 text-muted-foreground group-hover:text-secondary transition-colors" />
-              </div>
-              <span className="text-sm font-medium text-muted-foreground group-hover:text-secondary transition-colors">
-                RITUALS
-              </span>
-            </button>
-          </Link>
-
-          <Link href="/workout">
-            <button className="flex flex-col items-center gap-3 group">
-              <div className="w-20 h-20 rounded-full border-2 border-muted hover:border-secondary hover:shadow-lg transition-all flex items-center justify-center">
-                <Heart className="w-8 h-8 text-muted-foreground group-hover:text-secondary transition-colors" />
-              </div>
-              <span className="text-sm font-medium text-muted-foreground group-hover:text-secondary transition-colors">
-                WELLNESS
-              </span>
-            </button>
-          </Link>
-
-          <Link href="/nutrition">
-            <button className="flex flex-col items-center gap-3 group">
-              <div className="w-20 h-20 rounded-full border-2 border-muted hover:border-secondary hover:shadow-lg transition-all flex items-center justify-center">
-                <Brain className="w-8 h-8 text-muted-foreground group-hover:text-secondary transition-colors" />
-              </div>
-              <span className="text-sm font-medium text-muted-foreground group-hover:text-secondary transition-colors">
-                MINDFUL
-              </span>
-            </button>
-          </Link>
-        </div>
       </div>
     </DashboardLayout>
   );

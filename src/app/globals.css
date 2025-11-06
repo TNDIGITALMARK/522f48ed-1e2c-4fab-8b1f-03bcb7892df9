@@ -1,140 +1,140 @@
 @import "tailwindcss";
 
-/* Modern Minimalist Font System - Inspired by planner aesthetics */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+/* Modern Minimalist Font System - Inspired by wellness and smart home apps */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 /*
 =============================================================================
-BLOOM - MINIMALIST PLANNER AESTHETIC
+BLOOM - MODERN WELLNESS & SMART HOME INSPIRED DESIGN
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Inspired by elegant planner and journal designs
-- Neutral, warm color palette with sophisticated contrast
-- Mix of bold display fonts and elegant serif accents
-- Clean, organized layouts with purposeful spacing
-- Emphasis on readability and visual hierarchy
+- Inspired by modern wellness apps and smart home interfaces
+- Soft, warm neutral palette with pops of earthy tones
+- Clean, modern sans-serif typography for clarity
+- Glassmorphism effects with frosted backgrounds
+- Large rounded corners (20-28px) for friendly aesthetic
+- Emphasis on cards, overlays, and layered UI
 
-COLOR PALETTE (MINIMALIST NEUTRAL):
-- Pure Black (Primary): #000000 / HSL 0 0% 0% - Bold headings and key text
-- Warm Black (Text): #1C1C1C / HSL 0 0% 11% - Body text
-- Stone Gray (Secondary): #4A4A4A / HSL 0 0% 29% - Secondary text
-- Light Beige (Background): #F5F1E8 / HSL 42 38% 93% - Soft cream base
-- Warm Beige (Surface): #E8DCC4 / HSL 38 44% 84% - Card backgrounds
-- Sand Beige (Muted): #D4C5A9 / HSL 40 35% 74% - Subtle accents
-- Off White: #FAFAF8 / HSL 60 20% 98% - Pure backgrounds
-- Border Gray: #E0DDD5 / HSL 40 15% 87% - Soft borders
+COLOR PALETTE (WARM NEUTRAL):
+- Warm Charcoal (Text): #2C2C2C / HSL 0 0% 17% - Primary text
+- Soft Beige (Background): #F5F2ED / HSL 33 25% 95% - Light cream base
+- Warm Sand (Cards): #EBE6DF / HSL 40 20% 91% - Card backgrounds
+- Taupe (Borders): #D4CFC7 / HSL 40 12% 81% - Soft borders
+- Mocha (Accent): #9C8174 / HSL 20 22% 54% - Warm accent color
+- Cream White: #FAFAF8 / HSL 60 20% 98% - Pure backgrounds
+- Brown Primary: #7D6B5D / HSL 30 16% 43% - Primary actions
+- Light Taupe: #E5DFD8 / HSL 35 18% 87% - Muted elements
 
 TYPOGRAPHY SYSTEM:
-- Display/Headings: Montserrat (bold, modern, clean sans-serif)
-- Elegant Accents: Playfair Display (serif for special headings)
-- Body Text: Lora (elegant serif for readability)
-- Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold), 900 (black)
+- Primary Font: Inter (clean, modern, excellent readability)
+- Display Font: Plus Jakarta Sans (rounded, friendly for headings)
+- UI Font: DM Sans (geometric, clean for UI elements)
+- Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
 
 FONT USAGE:
-- Large Headings (h1): Montserrat 800-900 (bold, uppercase optional)
-- Section Headings (h2-h3): Montserrat 700-800 or Playfair Display 600-700
-- Subheadings (h4-h6): Montserrat 600-700
-- Body Text: Lora 400-500 (elegant readability)
-- UI Elements: Montserrat 500-600 (clean, modern)
+- Large Headings (h1): Plus Jakarta Sans 700-800 (friendly, rounded)
+- Section Headings (h2-h3): Plus Jakarta Sans 600-700
+- Subheadings (h4-h6): Inter 600-700
+- Body Text: Inter 400-500 (excellent readability)
+- UI Elements: DM Sans 500-600 (clean, modern)
+- Labels: Inter 500 (clear, concise)
 
-SPACING SYSTEM (PLANNER-INSPIRED):
+SPACING SYSTEM:
 - Cards: 24-32px padding
-- Sections: 48-64px vertical spacing
+- Large Cards: 32-48px padding
+- Sections: 48-80px vertical spacing
 - Elements: 16-24px between components
-- Grid gaps: 20-28px
-- Tight line-height for headings (1.1-1.2)
-- Comfortable line-height for body (1.6-1.8)
+- Grid gaps: 16-24px
+- Loose line-height for headings (1.2-1.3)
+- Comfortable line-height for body (1.6-1.75)
 
-COMPONENT STYLING:
-- Border Radius: 8-12px (subtle, refined)
-- Borders: 1-2px solid, minimal
-- Shadows: Very subtle (0 2px 8px rgba(0,0,0,0.04))
-- Buttons: Clean, flat design with hover states
-- Cards: Minimal shadows, defined borders
+COMPONENT STYLING (GLASSMORPHISM):
+- Border Radius: 20-28px (large, friendly rounds)
+- Card Radius: 24px standard
+- Button Radius: 16-20px (pill-shaped for primary actions)
+- Borders: 1px solid, very subtle
+- Shadows: Soft layered shadows (0 8px 32px rgba(0,0,0,0.08))
+- Glassmorphism: backdrop-filter blur(10px) with semi-transparent backgrounds
+- Overlay effects: Linear gradients with transparency
 
 VISUAL EFFECTS:
-- Emphasize white space and negative space
-- Simple, clean lines and borders
-- Minimal use of color - mostly neutral tones
-- Focus on typography hierarchy
-- Smooth, subtle transitions (200ms ease)
+- Glassmorphism on navigation and overlay elements
+- Soft drop shadows for depth
+- Smooth gradients (cream to beige)
+- Large rounded corners throughout
+- Hover effects with subtle scale transforms
+- Smooth transitions (300ms ease)
+- Frosted glass effect on cards and modals
 
 =============================================================================
 */
 
 :root {
-  /* Minimalist Planner Color System */
-  --bloom-black: 0 0% 0%; /* #000000 - Pure black for headings */
-  --bloom-warm-black: 0 0% 11%; /* #1C1C1C - Warm black for body text */
-  --bloom-stone-gray: 0 0% 29%; /* #4A4A4A - Secondary text */
-  --bloom-cream: 42 38% 93%; /* #F5F1E8 - Light cream background */
-  --bloom-warm-beige: 38 44% 84%; /* #E8DCC4 - Warm beige cards */
-  --bloom-sand: 40 35% 74%; /* #D4C5A9 - Sand beige accents */
-  --bloom-off-white: 60 20% 98%; /* #FAFAF8 - Pure backgrounds */
-  --bloom-border-gray: 40 15% 87%; /* #E0DDD5 - Soft borders */
+  /* Modern Wellness Color System */
+  --bloom-charcoal: 0 0% 17%; /* #2C2C2C - Warm charcoal text */
+  --bloom-beige: 33 25% 95%; /* #F5F2ED - Soft beige background */
+  --bloom-sand: 40 20% 91%; /* #EBE6DF - Warm sand cards */
+  --bloom-taupe: 40 12% 81%; /* #D4CFC7 - Taupe borders */
+  --bloom-mocha: 20 22% 54%; /* #9C8174 - Mocha accent */
+  --bloom-cream: 60 20% 98%; /* #FAFAF8 - Cream white */
+  --bloom-brown: 30 16% 43%; /* #7D6B5D - Brown primary */
+  --bloom-light-taupe: 35 18% 87%; /* #E5DFD8 - Light taupe */
 
-  /* Soft accent colors for subtle highlights */
-  --bloom-accent-rose: 345 40% 88%; /* Soft rose for feminine touches */
-  --bloom-accent-sage: 135 20% 75%; /* Muted sage for calm accents */
+  /* Soft accent colors */
+  --bloom-sage: 135 18% 75%; /* Soft sage green */
+  --bloom-terracotta: 15 45% 70%; /* Warm terracotta */
+  --bloom-lavender: 280 25% 85%; /* Soft lavender */
 
-  /* NEW: Brown/Beige Core Theme (Default) */
-  --theme-brown: 30 35% 45%; /* Warm brown - primary actions */
-  --theme-tan: 40 40% 75%; /* Tan/beige - secondary elements */
-  --theme-cream: 42 38% 93%; /* Cream - backgrounds */
-  --theme-sand: 35 30% 80%; /* Sand - muted elements */
-  --theme-mocha: 25 30% 35%; /* Dark mocha - text/borders */
-  --theme-latte: 35 35% 85%; /* Light latte - surfaces */
+  /* Light theme - Warm neutral with glassmorphism support */
+  --background: 33 25% 95%; /* Soft beige background */
+  --foreground: 0 0% 17%; /* Warm charcoal text */
 
-  /* Light theme - Enhanced with brown/beige defaults */
-  --background: 42 38% 93%; /* Cream background (was off-white) */
-  --foreground: 25 30% 20%; /* Dark mocha text (was pure black) */
+  /* Glass-effect cards with warm tones */
+  --card: 40 20% 91%; /* Warm sand cards */
+  --card-foreground: 0 0% 17%;
 
-  /* Warm beige cards with mocha text */
-  --card: 35 35% 88%; /* Latte cards (warmer) */
-  --card-foreground: 25 30% 20%;
+  /* Popovers with glassmorphism */
+  --popover: 60 20% 98%;
+  --popover-foreground: 0 0% 17%;
 
-  /* Popovers - soft cream */
-  --popover: 42 38% 96%;
-  --popover-foreground: 25 30% 20%;
-
-  /* Primary: Warm Brown for emphasis */
-  --primary: 30 35% 45%; /* Brown primary (was black) */
+  /* Primary: Brown for emphasis */
+  --primary: 30 16% 43%; /* Brown primary */
   --primary-foreground: 60 20% 98%;
 
-  /* Secondary: Tan/Beige */
-  --secondary: 40 40% 75%; /* Tan secondary (was stone gray) */
-  --secondary-foreground: 25 30% 20%;
+  /* Secondary: Mocha */
+  --secondary: 20 22% 54%; /* Mocha secondary */
+  --secondary-foreground: 60 20% 98%;
 
-  /* Muted: Sand Beige */
-  --muted: 35 30% 80%; /* Sand muted (lighter) */
-  --muted-foreground: 25 30% 35%;
+  /* Muted: Light taupe */
+  --muted: 35 18% 87%; /* Light taupe muted */
+  --muted-foreground: 0 0% 35%;
 
-  /* Accent: Mocha for subtle highlights */
-  --accent: 25 30% 55%; /* Mocha accent (was sage) */
-  --accent-foreground: 60 20% 98%;
+  /* Accent: Sage for subtle highlights */
+  --accent: 135 18% 75%; /* Sage accent */
+  --accent-foreground: 0 0% 17%;
 
-  /* Destructive - Warm terracotta */
-  --destructive: 12 50% 55%;
-  --destructive-foreground: 60 20% 98%;
+  /* Destructive - Terracotta */
+  --destructive: 15 45% 70%;
+  --destructive-foreground: 0 0% 17%;
 
-  /* Borders: Soft beige borders */
-  --border: 35 25% 82%; /* Beige border (warmer) */
-  --input: 35 25% 82%;
-  --ring: 30 35% 45%; /* Brown focus ring */
+  /* Borders: Subtle taupe */
+  --border: 40 12% 81%; /* Taupe border */
+  --input: 40 12% 81%;
+  --ring: 30 16% 43%; /* Brown focus ring */
 
-  /* Subtle rounded corners */
-  --radius: 0.625rem;
+  /* Large rounded corners for modern feel */
+  --radius: 1.5rem; /* 24px */
 
-  /* Sidebar - brown/beige aesthetic */
-  --sidebar-background: 38 35% 90%;
-  --sidebar-foreground: 25 30% 20%;
-  --sidebar-primary: 30 35% 45%;
+  /* Sidebar - glassmorphism effect */
+  --sidebar-background: 40 20% 94%;
+  --sidebar-foreground: 0 0% 17%;
+  --sidebar-primary: 30 16% 43%;
   --sidebar-primary-foreground: 60 20% 98%;
-  --sidebar-accent: 35 30% 82%;
-  --sidebar-accent-foreground: 25 30% 20%;
-  --sidebar-border: 35 25% 80%;
-  --sidebar-ring: 30 35% 45%;
+  --sidebar-accent: 35 18% 90%;
+  --sidebar-accent-foreground: 0 0% 17%;
+  --sidebar-border: 40 12% 85%;
+  --sidebar-ring: 30 16% 43%;
 }
 
 .dark {
@@ -272,83 +272,72 @@ html {
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 
-/* Typography System - Montserrat for bold headings, Playfair for elegant accents */
+/* Typography System - Plus Jakarta Sans for friendly headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-weight: 800;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.15;
+  line-height: 1.25;
 }
 
 h1 {
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
   letter-spacing: -0.03em;
 }
 
 h2 {
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin-bottom: 1.25rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   letter-spacing: -0.025em;
 }
 
-/* Optional: Use Playfair Display for elegant h2/h3 */
-h2.elegant,
-h3.elegant {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  font-style: normal;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
 h3 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.875rem;
 }
 
 h4 {
-  font-size: 1.375rem;
-  font-weight: 700;
-  margin-bottom: 0.875rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
 }
 
 h5 {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.625rem;
 }
 
 h6 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Body text - Lora for elegant readability */
+/* Body text - Inter for clarity */
 p {
   margin-top: 0;
-  margin-bottom: 1.125rem;
-  line-height: 1.75;
-  font-family: 'Lora', Georgia, serif;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
 
@@ -375,78 +364,89 @@ i {
   font-family: 'Lora', Georgia, serif;
 }
 
-/* Button defaults - Minimalist styling */
+/* Button defaults - Modern pill-shaped styling */
 button {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-  letter-spacing: 0.02em;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  letter-spacing: -0.01em;
 }
 
-/* Input defaults - Clean and simple */
+/* Input defaults - Clean with large radius */
 input, textarea, select {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  border-radius: 0.5rem;
-  border: 1.5px solid hsl(var(--border));
-  transition: border-color 0.2s ease, box-shadow 0.15s ease;
-  padding: 0.625rem 0.875rem;
+  border-radius: 1rem;
+  border: 1px solid hsl(var(--border));
+  transition: border-color 0.3s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  padding: 0.75rem 1rem;
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
-  border-color: hsl(var(--foreground));
-  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.08);
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  transform: translateY(-1px);
 }
 
 input::placeholder,
 textarea::placeholder {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
   opacity: 0.5;
 }
 
 /* Labels */
 label {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 600;
   font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
 }
 
-/* Minimalist shadows (very subtle) */
+/* Modern soft shadows with depth */
 .shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
-/* Card styling - Minimal and clean */
+/* Card styling - Large radius with glassmorphism support */
 .neutral-card,
 .bloom-card {
   background: hsl(var(--card));
-  border-radius: 0.75rem;
-  padding: 2rem;
-  border: 1.5px solid hsl(var(--border));
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  border: 1px solid hsl(var(--border) / 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(8px);
 }
 
 .neutral-card:hover,
 .bloom-card:hover {
-  transform: translateY(-1px);
-  border-color: hsl(var(--foreground) / 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Glassmorphism card variant */
+.glass-card {
+  background: hsl(var(--card) / 0.7);
+  backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid hsl(var(--border) / 0.3);
+  border-radius: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -825,6 +825,16 @@ tr:hover {
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--foreground) / 0.5);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Selection styling */
