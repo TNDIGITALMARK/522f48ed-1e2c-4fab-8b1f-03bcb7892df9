@@ -9,6 +9,7 @@ export interface CalendarEvent {
   title: string;
   description?: string;
   eventType: 'fitness' | 'wellness' | 'nutrition' | 'personal';
+  color?: string; // Custom color for the event (hex format)
   startDatetime: string;
   endDatetime?: string;
   allDay: boolean;

@@ -16,11 +16,26 @@ interface SmartCalendarProps {
 }
 
 const EVENT_TYPE_CONFIG = {
-  fitness: { icon: Dumbbell, color: 'hsl(135 35% 75%)', label: 'Fitness' },
-  wellness: { icon: Heart, color: 'hsl(280 50% 80%)', label: 'Wellness' },
-  nutrition: { icon: Apple, color: 'hsl(15 60% 85%)', label: 'Nutrition' },
-  personal: { icon: CalendarIcon, color: 'hsl(345 45% 85%)', label: 'Personal' }
+  fitness: { icon: Dumbbell, color: '#a8d5ba', label: 'Fitness' },
+  wellness: { icon: Heart, color: '#d4b5e3', label: 'Wellness' },
+  nutrition: { icon: Apple, color: '#f5cba7', label: 'Nutrition' },
+  personal: { icon: CalendarIcon, color: '#f5b5c5', label: 'Personal' }
 };
+
+const PRESET_COLORS = [
+  { name: 'Mint', value: '#a8d5ba' },
+  { name: 'Lavender', value: '#d4b5e3' },
+  { name: 'Peach', value: '#f5cba7' },
+  { name: 'Rose', value: '#f5b5c5' },
+  { name: 'Sky', value: '#b5d8f5' },
+  { name: 'Sage', value: '#c5d4b5' },
+  { name: 'Coral', value: '#f5b5a7' },
+  { name: 'Lilac', value: '#e3b5f5' },
+  { name: 'Lemon', value: '#f5f5b5' },
+  { name: 'Aqua', value: '#b5f5f0' },
+  { name: 'Sunset', value: '#f5c5b5' },
+  { name: 'Ocean', value: '#b5c5f5' }
+];
 
 export function SmartCalendar({ userId }: SmartCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -31,6 +46,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
     title: '',
     description: '',
     eventType: 'fitness' as CalendarEvent['eventType'],
+    color: EVENT_TYPE_CONFIG.fitness.color,
     time: '09:00',
     allDay: false
   });
@@ -103,6 +119,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
       title: newEvent.title,
       description: newEvent.description,
       eventType: newEvent.eventType,
+      color: newEvent.color,
       startDatetime: eventDateTime.toISOString(),
       allDay: newEvent.allDay
     });
@@ -112,6 +129,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
       title: '',
       description: '',
       eventType: 'fitness',
+      color: EVENT_TYPE_CONFIG.fitness.color,
       time: '09:00',
       allDay: false
     });
@@ -180,11 +198,12 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
                 <div className="flex-1 flex flex-col gap-0.5 overflow-hidden">
                   {dayEvents.slice(0, 3).map(event => {
                     const config = EVENT_TYPE_CONFIG[event.eventType];
+                    const eventColor = event.color || config.color;
                     return (
                       <div
                         key={event.id}
-                        className="text-xs px-1.5 py-0.5 rounded truncate"
-                        style={{ backgroundColor: config.color }}
+                        className="text-xs px-1.5 py-0.5 rounded truncate font-medium"
+                        style={{ backgroundColor: eventColor }}
                         title={event.title}
                       >
                         {event.title}
@@ -246,7 +265,17 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
 
             <div className="space-y-2">
               <Label htmlFor="event-type">Event Type</Label>
-              <Select value={newEvent.eventType} onValueChange={(value) => setNewEvent({ ...newEvent, eventType: value as CalendarEvent['eventType'] })}>
+              <Select
+                value={newEvent.eventType}
+                onValueChange={(value) => {
+                  const eventType = value as CalendarEvent['eventType'];
+                  setNewEvent({
+                    ...newEvent,
+                    eventType,
+                    color: EVENT_TYPE_CONFIG[eventType].color
+                  });
+                }}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -264,6 +293,43 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
                   })}
                 </SelectContent>
               </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Event Color</Label>
+              <div className="space-y-3">
+                <div className="grid grid-cols-6 gap-2">
+                  {PRESET_COLORS.map((colorOption) => (
+                    <button
+                      key={colorOption.value}
+                      type="button"
+                      className={`w-full aspect-square rounded-xl transition-all hover:scale-110 ${
+                        newEvent.color === colorOption.value
+                          ? 'ring-2 ring-primary ring-offset-2 scale-105'
+                          : 'hover:ring-2 hover:ring-muted-foreground/30'
+                      }`}
+                      style={{ backgroundColor: colorOption.value }}
+                      onClick={() => setNewEvent({ ...newEvent, color: colorOption.value })}
+                      title={colorOption.name}
+                    />
+                  ))}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor="custom-color" className="text-xs text-muted-foreground">
+                    Custom:
+                  </Label>
+                  <input
+                    id="custom-color"
+                    type="color"
+                    value={newEvent.color}
+                    onChange={(e) => setNewEvent({ ...newEvent, color: e.target.value })}
+                    className="w-12 h-8 rounded-lg border border-border cursor-pointer"
+                  />
+                  <span className="text-xs text-muted-foreground font-mono">
+                    {newEvent.color}
+                  </span>
+                </div>
+              </div>
             </div>
 
             <div className="space-y-2">

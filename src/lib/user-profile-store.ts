@@ -15,6 +15,11 @@ import { getActiveGoal, getLatestWeight, addWeightLog } from './weight-tracking'
 export interface UserProfile {
   userId: string;
 
+  // Personal information
+  name?: string;
+  email?: string;
+  profilePicture?: string; // Base64 encoded image or URL
+
   // Physical attributes
   height: HeightValue;
   weight: number;
@@ -316,6 +321,57 @@ export function updateWellnessMetrics(
   }
 ): UserProfile {
   return updateUserProfile(userId, updates);
+}
+
+/**
+ * Update personal information (name, email, profile picture)
+ */
+export function updatePersonalInfo(
+  userId: string,
+  updates: {
+    name?: string;
+    email?: string;
+    profilePicture?: string;
+  }
+): UserProfile {
+  return updateUserProfile(userId, updates);
+}
+
+/**
+ * Convert image file to base64 string for storage
+ */
+export async function imageToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
+ * Update profile picture from file
+ */
+export async function updateProfilePicture(userId: string, file: File): Promise<UserProfile> {
+  // Validate file type
+  if (!file.type.startsWith('image/')) {
+    throw new Error('File must be an image');
+  }
+
+  // Validate file size (max 5MB)
+  const maxSize = 5 * 1024 * 1024;
+  if (file.size > maxSize) {
+    throw new Error('Image must be smaller than 5MB');
+  }
+
+  // Convert to base64
+  const base64 = await imageToBase64(file);
+
+  // Update profile
+  return updatePersonalInfo(userId, { profilePicture: base64 });
 }
 
 /**
