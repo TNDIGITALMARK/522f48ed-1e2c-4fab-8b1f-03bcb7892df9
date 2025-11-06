@@ -100,15 +100,28 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-          <div className="order-1 md:order-2 flex justify-center">
-            <div className="relative w-full max-w-sm">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-[3rem] blur-3xl" />
+          <div className="order-1 md:order-2 flex flex-col gap-6 items-center justify-center">
+            {/* EMBODY Hero Image - Large featured image */}
+            <div className="relative w-full max-w-lg">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl" />
               <Image
-                src="/generated/phone-mockup.png"
-                alt="Bloom App Preview"
-                width={400}
-                height={600}
-                className="relative z-10 drop-shadow-2xl"
+                src="/generated/embody-hero.png"
+                alt="EMBODY - Your Potential You"
+                width={600}
+                height={400}
+                className="relative z-10 rounded-2xl shadow-bloom-lg w-full h-auto"
+                priority
+              />
+            </div>
+
+            {/* BLOOM Logo - Smaller accent below */}
+            <div className="relative w-48 h-48 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl shadow-bloom p-6">
+              <Image
+                src="/generated/bloom-logo.png"
+                alt="BLOOM Logo"
+                width={160}
+                height={160}
+                className="w-full h-auto"
               />
             </div>
           </div>
