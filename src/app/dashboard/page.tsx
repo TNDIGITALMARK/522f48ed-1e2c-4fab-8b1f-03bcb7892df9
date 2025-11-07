@@ -22,6 +22,7 @@ import { useDashboardData } from '@/hooks/use-user-profile';
 import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
 import { WorkoutSummary } from '@/components/workout-summary';
+import { BloomingFlower } from '@/components/blooming-flower';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -105,17 +106,29 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
-        {/* Modern Header with Greeting */}
+        {/* Modern Header with Greeting and Blooming Flower Animation */}
         <div className="pt-6 pb-2 animate-fade-in-up">
-          <p className="text-sm text-muted-foreground mb-1">
-            {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
-          </p>
-          <h1 className="text-4xl font-bold mb-2">
-            Hi {userData.name} 👋
-          </h1>
-          <p className="text-muted-foreground">
-            Welcome to your wellness dashboard
-          </p>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <p className="text-sm text-muted-foreground mb-1">
+                {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
+              </p>
+              <h1 className="text-4xl font-bold mb-2">
+                Hi {userData.name} 👋
+              </h1>
+              <p className="text-muted-foreground">
+                Welcome to your wellness dashboard
+              </p>
+            </div>
+            {/* Desktop flower - larger, prominent */}
+            <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
+              <BloomingFlower size={180} duration={2500} delay={800} />
+            </div>
+            {/* Mobile flower - smaller, compact */}
+            <div className="flex md:hidden items-center justify-center animate-fade-in-scale animation-delay-400">
+              <BloomingFlower size={100} duration={2000} delay={600} />
+            </div>
+          </div>
         </div>
 
         {/* Shared Calendar Section - At Top of Dashboard */}
@@ -216,6 +229,9 @@ export default function DashboardPage() {
         {/* Cycle Phase Banner - Hero Card Style */}
         <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-800">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none">
+            <BloomingFlower size={120} duration={3000} delay={1500} />
+          </div>
           <div className="relative z-10 flex items-center justify-between">
             <div>
               <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
