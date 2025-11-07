@@ -338,9 +338,9 @@ export default function HomePage() {
 
       {/* Smart Weekly Calorie System */}
       <section className="relative overflow-hidden section-spacing-xl texture-fabric textile-overlay-cream">
-        {/* Decorative sage green accent elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(100 18% 73% / 0.08) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(72 15% 27% / 0.06) 0%, transparent 70%)' }} />
+        {/* Decorative darker sage green accent elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(120 25% 55% / 0.12) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(110 30% 28% / 0.10) 0%, transparent 70%)' }} />
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-12">

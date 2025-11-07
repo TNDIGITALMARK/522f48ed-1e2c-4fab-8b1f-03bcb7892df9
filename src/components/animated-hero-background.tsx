@@ -48,7 +48,7 @@ export function AnimatedHeroBackground() {
         }`}
       />
 
-      {/* Sage green accent circle */}
+      {/* Darker sage green accent circle */}
       <div
         className={`absolute top-1/4 left-1/3
           w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64
@@ -57,12 +57,12 @@ export function AnimatedHeroBackground() {
           mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
-          background: 'radial-gradient(circle, hsl(100 18% 73% / 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(120 25% 55% / 0.15) 0%, transparent 70%)',
           animation: mounted ? 'pulse-slow 6s ease-in-out infinite' : 'none'
         }}
       />
 
-      {/* Olive accent circle */}
+      {/* Darker olive accent circle */}
       <div
         className={`absolute bottom-1/3 right-1/4
           w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80
@@ -71,7 +71,7 @@ export function AnimatedHeroBackground() {
           mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
-          background: 'radial-gradient(circle, hsl(72 15% 27% / 0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(110 30% 28% / 0.12) 0%, transparent 70%)',
           animation: mounted ? 'pulse-slow 7s ease-in-out infinite 1s' : 'none'
         }}
       />

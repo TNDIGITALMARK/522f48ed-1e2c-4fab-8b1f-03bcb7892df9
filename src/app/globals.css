@@ -17,15 +17,15 @@ DESIGN PHILOSOPHY:
 - **Premium Feel**: Subtle shadows, layered textures, and smooth transitions
 - **Organic Depth**: Layered textile overlays create tactile visual interest
 
-COLOR PALETTE (BEIGE, PEARL WHITE, AND GREEN):
+COLOR PALETTE (BEIGE, PEARL WHITE, AND DARKER GREEN):
 - Warm Beige Base: #F5F0E8 / HSL 35 30% 94% - Warm light beige background
 - Creamy Pearl White: #FAF8F4 / HSL 40 35% 97% - Creamy pearl white for cards
-- Soft Sage Green: #AABFA8 / HSL 120 20% 70% - Soft sage green accent
-- Earthy Olive Green: #476B44 / HSL 110 25% 35% - Olive green (primary actions)
+- Darker Sage Green: #7BA878 / HSL 120 25% 55% - Darker sage green accent
+- Darker Earthy Olive Green: #3A5838 / HSL 110 30% 28% - Darker olive green (primary actions)
 - Medium Beige: #E6DDD0 / HSL 35 25% 85% - Medium beige for muted elements
-- Muted Green: #8FA28D / HSL 115 18% 60% - Muted green for accents
+- Darker Muted Green: #6B8769 / HSL 115 20% 45% - Darker muted green for accents
 - Deep Beige-Brown: #574D42 / HSL 30 20% 30% - Deep beige-brown text
-- Dark Green: #2D4B2B / HSL 120 30% 25% - Dark green accents
+- Darker Deep Green: #214720 / HSL 120 35% 20% - Darker deep green accents
 
 TEXTILE TEXTURES (FROM REFERENCE IMAGES):
 - Green Corduroy: /textures/corduroy-green.png - Natural green ribbed texture
@@ -91,12 +91,12 @@ USAGE GUIDELINES:
   /* Base color variables */
   --bloom-beige-light: 35 30% 94%; /* #F5F0E8 - Warm light beige background */
   --bloom-pearl: 40 35% 97%; /* #FAF8F4 - Creamy pearl white */
-  --bloom-sage: 120 20% 70%; /* #AABFA8 - Soft sage green accent */
-  --bloom-olive: 110 25% 35%; /* #476B44 - Earthy olive green primary */
+  --bloom-sage: 120 25% 55%; /* #7BA878 - Darker sage green accent */
+  --bloom-olive: 110 30% 28%; /* #3A5838 - Darker earthy olive green primary */
   --bloom-beige-mid: 35 25% 85%; /* #E6DDD0 - Medium beige */
-  --bloom-green-muted: 115 18% 60%; /* #8FA28D - Muted green */
+  --bloom-green-muted: 115 20% 45%; /* #6B8769 - Darker muted green */
   --bloom-beige-dark: 30 20% 30%; /* #574D42 - Deep beige-brown text */
-  --bloom-green-dark: 120 30% 25%; /* #2D4B2B - Dark green accent */
+  --bloom-green-dark: 120 35% 20%; /* #214720 - Darker green accent */
 
   /* Light theme - Beige, Pearl, Green aesthetic */
   --background: 35 30% 94%; /* #F5F0E8 - Warm beige base */
@@ -110,20 +110,20 @@ USAGE GUIDELINES:
   --popover: 40 35% 97%;
   --popover-foreground: 30 20% 30%;
 
-  /* Primary: Earthy olive green for main actions */
-  --primary: 110 25% 35%; /* #476B44 - Olive green */
+  /* Primary: Darker earthy olive green for main actions */
+  --primary: 110 30% 28%; /* #3A5838 - Darker olive green */
   --primary-foreground: 40 35% 97%;
 
-  /* Secondary: Soft sage green accent */
-  --secondary: 120 20% 70%; /* #AABFA8 - Sage green */
+  /* Secondary: Darker sage green accent */
+  --secondary: 120 25% 55%; /* #7BA878 - Darker sage green */
   --secondary-foreground: 30 20% 30%;
 
   /* Muted: Medium beige tones */
   --muted: 35 25% 85%; /* #E6DDD0 - Medium beige */
   --muted-foreground: 30 20% 45%;
 
-  /* Accent: Sage green highlights */
-  --accent: 120 20% 70%; /* #AABFA8 - Sage */
+  /* Accent: Darker sage green highlights */
+  --accent: 120 25% 55%; /* #7BA878 - Darker sage */
   --accent-foreground: 30 20% 30%;
 
   /* Destructive: Warm terracotta */
@@ -133,20 +133,20 @@ USAGE GUIDELINES:
   /* Borders: Soft beige */
   --border: 35 22% 88%; /* #E8E0D5 - Soft beige border */
   --input: 35 22% 88%;
-  --ring: 110 25% 35%; /* Olive green focus ring */
+  --ring: 110 30% 28%; /* Darker olive green focus ring */
 
   /* Magazine-style rounded corners */
   --radius: 1.25rem; /* 20px for magazine aesthetic */
 
-  /* Sidebar: Warm beige with green accents */
+  /* Sidebar: Warm beige with darker green accents */
   --sidebar-background: 35 28% 92%;
   --sidebar-foreground: 30 20% 30%;
-  --sidebar-primary: 110 25% 35%;
+  --sidebar-primary: 110 30% 28%;
   --sidebar-primary-foreground: 40 35% 97%;
   --sidebar-accent: 35 25% 87%;
   --sidebar-accent-foreground: 30 20% 30%;
   --sidebar-border: 35 22% 88%;
-  --sidebar-ring: 110 25% 35%;
+  --sidebar-ring: 110 30% 28%;
 }
 
 .dark {
@@ -474,17 +474,17 @@ label {
    TEXTILE TEXTURE PATTERNS - INSPIRED BY REFERENCE IMAGES
    ============================================ */
 
-/* Sage Green Corduroy texture */
+/* Darker Sage Green Corduroy texture */
 .texture-corduroy {
   position: relative;
   background: linear-gradient(90deg,
-    hsl(120 20% 70%) 0%,
-    hsl(120 18% 67%) 2%,
-    hsl(120 20% 70%) 4%,
-    hsl(120 18% 67%) 6%,
-    hsl(120 20% 70%) 8%,
-    hsl(120 18% 67%) 10%,
-    hsl(120 20% 70%) 12%
+    hsl(120 25% 55%) 0%,
+    hsl(120 23% 52%) 2%,
+    hsl(120 25% 55%) 4%,
+    hsl(120 23% 52%) 6%,
+    hsl(120 25% 55%) 8%,
+    hsl(120 23% 52%) 10%,
+    hsl(120 25% 55%) 12%
   );
   background-size: 6px 100%;
   background-repeat: repeat-x;
@@ -496,10 +496,10 @@ label {
   inset: 0;
   background: repeating-linear-gradient(90deg,
     transparent 0px,
-    rgba(71, 107, 68, 0.15) 1px,
+    rgba(58, 88, 56, 0.15) 1px,
     transparent 2px,
     transparent 4px,
-    rgba(71, 107, 68, 0.2) 5px,
+    rgba(58, 88, 56, 0.2) 5px,
     transparent 6px
   );
   pointer-events: none;
@@ -508,12 +508,12 @@ label {
 /* Enhanced corduroy for backgrounds */
 .texture-corduroy-bg {
   background: repeating-linear-gradient(90deg,
-    hsl(120 20% 70%) 0px,
-    hsl(120 18% 67%) 1px,
-    hsl(120 20% 70%) 2px,
-    hsl(120 20% 70%) 6px,
-    hsl(120 16% 65%) 7px,
-    hsl(120 20% 70%) 8px
+    hsl(120 25% 55%) 0px,
+    hsl(120 23% 52%) 1px,
+    hsl(120 25% 55%) 2px,
+    hsl(120 25% 55%) 6px,
+    hsl(120 21% 50%) 7px,
+    hsl(120 25% 55%) 8px
   );
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -599,19 +599,19 @@ label {
   background-size: 4px 4px;
 }
 
-/* Textured card variants - Beige, Pearl, Green scheme */
+/* Textured card variants - Beige, Pearl, Darker Green scheme */
 .card-corduroy {
   background: repeating-linear-gradient(90deg,
-    hsl(120 20% 70%) 0px,
-    hsl(120 18% 67%) 1px,
-    hsl(120 20% 70%) 2px,
-    hsl(120 20% 70%) 6px,
-    hsl(120 16% 65%) 7px,
-    hsl(120 20% 70%) 8px
+    hsl(120 25% 55%) 0px,
+    hsl(120 23% 52%) 1px,
+    hsl(120 25% 55%) 2px,
+    hsl(120 25% 55%) 6px,
+    hsl(120 21% 50%) 7px,
+    hsl(120 25% 55%) 8px
   );
   background-size: 8px 100%;
-  border: 1px solid hsl(120 18% 65%);
-  box-shadow: inset 0 1px 2px rgba(71, 107, 68, 0.1);
+  border: 1px solid hsl(120 23% 50%);
+  box-shadow: inset 0 1px 2px rgba(58, 88, 56, 0.1);
 }
 
 .card-marble {
