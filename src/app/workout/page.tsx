@@ -257,9 +257,9 @@ export default function WorkoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -292,7 +292,7 @@ export default function WorkoutPage() {
           <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Progress */}
-        <Card className="bloom-card mb-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-none">
+        <Card className="magazine-feature-card texture-fabric mb-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-2 border-secondary/20">
           <h3 className="text-xl font-semibold mb-4">This Week's Progress</h3>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
@@ -345,7 +345,7 @@ export default function WorkoutPage() {
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
-          <Card className="bloom-card mb-6 bg-gradient-to-br from-accent/10 to-accent/5 border-none">
+          <Card className="magazine-feature-card card-marble mb-6 bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/20">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Weight & Goals</h3>
               <Link href="/weight">
@@ -565,7 +565,7 @@ export default function WorkoutPage() {
         </div>
 
         {/* Phase-Based Training Info */}
-        <Card className="bloom-card bg-gradient-to-br from-primary/5 to-accent/5 border-none mt-6">
+        <Card className="magazine-feature-card textile-overlay-green bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/15 mt-6">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary-foreground" />

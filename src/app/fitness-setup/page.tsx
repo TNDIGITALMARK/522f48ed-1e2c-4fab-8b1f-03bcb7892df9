@@ -63,7 +63,7 @@ export default function FitnessSetupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 px-4">
+    <div className="min-h-screen bg-textile-pearl textile-overlay-green py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">Fitness Profile Setup</h1>

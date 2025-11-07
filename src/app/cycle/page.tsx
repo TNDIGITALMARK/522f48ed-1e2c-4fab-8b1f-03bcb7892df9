@@ -92,9 +92,9 @@ export default function CyclePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -135,7 +135,7 @@ export default function CyclePage() {
           <TabsContent value="today" className="space-y-6">
 
         {/* Current Cycle Status */}
-        <Card className="bloom-card mb-6 bg-gradient-to-br from-secondary/20 to-secondary/5 border-none">
+        <Card className="magazine-feature-card mb-6 bg-gradient-to-br from-secondary/20 to-secondary/5 border-2 border-secondary/20">
           <div className="flex items-center justify-between mb-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -208,7 +208,7 @@ export default function CyclePage() {
         {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
           const PhaseIcon = phase.icon;
           return (
-            <Card key={phase.name} className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-none mb-6">
+            <Card key={phase.name} className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-secondary/10 to-secondary/5 border-2 border-secondary/15 mb-6">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
                   <PhaseIcon className="w-7 h-7 text-secondary-foreground" />

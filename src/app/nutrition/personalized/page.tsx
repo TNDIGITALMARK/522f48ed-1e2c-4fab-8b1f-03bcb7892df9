@@ -47,7 +47,7 @@ export default function PersonalizedNutritionPage() {
 
   if (!preferences || !mealPlan) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-textile-beige textile-overlay-cream flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4" />
           <p className="text-muted-foreground">Loading your personalized plan...</p>
@@ -57,8 +57,8 @@ export default function PersonalizedNutritionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <header className="bg-white border-b border-border px-6 py-4">
+    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -85,7 +85,7 @@ export default function PersonalizedNutritionPage() {
         </div>
 
         {/* Phase-Specific Info */}
-        <Card className="bloom-card bg-gradient-to-br from-primary/10 to-secondary/5 border-none mb-6">
+        <Card className="magazine-feature-card texture-fabric bg-gradient-to-br from-primary/10 to-secondary/5 border-none mb-6">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-6 h-6 text-primary-foreground" />
@@ -181,7 +181,7 @@ export default function PersonalizedNutritionPage() {
         </div>
 
         {/* Generated Grocery List */}
-        <Card className="bloom-card">
+        <Card className="magazine-feature-card">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-2xl font-semibold flex items-center gap-2">
               <ShoppingCart className="w-6 h-6 text-primary" />

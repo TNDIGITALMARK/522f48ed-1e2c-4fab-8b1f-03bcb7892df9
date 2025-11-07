@@ -78,9 +78,9 @@ export default function MovementPage() {
   const otherRituals = movementRituals.filter(r => !r.featured);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -220,7 +220,7 @@ export default function MovementPage() {
         </div>
 
         {/* Movement Benefits */}
-        <Card className="bloom-card bg-gradient-to-br from-accent/20 to-accent/5 border-none">
+        <Card className="magazine-feature-card card-fabric bg-gradient-to-br from-accent/20 to-accent/5 border-none">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-6 h-6 text-accent-foreground" />

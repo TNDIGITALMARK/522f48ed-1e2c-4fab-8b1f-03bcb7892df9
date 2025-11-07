@@ -179,9 +179,9 @@ export default function CommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up sticky top-0 z-40">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up sticky top-0 z-40 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>

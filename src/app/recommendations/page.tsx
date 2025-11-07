@@ -137,7 +137,7 @@ export default function RecommendationsPage() {
 
           {/* Focus Areas */}
           {dietRecs.focus_areas && dietRecs.focus_areas.length > 0 && (
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card">
               <div className="flex items-start gap-3">
                 <Target className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                 <div className="space-y-2 flex-1">
@@ -158,7 +158,7 @@ export default function RecommendationsPage() {
           )}
 
           {/* Recommendations */}
-          <Card className="bloom-card">
+          <Card className="magazine-feature-card">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
               Key Recommendations
@@ -175,7 +175,7 @@ export default function RecommendationsPage() {
 
           {/* Meal Suggestions */}
           {dietRecs.meal_suggestions && dietRecs.meal_suggestions.length > 0 && (
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Utensils className="w-5 h-5 text-primary" />
                 Suggested Meals
@@ -253,7 +253,7 @@ export default function RecommendationsPage() {
 
           {/* Focus Areas */}
           {workoutRecs.focus_areas && workoutRecs.focus_areas.length > 0 && (
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card">
               <div className="flex items-start gap-3">
                 <Target className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                 <div className="space-y-2 flex-1">
@@ -274,7 +274,7 @@ export default function RecommendationsPage() {
           )}
 
           {/* Recommendations */}
-          <Card className="bloom-card">
+          <Card className="magazine-feature-card">
             <h3 className="font-semibold mb-4 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-primary" />
               Key Recommendations
@@ -291,7 +291,7 @@ export default function RecommendationsPage() {
 
           {/* Workout Suggestions */}
           {workoutRecs.workout_suggestions && workoutRecs.workout_suggestions.length > 0 && (
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <Dumbbell className="w-5 h-5 text-primary" />
                 Suggested Workouts

@@ -11,7 +11,7 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-textile-beige textile-overlay-cream">
       {/* Desktop Sidebar - hidden on mobile */}
       <div className="hidden lg:block">
         <DashboardSidebar />

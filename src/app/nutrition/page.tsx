@@ -187,9 +187,9 @@ export default function NutritionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
       {/* Header */}
-      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -210,7 +210,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Food Quiz CTA */}
-        <Card className="bloom-card bg-gradient-to-br from-primary/10 to-secondary/5 border-primary/20 mb-6">
+        <Card className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-primary/10 to-secondary/5 border-2 border-primary/20 mb-6">
           <div className="flex items-center gap-4">
             <div className="text-5xl">🍽️</div>
             <div className="flex-1">
@@ -241,7 +241,7 @@ export default function NutritionPage() {
           <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Calorie Balance */}
-        <Card className="bloom-card mb-6 bg-gradient-to-br from-primary/10 to-primary/5 border-none">
+        <Card className="magazine-feature-card texture-fabric mb-6 bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-semibold mb-1">Weekly Balance</h3>
@@ -343,7 +343,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Bloom Score Scanner CTA */}
-        <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-accent/10 border-none mb-6">
+        <Card className="magazine-feature-card textile-overlay-green bg-gradient-to-br from-secondary/10 to-accent/10 border-2 border-secondary/20 mb-6">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
               <ScanLine className="w-7 h-7 text-secondary-foreground" />
@@ -422,7 +422,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Phase-Based Nutrition Tip */}
-        <Card className="bloom-card bg-gradient-to-br from-accent/10 to-primary/5 border-none">
+        <Card className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-accent/10 to-primary/5 border-2 border-accent/15">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-6 h-6 text-primary-foreground" />
@@ -440,7 +440,7 @@ export default function NutritionPage() {
 
           {/* GROCERY LIST TAB */}
           <TabsContent value="grocery" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card card-fabric">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2">
@@ -546,7 +546,7 @@ export default function NutritionPage() {
 
           {/* MEAL PLANNING TAB */}
           <TabsContent value="meals" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card card-marble">
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
                   <Calendar className="w-6 h-6 text-primary" />
@@ -635,7 +635,7 @@ export default function NutritionPage() {
 
           {/* AI MEAL IDEAS TAB */}
           <TabsContent value="ai-meals" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="magazine-feature-card texture-linen">
               <Tabs defaultValue="breakfast" className="w-full">
                 <TabsList className="grid w-full grid-cols-5 mb-6">
                   <TabsTrigger value="breakfast">Breakfast</TabsTrigger>

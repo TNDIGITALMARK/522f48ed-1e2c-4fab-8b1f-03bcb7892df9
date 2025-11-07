@@ -30,8 +30,8 @@ export default function NutritionQuizPage() {
 
   if (quizComplete) {
     return (
-      <div className="min-h-screen bg-background pb-24">
-        <header className="bg-white border-b border-border px-6 py-4">
+      <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+        <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
           <div className="max-w-4xl mx-auto">
             <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -83,8 +83,8 @@ export default function NutritionQuizPage() {
 
   if (showQuiz) {
     return (
-      <div className="min-h-screen bg-background pb-24">
-        <header className="bg-white border-b border-border px-6 py-4">
+      <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+        <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
           <div className="max-w-4xl mx-auto">
             <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -108,8 +108,8 @@ export default function NutritionQuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-24">
-      <header className="bg-white border-b border-border px-6 py-4">
+    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
