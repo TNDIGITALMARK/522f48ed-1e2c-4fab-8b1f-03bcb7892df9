@@ -12,10 +12,24 @@ export function AnimatedHeroBackground() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* EMBODY image as full background - Less transparent */}
+      {/* Magazine-style textile texture background layer */}
+      <div
+        className={`absolute inset-0 transition-all duration-[2500ms] ease-out ${
+          mounted ? 'opacity-25 scale-100' : 'opacity-0 scale-105'
+        }`}
+        style={{
+          backgroundImage: 'url(/textures/fabric-cream.jpg)',
+          backgroundSize: '800px auto',
+          backgroundRepeat: 'repeat',
+          backgroundPosition: 'center',
+          mixBlendMode: 'soft-light'
+        }}
+      />
+
+      {/* EMBODY image as full background - Magazine aesthetic */}
       <div
         className={`absolute inset-0 transition-all duration-[2000ms] ease-out ${
-          mounted ? 'opacity-35 scale-100' : 'opacity-0 scale-105'
+          mounted ? 'opacity-30 scale-100' : 'opacity-0 scale-105'
         }`}
       >
         <Image
@@ -27,34 +41,37 @@ export function AnimatedHeroBackground() {
         />
       </div>
 
-      {/* Gradient overlay for text readability and depth - Less transparent */}
+      {/* Beige gradient overlay for magazine feel */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br from-background/85 via-background/70 to-background/85 transition-opacity duration-[3000ms] ${
+        className={`absolute inset-0 bg-gradient-to-br from-background/90 via-background/75 to-background/90 transition-opacity duration-[3000ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
-      {/* Subtle animated circles for visual interest - responsive sizing */}
+      {/* Sage green accent circle */}
       <div
         className={`absolute top-1/4 left-1/3
           w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64
-          bg-accent/5 rounded-full blur-2xl md:blur-3xl
+          rounded-full blur-2xl md:blur-3xl
           transition-all duration-[2500ms] ${
           mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
+          background: 'radial-gradient(circle, hsl(100 18% 73% / 0.08) 0%, transparent 70%)',
           animation: mounted ? 'pulse-slow 6s ease-in-out infinite' : 'none'
         }}
       />
 
+      {/* Olive accent circle */}
       <div
         className={`absolute bottom-1/3 right-1/4
           w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80
-          bg-primary/5 rounded-full blur-2xl md:blur-3xl
+          rounded-full blur-2xl md:blur-3xl
           transition-all duration-[2500ms] delay-500 ${
           mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
         }`}
         style={{
+          background: 'radial-gradient(circle, hsl(72 15% 27% / 0.06) 0%, transparent 70%)',
           animation: mounted ? 'pulse-slow 7s ease-in-out infinite 1s' : 'none'
         }}
       />

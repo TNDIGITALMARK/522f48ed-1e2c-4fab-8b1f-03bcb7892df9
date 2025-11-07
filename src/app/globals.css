@@ -5,26 +5,27 @@
 
 /*
 =============================================================================
-BLOOM - NEW NATURAL COLOR SCHEME WITH TEXTILE INSPIRATION
+BLOOM - MAGAZINE-STYLE WELLNESS DESIGN SYSTEM
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Inspired by natural materials: green corduroy, flowing cream fabrics, marble
-- Light beige, pearl white, sage green, and warm brown palette
-- Real textile photo textures throughout the app
-- Clean, modern sans-serif typography for clarity
-- Large rounded corners (20-28px) for friendly aesthetic
-- Emphasis on natural depth through layered textures
+- **Magazine-Inspired Aesthetic**: Editorial layouts with sophisticated typography
+- **Natural Textile Integration**: Real fabric/corduroy photo textures from reference images
+- **Sophisticated Color Palette**: Light beige, pearl white, sage green, olive/brown tones
+- **Elegant Typography**: Playfair Display italic for headings, Inter for body text
+- **Refined Spacing**: Generous whitespace and comfortable reading proportions
+- **Premium Feel**: Subtle shadows, layered textures, and smooth transitions
+- **Organic Depth**: Layered textile overlays create tactile visual interest
 
-NEW COLOR PALETTE (LIGHT BEIGE, PEARL WHITE, GREEN, BROWN):
-- Rich Brown (Primary Text): #3B3027 / HSL 28 21% 19% - Deep brown for text
-- Deep Chocolate (Dark Accent): #2B221B / HSL 20 24% 13% - Darkest brown
-- Warm Taupe (Secondary): #2F2520 / HSL 15 20% 15% - Medium brown
+NEW COLOR PALETTE (MAGAZINE-STYLE: LIGHT BEIGE, PEARL, SAGE, OLIVE):
+- Light Beige Base: #F9F6F1 / HSL 38 33% 96% - Warm light beige background
+- Pearl White: #F7F3EE / HSL 30 38% 97% - Bright pearl white for cards
+- Sage Green Accent: #B9C4B2 / HSL 100 18% 73% - Soft sage green accent
+- Deep Olive Primary: #4B4F3A / HSL 72 15% 27% - Deep olive green (primary action)
+- Rich Brown Text: #3B3027 / HSL 28 21% 19% - Deep brown for text
+- Warm Taupe: #2F2520 / HSL 15 20% 15% - Medium brown
+- Deep Chocolate: #2B221B / HSL 20 24% 13% - Darkest brown
 - Olive Shadow: #24251D / HSL 65 13% 13% - Dark greenish-brown
-- Light Beige (Background): #F9F6F1 / HSL 38 33% 96% - Warm light beige
-- Pearl White (Cards): #F7F3EE / HSL 30 38% 97% - Bright pearl white
-- Sage Green (Accent): #B9C4B2 / HSL 100 18% 73% - Soft sage green
-- Dark Olive Green (Primary Action): #4B4F3A / HSL 72 15% 27% - Deep olive
 
 TEXTILE TEXTURES (FROM REFERENCE IMAGES):
 - Green Corduroy: /textures/corduroy-green.png - Natural green ribbed texture
@@ -84,71 +85,67 @@ USAGE GUIDELINES:
 */
 
 :root {
-  /* NEW COLOR SCHEME - Light Beige, Pearl White, Green, Brown */
-  /* Extracted from design reference images */
-  --bloom-rich-brown: 28 21% 19%; /* #3B3027 - Deep brown text */
-  --bloom-deep-chocolate: 20 24% 13%; /* #2B221B - Darkest brown */
-  --bloom-warm-taupe: 15 20% 15%; /* #2F2520 - Medium brown */
-  --bloom-olive-shadow: 65 13% 13%; /* #24251D - Dark greenish-brown */
-  --bloom-soft-cream: 38 33% 96%; /* #F9F6F1 - Light beige base */
-  --bloom-lighter-cream: 30 38% 97%; /* #F7F3EE - Pearl white */
+  /* MAGAZINE-STYLE COLOR SCHEME - From Reference Images */
+  /* Palette: Light Beige (#F9F6F1, #F7F3EE), Sage (#B9C4B2), Olive/Brown (#4B4F3A, #3B3027, #2B221B) */
+
+  /* Base color variables */
+  --bloom-beige-light: 38 33% 96%; /* #F9F6F1 - Primary background */
+  --bloom-pearl: 30 38% 97%; /* #F7F3EE - Card surfaces */
   --bloom-sage: 100 18% 73%; /* #B9C4B2 - Sage green accent */
-  --bloom-olive: 72 15% 27%; /* #4B4F3A - Deep olive green */
+  --bloom-olive: 72 15% 27%; /* #4B4F3A - Deep olive primary */
+  --bloom-brown-text: 28 21% 19%; /* #3B3027 - Rich brown text */
+  --bloom-brown-medium: 15 20% 15%; /* #2F2520 - Warm taupe */
+  --bloom-brown-dark: 20 24% 13%; /* #2B221B - Deep chocolate */
+  --bloom-olive-shadow: 65 13% 13%; /* #24251D - Dark greenish-brown */
 
-  /* Enhanced color palette with additional reference colors */
-  --bloom-pale-beige: 36 40% 95%; /* #F9F6F1 refined */
-  --bloom-pearl-white: 30 45% 98%; /* #F7F3EE pearl */
-  --bloom-muted-sage: 100 15% 75%; /* Softer sage variation */
-  --bloom-warm-brown: 28 20% 22%; /* Warmer brown for text */
+  /* Light theme - Magazine aesthetic with beige and sage */
+  --background: 38 33% 96%; /* #F9F6F1 - Light beige base */
+  --foreground: 28 21% 19%; /* #3B3027 - Rich brown text */
 
-  /* Light theme - Light Beige, Pearl White, Green, Brown */
-  --background: 38 33% 96%; /* Light beige background */
-  --foreground: 28 21% 19%; /* Rich brown text */
-
-  /* Cards with pearl white tones */
-  --card: 30 38% 97%; /* Pearl white cards */
+  /* Cards with pearl white */
+  --card: 30 38% 97%; /* #F7F3EE - Pearl white */
   --card-foreground: 28 21% 19%;
 
-  /* Popovers with pearl white */
+  /* Popovers */
   --popover: 30 38% 97%;
   --popover-foreground: 28 21% 19%;
 
-  /* Primary: Olive/dark green for actions */
-  --primary: 72 15% 27%; /* Dark olive green primary */
+  /* Primary: Deep olive green for main actions */
+  --primary: 72 15% 27%; /* #4B4F3A - Deep olive */
   --primary-foreground: 30 38% 97%;
 
-  /* Secondary: Sage green */
-  --secondary: 100 18% 73%; /* Sage green secondary */
+  /* Secondary: Sage green accent */
+  --secondary: 100 18% 73%; /* #B9C4B2 - Sage green */
   --secondary-foreground: 28 21% 19%;
 
-  /* Muted: Lighter beige tones */
-  --muted: 38 30% 88%; /* Light beige muted */
-  --muted-foreground: 28 21% 35%;
+  /* Muted: Light beige tones */
+  --muted: 38 30% 90%; /* Lighter beige for muted elements */
+  --muted-foreground: 28 21% 40%;
 
-  /* Accent: Sage green for highlights */
-  --accent: 100 18% 73%; /* Sage accent */
+  /* Accent: Sage green highlights */
+  --accent: 100 18% 73%; /* #B9C4B2 - Sage */
   --accent-foreground: 28 21% 19%;
 
-  /* Destructive - Deep brown */
-  --destructive: 20 24% 13%;
+  /* Destructive: Deep brown */
+  --destructive: 20 24% 13%; /* #2B221B */
   --destructive-foreground: 30 38% 97%;
 
-  /* Borders: Subtle beige-green blend */
-  --border: 38 25% 88%; /* Soft beige border */
-  --input: 38 25% 88%;
+  /* Borders: Soft beige-sage blend */
+  --border: 38 25% 90%; /* Softer beige border */
+  --input: 38 25% 90%;
   --ring: 72 15% 27%; /* Olive focus ring */
 
-  /* Large rounded corners for modern feel */
-  --radius: 1.5rem; /* 24px */
+  /* Magazine-style rounded corners */
+  --radius: 1.25rem; /* 20px for magazine aesthetic */
 
-  /* Sidebar - light beige with natural textures */
-  --sidebar-background: 38 33% 94%;
+  /* Sidebar: Light beige with olive accents */
+  --sidebar-background: 38 33% 95%;
   --sidebar-foreground: 28 21% 19%;
   --sidebar-primary: 72 15% 27%;
   --sidebar-primary-foreground: 30 38% 97%;
-  --sidebar-accent: 38 30% 90%;
+  --sidebar-accent: 38 30% 92%;
   --sidebar-accent-foreground: 28 21% 19%;
-  --sidebar-border: 38 25% 88%;
+  --sidebar-border: 38 25% 90%;
   --sidebar-ring: 72 15% 27%;
 }
 
@@ -290,87 +287,93 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 
-  /* Add subtle textile texture to body background */
+  /* Magazine-style subtle paper texture */
   background-image:
     repeating-linear-gradient(90deg,
       transparent 0px,
-      rgba(185, 196, 178, 0.01) 1px,
+      rgba(185, 196, 178, 0.015) 1px,
       transparent 2px,
-      transparent 4px
+      transparent 6px
     ),
     repeating-linear-gradient(0deg,
       transparent 0px,
-      rgba(160, 140, 120, 0.008) 1px,
+      rgba(59, 48, 39, 0.01) 1px,
       transparent 2px,
-      transparent 4px
-    );
-  background-size: 4px 4px;
+      transparent 6px
+    ),
+    radial-gradient(ellipse at 50% 50%, rgba(185, 196, 178, 0.02) 0%, transparent 50%);
+  background-size: 6px 6px, 6px 6px, 100% 100%;
 }
 
-/* Typography System - Bloom Font (Playfair Display Italic) for headings */
+/* Typography System - Magazine-style elegant headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 600;
   font-style: italic;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.75rem;
   font-weight: 600;
   margin-bottom: 1rem;
   letter-spacing: -0.015em;
 }
 
-h3 {
-  font-size: 1.5rem;
+h4 {
+  font-size: 1.375rem;
   font-weight: 600;
   margin-bottom: 0.875rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
 }
 
 h5 {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.005em;
 }
 
 h6 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  text-transform: none;
+  margin-bottom: 0.625rem;
   letter-spacing: 0;
 }
 
-/* Body text - Inter for clarity */
+/* Body text - Magazine-style readability */
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
-  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
+  color: hsl(var(--foreground) / 0.95);
 }
 
 a {
@@ -396,29 +399,43 @@ i {
   font-family: 'Lora', Georgia, serif;
 }
 
-/* Button defaults - Modern pill-shaped styling */
+/* Button defaults - Magazine-style elegant buttons */
 button {
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
-  border-radius: 1rem;
-  transition: all 0.3s ease;
-  letter-spacing: -0.01em;
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.08);
 }
 
-/* Input defaults - Clean with large radius */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 48, 39, 0.14);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.08);
+}
+
+/* Input defaults - Magazine-style refined inputs */
 input, textarea, select {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   border-radius: 1rem;
-  border: 1px solid hsl(var(--border));
+  border: 1.5px solid hsl(var(--border));
+  background: hsl(var(--card));
   transition: border-color 0.3s ease, box-shadow 0.2s ease, transform 0.15s ease;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1.125rem;
+  box-shadow: 0 1px 3px rgba(59, 48, 39, 0.04);
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12), 0 2px 8px rgba(59, 48, 39, 0.08);
   transform: translateY(-1px);
 }
 
@@ -437,20 +454,20 @@ label {
   letter-spacing: 0.01em;
 }
 
-/* Natural depth shadows with earthy tones */
+/* Magazine-style shadows with natural depth */
 .shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.08);
+  box-shadow: 0 2px 10px rgba(59, 48, 39, 0.06);
 }
 
 .shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 4px 16px rgba(59, 48, 39, 0.12);
+  box-shadow: 0 4px 20px rgba(59, 48, 39, 0.10);
 }
 
 .shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 8px 32px rgba(59, 48, 39, 0.15);
+  box-shadow: 0 10px 40px rgba(59, 48, 39, 0.14);
 }
 
 /* ============================================
@@ -706,10 +723,10 @@ label {
   background-size: 8px 8px;
 }
 
-/* Real textile image backgrounds */
+/* Real textile image backgrounds - From reference photos */
 .bg-corduroy-photo {
-  background-image: url('/textures/corduroy-green.png');
-  background-size: 400px auto;
+  background-image: url('/textures/corduroy-green.jpg');
+  background-size: 600px auto;
   background-repeat: repeat;
   background-position: center;
   position: relative;
@@ -719,14 +736,14 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background: hsl(var(--background) / 0.85);
+  background: hsl(var(--background) / 0.92);
   pointer-events: none;
   z-index: 0;
 }
 
 .bg-fabric-photo {
-  background-image: url('/textures/fabric-cream.png');
-  background-size: 600px auto;
+  background-image: url('/textures/fabric-cream.jpg');
+  background-size: 800px auto;
   background-repeat: repeat;
   background-position: center;
   position: relative;
@@ -736,12 +753,12 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background: hsl(var(--background) / 0.9);
+  background: hsl(var(--background) / 0.95);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Textile overlays for cards and sections */
+/* Textile overlays for cards and sections - Magazine style */
 .textile-overlay-green {
   position: relative;
   overflow: hidden;
@@ -751,12 +768,13 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/textures/corduroy-green.png');
-  background-size: 300px auto;
+  background-image: url('/textures/corduroy-green.jpg');
+  background-size: 500px auto;
   background-repeat: repeat;
-  opacity: 0.08;
+  opacity: 0.05;
   pointer-events: none;
   z-index: 0;
+  mix-blend-mode: multiply;
 }
 
 .textile-overlay-cream {
@@ -768,30 +786,32 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/textures/fabric-cream.png');
-  background-size: 400px auto;
+  background-image: url('/textures/fabric-cream.jpg');
+  background-size: 600px auto;
   background-repeat: repeat;
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
   z-index: 0;
+  mix-blend-mode: soft-light;
 }
 
-/* Card styling - Large radius with glassmorphism support */
+/* Card styling - Magazine-style with elegant spacing */
 .neutral-card,
 .bloom-card {
   background: hsl(var(--card));
-  border-radius: 1.5rem;
-  padding: 1.75rem;
-  border: 1px solid hsl(var(--border) / 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  backdrop-filter: blur(8px);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(59, 48, 39, 0.06);
 }
 
 .neutral-card:hover,
 .bloom-card:hover {
-  transform: translateY(-3px);
-  border-color: hsl(var(--primary) / 0.3);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  border-color: hsl(var(--primary) / 0.25);
+  box-shadow: 0 16px 48px rgba(59, 48, 39, 0.12);
 }
 
 /* Glassmorphism card variant - Less transparent for better visibility */
@@ -1078,15 +1098,45 @@ label {
    ADDITIONAL MINIMALIST ENHANCEMENTS
    ============================================ */
 
-/* Section spacing utilities */
+/* Magazine-style section spacing */
 .section-spacing {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .section-spacing-lg {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+.section-spacing-xl {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+
+/* Magazine-style content widths */
+.content-narrow {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-standard {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-wide {
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-full {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Minimalist quote/callout styling */
@@ -1363,16 +1413,167 @@ tr:hover {
   }
 }
 
+/* Magazine-style pull quotes */
+.pull-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.5;
+  color: hsl(var(--primary));
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-left: 4px solid hsl(var(--primary));
+  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted) / 0.3) 100%);
+  border-radius: 0.5rem;
+}
+
+/* Magazine-style drop cap */
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  float: left;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+  color: hsl(var(--primary));
+}
+
+/* Magazine-style column layouts */
+.magazine-columns-2 {
+  column-count: 2;
+  column-gap: 3rem;
+  column-rule: 1px solid hsl(var(--border));
+}
+
+.magazine-columns-3 {
+  column-count: 3;
+  column-gap: 2.5rem;
+  column-rule: 1px solid hsl(var(--border));
+}
+
+@media (max-width: 768px) {
+  .magazine-columns-2,
+  .magazine-columns-3 {
+    column-count: 1;
+    column-gap: 0;
+    column-rule: none;
+  }
+}
+
+/* Magazine-style image treatments */
+.magazine-image {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(59, 48, 39, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.magazine-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 48px rgba(59, 48, 39, 0.18);
+}
+
+.magazine-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Magazine-style sidebar callouts */
+.magazine-callout {
+  background: linear-gradient(135deg, hsl(var(--accent) / 0.1) 0%, hsl(var(--accent) / 0.05) 100%);
+  border: 1.5px solid hsl(var(--accent) / 0.3);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.magazine-callout-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  color: hsl(var(--primary));
+  margin-bottom: 0.75rem;
+}
+
+/* Magazine-style masonry/bento grids */
+.magazine-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.magazine-grid-2 {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.magazine-grid-3 {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .magazine-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .magazine-grid-2,
+  .magazine-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .magazine-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* Magazine-style feature cards */
+.magazine-feature-card {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+  box-shadow: 0 4px 20px rgba(59, 48, 39, 0.08);
+}
+
+.magazine-feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(59, 48, 39, 0.15);
+}
+
+.magazine-feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/fabric-cream.jpg');
+  background-size: 600px auto;
+  background-repeat: repeat;
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
 /* Print styles */
 @media print {
   body {
-    font-family: 'Lora', Georgia, serif;
+    font-family: 'Inter', sans-serif;
     color: #000;
     background: #fff;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Playfair Display', Georgia, serif;
     page-break-after: avoid;
   }
 
@@ -1380,5 +1581,10 @@ tr:hover {
   .shadow-bloom-sm,
   .shadow-bloom-lg {
     box-shadow: none !important;
+  }
+
+  .textile-overlay-green::before,
+  .textile-overlay-cream::before {
+    display: none;
   }
 }

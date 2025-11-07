@@ -45,7 +45,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-textile-beige">
       {/* Header/Navigation */}
-      <header className="bg-textile-pearl backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50 textile-overlay-cream">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -68,7 +68,7 @@ export default function HomePage() {
             </Link>
           </nav>
           <Link href="/dashboard">
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-2.5 shadow-bloom-sm hover:shadow-bloom transition-all">
               Download App
             </Button>
           </Link>
@@ -82,8 +82,8 @@ export default function HomePage() {
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <div className="inline-block mb-6 px-6 py-3 bg-primary/10 rounded-full backdrop-blur-sm animate-fade-in-scale">
-            <span className="text-base font-medium text-primary">Wellness Rooted in Self-Compassion</span>
+          <div className="inline-block mb-6 px-8 py-3.5 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full backdrop-blur-sm border border-primary/20 animate-fade-in-scale shadow-bloom-sm">
+            <span className="text-base font-semibold text-primary">Wellness Rooted in Self-Compassion</span>
           </div>
           <h1 className="text-5xl md:text-7xl mb-8 leading-tight animate-fade-in-up">
             Your Body's Wellness Partner
@@ -94,15 +94,15 @@ export default function HomePage() {
           <p className="text-lg md:text-xl mb-10 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
             Make fitness a form of <strong>self-care</strong>, not self-control.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center animate-fade-in-up animation-delay-600">
+          <div className="flex flex-wrap gap-5 justify-center animate-fade-in-up animation-delay-600">
             <Link href="/dashboard">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-10 py-6 text-lg shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-12 py-7 text-lg font-semibold shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
                 Start Your Journey
                 <ArrowRight className="ml-2 w-6 h-6" />
               </Button>
             </Link>
             <Link href="#features">
-              <Button size="lg" variant="outline" className="rounded-full px-10 py-6 text-lg border-2 backdrop-blur-sm bg-white/80 hover:bg-white transition-all hover:scale-105">
+              <Button size="lg" variant="outline" className="rounded-full px-12 py-7 text-lg font-semibold border-2 border-primary/30 backdrop-blur-sm bg-card/90 hover:bg-card hover:border-primary/50 transition-all hover:scale-105 shadow-bloom-sm">
                 Learn More
               </Button>
             </Link>
@@ -111,7 +111,7 @@ export default function HomePage() {
       </section>
 
       {/* Mission Statement */}
-      <section className="texture-marble py-16 textile-overlay-cream">
+      <section className="texture-fabric py-20 textile-overlay-cream section-spacing">
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <div className="inline-block mb-6">
             <Heart className="w-16 h-16 text-primary mx-auto" />
@@ -148,7 +148,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-textile-pearl textile-overlay-green">
+      <section id="features" className="section-spacing-lg bg-textile-pearl textile-overlay-green">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl mb-4">Smart, Intuitive Wellness</h2>
@@ -157,18 +157,18 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="magazine-grid-3">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="bloom-card card-fabric text-center hover:scale-105 transition-transform duration-300 relative z-10">
-                  <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-primary" />
+                <Card key={index} className="magazine-feature-card text-center p-8 relative z-10">
+                  <div className="flex justify-center mb-5">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center shadow-bloom-sm">
+                      <Icon className="w-9 h-9 text-primary" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-[0.95rem]">{feature.description}</p>
                 </Card>
               );
             })}
@@ -177,7 +177,7 @@ export default function HomePage() {
       </section>
 
       {/* Weight & Goals Tracking Section */}
-      <section className="py-20 bg-textile-beige">
+      <section className="section-spacing-lg bg-textile-beige textile-overlay-cream">
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-12">
             <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full border border-secondary/20">
@@ -189,9 +189,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="magazine-grid-2 mb-12">
             {/* Current Weight Card */}
-            <Card className="bloom-card bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
+            <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
@@ -235,7 +235,7 @@ export default function HomePage() {
             </Card>
 
             {/* Active Goal Card */}
-            <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/20">
+            <Card className="magazine-feature-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20 p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
@@ -292,8 +292,8 @@ export default function HomePage() {
           </div>
 
           {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 text-center">
+          <div className="magazine-grid-3">
+            <div className="magazine-feature-card text-center p-8">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-4 shadow-bloom">
                 <Scale className="w-7 h-7 text-white" />
               </div>
@@ -313,8 +313,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-pink-400 flex items-center justify-center mx-auto mb-4 shadow-bloom">
+            <div className="magazine-feature-card text-center p-8">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary/80 to-accent flex items-center justify-center mx-auto mb-4 shadow-bloom">
                 <TrendingUp className="w-7 h-7 text-white" />
               </div>
               <h4 className="text-lg font-semibold mb-2">Progress Insights</h4>
@@ -337,10 +337,10 @@ export default function HomePage() {
       </section>
 
       {/* Smart Weekly Calorie System */}
-      <section className="relative overflow-hidden py-24 texture-fabric">
-        {/* Decorative background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden section-spacing-xl texture-fabric textile-overlay-cream">
+        {/* Decorative sage green accent elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(100 18% 73% / 0.08) 0%, transparent 70%)' }} />
+        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(72 15% 27% / 0.06) 0%, transparent 70%)' }} />
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-12">
@@ -355,9 +355,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 items-start mb-12">
+          <div className="magazine-grid-2 items-start mb-12">
             <div className="space-y-6">
-              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-primary/5">
+              <div className="magazine-feature-card bg-gradient-to-br from-card to-primary/8 p-6">
                 <div className="flex gap-4 items-start">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
                     <Calendar className="w-6 h-6 text-white" />
@@ -371,7 +371,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-secondary/5">
+              <div className="magazine-feature-card bg-gradient-to-br from-card to-secondary/8 p-6">
                 <div className="flex gap-4 items-start">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
                     <Activity className="w-6 h-6 text-white" />
@@ -385,7 +385,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 bg-gradient-to-br from-white to-accent/10">
+              <div className="magazine-feature-card bg-gradient-to-br from-card to-accent/10 p-6">
                 <div className="flex gap-4 items-start">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-400 to-accent flex items-center justify-center flex-shrink-0 shadow-bloom">
                     <TrendingUp className="w-6 h-6 text-white" />
@@ -400,7 +400,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="bloom-card bg-gradient-to-br from-white via-primary/5 to-secondary/5 border-2 border-primary/20">
+            <div className="magazine-feature-card bg-gradient-to-br from-card via-primary/8 to-secondary/8 border-2 border-primary/25 p-8">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 mb-3">
                   <Sparkles className="w-5 h-5 text-primary" />
@@ -470,7 +470,7 @@ export default function HomePage() {
           </div>
 
           {/* Additional benefits row */}
-          <div className="grid md:grid-cols-4 gap-6 mt-12">
+          <div className="magazine-grid mt-12">
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                 <Award className="w-6 h-6 text-primary" />
@@ -507,8 +507,8 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <Card className="bloom-card bg-gradient-to-br from-secondary/20 via-accent/10 to-primary/10 border-none text-center">
+      <section className="max-w-6xl mx-auto px-6 section-spacing-lg">
+        <Card className="magazine-feature-card bg-gradient-to-br from-secondary/15 via-accent/8 to-primary/12 border-2 border-accent/20 text-center p-12">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl mb-6">Ready to Bloom?</h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -526,7 +526,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="texture-marble border-t border-border py-12">
+      <footer className="texture-fabric textile-overlay-cream border-t-2 border-border py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
