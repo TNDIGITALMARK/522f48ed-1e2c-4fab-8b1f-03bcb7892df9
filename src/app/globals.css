@@ -5,26 +5,32 @@
 
 /*
 =============================================================================
-BLOOM - EARTHY NATURAL DESIGN WITH TEXTILE INSPIRATION
+BLOOM - NEW NATURAL COLOR SCHEME WITH TEXTILE INSPIRATION
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Inspired by natural materials: corduroy, marble, flowing fabrics
-- Rich earthy tones with warm neutrals and sage green accents
-- Textured backgrounds with organic patterns
+- Inspired by natural materials: green corduroy, flowing cream fabrics, marble
+- Light beige, pearl white, sage green, and warm brown palette
+- Real textile photo textures throughout the app
 - Clean, modern sans-serif typography for clarity
 - Large rounded corners (20-28px) for friendly aesthetic
-- Emphasis on natural depth through textures and layering
+- Emphasis on natural depth through layered textures
 
-COLOR PALETTE (EARTHY NATURALS):
-- Rich Brown (Primary Text): #3B3027 / HSL 28 21% 19% - Deep earthy text
-- Deep Chocolate (Accent): #2B221B / HSL 20 24% 13% - Dark brown accent
-- Warm Taupe (Secondary): #2F2520 / HSL 15 20% 15% - Medium brown secondary
-- Olive Shadow (Tertiary): #24251D / HSL 65 13% 13% - Dark greenish-brown
-- Soft Cream (Background): #F9F6F1 / HSL 35 43% 96% - Warm cream base
-- Lighter Cream (Cards): #F7F3EE / HSL 30 38% 96% - Lightest cream
+NEW COLOR PALETTE (LIGHT BEIGE, PEARL WHITE, GREEN, BROWN):
+- Rich Brown (Primary Text): #3B3027 / HSL 28 21% 19% - Deep brown for text
+- Deep Chocolate (Dark Accent): #2B221B / HSL 20 24% 13% - Darkest brown
+- Warm Taupe (Secondary): #2F2520 / HSL 15 20% 15% - Medium brown
+- Olive Shadow: #24251D / HSL 65 13% 13% - Dark greenish-brown
+- Light Beige (Background): #F9F6F1 / HSL 38 33% 96% - Warm light beige
+- Pearl White (Cards): #F7F3EE / HSL 30 38% 97% - Bright pearl white
 - Sage Green (Accent): #B9C4B2 / HSL 100 18% 73% - Soft sage green
-- Olive Green (Action): #4B4F3A / HSL 72 15% 27% - Deep olive green
+- Dark Olive Green (Primary Action): #4B4F3A / HSL 72 15% 27% - Deep olive
+
+TEXTILE TEXTURES (FROM REFERENCE IMAGES):
+- Green Corduroy: /textures/corduroy-green.png - Natural green ribbed texture
+- Cream Fabric: /textures/fabric-cream.png - Flowing wavy cream/beige fabric
+- Subtle linen patterns for backgrounds
+- Marble-inspired gradients for cards
 
 TYPOGRAPHY SYSTEM:
 - Primary Font: Inter (clean, modern, excellent readability)
@@ -34,12 +40,12 @@ TYPOGRAPHY SYSTEM:
 
 FONT USAGE:
 - All Headings (h1-h6): Playfair Display Italic (elegant "Bloom by Rooted" style)
-- Body Text: Inter 400-500 (excellent readability)
+- Body Text: Inter 400-500 (excellent readability on beige background)
 - UI Elements: DM Sans 500-600 (clean, modern)
 - Labels: Inter 500 (clear, concise)
 
 SPACING SYSTEM:
-- Cards: 24-32px padding
+- Cards: 24-32px padding (pearl white with subtle texture)
 - Large Cards: 32-48px padding
 - Sections: 48-80px vertical spacing
 - Elements: 16-24px between components
@@ -51,83 +57,98 @@ COMPONENT STYLING (NATURAL TEXTURES):
 - Border Radius: 20-28px (large, friendly rounds)
 - Card Radius: 24px standard
 - Button Radius: 16-20px (pill-shaped for primary actions)
-- Borders: 1px solid, subtle with warm tones
+- Borders: 1px solid, subtle beige tones
 - Shadows: Natural depth shadows (0 4px 24px rgba(59,48,39,0.12))
-- Textile textures: Corduroy, marble, flowing fabric patterns
-- Overlay effects: Subtle gradients with earthy tones
+- Textile overlays: Real photo textures with opacity layers
+- Background patterns: Subtle linen and woven textures
 
 VISUAL EFFECTS:
-- Textile-inspired background patterns
-- Natural material textures (corduroy, marble, fabric)
-- Soft drop shadows for organic depth
-- Smooth earthy gradients (cream to sage)
+- Real textile photo backgrounds (corduroy, fabric)
+- Subtle overlay patterns for depth
+- Soft drop shadows with brown tones
+- Smooth cream-to-beige gradients
 - Large rounded corners throughout
 - Hover effects with subtle scale transforms
 - Smooth transitions (300ms ease)
-- Textured overlays on cards and sections
+- Layered textile textures on cards and sections
+
+USAGE GUIDELINES:
+- Use .textile-overlay-green for subtle green corduroy texture
+- Use .textile-overlay-cream for subtle cream fabric texture
+- Use .bg-textile-beige for light beige textured backgrounds
+- Use .bg-textile-pearl for pearl white textured backgrounds
+- Use .card-fabric for flowing fabric effect cards
+- Use .card-marble for marble-veined pearl white cards
 
 =============================================================================
 */
 
 :root {
-  /* Earthy Natural Color System */
-  --bloom-rich-brown: 28 21% 19%; /* #3B3027 - Deep earthy text */
-  --bloom-deep-chocolate: 20 24% 13%; /* #2B221B - Dark brown accent */
-  --bloom-warm-taupe: 15 20% 15%; /* #2F2520 - Medium brown secondary */
+  /* NEW COLOR SCHEME - Light Beige, Pearl White, Green, Brown */
+  /* Extracted from design reference images */
+  --bloom-rich-brown: 28 21% 19%; /* #3B3027 - Deep brown text */
+  --bloom-deep-chocolate: 20 24% 13%; /* #2B221B - Darkest brown */
+  --bloom-warm-taupe: 15 20% 15%; /* #2F2520 - Medium brown */
   --bloom-olive-shadow: 65 13% 13%; /* #24251D - Dark greenish-brown */
-  --bloom-soft-cream: 35 43% 96%; /* #F9F6F1 - Warm cream base */
-  --bloom-lighter-cream: 30 38% 96%; /* #F7F3EE - Lightest cream */
-  --bloom-sage: 100 18% 73%; /* #B9C4B2 - Soft sage green */
+  --bloom-soft-cream: 38 33% 96%; /* #F9F6F1 - Light beige base */
+  --bloom-lighter-cream: 30 38% 97%; /* #F7F3EE - Pearl white */
+  --bloom-sage: 100 18% 73%; /* #B9C4B2 - Sage green accent */
   --bloom-olive: 72 15% 27%; /* #4B4F3A - Deep olive green */
 
-  /* Light theme - Earthy naturals with texture support */
-  --background: 35 43% 96%; /* Soft cream background */
+  /* Enhanced color palette with additional reference colors */
+  --bloom-pale-beige: 36 40% 95%; /* #F9F6F1 refined */
+  --bloom-pearl-white: 30 45% 98%; /* #F7F3EE pearl */
+  --bloom-muted-sage: 100 15% 75%; /* Softer sage variation */
+  --bloom-warm-brown: 28 20% 22%; /* Warmer brown for text */
+
+  /* Light theme - Light Beige, Pearl White, Green, Brown */
+  --background: 38 33% 96%; /* Light beige background */
   --foreground: 28 21% 19%; /* Rich brown text */
 
-  /* Textured cards with warm cream tones */
-  --card: 30 38% 96%; /* Lighter cream cards */
+  /* Cards with pearl white tones */
+  --card: 30 38% 97%; /* Pearl white cards */
   --card-foreground: 28 21% 19%;
 
-  /* Popovers with natural feel */
-  --popover: 30 38% 96%;
+  /* Popovers with pearl white */
+  --popover: 30 38% 97%;
   --popover-foreground: 28 21% 19%;
 
-  /* Primary: Olive green for nature-inspired actions */
-  --primary: 72 15% 27%; /* Olive green primary */
-  --primary-foreground: 30 38% 96%;
+  /* Primary: Olive/dark green for actions */
+  --primary: 72 15% 27%; /* Dark olive green primary */
+  --primary-foreground: 30 38% 97%;
 
   /* Secondary: Sage green */
   --secondary: 100 18% 73%; /* Sage green secondary */
   --secondary-foreground: 28 21% 19%;
 
-  /* Muted: Warm taupe */
-  --muted: 15 20% 85%; /* Light warm taupe muted */
+  /* Muted: Lighter beige tones */
+  --muted: 38 30% 88%; /* Light beige muted */
   --muted-foreground: 28 21% 35%;
 
-  /* Accent: Sage green for subtle highlights */
+  /* Accent: Sage green for highlights */
   --accent: 100 18% 73%; /* Sage accent */
   --accent-foreground: 28 21% 19%;
 
-  /* Destructive - Deep chocolate */
+  /* Destructive - Deep brown */
   --destructive: 20 24% 13%;
-  --destructive-foreground: 30 38% 96%;
+  --destructive-foreground: 30 38% 97%;
 
-  /* Borders: Subtle sage-taupe blend */
-  --border: 100 18% 85%; /* Soft sage-taupe border */
-  --input: 100 18% 85%;
+  /* Borders: Subtle beige-green blend */
+  --border: 38 25% 88%; /* Soft beige border */
+  --input: 38 25% 88%;
   --ring: 72 15% 27%; /* Olive focus ring */
 
   /* Large rounded corners for modern feel */
   --radius: 1.5rem; /* 24px */
 
-  /* Sidebar - natural earthy effect */
-  --sidebar-background: 35 43% 94%;
+  /* Sidebar - light beige with natural textures */
+  --sidebar-background: 38 33% 94%;
   --sidebar-foreground: 28 21% 19%;
   --sidebar-primary: 72 15% 27%;
-  --sidebar-primary-foreground: 30 38% 96%;
-  --sidebar-accent: 100 18% 90%;
+  --sidebar-primary-foreground: 30 38% 97%;
+  --sidebar-accent: 38 30% 90%;
   --sidebar-accent-foreground: 28 21% 19%;
-  --sidebar-border: 100 18% 85%;
+  --sidebar-border: 38 25% 88%;
   --sidebar-ring: 72 15% 27%;
 }
 
@@ -274,6 +295,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   letter-spacing: -0.01em;
+
+  /* Add subtle textile texture to body background */
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      rgba(185, 196, 178, 0.01) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(0deg,
+      transparent 0px,
+      rgba(160, 140, 120, 0.008) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  background-size: 4px 4px;
 }
 
 /* Typography System - Bloom Font (Playfair Display Italic) for headings */
@@ -417,22 +454,22 @@ label {
 }
 
 /* ============================================
-   TEXTILE TEXTURE PATTERNS
+   TEXTILE TEXTURE PATTERNS - INSPIRED BY REFERENCE IMAGES
    ============================================ */
 
-/* Corduroy texture pattern */
+/* Green Corduroy texture (from img_9088.png) */
 .texture-corduroy {
   position: relative;
   background: linear-gradient(90deg,
-    hsl(var(--bloom-sage)) 0%,
-    hsl(var(--bloom-olive)) 2%,
-    hsl(var(--bloom-sage)) 4%,
-    hsl(var(--bloom-olive)) 6%,
-    hsl(var(--bloom-sage)) 8%,
-    hsl(var(--bloom-olive)) 10%,
-    hsl(var(--bloom-sage)) 12%
+    hsl(100 20% 65%) 0%,
+    hsl(100 18% 62%) 2%,
+    hsl(100 20% 65%) 4%,
+    hsl(100 18% 62%) 6%,
+    hsl(100 20% 65%) 8%,
+    hsl(100 18% 62%) 10%,
+    hsl(100 20% 65%) 12%
   );
-  background-size: 8px 100%;
+  background-size: 6px 100%;
   background-repeat: repeat-x;
 }
 
@@ -442,24 +479,37 @@ label {
   inset: 0;
   background: repeating-linear-gradient(90deg,
     transparent 0px,
-    rgba(75, 79, 58, 0.1) 1px,
+    rgba(75, 79, 58, 0.15) 1px,
     transparent 2px,
-    transparent 6px,
-    rgba(75, 79, 58, 0.15) 7px,
-    transparent 8px
+    transparent 4px,
+    rgba(75, 79, 58, 0.2) 5px,
+    transparent 6px
   );
   pointer-events: none;
 }
 
-/* Marble texture effect */
+/* Enhanced corduroy for backgrounds */
+.texture-corduroy-bg {
+  background: repeating-linear-gradient(90deg,
+    hsl(100 18% 73%) 0px,
+    hsl(100 16% 70%) 1px,
+    hsl(100 18% 73%) 2px,
+    hsl(100 18% 73%) 6px,
+    hsl(100 16% 68%) 7px,
+    hsl(100 18% 73%) 8px
+  );
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Marble texture effect - subtle gray/beige veining */
 .texture-marble {
   background: linear-gradient(135deg,
-    hsl(var(--bloom-soft-cream)) 0%,
-    hsl(var(--bloom-lighter-cream)) 25%,
-    hsl(var(--bloom-soft-cream)) 50%,
-    rgba(185, 196, 178, 0.1) 55%,
-    hsl(var(--bloom-lighter-cream)) 75%,
-    hsl(var(--bloom-soft-cream)) 100%
+    hsl(38 33% 96%) 0%,
+    hsl(30 38% 97%) 25%,
+    hsl(38 33% 96%) 50%,
+    hsl(0 0% 92%) 55%,
+    hsl(30 38% 97%) 75%,
+    hsl(38 33% 96%) 100%
   );
   background-size: 200% 200%;
   position: relative;
@@ -469,23 +519,36 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 30%, rgba(185, 196, 178, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 70%, rgba(75, 79, 58, 0.05) 0%, transparent 50%),
-              radial-gradient(ellipse at 40% 80%, rgba(185, 196, 178, 0.06) 0%, transparent 50%);
+  background: radial-gradient(ellipse at 20% 30%, rgba(185, 196, 178, 0.05) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(160, 160, 160, 0.03) 0%, transparent 50%),
+              radial-gradient(ellipse at 40% 80%, rgba(185, 196, 178, 0.04) 0%, transparent 50%);
   pointer-events: none;
 }
 
-/* Flowing fabric texture */
+/* Flowing fabric texture - inspired by wavy cream fabric (img_9089.png) */
 .texture-fabric {
   background: linear-gradient(120deg,
-    hsl(var(--bloom-soft-cream)) 0%,
-    hsl(var(--bloom-lighter-cream)) 25%,
-    hsl(var(--bloom-soft-cream)) 50%,
-    hsl(var(--bloom-lighter-cream)) 75%,
-    hsl(var(--bloom-soft-cream)) 100%
+    hsl(38 33% 96%) 0%,
+    hsl(30 38% 97%) 15%,
+    hsl(28 35% 94%) 30%,
+    hsl(35 40% 95%) 45%,
+    hsl(30 38% 97%) 60%,
+    hsl(38 33% 96%) 75%,
+    hsl(32 36% 95%) 90%,
+    hsl(38 33% 96%) 100%
   );
   background-size: 400% 400%;
   position: relative;
+  animation: fabric-flow 20s ease-in-out infinite;
+}
+
+@keyframes fabric-flow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .texture-fabric::after {
@@ -495,18 +558,19 @@ label {
   background: repeating-linear-gradient(
     45deg,
     transparent 0px,
-    rgba(185, 196, 178, 0.03) 2px,
+    rgba(185, 196, 178, 0.02) 2px,
     transparent 4px,
-    transparent 8px
+    transparent 12px
   ),
   repeating-linear-gradient(
     -45deg,
     transparent 0px,
-    rgba(185, 196, 178, 0.02) 2px,
+    rgba(160, 140, 120, 0.015) 2px,
     transparent 4px,
-    transparent 8px
+    transparent 12px
   );
   pointer-events: none;
+  opacity: 0.5;
 }
 
 /* Subtle linen texture */
@@ -518,35 +582,198 @@ label {
   background-size: 4px 4px;
 }
 
-/* Textured card variants */
+/* Textured card variants - NEW COLOR SCHEME */
 .card-corduroy {
-  background: linear-gradient(90deg,
-    hsl(100 18% 88%) 0%,
-    hsl(100 18% 85%) 2%,
-    hsl(100 18% 88%) 4%
+  background: repeating-linear-gradient(90deg,
+    hsl(100 18% 76%) 0px,
+    hsl(100 16% 73%) 1px,
+    hsl(100 18% 76%) 2px,
+    hsl(100 18% 76%) 6px,
+    hsl(100 16% 71%) 7px,
+    hsl(100 18% 76%) 8px
   );
-  background-size: 6px 100%;
-  border: 1px solid hsl(var(--bloom-sage));
+  background-size: 8px 100%;
+  border: 1px solid hsl(100 15% 70%);
+  box-shadow: inset 0 1px 2px rgba(75, 79, 58, 0.1);
 }
 
 .card-marble {
   background: linear-gradient(135deg,
-    hsl(var(--card)) 0%,
-    hsl(var(--bloom-lighter-cream)) 50%,
-    hsl(var(--card)) 100%
+    hsl(30 38% 97%) 0%,
+    hsl(38 33% 96%) 25%,
+    hsl(30 38% 97%) 50%,
+    hsl(0 0% 94%) 55%,
+    hsl(38 33% 96%) 75%,
+    hsl(30 38% 97%) 100%
   );
   background-size: 200% 200%;
   border: 1px solid hsl(var(--border));
+  position: relative;
+}
+
+.card-marble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(185, 196, 178, 0.04) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 60%, rgba(160, 160, 160, 0.02) 0%, transparent 60%);
+  pointer-events: none;
+  border-radius: inherit;
 }
 
 .card-fabric {
   background: linear-gradient(120deg,
-    hsl(var(--card)) 0%,
-    hsl(var(--bloom-soft-cream)) 50%,
-    hsl(var(--card)) 100%
+    hsl(38 33% 96%) 0%,
+    hsl(30 38% 97%) 20%,
+    hsl(35 40% 95%) 40%,
+    hsl(30 38% 97%) 60%,
+    hsl(38 33% 96%) 80%,
+    hsl(30 38% 97%) 100%
   );
   background-size: 300% 300%;
   border: 1px solid hsl(var(--border));
+  position: relative;
+  animation: fabric-flow 15s ease-in-out infinite;
+}
+
+.card-fabric::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0px,
+    rgba(185, 196, 178, 0.015) 2px,
+    transparent 4px,
+    transparent 10px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.6;
+}
+
+/* Textile background utility classes */
+.bg-textile-subtle {
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      rgba(185, 196, 178, 0.02) 1px,
+      transparent 2px,
+      transparent 5px
+    ),
+    repeating-linear-gradient(0deg,
+      transparent 0px,
+      rgba(160, 140, 120, 0.015) 1px,
+      transparent 2px,
+      transparent 5px
+    );
+  background-size: 5px 5px;
+}
+
+.bg-textile-beige {
+  background: hsl(38 33% 96%);
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      rgba(59, 48, 39, 0.02) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(0deg,
+      transparent 0px,
+      rgba(59, 48, 39, 0.015) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  background-size: 4px 4px;
+}
+
+.bg-textile-pearl {
+  background: hsl(30 38% 97%);
+  background-image:
+    repeating-linear-gradient(45deg,
+      transparent 0px,
+      rgba(185, 196, 178, 0.01) 2px,
+      transparent 4px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(-45deg,
+      transparent 0px,
+      rgba(160, 140, 120, 0.008) 2px,
+      transparent 4px,
+      transparent 8px
+    );
+  background-size: 8px 8px;
+}
+
+/* Real textile image backgrounds */
+.bg-corduroy-photo {
+  background-image: url('/textures/corduroy-green.png');
+  background-size: 400px auto;
+  background-repeat: repeat;
+  background-position: center;
+  position: relative;
+}
+
+.bg-corduroy-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--background) / 0.85);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-fabric-photo {
+  background-image: url('/textures/fabric-cream.png');
+  background-size: 600px auto;
+  background-repeat: repeat;
+  background-position: center;
+  position: relative;
+}
+
+.bg-fabric-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--background) / 0.9);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Textile overlays for cards and sections */
+.textile-overlay-green {
+  position: relative;
+  overflow: hidden;
+}
+
+.textile-overlay-green::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/corduroy-green.png');
+  background-size: 300px auto;
+  background-repeat: repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.textile-overlay-cream {
+  position: relative;
+  overflow: hidden;
+}
+
+.textile-overlay-cream::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/textures/fabric-cream.png');
+  background-size: 400px auto;
+  background-repeat: repeat;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Card styling - Large radius with glassmorphism support */

@@ -43,9 +43,9 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen texture-linen">
+    <div className="min-h-screen bg-textile-beige">
       {/* Header/Navigation */}
-      <header className="bg-white/90 backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50">
+      <header className="bg-textile-pearl backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50 textile-overlay-cream">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -76,7 +76,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section with Animated Background */}
-      <section className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 overflow-hidden">
+      <section className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 overflow-hidden textile-overlay-cream">
         {/* Animated Background Layer */}
         <AnimatedHeroBackground />
 
@@ -111,8 +111,8 @@ export default function HomePage() {
       </section>
 
       {/* Mission Statement */}
-      <section className="texture-marble py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section className="texture-marble py-16 textile-overlay-cream">
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <div className="inline-block mb-6">
             <Heart className="w-16 h-16 text-primary mx-auto" />
           </div>
@@ -148,8 +148,8 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 texture-fabric">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="features" className="py-20 bg-textile-pearl textile-overlay-green">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl mb-4">Smart, Intuitive Wellness</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -161,7 +161,7 @@ export default function HomePage() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="bloom-card card-marble text-center hover:scale-105 transition-transform duration-300">
+                <Card key={index} className="bloom-card card-fabric text-center hover:scale-105 transition-transform duration-300 relative z-10">
                   <div className="flex justify-center mb-4">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-primary" />
@@ -177,8 +177,8 @@ export default function HomePage() {
       </section>
 
       {/* Weight & Goals Tracking Section */}
-      <section className="py-20 texture-linen">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="py-20 bg-textile-beige">
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="text-center mb-12">
             <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full border border-secondary/20">
               <span className="text-sm font-semibold text-secondary">Track Your Progress</span>

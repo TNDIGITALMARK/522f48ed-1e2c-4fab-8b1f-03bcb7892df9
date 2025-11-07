@@ -119,7 +119,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Shared Calendar Section - At Top of Dashboard */}
-        <Card className="bloom-card animate-fade-in-up animation-delay-200">
+        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-200 textile-overlay-cream">
           <SharedCalendar userId={MOCK_USER_ID} />
         </Card>
 
@@ -150,7 +150,7 @@ export default function DashboardPage() {
         {/* Quick Stats Grid - Inspired by Smart Home Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in-up animation-delay-600">
           {/* Hydration Card */}
-          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+          <Card className="glass-card card-marble group hover:scale-105 transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-sm text-muted-foreground mb-1">Hydration</p>
