@@ -85,68 +85,68 @@ USAGE GUIDELINES:
 */
 
 :root {
-  /* BEIGE BACKDROP WITH SOPHISTICATED BROWN-GREEN FOCUS */
-  /* Palette: Pearl Beige, Sage Green, Rich Dark Browns */
+  /* WELLNESS DASHBOARD COLOR SCHEME - FROM DESIGN REFERENCE */
+  /* Palette: Warm Beige, Olive Green, Terra Cotta Brown */
 
-  /* Base color variables - New sophisticated palette */
-  --bloom-pearl-beige: 40 28% 96%; /* #F9F6F1 - Pearl beige backdrop */
-  --bloom-soft-beige: 35 26% 95%; /* #F7F3EE - Soft beige */
-  --bloom-sage-accent: 100 18% 73%; /* #B9C4B2 - Muted sage green */
-  --bloom-dark-olive: 67 15% 27%; /* #4B4F3A - Dark olive-brown primary */
-  --bloom-very-dark-brown: 25 20% 19%; /* #3B3027 - Rich dark brown */
-  --bloom-deep-brown: 23 23% 14%; /* #2B221B - Deep brown */
-  --bloom-dark-brown-green: 20 19% 15%; /* #2F2520 - Dark brown variant */
-  --bloom-darkest-brown: 65 13% 13%; /* #24251D - Darkest brown-green */
+  /* Base color variables - Exact colors from design mockup */
+  --bloom-cream-bg: 34 31% 92%; /* #f5ebe0 - Light beige/cream background */
+  --bloom-warm-beige: 38 29% 90%; /* #e8dcc8 - Warm beige for cards/search */
+  --bloom-sage-green: 96 21% 69%; /* #b8c5a8 - Light sage green for buttons */
+  --bloom-dark-olive: 78 10% 31%; /* #4a5244 - Dark olive green for calendar header */
+  --bloom-terra-cotta: 20 33% 39%; /* #8b5a3c - Terra cotta brown for progress bars */
+  --bloom-dark-text: 0 0% 17%; /* #2b2b2b - Dark text color */
+  --bloom-white: 0 0% 100%; /* #ffffff - Pure white for calendar days */
+  --bloom-light-gray: 0 0% 95%; /* #f2f2f2 - Light gray for borders */
 
-  /* Light theme - Beige backdrop with sophisticated browns */
-  --background: 40 28% 96%; /* #F9F6F1 - Pearl beige backdrop */
-  --foreground: 25 20% 19%; /* #3B3027 - Rich dark brown text */
+  /* Light theme - Warm beige backdrop */
+  --background: 34 31% 92%; /* #f5ebe0 - Cream background */
+  --foreground: 0 0% 17%; /* #2b2b2b - Dark text */
 
-  /* Cards with soft beige */
-  --card: 35 26% 95%; /* #F7F3EE - Soft beige cards */
-  --card-foreground: 25 20% 19%;
+  /* Cards with warm beige */
+  --card: 38 29% 90%; /* #e8dcc8 - Warm beige cards */
+  --card-foreground: 0 0% 17%;
 
   /* Popovers */
-  --popover: 35 26% 95%;
-  --popover-foreground: 25 20% 19%;
+  --popover: 38 29% 90%;
+  --popover-foreground: 0 0% 17%;
 
-  /* Primary: Dark olive-brown for main actions */
-  --primary: 67 15% 27%; /* #4B4F3A - Dark olive-brown */
-  --primary-foreground: 40 28% 96%;
+  /* Primary: Dark olive green for main actions */
+  --primary: 78 10% 31%; /* #4a5244 - Dark olive green */
+  --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Sage green accent */
-  --secondary: 100 18% 73%; /* #B9C4B2 - Muted sage green */
-  --secondary-foreground: 25 20% 19%;
+  /* Secondary: Light sage green accent */
+  --secondary: 96 21% 69%; /* #b8c5a8 - Light sage green */
+  --secondary-foreground: 0 0% 17%;
 
   /* Muted: Lighter beige tones */
-  --muted: 40 25% 90%; /* Light beige for muted elements */
-  --muted-foreground: 67 15% 35%;
+  --muted: 38 25% 85%; /* Light beige for muted elements */
+  --muted-foreground: 78 10% 40%;
 
-  /* Accent: Sage green highlights */
-  --accent: 100 18% 73%; /* #B9C4B2 - Muted sage */
-  --accent-foreground: 25 20% 19%;
+  /* Accent: Terra cotta brown */
+  --accent: 20 33% 39%; /* #8b5a3c - Terra cotta brown */
+  --accent-foreground: 0 0% 100%;
 
   /* Destructive: Warm terracotta */
   --destructive: 15 55% 55%; /* #C76E56 */
-  --destructive-foreground: 40 28% 96%;
+  --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Soft beige with subtle depth */
-  --border: 40 20% 88%; /* Soft beige border */
-  --input: 40 20% 88%;
-  --ring: 67 15% 27%; /* Dark olive focus ring */
+  /* Borders: Soft gray with subtle depth */
+  --border: 0 0% 88%; /* Soft gray border */
+  --input: 0 0% 88%;
+  --ring: 78 10% 31%; /* Dark olive focus ring */
 
-  /* Magazine-style rounded corners */
-  --radius: 1.25rem; /* 20px for magazine aesthetic */
+  /* Rounded corners - from design reference */
+  --radius: 1rem; /* 16px for clean modern aesthetic */
 
-  /* Sidebar: Pearl beige with dark brown accents */
-  --sidebar-background: 40 28% 94%;
-  --sidebar-foreground: 25 20% 19%;
-  --sidebar-primary: 67 15% 27%;
-  --sidebar-primary-foreground: 40 28% 96%;
-  --sidebar-accent: 40 25% 90%;
-  --sidebar-accent-foreground: 25 20% 19%;
-  --sidebar-border: 40 20% 88%;
-  --sidebar-ring: 67 15% 27%;
+  /* Sidebar: Warm beige with dark olive accents */
+  --sidebar-background: 38 29% 90%;
+  --sidebar-foreground: 0 0% 17%;
+  --sidebar-primary: 78 10% 31%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 38 25% 85%;
+  --sidebar-accent-foreground: 0 0% 17%;
+  --sidebar-border: 0 0% 88%;
+  --sidebar-ring: 78 10% 31%;
 }
 
 .dark {
@@ -293,21 +293,21 @@ body {
   text-rendering: optimizeLegibility;
   letter-spacing: -0.005em;
 
-  /* Subtle pearl beige paper texture with sage green accents */
+  /* Subtle warm cream paper texture - minimalist and clean */
   background-image:
     repeating-linear-gradient(90deg,
       transparent 0px,
-      rgba(185, 196, 178, 0.015) 1px,
+      rgba(184, 197, 168, 0.012) 1px,
       transparent 2px,
       transparent 6px
     ),
     repeating-linear-gradient(0deg,
       transparent 0px,
-      rgba(59, 48, 39, 0.01) 1px,
+      rgba(43, 43, 43, 0.008) 1px,
       transparent 2px,
       transparent 6px
     ),
-    radial-gradient(ellipse at 50% 50%, rgba(185, 196, 178, 0.02) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 50%, rgba(184, 197, 168, 0.015) 0%, transparent 50%);
   background-size: 6px 6px, 6px 6px, 100% 100%;
 }
 
