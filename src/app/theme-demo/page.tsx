@@ -11,9 +11,9 @@ import Link from 'next/link';
 
 export default function ThemeDemoPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen texture-linen">
       {/* Header with theme switcher */}
-      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50">
+      <header className="border-b border-border sticky top-0 bg-background/95 backdrop-blur-sm z-50 texture-marble">
         <div className="container max-w-6xl py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Palette className="w-6 h-6" />
@@ -55,6 +55,73 @@ export default function ThemeDemoPage() {
         {/* Theme Customizer */}
         <section>
           <ThemeCustomizer />
+        </section>
+
+        <Separator />
+
+        {/* Textile Textures Section */}
+        <section className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-bold mb-2">Textile Textures</h2>
+            <p className="text-muted-foreground">Natural material-inspired backgrounds for organic depth</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="texture-corduroy overflow-hidden">
+              <CardHeader className="relative z-10">
+                <CardTitle>Corduroy Texture</CardTitle>
+                <CardDescription>Inspired by green corduroy fabric</CardDescription>
+              </CardHeader>
+              <CardContent className="relative z-10">
+                <p className="text-sm">Vertical ribbed pattern with sage green tones</p>
+              </CardContent>
+            </Card>
+
+            <Card className="texture-marble overflow-hidden">
+              <CardHeader className="relative z-10">
+                <CardTitle>Marble Texture</CardTitle>
+                <CardDescription>Natural stone-inspired patterns</CardDescription>
+              </CardHeader>
+              <CardContent className="relative z-10">
+                <p className="text-sm">Soft veining with warm cream and sage accents</p>
+              </CardContent>
+            </Card>
+
+            <Card className="texture-fabric overflow-hidden">
+              <CardHeader className="relative z-10">
+                <CardTitle>Flowing Fabric</CardTitle>
+                <CardDescription>Soft, draped textile inspiration</CardDescription>
+              </CardHeader>
+              <CardContent className="relative z-10">
+                <p className="text-sm">Gentle waves and folds in cream tones</p>
+              </CardContent>
+            </Card>
+
+            <Card className="texture-linen overflow-hidden">
+              <CardHeader className="relative z-10">
+                <CardTitle>Linen Texture</CardTitle>
+                <CardDescription>Subtle woven pattern</CardDescription>
+              </CardHeader>
+              <CardContent className="relative z-10">
+                <p className="text-sm">Fine cross-hatch weave for natural depth</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="p-6 rounded-2xl card-corduroy">
+              <h4 className="font-semibold mb-2">Card Corduroy</h4>
+              <p className="text-sm text-muted-foreground">Subtle sage green ribbing</p>
+            </div>
+            <div className="p-6 rounded-2xl card-marble">
+              <h4 className="font-semibold mb-2">Card Marble</h4>
+              <p className="text-sm text-muted-foreground">Soft cream gradients</p>
+            </div>
+            <div className="p-6 rounded-2xl card-fabric">
+              <h4 className="font-semibold mb-2">Card Fabric</h4>
+              <p className="text-sm text-muted-foreground">Flowing cream patterns</p>
+            </div>
+          </div>
         </section>
 
         <Separator />

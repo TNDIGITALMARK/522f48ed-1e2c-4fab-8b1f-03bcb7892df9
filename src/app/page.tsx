@@ -43,9 +43,9 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-background to-accent/10">
+    <div className="min-h-screen texture-linen">
       {/* Header/Navigation */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50">
+      <header className="bg-white/90 backdrop-blur-sm border-b border-border px-6 py-4 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">Bloom</span>
@@ -111,7 +111,7 @@ export default function HomePage() {
       </section>
 
       {/* Mission Statement */}
-      <section className="bg-white py-16">
+      <section className="texture-marble py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="inline-block mb-6">
             <Heart className="w-16 h-16 text-primary mx-auto" />
@@ -148,7 +148,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gradient-to-br from-background via-cream/30 to-accent/5">
+      <section id="features" className="py-20 texture-fabric">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl mb-4">Smart, Intuitive Wellness</h2>
@@ -161,7 +161,7 @@ export default function HomePage() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="bloom-card text-center hover:scale-105 transition-transform duration-300">
+                <Card key={index} className="bloom-card card-marble text-center hover:scale-105 transition-transform duration-300">
                   <div className="flex justify-center mb-4">
                     <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
                       <Icon className="w-8 h-8 text-primary" />
@@ -177,7 +177,7 @@ export default function HomePage() {
       </section>
 
       {/* Weight & Goals Tracking Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 texture-linen">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full border border-secondary/20">
@@ -337,7 +337,7 @@ export default function HomePage() {
       </section>
 
       {/* Smart Weekly Calorie System */}
-      <section className="relative overflow-hidden py-24 bg-gradient-to-br from-cream via-white to-accent/5">
+      <section className="relative overflow-hidden py-24 texture-fabric">
         {/* Decorative background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
@@ -526,7 +526,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-border py-12">
+      <footer className="texture-marble border-t border-border py-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>

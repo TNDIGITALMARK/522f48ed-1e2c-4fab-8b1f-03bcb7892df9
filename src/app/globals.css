@@ -5,26 +5,26 @@
 
 /*
 =============================================================================
-BLOOM - MODERN WELLNESS & SMART HOME INSPIRED DESIGN
+BLOOM - EARTHY NATURAL DESIGN WITH TEXTILE INSPIRATION
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- Inspired by modern wellness apps and smart home interfaces
-- Soft, warm neutral palette with pops of earthy tones
+- Inspired by natural materials: corduroy, marble, flowing fabrics
+- Rich earthy tones with warm neutrals and sage green accents
+- Textured backgrounds with organic patterns
 - Clean, modern sans-serif typography for clarity
-- Glassmorphism effects with frosted backgrounds
 - Large rounded corners (20-28px) for friendly aesthetic
-- Emphasis on cards, overlays, and layered UI
+- Emphasis on natural depth through textures and layering
 
-COLOR PALETTE (WARM NEUTRAL):
-- Warm Charcoal (Text): #2C2C2C / HSL 0 0% 17% - Primary text
-- Soft Beige (Background): #F5F2ED / HSL 33 25% 95% - Light cream base
-- Warm Sand (Cards): #EBE6DF / HSL 40 20% 91% - Card backgrounds
-- Taupe (Borders): #D4CFC7 / HSL 40 12% 81% - Soft borders
-- Mocha (Accent): #9C8174 / HSL 20 22% 54% - Warm accent color
-- Cream White: #FAFAF8 / HSL 60 20% 98% - Pure backgrounds
-- Brown Primary: #7D6B5D / HSL 30 16% 43% - Primary actions
-- Light Taupe: #E5DFD8 / HSL 35 18% 87% - Muted elements
+COLOR PALETTE (EARTHY NATURALS):
+- Rich Brown (Primary Text): #3B3027 / HSL 28 21% 19% - Deep earthy text
+- Deep Chocolate (Accent): #2B221B / HSL 20 24% 13% - Dark brown accent
+- Warm Taupe (Secondary): #2F2520 / HSL 15 20% 15% - Medium brown secondary
+- Olive Shadow (Tertiary): #24251D / HSL 65 13% 13% - Dark greenish-brown
+- Soft Cream (Background): #F9F6F1 / HSL 35 43% 96% - Warm cream base
+- Lighter Cream (Cards): #F7F3EE / HSL 30 38% 96% - Lightest cream
+- Sage Green (Accent): #B9C4B2 / HSL 100 18% 73% - Soft sage green
+- Olive Green (Action): #4B4F3A / HSL 72 15% 27% - Deep olive green
 
 TYPOGRAPHY SYSTEM:
 - Primary Font: Inter (clean, modern, excellent readability)
@@ -47,141 +47,137 @@ SPACING SYSTEM:
 - Loose line-height for headings (1.2-1.3)
 - Comfortable line-height for body (1.6-1.75)
 
-COMPONENT STYLING (GLASSMORPHISM):
+COMPONENT STYLING (NATURAL TEXTURES):
 - Border Radius: 20-28px (large, friendly rounds)
 - Card Radius: 24px standard
 - Button Radius: 16-20px (pill-shaped for primary actions)
-- Borders: 1px solid, very subtle
-- Shadows: Soft layered shadows (0 8px 32px rgba(0,0,0,0.08))
-- Glassmorphism: backdrop-filter blur(10px) with semi-transparent backgrounds
-- Overlay effects: Linear gradients with transparency
+- Borders: 1px solid, subtle with warm tones
+- Shadows: Natural depth shadows (0 4px 24px rgba(59,48,39,0.12))
+- Textile textures: Corduroy, marble, flowing fabric patterns
+- Overlay effects: Subtle gradients with earthy tones
 
 VISUAL EFFECTS:
-- Glassmorphism on navigation and overlay elements
-- Soft drop shadows for depth
-- Smooth gradients (cream to beige)
+- Textile-inspired background patterns
+- Natural material textures (corduroy, marble, fabric)
+- Soft drop shadows for organic depth
+- Smooth earthy gradients (cream to sage)
 - Large rounded corners throughout
 - Hover effects with subtle scale transforms
 - Smooth transitions (300ms ease)
-- Frosted glass effect on cards and modals
+- Textured overlays on cards and sections
 
 =============================================================================
 */
 
 :root {
-  /* Modern Wellness Color System */
-  --bloom-charcoal: 0 0% 17%; /* #2C2C2C - Warm charcoal text */
-  --bloom-beige: 33 25% 95%; /* #F5F2ED - Soft beige background */
-  --bloom-sand: 40 20% 91%; /* #EBE6DF - Warm sand cards */
-  --bloom-taupe: 40 12% 81%; /* #D4CFC7 - Taupe borders */
-  --bloom-mocha: 20 22% 54%; /* #9C8174 - Mocha accent */
-  --bloom-cream: 60 20% 98%; /* #FAFAF8 - Cream white */
-  --bloom-brown: 30 16% 43%; /* #7D6B5D - Brown primary */
-  --bloom-light-taupe: 35 18% 87%; /* #E5DFD8 - Light taupe */
+  /* Earthy Natural Color System */
+  --bloom-rich-brown: 28 21% 19%; /* #3B3027 - Deep earthy text */
+  --bloom-deep-chocolate: 20 24% 13%; /* #2B221B - Dark brown accent */
+  --bloom-warm-taupe: 15 20% 15%; /* #2F2520 - Medium brown secondary */
+  --bloom-olive-shadow: 65 13% 13%; /* #24251D - Dark greenish-brown */
+  --bloom-soft-cream: 35 43% 96%; /* #F9F6F1 - Warm cream base */
+  --bloom-lighter-cream: 30 38% 96%; /* #F7F3EE - Lightest cream */
+  --bloom-sage: 100 18% 73%; /* #B9C4B2 - Soft sage green */
+  --bloom-olive: 72 15% 27%; /* #4B4F3A - Deep olive green */
 
-  /* Soft accent colors */
-  --bloom-sage: 135 18% 75%; /* Soft sage green */
-  --bloom-terracotta: 15 45% 70%; /* Warm terracotta */
-  --bloom-lavender: 280 25% 85%; /* Soft lavender */
+  /* Light theme - Earthy naturals with texture support */
+  --background: 35 43% 96%; /* Soft cream background */
+  --foreground: 28 21% 19%; /* Rich brown text */
 
-  /* Light theme - Warm neutral with glassmorphism support */
-  --background: 33 25% 95%; /* Soft beige background */
-  --foreground: 0 0% 17%; /* Warm charcoal text */
+  /* Textured cards with warm cream tones */
+  --card: 30 38% 96%; /* Lighter cream cards */
+  --card-foreground: 28 21% 19%;
 
-  /* Glass-effect cards with warm tones */
-  --card: 40 20% 91%; /* Warm sand cards */
-  --card-foreground: 0 0% 17%;
+  /* Popovers with natural feel */
+  --popover: 30 38% 96%;
+  --popover-foreground: 28 21% 19%;
 
-  /* Popovers with glassmorphism */
-  --popover: 60 20% 98%;
-  --popover-foreground: 0 0% 17%;
+  /* Primary: Olive green for nature-inspired actions */
+  --primary: 72 15% 27%; /* Olive green primary */
+  --primary-foreground: 30 38% 96%;
 
-  /* Primary: Brown for emphasis */
-  --primary: 30 16% 43%; /* Brown primary */
-  --primary-foreground: 60 20% 98%;
+  /* Secondary: Sage green */
+  --secondary: 100 18% 73%; /* Sage green secondary */
+  --secondary-foreground: 28 21% 19%;
 
-  /* Secondary: Mocha */
-  --secondary: 20 22% 54%; /* Mocha secondary */
-  --secondary-foreground: 60 20% 98%;
+  /* Muted: Warm taupe */
+  --muted: 15 20% 85%; /* Light warm taupe muted */
+  --muted-foreground: 28 21% 35%;
 
-  /* Muted: Light taupe */
-  --muted: 35 18% 87%; /* Light taupe muted */
-  --muted-foreground: 0 0% 35%;
+  /* Accent: Sage green for subtle highlights */
+  --accent: 100 18% 73%; /* Sage accent */
+  --accent-foreground: 28 21% 19%;
 
-  /* Accent: Sage for subtle highlights */
-  --accent: 135 18% 75%; /* Sage accent */
-  --accent-foreground: 0 0% 17%;
+  /* Destructive - Deep chocolate */
+  --destructive: 20 24% 13%;
+  --destructive-foreground: 30 38% 96%;
 
-  /* Destructive - Terracotta */
-  --destructive: 15 45% 70%;
-  --destructive-foreground: 0 0% 17%;
-
-  /* Borders: Subtle taupe */
-  --border: 40 12% 81%; /* Taupe border */
-  --input: 40 12% 81%;
-  --ring: 30 16% 43%; /* Brown focus ring */
+  /* Borders: Subtle sage-taupe blend */
+  --border: 100 18% 85%; /* Soft sage-taupe border */
+  --input: 100 18% 85%;
+  --ring: 72 15% 27%; /* Olive focus ring */
 
   /* Large rounded corners for modern feel */
   --radius: 1.5rem; /* 24px */
 
-  /* Sidebar - glassmorphism effect */
-  --sidebar-background: 40 20% 94%;
-  --sidebar-foreground: 0 0% 17%;
-  --sidebar-primary: 30 16% 43%;
-  --sidebar-primary-foreground: 60 20% 98%;
-  --sidebar-accent: 35 18% 90%;
-  --sidebar-accent-foreground: 0 0% 17%;
-  --sidebar-border: 40 12% 85%;
-  --sidebar-ring: 30 16% 43%;
+  /* Sidebar - natural earthy effect */
+  --sidebar-background: 35 43% 94%;
+  --sidebar-foreground: 28 21% 19%;
+  --sidebar-primary: 72 15% 27%;
+  --sidebar-primary-foreground: 30 38% 96%;
+  --sidebar-accent: 100 18% 90%;
+  --sidebar-accent-foreground: 28 21% 19%;
+  --sidebar-border: 100 18% 85%;
+  --sidebar-ring: 72 15% 27%;
 }
 
 .dark {
-  /* Dark mode: Soft charcoal with cream text (minimalist dark) */
-  --background: 0 0% 8%;
-  --foreground: 42 38% 93%;
+  /* Dark mode: Deep earthy tones with cream accents */
+  --background: 20 24% 13%; /* Deep chocolate background */
+  --foreground: 35 43% 96%; /* Soft cream text */
 
-  /* Dark cards with subtle warmth */
-  --card: 0 0% 12%;
-  --card-foreground: 42 38% 93%;
+  /* Dark cards with rich brown */
+  --card: 28 21% 19%; /* Rich brown cards */
+  --card-foreground: 35 43% 96%;
 
   /* Dark popovers */
-  --popover: 0 0% 12%;
-  --popover-foreground: 42 38% 93%;
+  --popover: 28 21% 19%;
+  --popover-foreground: 35 43% 96%;
 
-  /* Primary: White text on dark */
-  --primary: 60 20% 98%;
-  --primary-foreground: 0 0% 8%;
+  /* Primary: Sage green on dark */
+  --primary: 100 18% 73%; /* Sage green primary */
+  --primary-foreground: 20 24% 13%;
 
-  /* Secondary: Light gray */
-  --secondary: 0 0% 70%;
-  --secondary-foreground: 0 0% 8%;
+  /* Secondary: Olive green */
+  --secondary: 72 15% 27%; /* Olive secondary */
+  --secondary-foreground: 35 43% 96%;
 
-  /* Muted: Dark warm gray */
-  --muted: 0 0% 20%;
-  --muted-foreground: 40 30% 75%;
+  /* Muted: Dark warm taupe */
+  --muted: 15 20% 25%;
+  --muted-foreground: 35 43% 80%;
 
-  /* Accent: Soft sage */
-  --accent: 135 20% 60%;
-  --accent-foreground: 0 0% 8%;
+  /* Accent: Sage green */
+  --accent: 100 18% 73%;
+  --accent-foreground: 20 24% 13%;
 
-  /* Destructive - Soft coral */
-  --destructive: 12 60% 65%;
-  --destructive-foreground: 0 0% 8%;
+  /* Destructive - Warm terracotta */
+  --destructive: 15 45% 60%;
+  --destructive-foreground: 35 43% 96%;
 
   /* Borders */
-  --border: 0 0% 20%;
-  --input: 0 0% 20%;
-  --ring: 60 20% 98%;
+  --border: 15 20% 25%;
+  --input: 15 20% 25%;
+  --ring: 100 18% 73%;
 
   /* Sidebar dark */
-  --sidebar-background: 0 0% 10%;
-  --sidebar-foreground: 42 38% 93%;
-  --sidebar-primary: 60 20% 98%;
-  --sidebar-primary-foreground: 0 0% 8%;
-  --sidebar-accent: 0 0% 18%;
-  --sidebar-accent-foreground: 42 38% 93%;
-  --sidebar-border: 0 0% 18%;
-  --sidebar-ring: 60 20% 98%;
+  --sidebar-background: 20 24% 15%;
+  --sidebar-foreground: 35 43% 96%;
+  --sidebar-primary: 100 18% 73%;
+  --sidebar-primary-foreground: 20 24% 13%;
+  --sidebar-accent: 28 21% 22%;
+  --sidebar-accent-foreground: 35 43% 96%;
+  --sidebar-border: 15 20% 25%;
+  --sidebar-ring: 100 18% 73%;
 }
 
 @theme {
@@ -404,20 +400,153 @@ label {
   letter-spacing: 0.01em;
 }
 
-/* Modern soft shadows with depth */
+/* Natural depth shadows with earthy tones */
 .shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.08);
 }
 
 .shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(59, 48, 39, 0.12);
 }
 
 .shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 32px rgba(59, 48, 39, 0.15);
+}
+
+/* ============================================
+   TEXTILE TEXTURE PATTERNS
+   ============================================ */
+
+/* Corduroy texture pattern */
+.texture-corduroy {
+  position: relative;
+  background: linear-gradient(90deg,
+    hsl(var(--bloom-sage)) 0%,
+    hsl(var(--bloom-olive)) 2%,
+    hsl(var(--bloom-sage)) 4%,
+    hsl(var(--bloom-olive)) 6%,
+    hsl(var(--bloom-sage)) 8%,
+    hsl(var(--bloom-olive)) 10%,
+    hsl(var(--bloom-sage)) 12%
+  );
+  background-size: 8px 100%;
+  background-repeat: repeat-x;
+}
+
+.texture-corduroy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg,
+    transparent 0px,
+    rgba(75, 79, 58, 0.1) 1px,
+    transparent 2px,
+    transparent 6px,
+    rgba(75, 79, 58, 0.15) 7px,
+    transparent 8px
+  );
+  pointer-events: none;
+}
+
+/* Marble texture effect */
+.texture-marble {
+  background: linear-gradient(135deg,
+    hsl(var(--bloom-soft-cream)) 0%,
+    hsl(var(--bloom-lighter-cream)) 25%,
+    hsl(var(--bloom-soft-cream)) 50%,
+    rgba(185, 196, 178, 0.1) 55%,
+    hsl(var(--bloom-lighter-cream)) 75%,
+    hsl(var(--bloom-soft-cream)) 100%
+  );
+  background-size: 200% 200%;
+  position: relative;
+}
+
+.texture-marble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 30%, rgba(185, 196, 178, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 70%, rgba(75, 79, 58, 0.05) 0%, transparent 50%),
+              radial-gradient(ellipse at 40% 80%, rgba(185, 196, 178, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Flowing fabric texture */
+.texture-fabric {
+  background: linear-gradient(120deg,
+    hsl(var(--bloom-soft-cream)) 0%,
+    hsl(var(--bloom-lighter-cream)) 25%,
+    hsl(var(--bloom-soft-cream)) 50%,
+    hsl(var(--bloom-lighter-cream)) 75%,
+    hsl(var(--bloom-soft-cream)) 100%
+  );
+  background-size: 400% 400%;
+  position: relative;
+}
+
+.texture-fabric::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0px,
+    rgba(185, 196, 178, 0.03) 2px,
+    transparent 4px,
+    transparent 8px
+  ),
+  repeating-linear-gradient(
+    -45deg,
+    transparent 0px,
+    rgba(185, 196, 178, 0.02) 2px,
+    transparent 4px,
+    transparent 8px
+  );
+  pointer-events: none;
+}
+
+/* Subtle linen texture */
+.texture-linen {
+  background-color: hsl(var(--bloom-soft-cream));
+  background-image:
+    repeating-linear-gradient(90deg, rgba(59, 48, 39, 0.03) 0px, transparent 1px, transparent 2px, rgba(59, 48, 39, 0.03) 3px),
+    repeating-linear-gradient(0deg, rgba(59, 48, 39, 0.03) 0px, transparent 1px, transparent 2px, rgba(59, 48, 39, 0.03) 3px);
+  background-size: 4px 4px;
+}
+
+/* Textured card variants */
+.card-corduroy {
+  background: linear-gradient(90deg,
+    hsl(100 18% 88%) 0%,
+    hsl(100 18% 85%) 2%,
+    hsl(100 18% 88%) 4%
+  );
+  background-size: 6px 100%;
+  border: 1px solid hsl(var(--bloom-sage));
+}
+
+.card-marble {
+  background: linear-gradient(135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--bloom-lighter-cream)) 50%,
+    hsl(var(--card)) 100%
+  );
+  background-size: 200% 200%;
+  border: 1px solid hsl(var(--border));
+}
+
+.card-fabric {
+  background: linear-gradient(120deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--bloom-soft-cream)) 50%,
+    hsl(var(--card)) 100%
+  );
+  background-size: 300% 300%;
+  border: 1px solid hsl(var(--border));
 }
 
 /* Card styling - Large radius with glassmorphism support */
