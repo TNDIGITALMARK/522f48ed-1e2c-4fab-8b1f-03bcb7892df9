@@ -23,6 +23,7 @@ import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
 import { WorkoutSummary } from '@/components/workout-summary';
 import { BloomingFlower } from '@/components/blooming-flower';
+import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -226,29 +227,43 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* Cycle Phase Banner - Hero Card Style */}
+        {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave */}
         <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-800">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none">
+          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
             <BloomingFlower size={120} duration={3000} delay={1500} />
           </div>
-          <div className="relative z-10 flex items-center justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
-              <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
-              <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
-              <Link href="/cycle">
-                <Button className="rounded-full">
-                  View Details
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center gap-6">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
-                <Heart className="w-16 h-16 text-primary" />
+
+          {/* Top section with title and info */}
+          <div className="relative z-10 mb-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
+                <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
+                <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
+                <Link href="/cycle">
+                  <Button className="rounded-full">
+                    View Details
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="hidden md:flex items-center gap-6">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
+                  <Heart className="w-16 h-16 text-primary" />
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* 3D Animated Hormone Wave */}
+          <div className="relative z-10 mt-4 -mx-6 -mb-6">
+            <HormoneWave3D
+              phase="ovulation"
+              width={800}
+              height={180}
+              className="w-full"
+            />
           </div>
         </Card>
 
