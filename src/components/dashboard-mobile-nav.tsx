@@ -13,7 +13,7 @@ import {
   X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { BloomLogo } from './bloom-logo';
+import { RootedLogo } from './rooted-logo';
 import { Button } from './ui/button';
 
 const navigationItems = [
@@ -53,7 +53,7 @@ export function DashboardMobileNav() {
       {/* Mobile Header */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-border">
         <div className="flex items-center justify-between px-4 py-3">
-          <BloomLogo />
+          <RootedLogo />
           <Button
             variant="ghost"
             size="icon"

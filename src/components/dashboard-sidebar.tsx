@@ -15,7 +15,7 @@ import {
   Scale
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { BloomLogo } from './bloom-logo';
+import { RootedLogo } from './rooted-logo';
 
 const navigationItems = [
   {
@@ -62,7 +62,7 @@ export function DashboardSidebar() {
     <aside className="fixed left-0 top-0 h-screen w-72 bg-gradient-to-b from-card/95 to-card/90 backdrop-blur-xl border-r border-border/50 flex flex-col shadow-bloom">
       {/* Logo */}
       <div className="p-6 border-b border-border/30">
-        <BloomLogo />
+        <RootedLogo />
       </div>
 
       {/* Navigation */}
@@ -105,7 +105,7 @@ export function DashboardSidebar() {
           </div>
           <div className="flex-1">
             <p className="font-semibold text-sm">Sarah</p>
-            <p className="text-xs text-muted-foreground">sarah@bloom.app</p>
+            <p className="text-xs text-muted-foreground">sarah@rooted.app</p>
           </div>
         </div>
 

@@ -11,32 +11,32 @@ import Link from 'next/link';
 const features = [
   {
     icon: Calendar,
-    title: 'Smart Cycle Syncing',
-    description: 'AI learns your hormonal patterns and adjusts workout intensity, macros, and recovery for each phase.',
+    title: 'Natural Cycle Tracking',
+    description: 'Track your body's natural rhythms and align your wellness practices with nature's cycles for optimal health.',
     image: '/generated/wellness-coach-2.png',
   },
   {
     icon: Sparkles,
-    title: 'Smart Nutrition Planner',
-    description: 'AI fridge scanner, dynamic meal planning, and Bloom Score for food labels to optimize your nutrition.',
+    title: 'Organic Nutrition Guide',
+    description: 'Discover whole foods, seasonal eating, and plant-based recipes that nourish your body naturally.',
     image: '/generated/wellness-coach-3.png',
   },
   {
     icon: Activity,
-    title: 'Workout Sync System',
-    description: 'Cycle-based training that adapts to your energy levels with personalized workouts for every phase.',
+    title: 'Mindful Movement',
+    description: 'Practice yoga, walking meditations, and gentle exercises that connect you with your body and nature.',
     image: '/generated/wellness-coach-1.png',
   },
   {
     icon: Brain,
-    title: 'AI Wellness Companion',
-    description: 'Get daily affirmations, cycle insights, and personalized health education tailored to you.',
+    title: 'Nature-Based Wellness',
+    description: 'Daily practices inspired by the natural world to ground your mind, body, and spirit.',
     image: '/generated/wellness-coach-2.png',
   },
   {
     icon: Users,
-    title: 'Community & Support',
-    description: 'Connect by cycle phase or goals in a body-positive space for empowerment and inclusion.',
+    title: 'Grounded Community',
+    description: 'Connect with like-minded individuals on a journey towards natural, sustainable wellness.',
     image: '/generated/wellness-coach-3.png',
   },
 ];
@@ -47,11 +47,22 @@ export default function HomePage() {
       {/* Header/Navigation */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">Bloom</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/generated/rooted-logo.png"
+              alt="Rooted Logo"
+              width={48}
+              height={48}
+              className="object-contain"
+            />
+            <div>
+              <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
+                <span className="text-foreground">ROOTED</span>
+              </div>
+              <div className="text-xs text-muted-foreground font-light tracking-wide">
+                Grounded in Nature
+              </div>
+            </div>
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <Link href="#features" className="text-foreground hover:text-primary transition-colors font-medium">
@@ -83,16 +94,16 @@ export default function HomePage() {
         {/* Hero Content */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <div className="inline-block mb-6 px-8 py-3.5 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full backdrop-blur-sm border border-primary/20 animate-fade-in-scale shadow-bloom-sm">
-            <span className="text-base font-semibold text-primary">Wellness Rooted in Self-Compassion</span>
+            <span className="text-base font-semibold text-primary">Wellness Grounded in Nature</span>
           </div>
           <h1 className="text-5xl md:text-7xl mb-8 leading-tight animate-fade-in-up">
-            Your Body's Wellness Partner
+            Ground Yourself in Natural Wellness
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-200 max-w-2xl mx-auto">
-            Bloom empowers women to reconnect with their bodies through smart, intuitive wellness — blending holistic nutrition, emotional awareness, and cycle-synced care.
+            Rooted empowers you to reconnect with nature and your body through holistic wellness — blending organic nutrition, mindful movement, and sustainable daily rituals.
           </p>
           <p className="text-lg md:text-xl mb-10 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
-            Make fitness a form of <strong>self-care</strong>, not self-control.
+            Build wellness practices that are <strong>rooted in nature</strong>, grounded in self-care.
           </p>
           <div className="flex flex-wrap gap-5 justify-center animate-fade-in-up animation-delay-600">
             <Link href="/dashboard">

@@ -1,204 +1,183 @@
 @import "tailwindcss";
 
-/* Modern Minimalist Font System - Inspired by wellness and smart home apps */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+/* Rooted - Organic, Grounded Design System */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 /*
 =============================================================================
-BLOOM - MAGAZINE-STYLE WELLNESS DESIGN SYSTEM
+ROOTED - ORGANIC & GROUNDED DESIGN SYSTEM
 =============================================================================
 
 DESIGN PHILOSOPHY:
-- **Magazine-Inspired Aesthetic**: Editorial layouts with sophisticated typography
-- **Natural Textile Integration**: Real fabric/corduroy photo textures from reference images
-- **Warm & Earthy Color Palette**: Beige, pearl white, and sage green harmony
-- **Elegant Typography**: Playfair Display italic for headings, Inter for body text
-- **Refined Spacing**: Generous whitespace and comfortable reading proportions
-- **Premium Feel**: Subtle shadows, layered textures, and smooth transitions
-- **Organic Depth**: Layered textile overlays create tactile visual interest
+- **Rooted in Nature**: Earthy, organic aesthetic inspired by natural elements
+- **Grounded & Stable**: Deep earth tones with sage green accents
+- **Elegant Typography**: Serif headings with clean, readable body text
+- **Natural Depth**: Layered shadows and textures that feel organic
+- **Timeless & Sophisticated**: Classic design that feels both modern and timeless
+- **Root System Imagery**: Visual metaphor of being grounded and connected
 
-COLOR PALETTE (BEIGE BACKDROP WITH SOPHISTICATED BROWN-GREEN FOCUS):
-- Pearl Beige Background: #F9F6F1 / HSL 40 28% 96% - Light pearl beige backdrop
-- Soft Beige: #F7F3EE / HSL 35 26% 95% - Soft beige for cards
-- Sage Green Accent: #B9C4B2 / HSL 100 18% 73% - Muted sage green
-- Dark Olive Primary: #4B4F3A / HSL 67 15% 27% - Dark olive-brown primary
-- Very Dark Brown: #3B3027 / HSL 25 20% 19% - Rich dark brown text
-- Deep Brown: #2B221B / HSL 23 23% 14% - Even deeper brown
-- Dark Brown Green: #2F2520 / HSL 20 19% 15% - Dark brown variant
-- Darkest Brown Green: #24251D / HSL 65 13% 13% - Darkest brown-green accents
-
-TEXTILE TEXTURES (FROM REFERENCE IMAGES):
-- Green Corduroy: /textures/corduroy-green.png - Natural green ribbed texture
-- Cream Fabric: /textures/fabric-cream.png - Flowing wavy cream/beige fabric
-- Subtle linen patterns for backgrounds
-- Marble-inspired gradients for cards
+COLOR PALETTE (EARTHY & ORGANIC):
+- Sage Green: #A4B5A0 / HSL 100 18% 67% - Calm, natural green
+- Olive Green: #4F5D4A / HSL 100 10% 33% - Medium earth tone
+- Dark Brown: #3D3530 / HSL 25 11% 21% - Warm, grounded brown
+- Deep Forest: #2D3731 / HSL 150 11% 20% - Dark forest green
+- Navy Accent: #1F2B4E / HSL 225 43% 21% - Deep contrast accent
+- Warm Cream: #F5F0E8 / HSL 38 38% 93% - Soft cream background
+- Pure White: #FFFFFF - Clean highlights
 
 TYPOGRAPHY SYSTEM:
-- Primary Font: Inter (clean, modern, excellent readability)
-- Display Font: Playfair Display Italic (elegant "Bloom" brand font for all headings)
-- UI Font: DM Sans (geometric, clean for UI elements)
-- Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
+- Display Font: Cormorant Garamond (elegant serif for brand identity)
+- Body Font: Inter (clean, modern readability)
+- UI Font: DM Sans (geometric, clean for interactive elements)
+- Weights: 300 (light), 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
 
 FONT USAGE:
-- All Headings (h1-h6): Playfair Display Italic (elegant "Bloom by Rooted" style)
-- Body Text: Inter 400-500 (excellent readability on beige background)
-- UI Elements: DM Sans 500-600 (clean, modern)
-- Labels: Inter 500 (clear, concise)
+- Headings (h1-h6): Cormorant Garamond (elegant, rooted aesthetic)
+- Logo & Brand: Cormorant Garamond 600 with wide letter-spacing
+- Body Text: Inter 400-500 (excellent readability)
+- UI Elements: DM Sans 500-600 (clean, functional)
+- Labels: DM Sans 600 (clear, concise)
 
 SPACING SYSTEM:
-- Cards: 24-32px padding (pearl white with subtle texture)
+- Cards: 24-32px padding
 - Large Cards: 32-48px padding
-- Sections: 48-80px vertical spacing
+- Sections: 60-100px vertical spacing
 - Elements: 16-24px between components
-- Grid gaps: 16-24px
-- Loose line-height for headings (1.2-1.3)
-- Comfortable line-height for body (1.6-1.75)
+- Grid gaps: 20-32px
+- Generous line-height for headings (1.3-1.4)
+- Comfortable line-height for body (1.7-1.8)
 
-COMPONENT STYLING (NATURAL TEXTURES):
-- Border Radius: 20-28px (large, friendly rounds)
-- Card Radius: 24px standard
-- Button Radius: 16-20px (pill-shaped for primary actions)
-- Borders: 1px solid, subtle beige tones
-- Shadows: Natural depth shadows (0 4px 24px rgba(59,48,39,0.12))
-- Textile overlays: Real photo textures with opacity layers
-- Background patterns: Subtle linen and woven textures
+COMPONENT STYLING:
+- Border Radius: 12-16px (organic, natural rounds)
+- Card Radius: 16px standard
+- Button Radius: 12px (subtle rounds)
+- Borders: 1px solid, earthy tones
+- Shadows: Natural depth with green-brown tints
+- Root motifs: Decorative elements inspired by root systems
+- Organic textures: Subtle natural patterns
 
 VISUAL EFFECTS:
-- Real textile photo backgrounds (corduroy, fabric)
-- Subtle overlay patterns for depth
-- Soft drop shadows with brown tones
-- Smooth cream-to-beige gradients
-- Large rounded corners throughout
-- Hover effects with subtle scale transforms
+- Earth-tone shadows with green-brown tints
+- Subtle organic textures
+- Natural gradients (sage to olive)
 - Smooth transitions (300ms ease)
-- Layered textile textures on cards and sections
-
-USAGE GUIDELINES:
-- Use .textile-overlay-green for subtle green corduroy texture
-- Use .textile-overlay-cream for subtle cream fabric texture
-- Use .bg-textile-beige for light beige textured backgrounds
-- Use .bg-textile-pearl for pearl white textured backgrounds
-- Use .card-fabric for flowing fabric effect cards
-- Use .card-marble for marble-veined pearl white cards
+- Hover effects with gentle lifts
+- Root system decorative elements
 
 =============================================================================
 */
 
 :root {
-  /* BLOOM WELLNESS COLOR SCHEME - EXACT FROM DESIGN REFERENCES */
-  /* Palette: Soft Cream, Terracotta/Copper, Warm Beige, Dark Olive */
+  /* ROOTED COLOR SCHEME - EARTHY & ORGANIC */
+  /* Palette: Sage Green, Olive, Deep Browns, Navy Accent */
 
-  /* EXACT COLORS EXTRACTED FROM REFERENCE IMAGES */
-  --bloom-cream-bg: 37 31% 93%; /* #F5EFE7 - Soft cream background */
-  --bloom-card-beige: 35 28% 90%; /* #E8DFD0 - Warm beige for cards */
-  --bloom-lighter-beige: 38 30% 91%; /* #F0E8DD - Lighter beige variant */
-  --bloom-copper: 25 28% 58%; /* #B88A6F - Copper/terracotta primary */
-  --bloom-copper-light: 28 32% 63%; /* #C89D7E - Light copper */
-  --bloom-copper-dark: 22 25% 49%; /* #A67C5C - Dark copper */
-  --bloom-dark-olive: 60 8% 36%; /* #5A5C4D - Dark olive green */
-  --bloom-forest-green: 64 9% 30%; /* #4A4D3E - Forest green */
-  --bloom-dark-text: 30 20% 20%; /* #3B3027 - Rich dark brown text */
-  --bloom-white: 0 0% 100%; /* #FFFFFF - Pure white */
-  --bloom-light-border: 0 0% 90%; /* #E5E5E5 - Light border */
+  /* ROOTED BRAND COLORS */
+  --rooted-sage: 100 18% 67%; /* #A4B5A0 - Sage green */
+  --rooted-olive: 100 10% 33%; /* #4F5D4A - Olive green */
+  --rooted-brown: 25 11% 21%; /* #3D3530 - Dark brown */
+  --rooted-forest: 150 11% 20%; /* #2D3731 - Deep forest */
+  --rooted-navy: 225 43% 21%; /* #1F2B4E - Navy accent */
+  --rooted-cream: 38 38% 93%; /* #F5F0E8 - Warm cream */
+  --rooted-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
-  /* Light theme - Soft cream backdrop with copper accents */
-  --background: 37 31% 93%; /* #F5EFE7 - Soft cream background */
-  --foreground: 30 20% 20%; /* #3B3027 - Rich dark brown text */
+  /* Light theme - Warm cream backdrop with sage and olive accents */
+  --background: 38 38% 93%; /* #F5F0E8 - Warm cream background */
+  --foreground: 25 11% 21%; /* #3D3530 - Dark brown text */
 
-  /* Cards with warm beige */
-  --card: 35 28% 90%; /* #E8DFD0 - Warm beige cards */
-  --card-foreground: 30 20% 20%;
+  /* Cards with subtle sage tint */
+  --card: 0 0% 100%; /* Pure white cards for contrast */
+  --card-foreground: 25 11% 21%;
 
   /* Popovers */
-  --popover: 35 28% 90%;
-  --popover-foreground: 30 20% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 25 11% 21%;
 
-  /* Primary: Copper/Terracotta for main actions */
-  --primary: 25 28% 58%; /* #B88A6F - Copper primary */
+  /* Primary: Olive green for main actions */
+  --primary: 100 10% 33%; /* #4F5D4A - Olive green primary */
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Light copper for subtle accents */
-  --secondary: 28 32% 63%; /* #C89D7E - Light copper */
-  --secondary-foreground: 30 20% 20%;
+  /* Secondary: Sage green for subtle accents */
+  --secondary: 100 18% 67%; /* #A4B5A0 - Sage green */
+  --secondary-foreground: 25 11% 21%;
 
-  /* Muted: Lighter beige tones */
-  --muted: 38 25% 85%; /* Light beige for muted elements */
-  --muted-foreground: 25 20% 45%;
+  /* Muted: Light sage tones */
+  --muted: 100 18% 88%; /* Light sage for muted elements */
+  --muted-foreground: 100 10% 35%;
 
-  /* Accent: Dark olive green */
-  --accent: 60 8% 36%; /* #5A5C4D - Dark olive */
+  /* Accent: Deep forest green */
+  --accent: 150 11% 20%; /* #2D3731 - Deep forest */
   --accent-foreground: 0 0% 100%;
 
-  /* Destructive: Warm copper-red */
-  --destructive: 15 55% 55%; /* #C76E56 */
+  /* Destructive: Muted earth red */
+  --destructive: 10 45% 48%; /* Earth red */
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Soft beige with subtle depth */
-  --border: 35 20% 85%; /* Soft beige border */
-  --input: 35 20% 85%;
-  --ring: 25 28% 58%; /* Copper focus ring */
+  /* Borders: Soft sage with subtle depth */
+  --border: 100 18% 85%; /* Soft sage border */
+  --input: 100 18% 85%;
+  --ring: 100 10% 33%; /* Olive focus ring */
 
-  /* Rounded corners - modern, friendly */
-  --radius: 1.25rem; /* 20px for rounded, warm aesthetic */
+  /* Rounded corners - organic, natural */
+  --radius: 1rem; /* 16px for natural, organic aesthetic */
 
-  /* Sidebar: Warm beige with copper accents */
-  --sidebar-background: 35 28% 90%;
-  --sidebar-foreground: 30 20% 20%;
-  --sidebar-primary: 25 28% 58%;
+  /* Sidebar: Warm cream with olive accents */
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 25 11% 21%;
+  --sidebar-primary: 100 10% 33%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 38 25% 85%;
-  --sidebar-accent-foreground: 30 20% 20%;
-  --sidebar-border: 35 20% 85%;
-  --sidebar-ring: 25 28% 58%;
+  --sidebar-accent: 100 18% 88%;
+  --sidebar-accent-foreground: 25 11% 21%;
+  --sidebar-border: 100 18% 85%;
+  --sidebar-ring: 100 10% 33%;
 }
 
 .dark {
-  /* Dark mode: Rich dark browns with sage green accents */
-  --background: 23 23% 14%; /* #2B221B - Deep brown background */
-  --foreground: 40 28% 92%; /* #F0EBE5 - Warm cream text */
+  /* Dark mode: Deep forest with sage green accents */
+  --background: 150 11% 20%; /* #2D3731 - Deep forest background */
+  --foreground: 38 38% 93%; /* #F5F0E8 - Warm cream text */
 
-  /* Dark cards with dark brown-green */
-  --card: 20 19% 15%; /* #2F2520 - Dark brown cards */
-  --card-foreground: 40 28% 92%;
+  /* Dark cards with slightly lighter forest */
+  --card: 150 11% 25%; /* Slightly lighter forest for cards */
+  --card-foreground: 38 38% 93%;
 
   /* Dark popovers */
-  --popover: 20 19% 15%;
-  --popover-foreground: 40 28% 92%;
+  --popover: 150 11% 25%;
+  --popover-foreground: 38 38% 93%;
 
   /* Primary: Sage green on dark */
-  --primary: 100 18% 73%; /* #B9C4B2 - Sage green primary */
-  --primary-foreground: 23 23% 14%;
+  --primary: 100 18% 67%; /* #A4B5A0 - Sage green primary */
+  --primary-foreground: 150 11% 20%;
 
-  /* Secondary: Dark olive */
-  --secondary: 67 15% 35%; /* Lighter olive for contrast */
-  --secondary-foreground: 40 28% 92%;
+  /* Secondary: Olive for contrast */
+  --secondary: 100 10% 45%; /* Lighter olive for visibility */
+  --secondary-foreground: 38 38% 93%;
 
-  /* Muted: Dark brown variant */
-  --muted: 65 13% 20%;
-  --muted-foreground: 40 28% 75%;
+  /* Muted: Dark forest variant */
+  --muted: 150 11% 30%;
+  --muted-foreground: 100 18% 75%;
 
   /* Accent: Sage green */
-  --accent: 100 18% 73%;
-  --accent-foreground: 23 23% 14%;
+  --accent: 100 18% 67%;
+  --accent-foreground: 150 11% 20%;
 
-  /* Destructive - Coral */
-  --destructive: 10 65% 60%;
-  --destructive-foreground: 40 28% 92%;
+  /* Destructive - Earth red */
+  --destructive: 10 55% 55%;
+  --destructive-foreground: 38 38% 93%;
 
   /* Borders */
-  --border: 65 13% 22%;
-  --input: 65 13% 22%;
-  --ring: 100 18% 73%;
+  --border: 150 11% 35%;
+  --input: 150 11% 35%;
+  --ring: 100 18% 67%;
 
   /* Sidebar dark */
-  --sidebar-background: 25 20% 16%;
-  --sidebar-foreground: 40 28% 92%;
-  --sidebar-primary: 100 18% 73%;
-  --sidebar-primary-foreground: 23 23% 14%;
-  --sidebar-accent: 65 13% 20%;
-  --sidebar-accent-foreground: 40 28% 92%;
-  --sidebar-border: 65 13% 22%;
-  --sidebar-ring: 100 18% 73%;
+  --sidebar-background: 150 11% 22%;
+  --sidebar-foreground: 38 38% 93%;
+  --sidebar-primary: 100 18% 67%;
+  --sidebar-primary-foreground: 150 11% 20%;
+  --sidebar-accent: 150 11% 30%;
+  --sidebar-accent-foreground: 38 38% 93%;
+  --sidebar-border: 150 11% 35%;
+  --sidebar-ring: 100 18% 67%;
 }
 
 @theme {
@@ -314,15 +293,15 @@ body {
   background-size: 6px 6px, 6px 6px, 100% 100%;
 }
 
-/* Typography System - Magazine-style elegant headings */
+/* Typography System - Rooted elegant headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-weight: 600;
-  font-style: italic;
-  letter-spacing: -0.015em;
+  font-style: normal;
+  letter-spacing: 0.02em;
   color: hsl(var(--foreground));
   margin-top: 0;
-  line-height: 1.25;
+  line-height: 1.3;
 }
 
 h1 {

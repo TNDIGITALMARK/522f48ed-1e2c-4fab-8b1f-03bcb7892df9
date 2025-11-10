@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bloom by Rooted - Holistic Wellness for Women",
-  description: "Comprehensive wellness platform designed for women. Track cycles, practice mindfulness, and build healthy daily rituals.",
+  title: "Rooted - Grounded in Nature, Rooted in Wellness",
+  description: "A holistic wellness platform designed for natural living. Track your journey, practice mindfulness, and build sustainable daily rituals grounded in nature.",
 };
 
 export default function RootLayout({
