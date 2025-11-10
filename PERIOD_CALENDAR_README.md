@@ -2,7 +2,7 @@
 
 ## Overview
 
-A comprehensive period tracking and calendar system integrated into the Bloom wellness dashboard. This feature enables users to:
+A comprehensive period tracking and calendar system integrated into the rooted wellness dashboard. This feature enables users to:
 
 - **Track menstrual cycles** with automatic phase calculations
 - **View cycle insights** with personalized recommendations

@@ -13,7 +13,7 @@ export default function SettingsPage() {
           <Settings className="w-8 h-8" />
           <h1 className="text-4xl font-bold">Settings</h1>
         </div>
-        <p className="text-muted-foreground">Customize your Bloom experience</p>
+        <p className="text-muted-foreground">Customize your rooted experience</p>
       </div>
 
       <Separator />

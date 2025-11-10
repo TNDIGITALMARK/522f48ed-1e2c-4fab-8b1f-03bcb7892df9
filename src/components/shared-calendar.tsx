@@ -179,7 +179,7 @@ export function SharedCalendar({ userId }: SharedCalendarProps) {
 
   return (
     <div className="space-y-4">
-      {/* Calendar Header - Centered title with Bloom font style */}
+      {/* Calendar Header - Centered title with rooted font style */}
       <div className="flex items-center justify-between">
         <Button variant="outline" size="sm" onClick={goToPreviousMonth}>
           <ChevronLeft className="w-4 h-4" />

@@ -18,35 +18,35 @@ interface BloomingFlowerProps {
 }
 
 export function BloomingFlower({
-  bloomed: controlledBloomed,
+  bloomed: controlledrooteded,
   size = 200,
   duration = 2000,
   delay = 500,
   loop = false,
   className = ''
 }: BloomingFlowerProps) {
-  const [isBloomed, setIsBloomed] = useState(false);
+  const [isrooteded, setIsrooteded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     // Auto-bloom after delay if not controlled
-    if (controlledBloomed === undefined) {
+    if (controlledrooteded === undefined) {
       const timer = setTimeout(() => {
-        setIsBloomed(true);
+        setIsrooteded(true);
       }, delay);
       return () => clearTimeout(timer);
     }
-  }, [controlledBloomed, delay]);
+  }, [controlledrooteded, delay]);
 
   // Use controlled state if provided
-  const bloomState = controlledBloomed !== undefined ? controlledBloomed : isBloomed;
+  const bloomState = controlledrooteded !== undefined ? controlledrooteded : isrooteded;
 
   // Loop animation if enabled
   useEffect(() => {
     if (loop && bloomState) {
       const loopInterval = setInterval(() => {
-        setIsBloomed(false);
-        setTimeout(() => setIsBloomed(true), 100);
+        setIsrooteded(false);
+        setTimeout(() => setIsrooteded(true), 100);
       }, duration + 2000);
       return () => clearInterval(loopInterval);
     }

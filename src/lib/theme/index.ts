@@ -1,5 +1,5 @@
 /**
- * Bloom Theme System
+ * rooted Theme System
  * Custom color scheme management with brown/beige defaults
  */
 

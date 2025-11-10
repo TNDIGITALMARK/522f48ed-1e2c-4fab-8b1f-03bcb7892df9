@@ -1,6 +1,6 @@
-# Bloom Theme Customization Guide
+# rooted Theme Customization Guide
 
-Welcome to Bloom's custom color scheme system! This guide will help you personalize your Bloom experience with your own colors.
+Welcome to rooted's custom color scheme system! This guide will help you personalize your rooted experience with your own colors.
 
 ## Quick Start
 
@@ -172,4 +172,4 @@ Need help? Here are common issues:
 
 ---
 
-Enjoy personalizing your Bloom experience! 🌸
+Enjoy personalizing your rooted experience! 🌸

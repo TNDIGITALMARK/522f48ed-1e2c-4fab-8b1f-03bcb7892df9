@@ -1,8 +1,8 @@
-# Bloom - New Features Implementation
+# rooted - New Features Implementation
 
 ## Overview
 
-This implementation adds comprehensive health and fitness features to the Bloom app, including:
+This implementation adds comprehensive health and fitness features to the rooted app, including:
 - **Smart Calendar with Event Management**
 - **Expandable Goals/Todo System**
 - **Onboarding Health Quiz**
@@ -191,7 +191,7 @@ Migration files created in `/supabase/migrations/` (ready to apply).
 
 - **React** with TypeScript
 - **Next.js 15** (App Router)
-- **Tailwind CSS** with custom Bloom design system
+- **Tailwind CSS** with custom rooted design system
 - **Radix UI** components (Dialog, Select, Checkbox, Radio)
 - **LocalStorage** for data persistence
 - **Subscription pattern** for real-time updates
@@ -230,10 +230,10 @@ Migration files created in `/supabase/migrations/` (ready to apply).
 
 ## Design System Integration
 
-All new components use the existing Bloom design system:
+All new components use the existing rooted design system:
 - **Colors**: Forest green primary, sage secondary, warm beige accents
 - **Typography**: Inter font family
-- **Components**: Radix UI with custom Bloom styling
+- **Components**: Radix UI with custom rooted styling
 - **Spacing**: Consistent padding and gaps
 - **Shadows**: Subtle depth with bloom-card class
 - **Transitions**: Smooth 0.2s ease animations

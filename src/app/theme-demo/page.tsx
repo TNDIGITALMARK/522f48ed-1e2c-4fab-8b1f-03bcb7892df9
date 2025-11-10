@@ -37,7 +37,7 @@ export default function ThemeDemoPage() {
           <div>
             <h2 className="text-3xl font-bold mb-2">Custom Color Schemes</h2>
             <p className="text-muted-foreground">
-              Experience Bloom with your own personalized color palette. Choose from our curated presets or create
+              Experience rooted with your own personalized color palette. Choose from our curated presets or create
               your own custom theme.
             </p>
           </div>

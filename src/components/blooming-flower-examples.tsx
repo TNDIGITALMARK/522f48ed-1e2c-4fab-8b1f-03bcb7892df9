@@ -11,12 +11,12 @@ import { useState } from 'react';
  */
 
 export function BloomingFlowerExamples() {
-  const [controlledBloom, setControlledBloom] = useState(false);
+  const [controlledrooted, setControlledrooted] = useState(false);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 p-8">
       <div>
-        <h2 className="text-3xl font-bold mb-2">Blooming Flower Component Examples</h2>
+        <h2 className="text-3xl font-bold mb-2">rooteding Flower Component Examples</h2>
         <p className="text-muted-foreground">
           Inspired by Lively's animated dashboard design
         </p>
@@ -24,7 +24,7 @@ export function BloomingFlowerExamples() {
 
       {/* Example 1: Auto-bloom with default settings */}
       <Card className="p-8">
-        <h3 className="text-xl font-semibold mb-4">Auto-Bloom (Default)</h3>
+        <h3 className="text-xl font-semibold mb-4">Auto-rooted (Default)</h3>
         <p className="text-sm text-muted-foreground mb-6">
           Automatically blooms after mounting with default settings
         </p>
@@ -46,17 +46,17 @@ export function BloomingFlowerExamples() {
 
       {/* Example 3: Controlled bloom with button */}
       <Card className="p-8">
-        <h3 className="text-xl font-semibold mb-4">Controlled Bloom</h3>
+        <h3 className="text-xl font-semibold mb-4">Controlled rooted</h3>
         <p className="text-sm text-muted-foreground mb-6">
           Click the button to toggle the bloom state
         </p>
         <div className="flex flex-col items-center gap-4">
-          <BloomingFlower bloomed={controlledBloom} size={180} />
+          <BloomingFlower bloomed={controlledrooted} size={180} />
           <Button
-            onClick={() => setControlledBloom(!controlledBloom)}
+            onClick={() => setControlledrooted(!controlledrooted)}
             className="rounded-full"
           >
-            {controlledBloom ? 'Reset Flower' : 'Bloom Flower'}
+            {controlledrooted ? 'Reset Flower' : 'rooted Flower'}
           </Button>
         </div>
       </Card>

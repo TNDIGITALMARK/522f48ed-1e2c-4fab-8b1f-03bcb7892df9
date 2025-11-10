@@ -75,7 +75,7 @@ Enhanced journaling page (`src/app/rituals/journaling/page.tsx`):
 - Seamless integration with existing journal features
 
 ## Design System
-The implementation follows the existing Bloom design aesthetic:
+The implementation follows the existing rooted design aesthetic:
 - **Colors**: Warm beige/brown palette maintained
 - **Typography**: Montserrat headings, Lora body text
 - **Components**: Consistent card styling with subtle shadows

@@ -2,7 +2,7 @@
 
 ## Overview
 
-A comprehensive custom color scheme system has been implemented, allowing users to personalize their Bloom experience with brown/beige as the default core palette and unlimited custom theme creation.
+A comprehensive custom color scheme system has been implemented, allowing users to personalize their rooted experience with brown/beige as the default core palette and unlimited custom theme creation.
 
 ## Features Implemented
 

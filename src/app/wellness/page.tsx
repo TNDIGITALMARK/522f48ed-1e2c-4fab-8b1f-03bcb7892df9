@@ -67,7 +67,7 @@ export default function WellnessDashboard() {
                 <span className="text-primary-foreground font-semibold text-sm">B</span>
               </div>
               <div>
-                <h1 className="text-lg font-semibold italic font-['Playfair_Display']">Bloom</h1>
+                <h1 className="text-lg font-semibold italic font-['Playfair_Display']">rooted</h1>
                 <p className="text-xs text-muted-foreground">by Rooted</p>
               </div>
             </div>
@@ -301,11 +301,11 @@ export default function WellnessDashboard() {
               </p>
             </Card>
 
-            {/* Bloom Card */}
+            {/* rooted Card */}
             <Card className="bg-primary p-6 rounded-3xl text-primary-foreground">
-              <h4 className="text-lg font-semibold mb-2">Bloom</h4>
+              <h4 className="text-lg font-semibold mb-2">rooted</h4>
               <p className="text-sm opacity-90">
-                Bloom into calm — journal, stretch, or reflect
+                rooted into calm — journal, stretch, or reflect
               </p>
             </Card>
           </div>

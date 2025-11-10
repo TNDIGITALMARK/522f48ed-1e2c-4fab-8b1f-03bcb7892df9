@@ -1,8 +1,8 @@
-# Bloom by Rooted - Dashboard Implementation
+# rooted by Rooted - Dashboard Implementation
 
 ## Overview
 
-A comprehensive, responsive wellness dashboard designed for the Bloom by Rooted holistic wellness platform. Built with Next.js 15, React 19, TypeScript, and Tailwind CSS, featuring full Supabase integration for real-time data management.
+A comprehensive, responsive wellness dashboard designed for the rooted by Rooted holistic wellness platform. Built with Next.js 15, React 19, TypeScript, and Tailwind CSS, featuring full Supabase integration for real-time data management.
 
 ## Features Implemented
 
@@ -11,7 +11,7 @@ A comprehensive, responsive wellness dashboard designed for the Bloom by Rooted 
   - Fixed left sidebar with logo, navigation links, and user actions
   - Active state highlighting with smooth transitions
   - Settings and logout options
-  - Elegant hover effects matching the Bloom design system
+  - Elegant hover effects matching the rooted design system
 
 - **Desktop Header** (`src/components/dashboard-header.tsx`)
   - Search bar for wellness data and rituals
@@ -289,7 +289,7 @@ export default async function DashboardPage() {
 
 ## Credits
 
-Built for Bloom by Rooted - Holistic Wellness for Women
+Built for rooted by Rooted - Holistic Wellness for Women
 Design System: Playfair Display + Inter typography with sage green, terracotta, and soft pink palette
 Component Library: shadcn/ui (30+ pre-built components)
 Database: Supabase with Row Level Security

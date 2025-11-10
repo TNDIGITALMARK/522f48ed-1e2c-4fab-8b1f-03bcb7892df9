@@ -1,4 +1,4 @@
-# Bloom Theme System
+# rooted Theme System
 
 A comprehensive color scheme customization system with brown/beige defaults and user-created themes.
 

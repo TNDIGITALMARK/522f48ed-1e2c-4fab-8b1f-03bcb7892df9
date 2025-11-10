@@ -262,7 +262,7 @@ export default function WorkoutPage() {
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">Bloom</span>
+            <span className="text-foreground italic">rooted</span>
             <span className="text-sm text-muted-foreground font-light ml-2">
               by <span className="font-medium">Rooted</span>
             </span>

@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rooted - Grounded in Nature, Rooted in Wellness",
+  title: "rooted - Grounded in Nature, rooted in Wellness",
   description: "A holistic wellness platform designed for natural living. Track your journey, practice mindfulness, and build sustainable daily rituals grounded in nature.",
 };
 

@@ -192,7 +192,7 @@ export default function NutritionPage() {
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">Bloom</span>
+            <span className="text-foreground italic">rooted</span>
             <span className="text-sm text-muted-foreground font-light ml-2">
               by <span className="font-medium">Rooted</span>
             </span>
@@ -342,14 +342,14 @@ export default function NutritionPage() {
           </Card>
         </div>
 
-        {/* Bloom Score Scanner CTA */}
+        {/* rooted Score Scanner CTA */}
         <Card className="magazine-feature-card textile-overlay-green bg-gradient-to-br from-secondary/10 to-accent/10 border-2 border-secondary/20 mb-6">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
               <ScanLine className="w-7 h-7 text-secondary-foreground" />
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-semibold mb-1">Bloom Score Scanner</h3>
+              <h3 className="text-lg font-semibold mb-1">rooted Score Scanner</h3>
               <p className="text-sm text-muted-foreground">
                 Scan food labels to get instant nutrition scores (0-100) for protein, fiber, sugar, and ingredients
               </p>
@@ -389,7 +389,7 @@ export default function NutritionPage() {
                       }`}>
                         {meal.bloomScore}
                       </div>
-                      <span className="text-xs text-muted-foreground">Bloom Score</span>
+                      <span className="text-xs text-muted-foreground">rooted Score</span>
                     </div>
                   </div>
                 </div>

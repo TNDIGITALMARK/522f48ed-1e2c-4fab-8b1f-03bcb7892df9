@@ -6,7 +6,7 @@ export function RootedLogo({ className = "" }: { className?: string }) {
       {/* Rooted Logo Image with root system */}
       <div className="relative w-14 h-14">
         <Image
-          src="/generated/rooted-logo.png"
+          src="/rooted-logo.png"
           alt="Rooted Logo"
           fill
           className="object-contain"
@@ -16,7 +16,7 @@ export function RootedLogo({ className = "" }: { className?: string }) {
       {/* Text branding */}
       <div className="flex flex-col">
         <div className="font-['Cormorant_Garamond'] text-3xl font-semibold tracking-wider">
-          <span className="text-foreground">ROOTED</span>
+          <span className="text-foreground">rooted</span>
         </div>
         <div className="text-xs text-muted-foreground font-light tracking-wide">
           Grounded in Nature
@@ -27,4 +27,4 @@ export function RootedLogo({ className = "" }: { className?: string }) {
 }
 
 // Keep old export for backwards compatibility during migration
-export const BloomLogo = RootedLogo;
+export const rootedLogo = RootedLogo;

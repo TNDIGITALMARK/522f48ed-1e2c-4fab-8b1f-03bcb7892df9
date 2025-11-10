@@ -39,7 +39,7 @@ const DAILY_INSPIRATIONS = [
   },
   {
     quote: "Each day is a fresh bloom waiting to unfold its beauty through your actions.",
-    author: "Bloom Wisdom",
+    author: "rooted Wisdom",
     category: "Inspiration"
   }
 ];
@@ -69,7 +69,7 @@ export function TreeOfWisdom({ open, onOpenChange, onComplete }: TreeOfWisdomPro
     if (journalEntry.trim()) {
       // In a real app, save to database
       console.log('Saving journal entry:', journalEntry);
-      alert('Journal entry saved! 🌿 +20 Bloom Coins');
+      alert('Journal entry saved! 🌿 +20 rooted Coins');
       setJournalEntry('');
       onComplete?.();
     }
@@ -80,7 +80,7 @@ export function TreeOfWisdom({ open, onOpenChange, onComplete }: TreeOfWisdomPro
     if (filledEntries.length > 0) {
       // In a real app, save to database
       console.log('Saving gratitude entries:', filledEntries);
-      alert(`Gratitude practice complete! 🙏 +${filledEntries.length * 10} Bloom Coins`);
+      alert(`Gratitude practice complete! 🙏 +${filledEntries.length * 10} rooted Coins`);
       setGratitudeEntries(['', '', '']);
       onComplete?.();
     }
@@ -201,7 +201,7 @@ export function TreeOfWisdom({ open, onOpenChange, onComplete }: TreeOfWisdomPro
                 </Button>
 
                 <div className="text-sm text-muted-foreground space-y-1">
-                  <p>Earn <strong className="text-primary">+{meditationMinutes * 5} Bloom Coins</strong> for completing</p>
+                  <p>Earn <strong className="text-primary">+{meditationMinutes * 5} rooted Coins</strong> for completing</p>
                   <p>🌱 Build mindfulness • 🧘‍♀️ Reduce stress • ✨ Find clarity</p>
                 </div>
               </div>

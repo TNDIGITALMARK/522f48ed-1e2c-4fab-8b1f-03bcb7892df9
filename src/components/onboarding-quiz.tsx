@@ -141,7 +141,7 @@ export function OnboardingQuiz({ onComplete, onSkip }: OnboardingQuizProps) {
           <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <Sparkles className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold mb-2">Welcome to Bloom</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome to rooted</h1>
           <p className="text-muted-foreground">Let's personalize your health journey</p>
         </div>
 

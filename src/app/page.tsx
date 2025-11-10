@@ -49,7 +49,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/generated/rooted-logo.png"
+              src="/rooted-logo.png"
               alt="Rooted Logo"
               width={48}
               height={48}
@@ -57,7 +57,7 @@ export default function HomePage() {
             />
             <div>
               <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
-                <span className="text-foreground">ROOTED</span>
+                <span className="text-foreground">rooted</span>
               </div>
               <div className="text-xs text-muted-foreground font-light tracking-wide">
                 Grounded in Nature
@@ -130,7 +130,7 @@ export default function HomePage() {
           <h2 className="text-3xl md:text-4xl mb-6">Our Mission</h2>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto mb-8">
             To help women redefine fitness — not as punishment or perfection, but as a lifelong relationship with their body.
-            Bloom promotes wellness, body neutrality, and self-awareness through a holistic, cycle-synced, and sociologically informed lens.
+            rooted promotes wellness, body neutrality, and self-awareness through a holistic, cycle-synced, and sociologically informed lens.
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div>
@@ -431,7 +431,7 @@ export default function HomePage() {
                       <div className="flex-1">
                         <h4 className="font-semibold mb-1.5 text-base">Share Your Week</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          Tell Bloom about upcoming dinners, drinks, or events
+                          Tell us about upcoming dinners, drinks, or events
                         </p>
                       </div>
                     </div>
@@ -521,7 +521,7 @@ export default function HomePage() {
       <section className="max-w-6xl mx-auto px-6 section-spacing-lg">
         <Card className="magazine-feature-card bg-gradient-to-br from-secondary/15 via-accent/8 to-primary/12 border-2 border-accent/20 text-center p-12">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl mb-6">Ready to Bloom?</h2>
+            <h2 className="text-4xl mb-6">Ready to Get Started?</h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Join thousands of women who are transforming their wellness journey with personalized,
               holistic care designed just for them.
@@ -542,7 +542,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight mb-4">
-                <span className="text-foreground italic">Bloom</span>
+                <span className="text-foreground italic">rooted</span>
                 <span className="text-sm text-muted-foreground font-light ml-2">
                   by <span className="font-medium">Rooted</span>
                 </span>
@@ -577,7 +577,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
-            <p>© 2025 Bloom by Rooted. All rights reserved.</p>
+            <p>© 2025 rooted. All rights reserved.</p>
           </div>
         </div>
       </footer>

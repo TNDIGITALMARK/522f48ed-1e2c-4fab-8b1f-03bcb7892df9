@@ -2,7 +2,7 @@
 
 ## Overview
 
-This implementation adds two major features to the Bloom nutrition tracking system:
+This implementation adds two major features to the rooted nutrition tracking system:
 
 1. **Comprehensive Food Quiz** - A multi-step quiz covering all major food groups
 2. **Apple Health Integration** - Sync step count and activity data for personalized nutrition
@@ -64,7 +64,7 @@ This implementation adds two major features to the Bloom nutrition tracking syst
 - ✅ Generate cycle-specific meal suggestions
 - ✅ Create personalized grocery lists
 - ✅ Calculate nutrition totals
-- ✅ Bloom Score integration
+- ✅ rooted Score integration
 - ✅ Phase-based recommendations
 
 #### Cycle-Specific Recommendations:
@@ -178,7 +178,7 @@ const mealPlan = generateMealSuggestions({
 ### Current Integrations:
 - ✅ Main nutrition page (`/nutrition`)
 - ✅ Navigation system
-- ✅ Bloom design system
+- ✅ rooted design system
 - ✅ Existing UI components
 
 ### Ready for Integration:
@@ -225,7 +225,7 @@ const mealPlan = generateMealSuggestions({
 
 ## Design System Compliance
 
-All components follow the Bloom design system:
+All components follow the rooted design system:
 - ✅ Playfair Display headings
 - ✅ Inter body text
 - ✅ Sage green, terracotta, pink color palette

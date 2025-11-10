@@ -107,7 +107,7 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
-        {/* Modern Header with Greeting and Blooming Flower Animation */}
+        {/* Modern Header with Greeting and rooteding Flower Animation */}
         <div className="pt-6 pb-2 animate-fade-in-up">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">

@@ -1,7 +1,7 @@
 # Cycle Tracking Enhancements - Implementation Guide
 
 ## Overview
-This document outlines the comprehensive enhancements to the Bloom cycle tracking app, transforming it from a basic period tracker into a complete health companion with social features, nutrition guidance, and smart meal planning.
+This document outlines the comprehensive enhancements to the rooted cycle tracking app, transforming it from a basic period tracker into a complete health companion with social features, nutrition guidance, and smart meal planning.
 
 ## Key Features Implemented
 
