@@ -12,7 +12,7 @@ const features = [
   {
     icon: Calendar,
     title: 'Natural Cycle Tracking',
-    description: 'Track your body's natural rhythms and align your wellness practices with nature's cycles for optimal health.',
+    description: 'Track your body\'s natural rhythms and align your wellness practices with nature\'s cycles for optimal health.',
     image: '/generated/wellness-coach-2.png',
   },
   {

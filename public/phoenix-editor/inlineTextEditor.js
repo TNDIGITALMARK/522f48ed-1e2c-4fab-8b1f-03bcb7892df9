@@ -327,10 +327,19 @@
       }
 
       // Get source location BEFORE cleanup (while element still exists)
-      const sourceTracker = window.__phoenixSourceMapTracker;
-      const sourceLocation = sourceTracker?.getSourceLocation(this.originalElement);
+      // PRIORITY 1: Use stamped attributes from build-time plugin
+      const filePath = this.originalElement.getAttribute('data-phoenix-source');
+      const lineNumber = this.originalElement.getAttribute('data-phoenix-line')
+        ? parseInt(this.originalElement.getAttribute('data-phoenix-line'), 10)
+        : undefined;
+      const columnNumber = this.originalElement.getAttribute('data-phoenix-col')
+        ? parseInt(this.originalElement.getAttribute('data-phoenix-col'), 10)
+        : undefined;
+
       const elementTag = this.originalElement.tagName.toLowerCase();
       const elementClasses = Array.from(this.originalElement.classList);
+
+      log('📍 Source location from stamped attributes:', { filePath, lineNumber, columnNumber });
 
       // Use visualEditExtension's optimistic update system
       if (window.__phoenixVisualEditor) {
@@ -352,9 +361,9 @@
                 phoenixId: phoenixId,
                 data: {
                   phoenixId: phoenixId,
-                  filePath: sourceLocation?.filePath || './src/app/page.tsx',
-                  lineNumber: sourceLocation?.lineNumber,
-                  columnNumber: sourceLocation?.columnNumber,
+                  filePath: filePath || './src/app/page.tsx',
+                  lineNumber: lineNumber,
+                  columnNumber: columnNumber,
                   oldText: this.originalText,
                   newText: newText,
                   elementTag: elementTag,

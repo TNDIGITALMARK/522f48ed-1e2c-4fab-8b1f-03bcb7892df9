@@ -102,18 +102,20 @@
       
       elements.forEach(element => {
         if (!isValidTrackingElement(element)) return;
-        
-        // Skip if already has tracking ID
-        if (element.hasAttribute('data-phoenix-id')) return;
-        
-        // Generate phoenix ID
-        const phoenixId = 'phoenix-' + Date.now() + '-' + (++counter);
-        element.setAttribute('data-phoenix-id', phoenixId);
-        
-        // Create tracking data
+
+        // Check if element already has a build-time stamped ID
+        let phoenixId = element.getAttribute('data-phoenix-id');
+
+        if (!phoenixId) {
+          // Generate runtime ID only if no build-time ID exists
+          phoenixId = 'phoenix-' + Date.now() + '-' + (++counter);
+          element.setAttribute('data-phoenix-id', phoenixId);
+        }
+
+        // Always create tracking data and add to map (even for build-time stamped elements)
         const trackingData = createElementData(element);
         trackingElements.set(phoenixId, trackingData);
-        
+
         elementCounter++;
       });
     });
@@ -204,46 +206,113 @@
   
   // Enhanced helper functions for AST/Babel processing
   function extractFilePathFromElement(element) {
-    // Use source map tracker if available
+    // PRIORITY 1: Check for stamped attributes (from build-time plugin)
+    const stampedSource = element.getAttribute('data-phoenix-source');
+    if (stampedSource) {
+      log('✅ Using stamped source:', stampedSource);
+      return stampedSource;
+    }
+
+    // PRIORITY 2: Try index lookup if available
+    if (window.__phoenixIndexLoader) {
+      // Try nodeId lookup
+      const nodeId = element.getAttribute('data-phoenix-id');
+      if (nodeId) {
+        const entry = window.__phoenixIndexLoader.findByNodeId(nodeId);
+        if (entry) {
+          log('✅ Index match by nodeId:', entry.file);
+          return entry.file;
+        }
+      }
+
+      // Try CSS path lookup
+      const cssPath = window.__phoenixIndexLoader.buildCSSPathFromElement(element);
+      const pathEntry = window.__phoenixIndexLoader.findByPath(cssPath);
+      if (pathEntry) {
+        log('✅ Index match by CSS path:', pathEntry.file);
+        return pathEntry.file;
+      }
+
+      // Try fingerprint lookup
+      const fingerprint = window.__phoenixIndexLoader.buildFingerprintFromElement(element);
+      const fpEntry = window.__phoenixIndexLoader.findByFingerprint(fingerprint);
+      if (fpEntry) {
+        log('✅ Index match by fingerprint:', fpEntry.file);
+        return fpEntry.file;
+      }
+
+      // Try class lookup
+      const classes = element.className?.split(' ').filter(Boolean) || [];
+      for (const cls of classes) {
+        const classEntry = window.__phoenixIndexLoader.findByClass(cls);
+        if (classEntry && !Array.isArray(classEntry)) {
+          log('✅ Index match by unique class:', classEntry.file);
+          return classEntry.file;
+        }
+      }
+    }
+
+    // PRIORITY 3: Use source map tracker
     if (window.__phoenixSourceMapTracker) {
       const location = window.__phoenixSourceMapTracker.getSourceLocation(element);
       return location.filePath;
     }
 
-    // Fallback: check explicit attributes
-    const componentId = element.getAttribute('data-component-source');
-    if (componentId) return componentId;
-
-    const dataFile = element.getAttribute('data-file');
-    if (dataFile) return dataFile;
-
-    // Attempt to derive from class names or data attributes
-    const className = element.className;
-    if (className && typeof className === 'string' && className.includes('-')) {
-      const segments = className.split('-');
-      return `./src/components/${segments[0]}/${segments[0]}.tsx`;
-    }
-
-    return `./src/app/page.tsx`; // Default fallback
+    // Final fallback
+    log('⚠️  No tracking data available for element');
+    return './src/app/page.tsx';
   }
 
   function extractLineNumberFromElement(element) {
-    // Use source map tracker if available
+    // PRIORITY 1: Check for stamped line number
+    const stampedLine = element.getAttribute('data-phoenix-line');
+    if (stampedLine) {
+      const lineNumber = parseInt(stampedLine, 10);
+      log('✅ Using stamped line:', lineNumber);
+      return lineNumber;
+    }
+
+    // PRIORITY 2: Try index lookup
+    if (window.__phoenixIndexLoader) {
+      const nodeId = element.getAttribute('data-phoenix-id');
+      if (nodeId) {
+        const entry = window.__phoenixIndexLoader.findByNodeId(nodeId);
+        if (entry) {
+          return entry.line;
+        }
+      }
+    }
+
+    // PRIORITY 3: Use source map tracker
     if (window.__phoenixSourceMapTracker) {
       const location = window.__phoenixSourceMapTracker.getSourceLocation(element);
       return location.lineNumber;
     }
 
-    // Fallback: check explicit attribute
-    const lineAttr = element.getAttribute('data-line-number');
-    if (lineAttr) return parseInt(lineAttr);
-
-    // Estimate based on depth and position
-    return getElementDepth(element) * 3 + 10; // Rough estimate
+    // Final fallback
+    log('⚠️  No line number available for element');
+    return 1;
   }
 
   function extractColumnNumberFromElement(element) {
-    // Use source map tracker if available
+    // Check for stamped column number
+    const stampedCol = element.getAttribute('data-phoenix-col');
+    if (stampedCol) {
+      return parseInt(stampedCol, 10);
+    }
+
+    // Try index lookup
+    if (window.__phoenixIndexLoader) {
+      const nodeId = element.getAttribute('data-phoenix-id');
+      if (nodeId) {
+        const entry = window.__phoenixIndexLoader.findByNodeId(nodeId);
+        if (entry) {
+          return entry.col;
+        }
+      }
+    }
+
+    // Use source map tracker
     if (window.__phoenixSourceMapTracker) {
       const location = window.__phoenixSourceMapTracker.getSourceLocation(element);
       return location.columnNumber;
@@ -660,11 +729,11 @@
 
     event.preventDefault();
     event.stopPropagation();
-    
+
     let target = event.target;
     let phoenixElement = null;
     let phoenixId = null;
-    
+
     while (target && target !== document.body) {
       const elementPhoenixId = target.getAttribute('data-phoenix-id');
       if (elementPhoenixId) {
@@ -674,12 +743,20 @@
       }
       target = target.parentElement;
     }
-    
+
     if (!phoenixId) {
       log('Click: No trackable element found');
       return;
     }
-    
+
+    // NEW: Shift+Click opens class editor
+    if (event.shiftKey && window.__phoenixInlineClassEditor) {
+      log('Shift+Click detected - opening class editor:', phoenixId);
+      hideContextDropdown(); // Hide dropdown if visible
+      window.__phoenixInlineClassEditor.startEdit(phoenixElement);
+      return;
+    }
+
     log('Phoenix element clicked:', phoenixId);
     
     if (selectedElement) {
@@ -792,7 +869,13 @@
         <svg class="__phoenix-dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
           <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
         </svg>
-        <span>Add to Chat Context</span>
+        <span>Add to Context</span>
+      </button>
+      <button class="__phoenix-dropdown-button" data-action="edit-classes">
+        <svg class="__phoenix-dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+        </svg>
+        <span>Edit Classes</span>
       </button>
     `;
 
@@ -818,19 +901,34 @@
       z-index: 2147483647 !important;
     `;
 
-    // Handle button click
-    const button = dropdown.querySelector('[data-action="add-context"]');
-    button.addEventListener('click', (e) => {
+    // Handle button clicks
+    const addContextButton = dropdown.querySelector('[data-action="add-context"]');
+    addContextButton.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
 
-      log('Context dropdown clicked for:', phoenixId);
+      log('Add to context clicked for:', phoenixId);
 
       if (window.__phoenixContextIntegration) {
         window.__phoenixContextIntegration.addToChat(phoenixId, trackingData);
         hideContextDropdown();
       } else {
         log('Context integration not available');
+      }
+    });
+
+    const editClassesButton = dropdown.querySelector('[data-action="edit-classes"]');
+    editClassesButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      log('Edit classes clicked for:', phoenixId);
+
+      hideContextDropdown();
+      if (window.__phoenixInlineClassEditor) {
+        window.__phoenixInlineClassEditor.startEdit(element);
+      } else {
+        log('Class editor not available');
       }
     });
 
@@ -1101,16 +1199,18 @@
     init();
   }
 
-  // Debug API
-  if (DEBUG) {
-    window.__editorHelperEnhanced = {
-      enable,
-      disable,
-      isEnabled: () => enabled,
-      getTrackingElements: () => trackingElements,
-      getElementCount: () => elementCounter
-    };
-  }
+  // Expose API (always expose, not just in debug mode)
+  window.__editorHelperEnhanced = {
+    enable,
+    disable,
+    isEnabled: () => enabled,
+    getTrackingElements: () => trackingElements,
+    getElementCount: () => elementCounter,
+    trackingElements // Add direct access to Map
+  };
+
+  // Add alias for consistency with other Phoenix tools
+  window.__phoenixHelper = window.__editorHelperEnhanced;
 
 
   // Send ready signal to parent on initialization

@@ -336,20 +336,16 @@ body:not(.__editor-active) .__ed-hierarchy-indicator {
   }
 }
 
-/* ===== Context Dropdown Styles ===== */
+/* ===== Context Dropdown Styles (Minimalistic) ===== */
 
 .__phoenix-context-dropdown {
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
-  box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.04),
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    0 12px 32px rgba(0, 0, 0, 0.12);
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   padding: 4px;
-  min-width: 200px;
-  animation: dropdownSlideIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 160px;
+  animation: dropdownSlideIn 0.15s ease-out;
   transform-origin: top left;
   transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 2147483647;
@@ -359,17 +355,17 @@ body:not(.__editor-active) .__ed-hierarchy-indicator {
 .__phoenix-dropdown-button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 8px 12px;
   border: none;
   background: transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  transition: background 0.12s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 13px;
   font-weight: 500;
-  color: #1f2937;
+  color: #374151;
   text-align: left;
   width: 100%;
   white-space: nowrap;
@@ -377,20 +373,18 @@ body:not(.__editor-active) .__ed-hierarchy-indicator {
 }
 
 .__phoenix-dropdown-button:hover {
-  background: rgba(59, 130, 246, 0.08);
-  transform: translateX(2px);
+  background: #f3f4f6;
 }
 
 .__phoenix-dropdown-button:active {
-  background: rgba(59, 130, 246, 0.15);
-  transform: scale(0.98);
+  background: #e5e7eb;
 }
 
 .__phoenix-dropdown-icon {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
-  color: #3b82f6;
+  color: #6b7280;
 }
 
 /* Improved context added indicator */

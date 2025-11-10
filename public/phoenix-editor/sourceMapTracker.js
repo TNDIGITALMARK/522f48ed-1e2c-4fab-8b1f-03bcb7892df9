@@ -298,28 +298,11 @@
 
     /**
      * Derive file path from content and context
+     * DEPRECATED: Removed hardcoded file paths - use stamped attributes or index instead
      */
     deriveFromContent(element, textContent) {
-      // Check if this looks like a story ring (username format)
-      if (textContent.includes('_') && textContent.length < 30) {
-        log('Detected story-like content:', textContent);
-        return './src/components/stories/StoryRing.tsx';
-      }
-
-      // Check if this is in a post context (likes, comments, etc.)
-      const hasPostIndicators = this.checkAncestorForKeywords(element, ['like', 'comment', 'share']);
-      if (hasPostIndicators) {
-        log('Detected post content context');
-        return './src/components/posts/PostCard.tsx';
-      }
-
-      // Check if in navigation context
-      const hasNavIndicators = this.checkAncestorForKeywords(element, ['home', 'explore', 'create', 'activity', 'profile']);
-      if (hasNavIndicators) {
-        log('Detected navigation context');
-        return './src/components/layout/BottomNavigation.tsx';
-      }
-
+      // This method is deprecated and returns null
+      // Tracking now relies on build-time stamped attributes and runtime index
       return null;
     }
 
@@ -371,13 +354,10 @@
         return updated.lineNumber;
       }
 
-      // Strategy 3: Estimate from DOM position
-      const depth = this.getElementDepth(element);
-      const siblings = Array.from(element.parentElement?.children || []);
-      const siblingIndex = siblings.indexOf(element);
-
-      // Rough estimate: base line + depth + sibling offset
-      return 10 + (depth * 2) + siblingIndex;
+      // Strategy 3: No estimation - return unknown
+      // Line number estimation removed - rely on stamped attributes or index
+      log('No line number available - returning 1 as fallback');
+      return 1;
     }
 
     /**

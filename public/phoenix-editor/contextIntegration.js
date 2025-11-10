@@ -174,83 +174,40 @@
     }
 
     /**
-     * Show checkmark indicator with enhanced bounce animation
+     * Show subtle success feedback
      */
     showCheckmark(element) {
-      const checkmark = document.createElement('div');
-      checkmark.className = '__phoenix-checkmark';
-      checkmark.innerHTML = '✓';
-      checkmark.style.cssText = `
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: rgba(34, 197, 94, 0.95);
-        color: white;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28px;
-        font-weight: bold;
-        pointer-events: none;
-        z-index: 999999;
-        animation: checkmarkBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-      `;
+      // Minimal feedback - just a subtle flash
+      const originalOpacity = element.style.opacity;
+      element.style.transition = 'opacity 0.15s ease';
+      element.style.opacity = '0.6';
 
-      element.style.position = element.style.position || 'relative';
-      element.appendChild(checkmark);
-
-      // Remove after animation with fade
       setTimeout(() => {
-        checkmark.style.transition = 'opacity 0.3s ease-out';
-        checkmark.style.opacity = '0';
-        setTimeout(() => checkmark.remove(), 300);
-      }, 1200);
+        element.style.opacity = originalOpacity || '1';
+      }, 150);
     }
 
     /**
-     * Show error indicator
+     * Show subtle error feedback
      */
     showErrorIndicator(element) {
-      const errorIcon = document.createElement('div');
-      errorIcon.className = '__phoenix-error';
-      errorIcon.innerHTML = '✕';
-      errorIcon.style.cssText = `
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: rgba(239, 68, 68, 0.95);
-        color: white;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-        pointer-events: none;
-        z-index: 999999;
-      `;
+      // Minimal feedback - just a subtle shake
+      const originalTransform = element.style.transform;
+      element.style.transition = 'transform 0.1s ease';
 
-      element.style.position = element.style.position || 'relative';
-      element.appendChild(errorIcon);
-
-      // Animate in
-      requestAnimationFrame(() => {
-        errorIcon.style.transform = 'translate(-50%, -50%) scale(1)';
-      });
-
-      // Remove after animation
+      element.style.transform = 'translateX(-4px)';
       setTimeout(() => {
-        errorIcon.style.opacity = '0';
-        setTimeout(() => errorIcon.remove(), 300);
-      }, 1200);
+        element.style.transform = 'translateX(4px)';
+        setTimeout(() => {
+          element.style.transform = 'translateX(-2px)';
+          setTimeout(() => {
+            element.style.transform = 'translateX(2px)';
+            setTimeout(() => {
+              element.style.transform = originalTransform || 'translateX(0)';
+            }, 50);
+          }, 50);
+        }, 50);
+      }, 50);
     }
 
     /**
@@ -365,23 +322,9 @@
 
   log('✅ Context Integration loaded and ready');
 
-  // Add CSS animations with enhanced bounce
+  // Add minimal CSS for context indicators
   const style = document.createElement('style');
   style.textContent = `
-    @keyframes checkmarkBounce {
-      0% {
-        transform: translate(-50%, -50%) scale(0) rotate(-45deg);
-        opacity: 0;
-      }
-      60% {
-        transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 1;
-      }
-    }
-
     [data-context-adding] {
       opacity: 0.7 !important;
       transition: opacity 0.2s ease !important;
@@ -396,15 +339,14 @@
       position: absolute;
       top: 4px;
       right: 4px;
-      width: 14px;
-      height: 14px;
-      background: rgba(34, 197, 94, 0.95);
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
       border-radius: 50%;
-      border: 2px solid white;
+      border: 1.5px solid white;
       z-index: 999998;
       pointer-events: none;
-      box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4);
-      animation: checkmarkBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     }
   `;
   document.head.appendChild(style);

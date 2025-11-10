@@ -46,7 +46,10 @@
         }
 
         // Apply change based on property type
-        if (this.isTextContentProperty(property)) {
+        if (property === 'className') {
+          // Direct className replacement
+          this.updateClassName(element, value);
+        } else if (this.isTextContentProperty(property)) {
           this.updateTextContent(element, value);
         } else if (this.isTailwindClass(property, value)) {
           this.updateTailwindClasses(element, property, value);
@@ -74,13 +77,19 @@
       }
     }
 
+    updateClassName(element, newClassName) {
+      // Replace entire className with new value
+      element.className = newClassName;
+      console.log('🎨 OptimisticStyleEditor: Updated className:', newClassName);
+    }
+
     updateTailwindClasses(element, property, value) {
       const currentClasses = Array.from(element.classList);
-      
+
       // Remove existing classes of the same type
       const classesToRemove = this.getConflictingTailwindClasses(currentClasses, property);
       classesToRemove.forEach(cls => element.classList.remove(cls));
-      
+
       // Add new class
       if (value && value !== 'none') {
         element.classList.add(value);
