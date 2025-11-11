@@ -52,17 +52,17 @@ export interface ColorScheme {
 
 export const DEFAULT_THEMES: Record<string, ColorScheme> = {
   brownBeige: {
-    id: 'brown-beige-v2', // Changed ID to force theme refresh
+    id: 'brown-beige-v3', // Changed ID to force theme refresh with warm white background
     name: 'Rooted Earth Tones',
-    description: 'Sage green, olive, brown, and navy palette with natural earthy tones',
+    description: 'Sage green, olive, brown, and navy palette with warm inviting white background',
     isDefault: true,
     colors: {
-      // Updated to match globals.css - Sage/Olive/Brown palette
+      // Updated to match globals.css - Sage/Olive/Brown palette with warm white background
       primary: '80 12% 37%', // --rooted-olive (Medium olive green)
       primaryForeground: '0 0% 100%',
       secondary: '100 15% 67%', // --rooted-sage (Light sage green)
       secondaryForeground: '25 11% 21%',
-      background: '38 38% 93%', // --rooted-cream (Warm cream background)
+      background: '35 45% 96%', // #FAF7F3 - Warm inviting white background
       foreground: '25 11% 21%', // --rooted-brown (Dark brown text)
       card: '100 20% 95%', // Light sage-tinted cards
       cardForeground: '25 11% 21%',
