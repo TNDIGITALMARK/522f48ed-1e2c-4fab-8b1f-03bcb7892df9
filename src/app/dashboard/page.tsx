@@ -22,6 +22,7 @@ import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
 import { DailyAspiration } from '@/components/daily-aspiration';
+import { RootedTextLogo } from '@/components/rooted-text-logo';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -99,17 +100,10 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto pb-12 px-6">
-        {/* Modern Header with Greeting - Reduced spacing */}
-        <div className="pt-6 pb-0 animate-fade-in-up">
-          <div className="flex flex-col items-center justify-center gap-3">
-            <div className="text-center w-full">
-              <p className="text-sm text-muted-foreground mb-1">
-                {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
-              </p>
-              <h1 className="text-4xl font-bold mb-1">
-                Hi {userData.name}
-              </h1>
-            </div>
+        {/* ROOTED Logo Header - Clean and Centered */}
+        <div className="pt-12 pb-8 animate-fade-in-up">
+          <div className="flex flex-col items-center justify-center">
+            <RootedTextLogo className="w-full max-w-xl" />
           </div>
         </div>
 
