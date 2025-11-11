@@ -119,13 +119,15 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Small clickable prompt beneath animation */}
+          {/* Oval button for meal plan personalization */}
           <div className="mt-8 text-center animate-fade-in-up animation-delay-800">
-            <Link
-              href="/nutrition/quiz"
-              className="inline-block text-sm text-muted-foreground hover:text-primary transition-colors duration-300 underline underline-offset-4 decoration-primary/30 hover:decoration-primary"
-            >
-              Personalize your meal plans take the quiz
+            <Link href="/nutrition/quiz">
+              <Button
+                variant="outline"
+                className="rounded-full px-8 py-3 text-sm font-medium border-2 border-primary/30 backdrop-blur-sm bg-card/90 hover:bg-card hover:border-primary/50 transition-all hover:scale-105 shadow-bloom-sm"
+              >
+                Personalize your meal plans
+              </Button>
             </Link>
           </div>
         </div>
