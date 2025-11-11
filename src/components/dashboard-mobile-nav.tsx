@@ -77,162 +77,166 @@ export function DashboardMobileNav() {
         </div>
       </header>
 
-      {/* Tree Roots Mobile Menu - Full Screen with Roots */}
+      {/* Tree Roots Mobile Menu - Growing from Top Right Corner */}
       {isOpen && (
         <>
-          {/* Decorative Tree Root SVG Background - FULL SCREEN */}
+          {/* Black Backdrop */}
+          <div
+            className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Decorative Tree Root SVG Background - Growing from TOP RIGHT */}
           <svg
-            className="lg:hidden fixed inset-0 w-full h-full pointer-events-none z-40 top-[60px]"
+            className="lg:hidden fixed inset-0 w-full h-full pointer-events-none z-45"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
-            {/* Main central trunk spreading downward */}
+            {/* ORIGIN POINT: Top Right Corner (95, 5) */}
+
+            {/* Main trunk growing downward from top-right */}
             <path
-              d="M 50 0 Q 48 15, 45 30 T 40 50 Q 38 60, 35 70 T 30 90"
-              stroke="hsl(var(--rooted-brown))"
-              strokeWidth="0.8"
+              d="M 95 5 Q 93 12, 90 20 T 85 35 Q 82 45, 78 55 T 70 75"
+              stroke="#000000"
+              strokeWidth="1.2"
               fill="none"
               className="animate-root-grow"
               vectorEffect="non-scaling-stroke"
+              opacity="0.9"
             />
 
-            {/* Left spreading roots */}
+            {/* Primary branch extending down-left */}
             <path
-              d="M 48 10 Q 40 15, 30 20 T 10 30"
-              stroke="hsl(var(--rooted-olive))"
-              strokeWidth="0.6"
+              d="M 93 8 Q 85 15, 75 22 T 60 32 Q 50 38, 40 45"
+              stroke="#000000"
+              strokeWidth="1"
               fill="none"
               className="animate-root-branch-1 animation-delay-100"
               vectorEffect="non-scaling-stroke"
-            />
-            <path
-              d="M 45 25 Q 35 30, 20 35 T 5 45"
-              stroke="hsl(var(--rooted-sage))"
-              strokeWidth="0.5"
-              fill="none"
-              className="animate-root-branch-2 animation-delay-200"
-              vectorEffect="non-scaling-stroke"
-            />
-            <path
-              d="M 40 40 Q 30 45, 15 50 T 0 60"
-              stroke="hsl(var(--rooted-olive))"
-              strokeWidth="0.5"
-              fill="none"
-              className="animate-root-branch-1 animation-delay-300"
-              vectorEffect="non-scaling-stroke"
+              opacity="0.85"
             />
 
-            {/* Right spreading roots */}
+            {/* Secondary branch curving left */}
             <path
-              d="M 52 10 Q 60 15, 70 20 T 90 30"
-              stroke="hsl(var(--rooted-sage))"
-              strokeWidth="0.6"
+              d="M 90 18 Q 80 25, 65 30 T 45 38"
+              stroke="#000000"
+              strokeWidth="0.9"
               fill="none"
               className="animate-root-branch-2 animation-delay-150"
               vectorEffect="non-scaling-stroke"
+              opacity="0.8"
             />
+
+            {/* Thinner branch spreading far left */}
             <path
-              d="M 55 25 Q 65 30, 80 35 T 95 45"
-              stroke="hsl(var(--rooted-olive))"
+              d="M 85 30 Q 70 35, 50 40 T 25 48"
+              stroke="#000000"
+              strokeWidth="0.7"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-200"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.75"
+            />
+
+            {/* Lower spreading branch */}
+            <path
+              d="M 78 48 Q 65 55, 50 60 T 30 68"
+              stroke="#000000"
+              strokeWidth="0.8"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-250"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.7"
+            />
+
+            {/* Deep lower branch */}
+            <path
+              d="M 70 68 Q 55 75, 35 82 T 15 90"
+              stroke="#000000"
+              strokeWidth="0.6"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-300"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.65"
+            />
+
+            {/* Wispy upper branch to left */}
+            <path
+              d="M 92 10 Q 82 12, 70 14 T 50 18"
+              stroke="#000000"
               strokeWidth="0.5"
               fill="none"
-              className="animate-root-branch-1 animation-delay-250"
+              className="animate-root-grow animation-delay-80"
               vectorEffect="non-scaling-stroke"
+              opacity="0.6"
             />
+
+            {/* Fine tendril reaching far down */}
             <path
-              d="M 60 40 Q 70 45, 85 50 T 100 60"
-              stroke="hsl(var(--rooted-brown))"
+              d="M 75 55 Q 60 65, 40 75 T 20 88"
+              stroke="#000000"
               strokeWidth="0.5"
               fill="none"
               className="animate-root-branch-2 animation-delay-350"
               vectorEffect="non-scaling-stroke"
+              opacity="0.55"
             />
 
-            {/* Upper spreading branches */}
+            {/* Subtle side branch */}
             <path
-              d="M 50 5 Q 35 8, 20 10 T 0 15"
-              stroke="hsl(var(--rooted-brown))"
-              strokeWidth="0.4"
+              d="M 88 22 Q 78 28, 65 35 T 48 44"
+              stroke="#000000"
+              strokeWidth="0.6"
               fill="none"
-              className="animate-root-grow animation-delay-50"
+              className="animate-root-branch-1 animation-delay-180"
               vectorEffect="non-scaling-stroke"
-            />
-            <path
-              d="M 50 5 Q 65 8, 80 10 T 100 15"
-              stroke="hsl(var(--rooted-sage))"
-              strokeWidth="0.4"
-              fill="none"
-              className="animate-root-grow animation-delay-100"
-              vectorEffect="non-scaling-stroke"
+              opacity="0.7"
             />
 
-            {/* Lower spreading branches */}
-            <path
-              d="M 35 60 Q 25 70, 10 80 T 0 90"
-              stroke="hsl(var(--rooted-olive))"
-              strokeWidth="0.4"
-              fill="none"
-              className="animate-root-branch-1 animation-delay-400"
-              vectorEffect="non-scaling-stroke"
-            />
-            <path
-              d="M 30 75 Q 20 85, 5 92 T 0 100"
-              stroke="hsl(var(--rooted-sage))"
-              strokeWidth="0.3"
-              fill="none"
-              className="animate-root-branch-2 animation-delay-450"
-              vectorEffect="non-scaling-stroke"
-            />
-
-            {/* Organic root nodes */}
-            <circle cx="45" cy="30" r="0.4" fill="hsl(var(--rooted-brown))" className="animate-root-pulse animation-delay-200" />
-            <circle cx="40" cy="50" r="0.3" fill="hsl(var(--rooted-olive))" className="animate-root-pulse animation-delay-350" />
-            <circle cx="55" cy="25" r="0.35" fill="hsl(var(--rooted-sage))" className="animate-root-pulse animation-delay-300" />
+            {/* Root nodes - organic knots */}
+            <circle cx="90" cy="20" r="0.5" fill="#000000" className="animate-root-pulse animation-delay-150" opacity="0.8" />
+            <circle cx="75" cy="30" r="0.4" fill="#000000" className="animate-root-pulse animation-delay-250" opacity="0.7" />
+            <circle cx="65" cy="45" r="0.45" fill="#000000" className="animate-root-pulse animation-delay-350" opacity="0.75" />
+            <circle cx="50" cy="60" r="0.35" fill="#000000" className="animate-root-pulse animation-delay-400" opacity="0.65" />
           </svg>
 
-          {/* Menu Rectangle - Right Side Dropdown */}
-          <nav className="lg:hidden fixed top-[60px] right-0 w-[85%] max-w-[320px] h-[calc(100vh-60px)] bg-white z-50 shadow-bloom-lg overflow-hidden">
-            {/* Menu Items with Staggered Animation */}
-            <div className="relative z-10 p-6 pt-8 space-y-2">
-              {navigationItems.map((item, index) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href;
+          {/* Individual Menu Item Cards - Floating Down from Right */}
+          <div className="lg:hidden fixed top-[80px] right-4 z-50 space-y-3 w-[280px] max-w-[calc(100vw-2rem)]">
+            {navigationItems.map((item, index) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
 
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200',
-                      'hover:bg-primary/10 hover:text-primary hover:shadow-bloom-sm hover:scale-[1.02]',
-                      'animate-root-item',
-                      `animation-delay-${100 + index * 50}`,
-                      isActive
-                        ? 'bg-primary text-primary-foreground shadow-bloom-sm scale-[1.02]'
-                        : 'text-muted-foreground bg-muted/10'
-                    )}
-                  >
-                    <div className={cn(
-                      "flex items-center justify-center w-10 h-10 rounded-lg transition-all",
-                      isActive
-                        ? "bg-primary-foreground/20"
-                        : "bg-muted/30"
-                    )}>
-                      <Icon
-                        className="w-5 h-5 flex-shrink-0"
-                        style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
-                      />
-                    </div>
-                    <span className="font-semibold text-base">{item.title}</span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* Decorative bottom accent */}
-            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[hsl(var(--rooted-sage))]/10 to-transparent pointer-events-none" />
-          </nav>
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    'flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-200',
+                    'bg-white shadow-bloom hover:shadow-bloom-lg hover:scale-[1.03]',
+                    'animate-root-item border-2',
+                    `animation-delay-${150 + index * 60}`,
+                    isActive
+                      ? 'border-black bg-black text-white'
+                      : 'border-gray-200 hover:border-black/30'
+                  )}
+                >
+                  <div className={cn(
+                    "flex items-center justify-center w-12 h-12 rounded-xl transition-all",
+                    isActive
+                      ? "bg-white/20"
+                      : "bg-muted/30"
+                  )}>
+                    <Icon
+                      className="w-6 h-6 flex-shrink-0"
+                      style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
+                    />
+                  </div>
+                  <span className="font-semibold text-base">{item.title}</span>
+                </Link>
+              );
+            })}
+          </div>
         </>
       )}
 
