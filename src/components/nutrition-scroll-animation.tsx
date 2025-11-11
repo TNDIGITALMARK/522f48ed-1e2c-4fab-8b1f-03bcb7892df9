@@ -58,31 +58,31 @@ const FOOD_ICONS = [
   { id: 'wine', path: <path d="M8 2h8v6c0 2-2 4-4 4s-4-2-4-4V2zM12 12v10M9 22h6" /> },
 
   // Row 5 - Snacks & Sweets
-  { id: 'cookie', path: <circle cx="12" cy="12" r="9" /><circle cx="9" cy="10" r="1" fill="currentColor" /><circle cx="15" cy="10" r="1" fill="currentColor" /><circle cx="12" cy="14" r="1" fill="currentColor" /><circle cx="9" cy="15" r="1" fill="currentColor" /><circle cx="15" cy="15" r="1" fill="currentColor" /> },
+  { id: 'cookie', path: <><circle cx="12" cy="12" r="9" /><circle cx="9" cy="10" r="1" fill="currentColor" /><circle cx="15" cy="10" r="1" fill="currentColor" /><circle cx="12" cy="14" r="1" fill="currentColor" /><circle cx="9" cy="15" r="1" fill="currentColor" /><circle cx="15" cy="15" r="1" fill="currentColor" /></> },
   { id: 'cake', path: <path d="M4 15h16v5c0 1-1 2-2 2H6c-1 0-2-1-2-2v-5zM4 15l2-8h12l2 8M8 7V4M12 7V3M16 7V4M4 11h16" /> },
-  { id: 'donut', path: <circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M8 6l1 1M16 6l-1 1M18 12h-1M6 12h1M16 18l-1-1M8 18l1-1" /> },
+  { id: 'donut', path: <><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M8 6l1 1M16 6l-1 1M18 12h-1M6 12h1M16 18l-1-1M8 18l1-1" /></> },
   { id: 'icecream', path: <path d="M8 10c0-2 2-4 4-4s4 2 4 4M8 10v1c0 2 2 4 4 4s4-2 4-4v-1M12 15l-2 7h4l-2-7" /> },
   { id: 'candy', path: <path d="M8 8l8 8M8 16l8-8M6 6c-1 1-1 3 0 4l8 8c1 1 3 1 4 0s1-3 0-4l-8-8c-1-1-3-1-4 0z" /> },
   { id: 'chocolate', path: <path d="M4 4h16v16H4V4zM12 4v16M4 12h16M8 4v16M16 4v16M4 8h16M4 16h16" /> },
 
   // Row 6 - Additional items
-  { id: 'avocado', path: <path d="M12 3c-4 0-7 3-7 7v4c0 3 2 5 5 5h4c3 0 5-2 5-5v-4c0-4-3-7-7-7z" /><circle cx="12" cy="13" r="2" /> },
+  { id: 'avocado', path: <><path d="M12 3c-4 0-7 3-7 7v4c0 3 2 5 5 5h4c3 0 5-2 5-5v-4c0-4-3-7-7-7z" /><circle cx="12" cy="13" r="2" /></> },
   { id: 'pineapple', path: <path d="M8 2l1 2M12 2v2M16 2l-1 2M7 6h10c1 0 2 1 2 2v8c0 3-2 5-5 5h-4c-3 0-5-2-5-5V8c0-1 1-2 2-2z" /> },
   { id: 'strawberry', path: <path d="M12 3l-7 7c0 4 3 7 7 7s7-3 7-7l-7-7zM9 3h6M10 8h1M13 8h1M10 11h1M13 11h1M11 14h2" /> },
-  { id: 'lemon', path: <circle cx="12" cy="12" r="8" /><path d="M18 6l2-2M6 6L4 4M12 12V8M12 12h4" /> },
-  { id: 'orange', path: <circle cx="12" cy="12" r="8" /><path d="M12 4v16M4 12h16M8 7l8 10M16 7L8 17" /> },
+  { id: 'lemon', path: <><circle cx="12" cy="12" r="8" /><path d="M18 6l2-2M6 6L4 4M12 12V8M12 12h4" /></> },
+  { id: 'orange', path: <><circle cx="12" cy="12" r="8" /><path d="M12 4v16M4 12h16M8 7l8 10M16 7L8 17" /></> },
   { id: 'grapes', path: <><circle cx="12" cy="10" r="2" /><circle cx="9" cy="13" r="2" /><circle cx="15" cy="13" r="2" /><circle cx="10" cy="16" r="2" /><circle cx="14" cy="16" r="2" /><path d="M12 8V4M11 4h2" /></> },
-  { id: 'watermelon', path: <path d="M3 15c0-5 4-9 9-9s9 4 9 9H3z" /><path d="M7 11l2 2M12 10l1 2M17 11l-2 2M9 15h1M12 14h1M15 15h1" /> },
-  { id: 'kiwi', path: <circle cx="12" cy="12" r="8" /><path d="M8 12h8M12 8v8M9 9l6 6M15 9l-6 6M10 7l1 1M14 7l-1 1M7 10l1 1M17 10l-1 1" /> },
+  { id: 'watermelon', path: <><path d="M3 15c0-5 4-9 9-9s9 4 9 9H3z" /><path d="M7 11l2 2M12 10l1 2M17 11l-2 2M9 15h1M12 14h1M15 15h1" /></> },
+  { id: 'kiwi', path: <><circle cx="12" cy="12" r="8" /><path d="M8 12h8M12 8v8M9 9l6 6M15 9l-6 6M10 7l1 1M14 7l-1 1M7 10l1 1M17 10l-1 1" /></> },
 
   // Row 7 - More variety
-  { id: 'corn', path: <path d="M8 4h8c1 0 2 1 2 2v12c0 1-1 2-2 2H8c-1 0-2-1-2-2V6c0-1 1-2 2-2z" /><path d="M10 7v10M14 7v10M8 10h8M8 14h8" /> },
-  { id: 'mushroom', path: <path d="M12 6c-4 0-7 2-7 5h14c0-3-3-5-7-5z" /><path d="M10 11v8h4v-8" /> },
+  { id: 'corn', path: <><path d="M8 4h8c1 0 2 1 2 2v12c0 1-1 2-2 2H8c-1 0-2-1-2-2V6c0-1 1-2 2-2z" /><path d="M10 7v10M14 7v10M8 10h8M8 14h8" /></> },
+  { id: 'mushroom', path: <><path d="M12 6c-4 0-7 2-7 5h14c0-3-3-5-7-5z" /><path d="M10 11v8h4v-8" /></> },
   { id: 'nuts', path: <><path d="M7 10c-1 1-1 3 0 4s3 1 4 0l4-4c1-1 1-3 0-4s-3-1-4 0l-4 4z" /><path d="M13 18c1-1 1-3 0-4s-3-1-4 0l-4 4c-1 1-1 3 0 4s3 1 4 0l4-4z" /></> },
-  { id: 'salad', path: <path d="M3 15h18v3c0 1-1 2-2 2H5c-1 0-2-1-2-2v-3z" /><path d="M6 15C6 9 9 5 12 5s6 4 6 10M9 11c1-2 2-3 3-3s2 1 3 3" /> },
+  { id: 'salad', path: <><path d="M3 15h18v3c0 1-1 2-2 2H5c-1 0-2-1-2-2v-3z" /><path d="M6 15C6 9 9 5 12 5s6 4 6 10M9 11c1-2 2-3 3-3s2 1 3 3" /></> },
   { id: 'burger', path: <><path d="M4 14h16M4 18h16c1 0 2-1 2-2H2c0 1 1 2 2 2z" /><path d="M20 8H4c0-3 2-5 5-5h6c3 0 5 2 5 5z" /><circle cx="8" cy="11" r="0.5" fill="currentColor" /><circle cx="12" cy="11" r="0.5" fill="currentColor" /><circle cx="16" cy="11" r="0.5" fill="currentColor" /></> },
-  { id: 'hotdog', path: <path d="M4 12c0-2 1-3 3-3h10c2 0 3 1 3 3s-1 3-3 3H7c-2 0-3-1-3-3z" /><path d="M6 10l12 4M6 14l12-4" /> },
-  { id: 'taco', path: <path d="M4 18c0-6 3-10 8-10s8 4 8 10H4z" /><path d="M8 14h8M10 11h4M9 17h6" /> },
+  { id: 'hotdog', path: <><path d="M4 12c0-2 1-3 3-3h10c2 0 3 1 3 3s-1 3-3 3H7c-2 0-3-1-3-3z" /><path d="M6 10l12 4M6 14l12-4" /></> },
+  { id: 'taco', path: <><path d="M4 18c0-6 3-10 8-10s8 4 8 10H4z" /><path d="M8 14h8M10 11h4M9 17h6" /></> },
   { id: 'sushi', path: <><rect x="4" y="10" width="16" height="4" rx="1" /><circle cx="8" cy="12" r="1.5" fill="currentColor" /><circle cx="12" cy="12" r="1.5" fill="currentColor" /><circle cx="16" cy="12" r="1.5" fill="currentColor" /></> },
 ];
 
