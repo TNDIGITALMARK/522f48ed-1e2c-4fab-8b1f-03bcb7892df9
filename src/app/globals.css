@@ -68,73 +68,72 @@ VISUAL EFFECTS:
 */
 
 :root {
-  /* NEW COLOR SCHEME - EARTHY NATURAL PALETTE */
-  /* Palette: Light Cream, Beige, Light Green, Dark Green, Brown, Navy */
+  /* NEW COLOR SCHEME - EXTRACTED FROM REFERENCE IMAGE */
+  /* Palette: Sage Green, Olive Green, Dark Brown, Deep Forest, Navy Blue */
 
-  /* BRAND COLORS - FROM REFERENCE IMAGE */
+  /* BRAND COLORS - EXACT FROM REFERENCE IMAGE */
+  --rooted-sage: 100 15% 67%; /* #A8B8A5 - Light sage green (top bar) */
+  --rooted-olive: 80 12% 37%; /* #5A604D - Medium olive green */
+  --rooted-brown: 25 11% 21%; /* #3E3530 - Rich dark brown */
+  --rooted-forest: 140 12% 18%; /* #2B2F2A - Deep charcoal/forest */
+  --rooted-navy: 215 43% 21%; /* #1E2F4D - Deep navy blue */
   --rooted-cream: 38 38% 93%; /* #F5F0E8 - Light cream background */
-  --rooted-beige: 35 26% 92%; /* #F0ECE6 - Soft beige */
-  --rooted-light-green: 100 18% 72%; /* #9FB39A - Light sage green */
-  --rooted-dark-green: 95 15% 30%; /* #4A573F - Darker olive green */
-  --rooted-brown: 25 11% 21%; /* #3D3530 - Warm brown */
-  --rooted-forest: 150 11% 19%; /* #2C3630 - Deep forest green */
-  --rooted-navy: 225 43% 21%; /* #1F2B4E - Navy accent */
   --rooted-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
-  /* Light theme - Cream & beige foundation with green accents */
-  --background: 38 38% 93%; /* #F5F0E8 - Light cream background */
-  --foreground: 25 11% 21%; /* #3D3530 - Warm brown text */
+  /* Light theme - Cream foundation with sage and olive accents */
+  --background: 38 38% 93%; /* #F5F0E8 - Warm cream background */
+  --foreground: 25 11% 21%; /* #3E3530 - Dark brown text */
 
-  /* Cards with beige warmth */
-  --card: 35 26% 96%; /* Very light beige cards */
+  /* Cards with sage green tint */
+  --card: 100 20% 95%; /* Very light sage-tinted cards */
   --card-foreground: 25 11% 21%;
 
   /* Popovers */
-  --popover: 35 26% 96%;
+  --popover: 100 20% 95%;
   --popover-foreground: 25 11% 21%;
 
-  /* Primary: Dark green for main actions */
-  --primary: 95 15% 30%; /* #4A573F - Darker olive green */
+  /* Primary: Olive green for main actions */
+  --primary: 80 12% 37%; /* #5A604D - Medium olive green */
   --primary-foreground: 0 0% 100%;
 
-  /* Secondary: Light sage green for subtle accents */
-  --secondary: 100 18% 72%; /* #9FB39A - Light sage green */
+  /* Secondary: Sage green for subtle accents */
+  --secondary: 100 15% 67%; /* #A8B8A5 - Light sage green */
   --secondary-foreground: 25 11% 21%;
 
-  /* Muted: Light beige tones */
-  --muted: 35 26% 90%; /* Light beige for muted elements */
-  --muted-foreground: 95 15% 35%;
+  /* Muted: Light sage tones */
+  --muted: 100 15% 88%; /* Light sage for muted elements */
+  --muted-foreground: 80 12% 35%;
 
   /* Accent: Navy blue for emphasis */
-  --accent: 225 43% 21%; /* #1F2B4E - Navy accent */
+  --accent: 215 43% 21%; /* #1E2F4D - Deep navy accent */
   --accent-foreground: 0 0% 100%;
 
   /* Destructive: Muted earth red */
   --destructive: 10 45% 48%; /* Earth red */
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Soft beige with subtle depth */
-  --border: 35 26% 85%; /* Soft beige border */
-  --input: 35 26% 85%;
-  --ring: 95 15% 30%; /* Dark green focus ring */
+  /* Borders: Soft sage with subtle depth */
+  --border: 100 15% 82%; /* Soft sage border */
+  --input: 100 15% 82%;
+  --ring: 80 12% 37%; /* Olive green focus ring */
 
   /* Rounded corners - organic, natural */
   --radius: 1rem; /* 16px for natural, organic aesthetic */
 
-  /* Sidebar: Beige with green accents */
-  --sidebar-background: 35 26% 96%;
+  /* Sidebar: Sage with olive accents */
+  --sidebar-background: 100 20% 95%;
   --sidebar-foreground: 25 11% 21%;
-  --sidebar-primary: 95 15% 30%;
+  --sidebar-primary: 80 12% 37%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 100 18% 88%;
+  --sidebar-accent: 100 15% 88%;
   --sidebar-accent-foreground: 25 11% 21%;
-  --sidebar-border: 35 26% 85%;
-  --sidebar-ring: 95 15% 30%;
+  --sidebar-border: 100 15% 82%;
+  --sidebar-ring: 80 12% 37%;
 }
 
 .dark {
-  /* Dark mode: Deep forest green with cream accents */
-  --background: 150 11% 19%; /* #2C3630 - Deep forest background */
+  /* Dark mode: Deep forest/charcoal with sage accents */
+  --background: 140 12% 18%; /* #2B2F2A - Deep charcoal/forest background */
   --foreground: 38 38% 93%; /* #F5F0E8 - Light cream text */
 
   /* Dark cards with brown undertones */
@@ -145,20 +144,20 @@ VISUAL EFFECTS:
   --popover: 25 11% 25%;
   --popover-foreground: 38 38% 93%;
 
-  /* Primary: Light green on dark */
-  --primary: 100 18% 72%; /* #9FB39A - Light sage green primary */
-  --primary-foreground: 150 11% 19%;
+  /* Primary: Sage green on dark */
+  --primary: 100 15% 67%; /* #A8B8A5 - Sage green primary */
+  --primary-foreground: 140 12% 18%;
 
   /* Secondary: Navy for contrast */
-  --secondary: 225 43% 35%; /* Lighter navy for visibility */
+  --secondary: 215 43% 35%; /* Lighter navy for visibility */
   --secondary-foreground: 38 38% 93%;
 
-  /* Muted: Dark brown-green variant */
-  --muted: 95 15% 25%;
-  --muted-foreground: 100 18% 75%;
+  /* Muted: Dark olive variant */
+  --muted: 80 12% 28%;
+  --muted-foreground: 100 15% 75%;
 
   /* Accent: Navy blue */
-  --accent: 225 43% 35%;
+  --accent: 215 43% 35%;
   --accent-foreground: 38 38% 93%;
 
   /* Destructive - Earth red */
@@ -166,19 +165,19 @@ VISUAL EFFECTS:
   --destructive-foreground: 38 38% 93%;
 
   /* Borders */
-  --border: 95 15% 35%;
-  --input: 95 15% 35%;
-  --ring: 100 18% 72%;
+  --border: 80 12% 35%;
+  --input: 80 12% 35%;
+  --ring: 100 15% 67%;
 
-  /* Sidebar dark - forest green */
-  --sidebar-background: 150 11% 22%;
+  /* Sidebar dark - deep forest */
+  --sidebar-background: 140 12% 22%;
   --sidebar-foreground: 38 38% 93%;
-  --sidebar-primary: 100 18% 72%;
-  --sidebar-primary-foreground: 150 11% 19%;
-  --sidebar-accent: 95 15% 30%;
+  --sidebar-primary: 100 15% 67%;
+  --sidebar-primary-foreground: 140 12% 18%;
+  --sidebar-accent: 80 12% 30%;
   --sidebar-accent-foreground: 38 38% 93%;
-  --sidebar-border: 95 15% 35%;
-  --sidebar-ring: 100 18% 72%;
+  --sidebar-border: 80 12% 35%;
+  --sidebar-ring: 100 15% 67%;
 }
 
 @theme {
@@ -276,21 +275,21 @@ body {
   text-rendering: optimizeLegibility;
   letter-spacing: -0.005em;
 
-  /* Subtle cream paper texture - natural and organic */
+  /* Subtle cream paper texture - natural and organic with sage undertones */
   background-image:
     repeating-linear-gradient(90deg,
       transparent 0px,
-      rgba(159, 179, 154, 0.015) 1px,
+      rgba(168, 184, 165, 0.015) 1px,
       transparent 2px,
       transparent 6px
     ),
     repeating-linear-gradient(0deg,
       transparent 0px,
-      rgba(61, 53, 48, 0.01) 1px,
+      rgba(62, 53, 48, 0.01) 1px,
       transparent 2px,
       transparent 6px
     ),
-    radial-gradient(ellipse at 50% 50%, rgba(159, 179, 154, 0.02) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 50%, rgba(168, 184, 165, 0.02) 0%, transparent 50%);
   background-size: 6px 6px, 6px 6px, 100% 100%;
 }
 
@@ -390,17 +389,17 @@ button {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.01em;
   text-transform: none;
-  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.12);
+  box-shadow: 0 2px 8px rgba(62, 53, 48, 0.12);
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 48, 39, 0.18);
+  box-shadow: 0 6px 20px rgba(62, 53, 48, 0.18);
 }
 
 button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(59, 48, 39, 0.12);
+  box-shadow: 0 2px 8px rgba(62, 53, 48, 0.12);
 }
 
 /* Input defaults - Magazine-style refined inputs */
@@ -412,13 +411,13 @@ input, textarea, select {
   background: hsl(var(--card));
   transition: border-color 0.3s ease, box-shadow 0.2s ease, transform 0.15s ease;
   padding: 0.875rem 1.125rem;
-  box-shadow: 0 1px 3px rgba(59, 48, 39, 0.06);
+  box-shadow: 0 1px 3px rgba(62, 53, 48, 0.06);
 }
 
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12), 0 2px 8px rgba(59, 48, 39, 0.12);
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.12), 0 2px 8px rgba(62, 53, 48, 0.12);
   transform: translateY(-1px);
 }
 
@@ -437,37 +436,37 @@ label {
   letter-spacing: 0.01em;
 }
 
-/* Magazine-style shadows with natural depth - Brown-green tinted */
+/* Magazine-style shadows with natural depth - Brown-sage tinted */
 .shadow-neutral-sm,
 .shadow-bloom-sm {
-  box-shadow: 0 2px 10px rgba(59, 48, 39, 0.08);
+  box-shadow: 0 2px 10px rgba(62, 53, 48, 0.08);
 }
 
 .shadow-neutral,
 .shadow-bloom {
-  box-shadow: 0 4px 20px rgba(59, 48, 39, 0.12);
+  box-shadow: 0 4px 20px rgba(62, 53, 48, 0.12);
 }
 
 .shadow-neutral-lg,
 .shadow-bloom-lg {
-  box-shadow: 0 10px 40px rgba(59, 48, 39, 0.16);
+  box-shadow: 0 10px 40px rgba(62, 53, 48, 0.16);
 }
 
 /* ============================================
    TEXTILE TEXTURE PATTERNS - INSPIRED BY REFERENCE IMAGES
    ============================================ */
 
-/* Light Green Corduroy texture - from reference palette */
+/* Sage Green Corduroy texture - from new reference palette */
 .texture-corduroy {
   position: relative;
   background: linear-gradient(90deg,
-    hsl(100 18% 72%) 0%,
-    hsl(100 16% 69%) 2%,
-    hsl(100 18% 72%) 4%,
-    hsl(100 16% 69%) 6%,
-    hsl(100 18% 72%) 8%,
-    hsl(100 16% 69%) 10%,
-    hsl(100 18% 72%) 12%
+    hsl(100 15% 67%) 0%,
+    hsl(100 13% 64%) 2%,
+    hsl(100 15% 67%) 4%,
+    hsl(100 13% 64%) 6%,
+    hsl(100 15% 67%) 8%,
+    hsl(100 13% 64%) 10%,
+    hsl(100 15% 67%) 12%
   );
   background-size: 6px 100%;
   background-repeat: repeat-x;
@@ -479,10 +478,10 @@ label {
   inset: 0;
   background: repeating-linear-gradient(90deg,
     transparent 0px,
-    rgba(74, 87, 63, 0.15) 1px,
+    rgba(90, 96, 77, 0.15) 1px,
     transparent 2px,
     transparent 4px,
-    rgba(74, 87, 63, 0.2) 5px,
+    rgba(90, 96, 77, 0.2) 5px,
     transparent 6px
   );
   pointer-events: none;
@@ -491,14 +490,14 @@ label {
 /* Enhanced corduroy for backgrounds */
 .texture-corduroy-bg {
   background: repeating-linear-gradient(90deg,
-    hsl(100 18% 72%) 0px,
-    hsl(100 16% 69%) 1px,
-    hsl(100 18% 72%) 2px,
-    hsl(100 18% 72%) 6px,
-    hsl(100 14% 67%) 7px,
-    hsl(100 18% 72%) 8px
+    hsl(100 15% 67%) 0px,
+    hsl(100 13% 64%) 1px,
+    hsl(100 15% 67%) 2px,
+    hsl(100 15% 67%) 6px,
+    hsl(100 11% 62%) 7px,
+    hsl(100 15% 67%) 8px
   );
-  box-shadow: inset 0 1px 3px rgba(61, 53, 48, 0.08);
+  box-shadow: inset 0 1px 3px rgba(62, 53, 48, 0.08);
 }
 
 /* Marble texture effect - beige with light green veining */
@@ -519,9 +518,9 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 30%, rgba(159, 179, 154, 0.05) 0%, transparent 50%),
+  background: radial-gradient(ellipse at 20% 30%, rgba(168, 184, 165, 0.05) 0%, transparent 50%),
               radial-gradient(ellipse at 80% 70%, rgba(240, 236, 230, 0.04) 0%, transparent 50%),
-              radial-gradient(ellipse at 40% 80%, rgba(159, 179, 154, 0.04) 0%, transparent 50%);
+              radial-gradient(ellipse at 40% 80%, rgba(168, 184, 165, 0.04) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -558,7 +557,7 @@ label {
   background: repeating-linear-gradient(
     45deg,
     transparent 0px,
-    rgba(159, 179, 154, 0.025) 2px,
+    rgba(168, 184, 165, 0.025) 2px,
     transparent 4px,
     transparent 12px
   ),
@@ -582,19 +581,19 @@ label {
   background-size: 4px 4px;
 }
 
-/* Textured card variants - Light green with beige accents */
+/* Textured card variants - Sage green with beige accents */
 .card-corduroy {
   background: repeating-linear-gradient(90deg,
-    hsl(100 18% 72%) 0px,
-    hsl(100 16% 69%) 1px,
-    hsl(100 18% 72%) 2px,
-    hsl(100 18% 72%) 6px,
-    hsl(100 14% 67%) 7px,
-    hsl(100 18% 72%) 8px
+    hsl(100 15% 67%) 0px,
+    hsl(100 13% 64%) 1px,
+    hsl(100 15% 67%) 2px,
+    hsl(100 15% 67%) 6px,
+    hsl(100 11% 62%) 7px,
+    hsl(100 15% 67%) 8px
   );
   background-size: 8px 100%;
-  border: 1px solid hsl(100 16% 67%);
-  box-shadow: inset 0 1px 2px rgba(74, 87, 63, 0.12);
+  border: 1px solid hsl(100 13% 62%);
+  box-shadow: inset 0 1px 2px rgba(90, 96, 77, 0.12);
 }
 
 .card-marble {
@@ -615,7 +614,7 @@ label {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 40%, rgba(159, 179, 154, 0.05) 0%, transparent 60%),
+  background: radial-gradient(ellipse at 30% 40%, rgba(168, 184, 165, 0.05) 0%, transparent 60%),
               radial-gradient(ellipse at 70% 60%, rgba(240, 236, 230, 0.03) 0%, transparent 60%);
   pointer-events: none;
   border-radius: inherit;
@@ -643,7 +642,7 @@ label {
   background: repeating-linear-gradient(
     45deg,
     transparent 0px,
-    rgba(159, 179, 154, 0.02) 2px,
+    rgba(168, 184, 165, 0.02) 2px,
     transparent 4px,
     transparent 10px
   );
@@ -652,12 +651,12 @@ label {
   opacity: 0.6;
 }
 
-/* Textile background utility classes - New palette */
+/* Textile background utility classes - Sage palette */
 .bg-textile-subtle {
   background-image:
     repeating-linear-gradient(90deg,
       transparent 0px,
-      rgba(159, 179, 154, 0.025) 1px,
+      rgba(168, 184, 165, 0.025) 1px,
       transparent 2px,
       transparent 5px
     ),
@@ -693,7 +692,7 @@ label {
   background-image:
     repeating-linear-gradient(45deg,
       transparent 0px,
-      rgba(159, 179, 154, 0.015) 2px,
+      rgba(168, 184, 165, 0.015) 2px,
       transparent 4px,
       transparent 8px
     ),
@@ -787,14 +786,14 @@ label {
   border: 1px solid hsl(var(--border) / 0.4);
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.3s ease;
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(59, 48, 39, 0.08);
+  box-shadow: 0 2px 12px rgba(62, 53, 48, 0.08);
 }
 
 .neutral-card:hover,
 .bloom-card:hover {
   transform: translateY(-4px);
   border-color: hsl(var(--primary) / 0.25);
-  box-shadow: 0 16px 48px rgba(59, 48, 39, 0.14);
+  box-shadow: 0 16px 48px rgba(62, 53, 48, 0.14);
 }
 
 /* Glassmorphism card variant - Less transparent for better visibility */
@@ -1001,7 +1000,7 @@ label {
   background: linear-gradient(90deg,
     hsl(var(--cycle-menstruation)) 0% 25%,
     hsl(var(--cycle-follicular)) 25% 50%,
-    hsl(100 18% 72%) 50% 75%,
+    hsl(100 15% 67%) 50% 75%,
     hsl(var(--cycle-luteal)) 75% 100%
   );
 }
@@ -1449,13 +1448,13 @@ tr:hover {
 .magazine-image {
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(59, 48, 39, 0.14);
+  box-shadow: 0 8px 32px rgba(62, 53, 48, 0.14);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .magazine-image:hover {
   transform: scale(1.02);
-  box-shadow: 0 16px 48px rgba(59, 48, 39, 0.20);
+  box-shadow: 0 16px 48px rgba(62, 53, 48, 0.20);
 }
 
 .magazine-image img {
@@ -1527,12 +1526,12 @@ tr:hover {
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border) / 0.4);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
-  box-shadow: 0 4px 20px rgba(59, 48, 39, 0.10);
+  box-shadow: 0 4px 20px rgba(62, 53, 48, 0.10);
 }
 
 .magazine-feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(59, 48, 39, 0.18);
+  box-shadow: 0 20px 60px rgba(62, 53, 48, 0.18);
 }
 
 .magazine-feature-card::before {
@@ -1639,8 +1638,8 @@ tr:hover {
 .progress-copper-fill {
   background: linear-gradient(90deg,
     hsl(var(--rooted-brown)) 0%,
-    hsl(var(--rooted-dark-green)) 50%,
-    hsl(var(--rooted-light-green)) 100%
+    hsl(var(--rooted-olive)) 50%,
+    hsl(var(--rooted-sage)) 100%
   );
   height: 100%;
   border-radius: 1rem;
@@ -1654,12 +1653,12 @@ tr:hover {
   padding: 1.5rem;
   border: 1px solid hsl(var(--border) / 0.4);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 12px rgba(74, 87, 63, 0.1);
+  box-shadow: 0 2px 12px rgba(90, 96, 77, 0.1);
 }
 
 .stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(74, 87, 63, 0.18);
+  box-shadow: 0 8px 24px rgba(90, 96, 77, 0.18);
 }
 
 .stat-icon-wrapper {
