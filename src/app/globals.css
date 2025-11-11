@@ -2060,6 +2060,10 @@ tr:hover {
   animation-delay: 100ms;
 }
 
+.animation-delay-120 {
+  animation-delay: 120ms;
+}
+
 .animation-delay-150 {
   animation-delay: 150ms;
 }
@@ -2076,8 +2080,16 @@ tr:hover {
   animation-delay: 220ms;
 }
 
+.animation-delay-240 {
+  animation-delay: 240ms;
+}
+
 .animation-delay-250 {
   animation-delay: 250ms;
+}
+
+.animation-delay-260 {
+  animation-delay: 260ms;
 }
 
 .animation-delay-280 {
@@ -2092,8 +2104,16 @@ tr:hover {
   animation-delay: 320ms;
 }
 
+.animation-delay-340 {
+  animation-delay: 340ms;
+}
+
 .animation-delay-350 {
   animation-delay: 350ms;
+}
+
+.animation-delay-360 {
+  animation-delay: 360ms;
 }
 
 .animation-delay-400 {

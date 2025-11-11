@@ -86,110 +86,56 @@ export function DashboardMobileNav() {
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Decorative Tree Root SVG Background - Growing from TOP RIGHT with REALISTIC 3D VOLUMETRIC DEPTH */}
+          {/* Realistic Tree Root SVG - Inspired by Natural Root Systems - Spreading Across Screen */}
           <svg
             className="lg:hidden fixed inset-0 w-full h-full pointer-events-none z-45"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
             <defs>
-              {/* Advanced 3D depth filter with multiple shadows */}
-              <filter id="root-depth-3d" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.4" result="blur1" />
-                <feOffset dx="0.3" dy="0.5" result="offset1" />
-                <feComposite in="blur1" in2="offset1" operator="out" result="shadow1" />
-
-                <feGaussianBlur in="SourceAlpha" stdDeviation="0.2" result="blur2" />
-                <feOffset dx="-0.2" dy="0.3" result="offset2" />
-                <feComposite in="blur2" in2="offset2" operator="out" result="shadow2" />
-
-                <feMerge>
-                  <feMergeNode in="shadow1" />
-                  <feMergeNode in="shadow2" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-
-              {/* Gradients for 3D volumetric effect */}
-              <linearGradient id="root-gradient-main" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#000000" stopOpacity="0.9" />
-                <stop offset="50%" stopColor="#1a1a1a" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#000000" stopOpacity="0.85" />
+              {/* Natural wood texture gradient */}
+              <linearGradient id="root-wood-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#1a1410" stopOpacity="0.95" />
+                <stop offset="40%" stopColor="#2d1f1a" stopOpacity="0.90" />
+                <stop offset="60%" stopColor="#1a1410" stopOpacity="0.88" />
+                <stop offset="100%" stopColor="#0d0805" stopOpacity="0.92" />
               </linearGradient>
 
-              <linearGradient id="root-gradient-branch" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#000000" stopOpacity="0.85" />
-                <stop offset="50%" stopColor="#2a2a2a" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#000000" stopOpacity="0.75" />
+              <linearGradient id="root-wood-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#1a1410" stopOpacity="0.88" />
+                <stop offset="50%" stopColor="#2d1f1a" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#1a1410" stopOpacity="0.82" />
               </linearGradient>
 
-              <linearGradient id="root-gradient-thin" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#000000" stopOpacity="0.75" />
-                <stop offset="50%" stopColor="#3a3a3a" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#000000" stopOpacity="0.65" />
+              <linearGradient id="root-wood-thin" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1a1410" stopOpacity="0.75" />
+                <stop offset="50%" stopColor="#3d2d24" stopOpacity="0.80" />
+                <stop offset="100%" stopColor="#1a1410" stopOpacity="0.72" />
               </linearGradient>
 
-              {/* Radial gradient for organic root nodes */}
-              <radialGradient id="root-node-gradient">
-                <stop offset="0%" stopColor="#000000" stopOpacity="0.9" />
-                <stop offset="50%" stopColor="#1a1a1a" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#000000" stopOpacity="0.3" />
+              {/* Organic root node */}
+              <radialGradient id="root-node">
+                <stop offset="0%" stopColor="#2d1f1a" stopOpacity="0.85" />
+                <stop offset="50%" stopColor="#1a1410" stopOpacity="0.70" />
+                <stop offset="100%" stopColor="#0d0805" stopOpacity="0.30" />
               </radialGradient>
             </defs>
 
-            {/* ORIGIN POINT: Top Right Corner (95, 5) */}
+            {/* ORIGIN: Top Right Corner (95, 3) - Natural spread pattern like real tree roots */}
 
-            {/* ===== MAIN TRUNK - VOLUMETRIC 3D RENDERING ===== */}
-            {/* Deep shadow layer (darkest) */}
+            {/* ===== MAIN CENTRAL ROOT - Thick, twisting downward ===== */}
             <path
-              d="M 93.8 5 Q 91.8 12, 88.8 20 T 83.8 35 Q 80.8 45, 76.8 55 T 68.8 75 Q 65.8 82, 62 90"
-              stroke="#000000"
-              strokeWidth="2.2"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-grow"
-              opacity="0.25"
-            />
-
-            {/* Mid-shadow layer */}
-            <path
-              d="M 94.2 5 Q 92.2 12, 89.2 20 T 84.2 35 Q 81.2 45, 77.2 55 T 69.2 75 Q 66.2 82, 62.5 90"
-              stroke="#000000"
+              d="M 95 3 C 93 8, 92 13, 90 18 C 88 24, 85 30, 82 36 C 79 43, 75 50, 71 57 C 68 63, 64 70, 60 77 C 57 83, 53 89, 50 95"
+              stroke="url(#root-wood-1)"
               strokeWidth="1.8"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-grow"
-              opacity="0.35"
+              opacity="0.92"
             />
-
-            {/* Left contour (shadow side) - THICK FOR VOLUME */}
             <path
-              d="M 94.3 5 Q 92.3 12, 89.3 20 T 84.3 35 Q 81.3 45, 77.3 55 T 69.3 75 Q 66.3 82, 62.8 90"
-              stroke="url(#root-gradient-main)"
-              strokeWidth="1.5"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-grow"
-              filter="url(#root-depth-3d)"
-            />
-
-            {/* Center core line */}
-            <path
-              d="M 95 5 Q 93 12, 90 20 T 85 35 Q 82 45, 78 55 T 70 75 Q 67 82, 63.5 90"
-              stroke="#1a1a1a"
-              strokeWidth="0.8"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-grow"
-              opacity="0.6"
-            />
-
-            {/* Right contour (highlight side) - CREATES CYLINDER EFFECT */}
-            <path
-              d="M 95.7 5 Q 93.7 12, 90.7 20 T 85.7 35 Q 82.7 45, 78.7 55 T 70.7 75 Q 67.7 82, 64.2 90"
+              d="M 95.5 3 C 93.5 8, 92.5 13, 90.5 18 C 88.5 24, 85.5 30, 82.5 36 C 79.5 43, 75.5 50, 71.5 57 C 68.5 63, 64.5 70, 60.5 77 C 57.5 83, 53.5 89, 50.5 95"
               stroke="#000000"
               strokeWidth="1.4"
               fill="none"
@@ -199,291 +145,212 @@ export function DashboardMobileNav() {
               opacity="0.85"
             />
 
-            {/* Highlight edge for roundness */}
+            {/* ===== MAJOR LATERAL ROOT - Spreading left horizontally ===== */}
             <path
-              d="M 96 5 Q 94 12, 91 20 T 86 35 Q 83 45, 79 55 T 71 75 Q 68 82, 64.5 90"
-              stroke="#000000"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-grow"
-              opacity="0.95"
-            />
-
-            {/* ===== PRIMARY THICK BRANCH - VOLUMETRIC 3D ===== */}
-            {/* Shadow foundation */}
-            <path
-              d="M 92.5 8 Q 84.5 15, 74.5 22 T 59.5 32 Q 49.5 38, 39.5 45 T 25 55"
-              stroke="#000000"
-              strokeWidth="1.8"
+              d="M 93 6 C 86 9, 78 11, 70 13 C 60 15, 48 17, 36 19 C 26 21, 15 23, 5 26"
+              stroke="url(#root-wood-1)"
+              strokeWidth="1.5"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-1 animation-delay-100"
-              opacity="0.3"
+              opacity="0.90"
             />
-
-            {/* Left contour (shadow) */}
             <path
-              d="M 92.8 8 Q 84.8 15, 74.8 22 T 59.8 32 Q 49.8 38, 39.8 45 T 25.3 55"
-              stroke="url(#root-gradient-branch)"
-              strokeWidth="1.3"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-1 animation-delay-100"
-              filter="url(#root-depth-3d)"
-            />
-
-            {/* Center core */}
-            <path
-              d="M 93 8 Q 85 15, 75 22 T 60 32 Q 50 38, 40 45 T 25.5 55"
-              stroke="#2a2a2a"
-              strokeWidth="0.6"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-branch-1 animation-delay-100"
-              opacity="0.5"
-            />
-
-            {/* Right contour (highlight) */}
-            <path
-              d="M 93.2 8 Q 85.2 15, 75.2 22 T 60.2 32 Q 50.2 38, 40.2 45 T 25.7 55"
+              d="M 93.5 6.5 C 86.5 9.5, 78.5 11.5, 70.5 13.5 C 60.5 15.5, 48.5 17.5, 36.5 19.5 C 26.5 21.5, 15.5 23.5, 5.5 26.5"
               stroke="#000000"
               strokeWidth="1.2"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-1 animation-delay-100"
-              opacity="0.8"
+              opacity="0.82"
             />
 
-            {/* Thin highlight edge */}
+            {/* ===== THICK DIAGONAL ROOT - Spreading left and down ===== */}
             <path
-              d="M 93.5 8 Q 85.5 15, 75.5 22 T 60.5 32 Q 50.5 38, 40.5 45 T 26 55"
-              stroke="#000000"
-              strokeWidth="0.5"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-branch-1 animation-delay-100"
-              opacity="0.9"
-            />
-
-            {/* ===== SECONDARY MEDIUM BRANCH - TAPERING VOLUME ===== */}
-            {/* Shadow base */}
-            <path
-              d="M 89.5 18 Q 79.5 25, 64.5 30 T 44.5 38 Q 34 42, 22 48"
-              stroke="#000000"
-              strokeWidth="1.5"
+              d="M 91 12 C 82 18, 72 24, 62 30 C 50 37, 37 44, 25 51 C 16 57, 8 64, 2 72"
+              stroke="url(#root-wood-1)"
+              strokeWidth="1.4"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-2 animation-delay-150"
-              opacity="0.25"
+              opacity="0.88"
             />
-
-            {/* Left contour */}
             <path
-              d="M 89.7 18 Q 79.7 25, 64.7 30 T 44.7 38 Q 34.2 42, 22.2 48"
-              stroke="url(#root-gradient-branch)"
+              d="M 91.5 12.5 C 82.5 18.5, 72.5 24.5, 62.5 30.5 C 50.5 37.5, 37.5 44.5, 25.5 51.5 C 16.5 57.5, 8.5 64.5, 2.5 72.5"
+              stroke="#000000"
               strokeWidth="1.1"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-2 animation-delay-150"
-              filter="url(#root-depth-3d)"
+              opacity="0.80"
             />
 
-            {/* Center */}
+            {/* ===== CURVING ROOT - Wide horizontal sweep ===== */}
             <path
-              d="M 90 18 Q 80 25, 65 30 T 45 38 Q 34.5 42, 22.5 48"
-              stroke="#2a2a2a"
-              strokeWidth="0.5"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-branch-2 animation-delay-150"
-              opacity="0.5"
-            />
-
-            {/* Right contour */}
-            <path
-              d="M 90.3 18 Q 80.3 25, 65.3 30 T 45.3 38 Q 34.8 42, 22.8 48"
-              stroke="#000000"
-              strokeWidth="1.0"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-2 animation-delay-150"
-              opacity="0.75"
-            />
-
-            {/* ===== THIN SPREADING BRANCH - ORGANIC TAPER ===== */}
-            <path
-              d="M 85.2 30 Q 70.2 35, 50.2 40 T 25.2 48 Q 15 52, 8 58"
-              stroke="#000000"
+              d="M 88 20 C 75 23, 62 25, 48 27 C 35 29, 22 32, 10 36 C 5 38, 2 41, 0 45"
+              stroke="url(#root-wood-2)"
               strokeWidth="1.2"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-1 animation-delay-200"
-              opacity="0.3"
+              opacity="0.85"
             />
 
+            {/* ===== SNAKING ROOT - Organic curve pattern ===== */}
             <path
-              d="M 85 30 Q 70 35, 50 40 T 25 48 Q 15 52, 8 58"
-              stroke="url(#root-gradient-thin)"
-              strokeWidth="0.9"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-1 animation-delay-200"
-              filter="url(#root-depth-3d)"
-            />
-
-            {/* ===== LOWER SPREADING ROOT - VOLUMETRIC ===== */}
-            <path
-              d="M 78 48 Q 65 55, 50 60 T 30 68 Q 20 73, 12 80"
-              stroke="#000000"
-              strokeWidth="1.3"
+              d="M 85 28 C 73 33, 61 37, 49 41 C 38 45, 27 50, 17 56 C 10 60, 4 66, 1 73"
+              stroke="url(#root-wood-2)"
+              strokeWidth="1.1"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
               className="animate-root-branch-2 animation-delay-250"
-              opacity="0.25"
+              opacity="0.82"
             />
 
+            {/* ===== LOWER SPREADING ROOT ===== */}
             <path
-              d="M 78.2 48 Q 65.2 55, 50.2 60 T 30.2 68 Q 20.2 73, 12.2 80"
-              stroke="url(#root-gradient-branch)"
+              d="M 75 50 C 62 56, 49 61, 36 66 C 25 70, 14 75, 5 82"
+              stroke="url(#root-wood-2)"
               strokeWidth="1.0"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="animate-root-branch-2 animation-delay-250"
-              filter="url(#root-depth-3d)"
+              className="animate-root-branch-1 animation-delay-300"
+              opacity="0.80"
             />
 
+            {/* ===== DELICATE WISPY TENDRILS - Fine roots spreading ===== */}
             <path
-              d="M 78.5 48 Q 65.5 55, 50.5 60 T 30.5 68 Q 20.5 73, 12.5 80"
-              stroke="#000000"
+              d="M 92 8 C 84 10, 76 11, 68 12 C 58 13, 47 14, 36 16 C 27 17, 18 19, 10 22"
+              stroke="url(#root-wood-thin)"
               strokeWidth="0.8"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="animate-root-branch-2 animation-delay-250"
+              className="animate-root-grow animation-delay-80"
+              opacity="0.70"
+            />
+
+            <path
+              d="M 89 16 C 78 20, 67 23, 55 26 C 43 29, 31 33, 20 38 C 12 42, 5 47, 1 53"
+              stroke="url(#root-wood-thin)"
+              strokeWidth="0.7"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-2 animation-delay-180"
+              opacity="0.68"
+            />
+
+            <path
+              d="M 83 35 C 70 40, 56 44, 42 48 C 30 52, 18 57, 8 64"
+              stroke="url(#root-wood-thin)"
+              strokeWidth="0.7"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-1 animation-delay-220"
               opacity="0.65"
             />
 
-            {/* ===== DEEP DESCENDING ROOT ===== */}
             <path
-              d="M 70 68 Q 55 75, 35 82 T 15 90 Q 10 94, 5 98"
-              stroke="url(#root-gradient-thin)"
-              strokeWidth="0.9"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-1 animation-delay-300"
-              filter="url(#root-depth-3d)"
-            />
-
-            <path
-              d="M 70.3 68 Q 55.3 75, 35.3 82 T 15.3 90 Q 10.3 94, 5.3 98"
-              stroke="#000000"
-              strokeWidth="0.7"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-1 animation-delay-300"
-              opacity="0.6"
-            />
-
-            {/* ===== WISPY UPPER TENDRILS ===== */}
-            <path
-              d="M 92 10 Q 82 12, 70 14 T 50 18 Q 38 21, 28 25"
-              stroke="url(#root-gradient-thin)"
-              strokeWidth="0.7"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-grow animation-delay-80"
-              filter="url(#root-depth-3d)"
-            />
-
-            <path
-              d="M 92.3 10 Q 82.3 12, 70.3 14 T 50.3 18 Q 38.3 21, 28.3 25"
-              stroke="#000000"
-              strokeWidth="0.5"
-              fill="none"
-              strokeLinecap="round"
-              className="animate-root-grow animation-delay-80"
-              opacity="0.55"
-            />
-
-            {/* ===== DELICATE SIDE TENDRILS ===== */}
-            <path
-              d="M 75 55 Q 60 65, 40 75 T 20 88 Q 15 92, 10 96"
-              stroke="url(#root-gradient-thin)"
-              strokeWidth="0.7"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-2 animation-delay-350"
-              opacity="0.5"
-            />
-
-            <path
-              d="M 88 22 Q 78 28, 65 35 T 48 44 Q 38 49, 30 55"
-              stroke="url(#root-gradient-thin)"
-              strokeWidth="0.8"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="animate-root-branch-1 animation-delay-180"
-              filter="url(#root-depth-3d)"
-            />
-
-            {/* ===== ADDITIONAL FINE ROOTS FOR DENSITY ===== */}
-            <path
-              d="M 82 40 Q 70 45, 55 50 T 35 58"
-              stroke="#000000"
+              d="M 78 44 C 65 49, 51 54, 37 59 C 25 63, 14 69, 5 77"
+              stroke="url(#root-wood-thin)"
               strokeWidth="0.6"
               fill="none"
               strokeLinecap="round"
-              className="animate-root-branch-2 animation-delay-220"
-              opacity="0.45"
+              strokeLinejoin="round"
+              className="animate-root-branch-2 animation-delay-280"
+              opacity="0.62"
             />
 
             <path
-              d="M 68 62 Q 52 68, 32 75 T 18 83"
-              stroke="#000000"
+              d="M 70 60 C 56 66, 41 71, 27 77 C 17 81, 8 87, 2 95"
+              stroke="url(#root-wood-thin)"
+              strokeWidth="0.6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-1 animation-delay-320"
+              opacity="0.60"
+            />
+
+            {/* ===== ADDITIONAL BRANCHING ROOTS - Creating density ===== */}
+            <path
+              d="M 80 38 C 68 42, 55 45, 42 49 C 30 52, 18 57, 8 63"
+              stroke="url(#root-wood-thin)"
+              strokeWidth="0.7"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-2 animation-delay-260"
+              opacity="0.65"
+            />
+
+            <path
+              d="M 65 65 C 52 70, 38 75, 24 81 C 15 85, 7 91, 2 98"
+              stroke="url(#root-wood-thin)"
+              strokeWidth="0.6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-1 animation-delay-350"
+              opacity="0.58"
+            />
+
+            {/* ===== VERY FINE ROOT HAIRS - Delicate spread ===== */}
+            <path
+              d="M 90 10 C 81 12, 72 13, 62 14 C 51 15, 39 17, 28 20"
+              stroke="#1a1410"
               strokeWidth="0.5"
               fill="none"
               strokeLinecap="round"
-              className="animate-root-branch-1 animation-delay-280"
-              opacity="0.4"
+              strokeLinejoin="round"
+              className="animate-root-grow animation-delay-120"
+              opacity="0.55"
             />
 
-            {/* ===== ORGANIC ROOT NODES - VOLUMETRIC SPHERES ===== */}
-            {/* Node at trunk junction */}
-            <ellipse cx="90" cy="20" rx="1.2" ry="1.0" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-150" />
-            <circle cx="90" cy="19.8" r="0.4" fill="#2a2a2a" opacity="0.6" />
+            <path
+              d="M 86 24 C 74 28, 62 31, 49 35 C 37 38, 25 43, 14 49"
+              stroke="#1a1410"
+              strokeWidth="0.5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-2 animation-delay-240"
+              opacity="0.52"
+            />
 
-            {/* Node at major branch point */}
-            <ellipse cx="75" cy="30" rx="1.0" ry="0.9" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-250" />
-            <circle cx="75" cy="29.8" r="0.35" fill="#2a2a2a" opacity="0.5" />
+            <path
+              d="M 72 55 C 58 61, 44 66, 30 72 C 19 76, 9 82, 3 90"
+              stroke="#1a1410"
+              strokeWidth="0.5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-root-branch-1 animation-delay-340"
+              opacity="0.50"
+            />
 
-            {/* Node at secondary branch */}
-            <ellipse cx="65" cy="45" rx="0.9" ry="0.8" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-350" />
-            <circle cx="65" cy="44.8" r="0.3" fill="#2a2a2a" opacity="0.5" />
+            {/* ===== NATURAL ROOT NODES - Junction points ===== */}
+            <ellipse cx="91" cy="12" rx="1.1" ry="0.9" fill="url(#root-node)" className="animate-root-pulse animation-delay-150" opacity="0.85" />
+            <ellipse cx="88" cy="20" rx="0.95" ry="0.8" fill="url(#root-node)" className="animate-root-pulse animation-delay-200" opacity="0.80" />
+            <ellipse cx="85" cy="28" rx="0.85" ry="0.75" fill="url(#root-node)" className="animate-root-pulse animation-delay-250" opacity="0.75" />
+            <ellipse cx="82" cy="36" rx="0.8" ry="0.7" fill="url(#root-node)" className="animate-root-pulse animation-delay-300" opacity="0.72" />
+            <ellipse cx="75" cy="50" rx="0.75" ry="0.65" fill="url(#root-node)" className="animate-root-pulse animation-delay-350" opacity="0.68" />
+            <ellipse cx="70" cy="60" rx="0.7" ry="0.6" fill="url(#root-node)" className="animate-root-pulse animation-delay-400" opacity="0.65" />
 
-            {/* Node at lower junction */}
-            <ellipse cx="50" cy="60" rx="0.8" ry="0.7" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-400" />
-            <circle cx="50" cy="59.8" r="0.25" fill="#2a2a2a" opacity="0.4" />
-
-            {/* Small nodes along roots */}
-            <circle cx="82" cy="35" r="0.5" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-180" opacity="0.7" />
-            <circle cx="60" cy="50" r="0.45" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-280" opacity="0.65" />
-            <circle cx="38" cy="70" r="0.4" fill="url(#root-node-gradient)" className="animate-root-pulse animation-delay-320" opacity="0.6" />
+            {/* Small junction nodes */}
+            <circle cx="80" cy="38" r="0.55" fill="url(#root-node)" className="animate-root-pulse animation-delay-220" opacity="0.70" />
+            <circle cx="65" cy="65" r="0.5" fill="url(#root-node)" className="animate-root-pulse animation-delay-320" opacity="0.65" />
+            <circle cx="50" cy="41" r="0.45" fill="url(#root-node)" className="animate-root-pulse animation-delay-280" opacity="0.62" />
+            <circle cx="36" cy="66" r="0.4" fill="url(#root-node)" className="animate-root-pulse animation-delay-360" opacity="0.60" />
           </svg>
 
           {/* Individual Menu Item Cards - Floating Down from Right */}
