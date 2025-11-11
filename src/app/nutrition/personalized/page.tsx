@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { FoodSearchAnimation } from '@/components/food-search-animation';
+import { NutritionScrollAnimation } from '@/components/nutrition-scroll-animation';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -70,6 +70,11 @@ export default function PersonalizedNutritionPage() {
         </div>
       </header>
 
+      {/* Full-width Food Animation - spans entire viewport */}
+      <div className="w-full mb-8 animate-fade-in-up animation-delay-200">
+        <NutritionScrollAnimation />
+      </div>
+
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -83,11 +88,6 @@ export default function PersonalizedNutritionPage() {
           <p className="text-muted-foreground text-lg">
             Based on your food preferences and follicular phase
           </p>
-        </div>
-
-        {/* Food Search Animation */}
-        <div className="mb-8">
-          <FoodSearchAnimation />
         </div>
 
         {/* Phase-Specific Info */}
