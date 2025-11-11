@@ -127,7 +127,8 @@ export default function DashboardPage() {
 
         {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave - MOVED TO TOP */}
         <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-200">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          {/* Animated background gradient pulse */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
             <BloomingFlower size={120} duration={3000} delay={1500} />
           </div>
@@ -147,7 +148,7 @@ export default function DashboardPage() {
                 </Link>
               </div>
               <div className="hidden md:flex items-center gap-6">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm animate-bloom-breathe">
                   <Heart className="w-16 h-16 text-primary" />
                 </div>
               </div>
@@ -162,6 +163,16 @@ export default function DashboardPage() {
               height={180}
               className="w-full"
             />
+          </div>
+
+          {/* Log a Symptom Button */}
+          <div className="relative z-10 mt-6 -mx-6 -mb-6 p-6 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 border-t border-primary/10">
+            <Link href="/log-symptom">
+              <Button className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-bloom">
+                <Plus className="mr-2 w-5 h-5" />
+                Log a Symptom
+              </Button>
+            </Link>
           </div>
         </Card>
 
