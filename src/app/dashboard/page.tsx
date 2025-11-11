@@ -15,7 +15,8 @@ import {
   Wind,
   Sparkles,
   Plus,
-  ArrowRight
+  ArrowRight,
+  Dumbbell
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
@@ -36,6 +37,20 @@ export default function DashboardPage() {
     updateWellness,
     isLoading
   } = useDashboardData(MOCK_USER_ID);
+
+  // Modal state for metric cards
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState<'hydration' | 'steps' | 'sleep' | 'workout' | null>(null);
+
+  const openMetricModal = (metric: 'hydration' | 'steps' | 'sleep' | 'workout') => {
+    setSelectedMetric(metric);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedMetric(null);
+  };
 
   // Mock wellness data
   const userData = {
@@ -165,91 +180,105 @@ export default function DashboardPage() {
           <GoalsTodoList userId={MOCK_USER_ID} />
         </div>
 
-        {/* Horizontal Week Calendar - Rounded Pill Style */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide animate-fade-in-up animation-delay-800">
-          {weekDates.map((date, index) => {
-            const isToday = date.toDateString() === now.toDateString();
-            return (
-              <button
-                key={index}
-                className={`flex flex-col items-center justify-center min-w-[4.5rem] h-24 rounded-3xl transition-all duration-300 ${
-                  isToday
-                    ? 'bg-primary text-primary-foreground shadow-bloom scale-105'
-                    : 'bg-card hover:bg-muted/80 hover:scale-105 hover:shadow-bloom-sm border border-border/50'
-                }`}
-              >
-                <span className="text-xs font-medium mb-1.5 opacity-70 uppercase tracking-wider">
-                  {days[date.getDay()]}
-                </span>
-                <span className="text-2xl font-bold">
-                  {date.getDate()}
-                </span>
-              </button>
-            );
-          })}
-        </div>
 
-        {/* Quick Stats Grid - Inspired by Smart Home Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in-scale animation-delay-1000">
-          {/* Hydration Card */}
-          <Card className="glass-card card-marble group hover:scale-105 transition-all duration-300">
+        {/* Health Metrics Grid - 4 Interactive Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1000">
+          {/* Hydration Card - Blue */}
+          <Card
+            className="glass-card card-marble group hover:scale-105 transition-all duration-300 cursor-pointer"
+            style={{ backgroundColor: 'hsl(210 100% 92%)', borderColor: 'hsl(210 80% 75%)' }}
+            onClick={() => openMetricModal('hydration')}
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Hydration</p>
-                <p className="text-3xl font-bold">
-                  {userData.water.completed}<span className="text-lg text-muted-foreground">/{userData.water.goal}</span>
+                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(210 60% 40%)' }}>Hydration</p>
+                <p className="text-3xl font-bold" style={{ color: 'hsl(210 80% 30%)' }}>
+                  {userData.water.completed}<span className="text-lg opacity-70">/{userData.water.goal}</span>
                 </p>
               </div>
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
-                <Droplets className="w-8 h-8 text-primary" />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(210 100% 85%)' }}>
+                <Droplets className="w-7 h-7" style={{ color: 'hsl(210 90% 45%)' }} />
               </div>
             </div>
             <div className="space-y-2">
               <Progress value={(userData.water.completed / userData.water.goal) * 100} className="h-2" />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs" style={{ color: 'hsl(210 40% 50%)' }}>
                 {userData.water.goal - userData.water.completed} glasses remaining
               </p>
             </div>
           </Card>
 
-          {/* Steps Card */}
-          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+          {/* Steps Card - Brown */}
+          <Card
+            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
+            style={{ backgroundColor: 'hsl(25 30% 90%)', borderColor: 'hsl(25 25% 70%)' }}
+            onClick={() => openMetricModal('steps')}
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Steps</p>
-                <p className="text-3xl font-bold">
+                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(25 25% 35%)' }}>Steps</p>
+                <p className="text-3xl font-bold" style={{ color: 'hsl(25 30% 25%)' }}>
                   {(userData.steps.completed / 1000).toFixed(1)}k
                 </p>
               </div>
-              <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                <Footprints className="w-8 h-8 text-secondary" />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(25 35% 80%)' }}>
+                <Footprints className="w-7 h-7" style={{ color: 'hsl(25 40% 40%)' }} />
               </div>
             </div>
             <div className="space-y-2">
               <Progress value={(userData.steps.completed / userData.steps.goal) * 100} className="h-2" />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs" style={{ color: 'hsl(25 20% 45%)' }}>
                 {((userData.steps.goal - userData.steps.completed) / 1000).toFixed(1)}k to goal
               </p>
             </div>
           </Card>
 
-          {/* Sleep Card */}
-          <Card className="glass-card group hover:scale-105 transition-all duration-300">
+          {/* Sleep Card - Light Sage Green */}
+          <Card
+            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
+            style={{ backgroundColor: 'hsl(100 25% 90%)', borderColor: 'hsl(100 20% 70%)' }}
+            onClick={() => openMetricModal('sleep')}
+          >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-sm text-muted-foreground mb-1">Sleep</p>
-                <p className="text-3xl font-bold">
+                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(100 25% 35%)' }}>Sleep</p>
+                <p className="text-3xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>
                   {userData.sleepHours}h
                 </p>
               </div>
-              <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center">
-                <Moon className="w-8 h-8 text-accent-foreground" />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 80%)' }}>
+                <Moon className="w-7 h-7" style={{ color: 'hsl(100 35% 40%)' }} />
               </div>
             </div>
             <div className="space-y-2">
               <Progress value={(userData.sleepHours / 8) * 100} className="h-2" />
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs" style={{ color: 'hsl(100 20% 40%)' }}>
                 {(8 - userData.sleepHours).toFixed(1)}h until target
+              </p>
+            </div>
+          </Card>
+
+          {/* Workout Card - White/Black */}
+          <Card
+            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
+            style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
+            onClick={() => openMetricModal('workout')}
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(0 0% 30%)' }}>Workout</p>
+                <p className="text-3xl font-bold" style={{ color: 'hsl(0 0% 10%)' }}>
+                  3<span className="text-lg opacity-70">/5</span>
+                </p>
+              </div>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
+                <Dumbbell className="w-7 h-7" style={{ color: 'hsl(0 0% 20%)' }} />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Progress value={60} className="h-2" />
+              <p className="text-xs" style={{ color: 'hsl(0 0% 45%)' }}>
+                2 sessions this week
               </p>
             </div>
           </Card>
@@ -298,6 +327,154 @@ export default function DashboardPage() {
         <div className="animate-fade-in-up animation-delay-1400">
           <SwipeableSleepTracker />
         </div>
+
+        {/* Metric Insights/Edit Modal */}
+        {modalOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
+            onClick={closeModal}
+          >
+            <Card
+              className="w-full max-w-md p-6 relative animate-fade-in-scale"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {selectedMetric === 'hydration' && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(210 100% 85%)' }}>
+                      <Droplets className="w-6 h-6" style={{ color: 'hsl(210 90% 45%)' }} />
+                    </div>
+                    <h3 className="text-2xl font-bold">Hydration Tracker</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Daily Goal</p>
+                      <p className="text-3xl font-bold">{userData.water.goal} glasses</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Completed Today</p>
+                      <p className="text-3xl font-bold" style={{ color: 'hsl(210 80% 40%)' }}>
+                        {userData.water.completed} glasses
+                      </p>
+                    </div>
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <p className="text-sm font-medium mb-2">💡 Insight</p>
+                      <p className="text-sm text-muted-foreground">
+                        You're {Math.round((userData.water.completed / userData.water.goal) * 100)}% of the way to your daily hydration goal. Keep it up!
+                      </p>
+                    </div>
+                    <Button className="w-full" onClick={handleAddWater}>
+                      Add Glass of Water
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {selectedMetric === 'steps' && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(25 35% 80%)' }}>
+                      <Footprints className="w-6 h-6" style={{ color: 'hsl(25 40% 40%)' }} />
+                    </div>
+                    <h3 className="text-2xl font-bold">Steps Tracker</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Daily Goal</p>
+                      <p className="text-3xl font-bold">{userData.steps.goal.toLocaleString()} steps</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Steps Today</p>
+                      <p className="text-3xl font-bold" style={{ color: 'hsl(25 40% 35%)' }}>
+                        {userData.steps.completed.toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-lg" style={{ backgroundColor: 'hsl(25 40% 95%)' }}>
+                      <p className="text-sm font-medium mb-2">💡 Insight</p>
+                      <p className="text-sm text-muted-foreground">
+                        Great progress! You've walked {(userData.steps.completed / userData.steps.goal * 100).toFixed(0)}% of your daily goal.
+                      </p>
+                    </div>
+                    <Link href="/workout">
+                      <Button className="w-full">Log Activity</Button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+
+              {selectedMetric === 'sleep' && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 80%)' }}>
+                      <Moon className="w-6 h-6" style={{ color: 'hsl(100 35% 40%)' }} />
+                    </div>
+                    <h3 className="text-2xl font-bold">Sleep Tracker</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Target Sleep</p>
+                      <p className="text-3xl font-bold">8 hours</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Last Night</p>
+                      <p className="text-3xl font-bold" style={{ color: 'hsl(100 35% 35%)' }}>
+                        {userData.sleepHours} hours
+                      </p>
+                    </div>
+                    <div className="p-4 rounded-lg" style={{ backgroundColor: 'hsl(100 30% 95%)' }}>
+                      <p className="text-sm font-medium mb-2">💡 Insight</p>
+                      <p className="text-sm text-muted-foreground">
+                        {userData.sleepHours >= 7
+                          ? 'Excellent! You got quality rest last night.'
+                          : `Try to get ${(8 - userData.sleepHours).toFixed(1)} more hours tonight for optimal recovery.`}
+                      </p>
+                    </div>
+                    <Button className="w-full">Edit Sleep Log</Button>
+                  </div>
+                </div>
+              )}
+
+              {selectedMetric === 'workout' && (
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
+                      <Dumbbell className="w-6 h-6" style={{ color: 'hsl(0 0% 20%)' }} />
+                    </div>
+                    <h3 className="text-2xl font-bold">Workout Tracker</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">Weekly Goal</p>
+                      <p className="text-3xl font-bold">5 sessions</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-2">This Week</p>
+                      <p className="text-3xl font-bold">3 sessions</p>
+                    </div>
+                    <div className="p-4 bg-gray-50 rounded-lg">
+                      <p className="text-sm font-medium mb-2">💡 Insight</p>
+                      <p className="text-sm text-muted-foreground">
+                        You're on track! Complete 2 more sessions this week to hit your goal.
+                      </p>
+                    </div>
+                    <Link href="/workout">
+                      <Button className="w-full">Start Workout</Button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </Card>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
