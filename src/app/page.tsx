@@ -4,7 +4,7 @@ import { AnimatedHeroBackground } from '@/components/animated-hero-background';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Sparkles, Calendar, ArrowRight, Activity, Brain, Users, Award, TrendingUp, Scale, Target, TrendingDown } from 'lucide-react';
+import { Heart, Sparkles, Calendar, ArrowRight, Activity, Brain, Users, Award, TrendingUp, Scale, Target, TrendingDown, Utensils } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -126,6 +126,7 @@ export default function HomePage() {
                 variant="outline"
                 className="rounded-full px-8 py-3 text-sm font-medium border-2 border-primary/30 backdrop-blur-sm bg-card/90 hover:bg-card hover:border-primary/50 transition-all hover:scale-105 shadow-bloom-sm"
               >
+                <Utensils className="w-4 h-4 mr-2" strokeWidth={1.5} />
                 Personalize your meal plans
               </Button>
             </Link>
