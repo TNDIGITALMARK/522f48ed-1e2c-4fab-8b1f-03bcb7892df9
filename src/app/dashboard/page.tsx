@@ -126,20 +126,18 @@ export default function DashboardPage() {
             <p className="text-sm text-muted-foreground mb-2 text-center">Your Cycle Phase</p>
           </div>
 
-          {/* Phase info with animation above phase name */}
-          <div className="relative z-10 mb-6 text-center">
-            {/* Animation directly above phase name */}
-            <div className="flex justify-center mb-4">
-              {/* Desktop flower - larger, prominent */}
-              <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
-                <BloomingFlower size={160} duration={2500} delay={800} />
-              </div>
-              {/* Mobile flower - smaller, compact */}
-              <div className="flex md:hidden items-center justify-center animate-fade-in-scale animation-delay-400">
-                <BloomingFlower size={90} duration={2000} delay={600} />
-              </div>
-            </div>
+          {/* 3D Animated Hormone Wave - Moved here underneath title */}
+          <div className="relative z-10 mb-6 -mx-6">
+            <HormoneWave3D
+              phase="ovulation"
+              width={800}
+              height={180}
+              className="w-full"
+            />
+          </div>
 
+          {/* Phase info - Now below the animation */}
+          <div className="relative z-10 mb-6 text-center">
             <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
             <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
             <Link href="/cycle">
@@ -148,16 +146,6 @@ export default function DashboardPage() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-          </div>
-
-          {/* 3D Animated Hormone Wave */}
-          <div className="relative z-10 mt-4 -mx-6">
-            <HormoneWave3D
-              phase="ovulation"
-              width={800}
-              height={180}
-              className="w-full"
-            />
           </div>
 
           {/* Log a Symptom Button */}
