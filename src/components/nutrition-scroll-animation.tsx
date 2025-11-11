@@ -44,7 +44,7 @@ const FOOD_ICONS = [
   // Row 3 - Grains & Bread
   { id: 'bread', path: <path d="M4 8h16c1 0 2 1 2 2v8c0 1-1 2-2 2H4c-1 0-2-1-2-2v-8c0-1 1-2 2-2zM4 8c0-2 2-4 4-4h8c2 0 4 2 4 4" /> },
   { id: 'croissant', path: <path d="M4 14c0-3 2-6 5-8 1-1 2-1 3-1s2 0 3 1c3 2 5 5 5 8 0 2-1 3-3 4-1 1-3 1-5 1s-4 0-5-1c-2-1-3-2-3-4z" /> },
-  { id: 'pizza', path: <circle cx="12" cy="12" r="10" /><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17" /> },
+  { id: 'pizza', path: <><circle cx="12" cy="12" r="10" /><path d="M12 2v20M2 12h20M7 7l10 10M17 7L7 17" /></> },
   { id: 'pasta', path: <path d="M3 10c3 0 3-3 6-3s3 3 6 3 3-3 6-3M3 14c3 0 3-3 6-3s3 3 6 3 3-3 6-3M3 18c3 0 3-3 6-3s3 3 6 3 3-3 6-3" /> },
   { id: 'rice', path: <path d="M8 8V5M12 8V4M16 8V5M6 8h12v10c0 1-1 2-2 2h-8c-1 0-2-1-2-2V8z" /> },
   { id: 'cereal', path: <path d="M8 6h8v12H8V6zM6 10h12M8 14h8M10 6V4M14 6V4" /> },
