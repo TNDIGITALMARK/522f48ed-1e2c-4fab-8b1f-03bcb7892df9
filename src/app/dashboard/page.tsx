@@ -121,8 +121,8 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave - MOVED TO TOP */}
-        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-0 overflow-hidden relative animate-fade-in-up animation-delay-200 shadow-bloom-lg mt-2">
+        {/* Cycle Phase Banner - Floating Card Style with 3D Hormone Wave - MOVED TO TOP */}
+        <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6">
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
@@ -152,7 +152,7 @@ export default function DashboardPage() {
           </div>
 
           {/* 3D Animated Hormone Wave */}
-          <div className="relative z-10 mt-4 -mx-6 -mb-6">
+          <div className="relative z-10 mt-4 -mx-6">
             <HormoneWave3D
               phase="ovulation"
               width={800}
@@ -162,7 +162,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Log a Symptom Button */}
-          <div className="relative z-10 mt-6 -mx-6 -mb-6 p-6 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 border-t border-primary/10">
+          <div className="relative z-10 mt-6 -mx-6 p-6 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 border-t border-primary/10">
             <Link href="/log-symptom">
               <Button className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-bloom">
                 <Plus className="mr-2 w-5 h-5" />
@@ -170,7 +170,7 @@ export default function DashboardPage() {
               </Button>
             </Link>
           </div>
-        </Card>
+        </div>
 
         {/* Rooted Reset Section - MOVED AFTER CYCLE PHASE */}
         <div className="animate-fade-in-up animation-delay-300 mt-4">
