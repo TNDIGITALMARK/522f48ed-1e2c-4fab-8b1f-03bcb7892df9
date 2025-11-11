@@ -22,7 +22,6 @@ import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
 import { DailyAspiration } from '@/components/daily-aspiration';
-import { RootedTextLogo } from '@/components/rooted-text-logo';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -100,10 +99,12 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto pb-12 px-6">
-        {/* ROOTED Logo Header - Clean and Centered */}
+        {/* Greeting Header */}
         <div className="pt-12 pb-8 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center">
-            <RootedTextLogo className="w-full max-w-xl" />
+            <h1 className="text-5xl md:text-6xl font-bold text-foreground">
+              Hi {userData.name}
+            </h1>
           </div>
         </div>
 
