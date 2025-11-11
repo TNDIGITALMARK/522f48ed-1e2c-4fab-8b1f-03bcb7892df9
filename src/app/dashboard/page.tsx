@@ -21,10 +21,10 @@ import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
 import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
-import { WorkoutSummary } from '@/components/workout-summary';
 import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
+import { DailyAspiration } from '@/components/daily-aspiration';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -84,26 +84,6 @@ export default function DashboardPage() {
   };
 
   const weekDates = getWeekDates();
-
-  // Mock workout data (in real app, this would come from state management or API)
-  const mockWorkoutLogs = [
-    { id: '1', exercise: 'Barbell Squat', sets: 4, reps: 8, weight: 135, calories: 250, date: '2025-10-28' },
-    { id: '2', exercise: 'Bench Press', sets: 4, reps: 10, weight: 95, calories: 200, date: '2025-10-28' },
-    { id: '3', exercise: 'Deadlift', sets: 3, reps: 6, weight: 185, calories: 300, date: '2025-10-26' },
-  ];
-
-  const mockCardioLogs = [
-    {
-      id: '1',
-      machineName: 'Treadmill',
-      durationMinutes: 30,
-      caloriesBurned: 280,
-      distance: 3.2,
-      distanceUnit: 'mi',
-      workoutDate: '2025-10-27',
-      createdAt: '2025-10-27T10:00:00Z'
-    }
-  ];
 
   return (
     <DashboardLayout>
@@ -317,9 +297,9 @@ export default function DashboardPage() {
           <SwipeableSleepTracker />
         </div>
 
-        {/* Workout Summary Section */}
+        {/* Daily Aspiration Section */}
         <div className="animate-fade-in-up animation-delay-1600">
-          <WorkoutSummary workoutLogs={mockWorkoutLogs} cardioLogs={mockCardioLogs} />
+          <DailyAspiration userId={MOCK_USER_ID} />
         </div>
       </div>
     </DashboardLayout>
