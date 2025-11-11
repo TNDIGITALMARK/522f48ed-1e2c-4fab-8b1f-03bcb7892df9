@@ -110,6 +110,24 @@ export default function DashboardPage() {
                 Hi {userData.name}
               </h1>
             </div>
+          </div>
+        </div>
+
+        {/* Cycle Phase Banner - Rearranged Layout */}
+        <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6">
+          {/* Animated background gradient pulse */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
+          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
+            <BloomingFlower size={120} duration={3000} delay={1500} />
+          </div>
+
+          {/* Title at top */}
+          <div className="relative z-10 mb-6">
+            <p className="text-sm text-muted-foreground mb-2 text-center">Your Cycle Phase</p>
+          </div>
+
+          {/* Animation in center */}
+          <div className="relative z-10 flex justify-center mb-6">
             {/* Desktop flower - larger, prominent */}
             <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
               <BloomingFlower size={160} duration={2500} delay={800} />
@@ -119,36 +137,17 @@ export default function DashboardPage() {
               <BloomingFlower size={90} duration={2000} delay={600} />
             </div>
           </div>
-        </div>
 
-        {/* Cycle Phase Banner - Floating Card Style with 3D Hormone Wave - MOVED TO TOP */}
-        <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6">
-          {/* Animated background gradient pulse */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
-          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
-            <BloomingFlower size={120} duration={3000} delay={1500} />
-          </div>
-
-          {/* Top section with title and info */}
-          <div className="relative z-10 mb-6">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
-                <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
-                <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
-                <Link href="/cycle">
-                  <Button className="rounded-full">
-                    View Details
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
-              </div>
-              <div className="hidden md:flex items-center gap-6">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm animate-bloom-breathe">
-                  <Heart className="w-16 h-16 text-primary" />
-                </div>
-              </div>
-            </div>
+          {/* Phase info below animation */}
+          <div className="relative z-10 mb-6 text-center">
+            <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
+            <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
+            <Link href="/cycle">
+              <Button className="rounded-full">
+                View Details
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </div>
 
           {/* 3D Animated Hormone Wave */}
