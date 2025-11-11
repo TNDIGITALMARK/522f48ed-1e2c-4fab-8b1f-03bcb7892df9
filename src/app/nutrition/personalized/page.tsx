@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
+import { FoodSearchAnimation } from '@/components/food-search-animation';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -82,6 +83,11 @@ export default function PersonalizedNutritionPage() {
           <p className="text-muted-foreground text-lg">
             Based on your food preferences and follicular phase
           </p>
+        </div>
+
+        {/* Food Search Animation */}
+        <div className="mb-8">
+          <FoodSearchAnimation />
         </div>
 
         {/* Phase-Specific Info */}

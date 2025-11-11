@@ -1818,6 +1818,82 @@ tr:hover {
   animation: magazine-shimmer 2s infinite;
 }
 
+/* ============================================
+   FOOD SEARCH ANIMATION STYLES
+   ============================================ */
+
+/* Food item floating animation */
+@keyframes food-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(8px) rotate(1deg);
+  }
+}
+
+/* Magnifying glass scanning pulse */
+@keyframes magnifier-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Scanning beam effect */
+@keyframes scan-beam {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+/* Sparkle animation */
+@keyframes sparkle-twinkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* Food search animation utility classes */
+.animate-food-float {
+  animation: food-float 3s ease-in-out infinite;
+}
+
+.animate-magnifier-pulse {
+  animation: magnifier-pulse 2s ease-in-out infinite;
+}
+
+.animate-scan-beam {
+  animation: scan-beam 3s linear infinite;
+}
+
+.animate-sparkle-twinkle {
+  animation: sparkle-twinkle 1.5s ease-in-out infinite;
+}
+
 /* Print styles */
 @media print {
   body {
