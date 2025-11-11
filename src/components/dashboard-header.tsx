@@ -70,7 +70,7 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b-2 border-border/50 shadow-bloom-sm">
+      <header className="sticky top-0 z-10 bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm">
         <div className="flex items-center justify-between px-6 py-5">
           {/* Search Bar */}
           <div className="flex-1 max-w-sm">
