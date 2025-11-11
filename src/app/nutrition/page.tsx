@@ -219,19 +219,22 @@ export default function NutritionPage() {
         </div>
       </header>
 
-      {/* Full-width Food Animation - spans entire viewport */}
-      <div className="w-full mb-8 animate-fade-in-up animation-delay-200">
-        <NutritionScrollAnimation />
-      </div>
-
       <main className="max-w-4xl mx-auto px-6 py-8">
-        {/* Page Title */}
-        <div className="mb-8 animate-fade-in-up animation-delay-200">
+        {/* Page Title - Above Animation */}
+        <div className="mb-6 animate-fade-in-up animation-delay-200 text-center">
           <h1 className="text-4xl mb-2">Smart Nutrition</h1>
           <p className="text-muted-foreground text-lg">
             Your personalized meal planner synced to your cycle
           </p>
         </div>
+      </main>
+
+      {/* Full-width Food Animation - spans entire viewport */}
+      <div className="w-full mb-8 animate-fade-in-up animation-delay-400">
+        <NutritionScrollAnimation />
+      </div>
+
+      <main className="max-w-4xl mx-auto px-6 py-0 pb-8">
 
         {/* Food Quiz CTA */}
         <Card className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-primary/10 to-secondary/5 border-2 border-primary/20 mb-6">

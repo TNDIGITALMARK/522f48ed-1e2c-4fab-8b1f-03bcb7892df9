@@ -3,18 +3,18 @@
 import { motion } from 'framer-motion';
 
 // Line-art food icon components inspired by the reference image
-// Simplified SVG paths representing various foods
+// Baby-sized icons for visually appealing presentation
 const FoodIcon = ({ path, viewBox = "0 0 24 24" }: { path: string; viewBox?: string }) => (
   <svg
-    width="48"
-    height="48"
+    width="28"
+    height="28"
     viewBox={viewBox}
     fill="none"
     stroke="currentColor"
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="text-foreground/60"
+    className="text-foreground/70"
   >
     {path}
   </svg>
@@ -99,10 +99,9 @@ export function NutritionScrollAnimation() {
 
   return (
     <div className="w-full relative -mx-6">
-      {/* Full-width container that breaks out of parent padding */}
-      <div className="relative py-8 overflow-hidden bg-gradient-to-br from-background via-muted/10 to-background">
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5 bg-textile-subtle" />
+      {/* Full-width container - clean background without gradient */}
+      <div className="relative py-8 overflow-hidden"
+           style={{ backgroundColor: 'transparent' }}>
 
         {/* Row 1 - Scroll left to right */}
         <div className="relative h-16 overflow-hidden mb-4">
@@ -185,9 +184,51 @@ export function NutritionScrollAnimation() {
           </motion.div>
         </div>
 
-        {/* Optional: Gradient overlays on edges for smoother appearance */}
-        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+        {/* Magnifying glass overlay - searching effect */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <motion.div
+            className="relative"
+            animate={{
+              scale: [1, 1.05, 1],
+              opacity: [0.9, 1, 0.9],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <svg
+              width="120"
+              height="120"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-primary/30 drop-shadow-lg"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+
+            {/* Scanning beam effect inside magnifying glass */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
