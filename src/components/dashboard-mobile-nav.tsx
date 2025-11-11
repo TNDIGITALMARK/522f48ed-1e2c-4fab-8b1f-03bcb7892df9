@@ -86,117 +86,268 @@ export function DashboardMobileNav() {
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Decorative Tree Root SVG Background - Growing from TOP RIGHT */}
+          {/* Decorative Tree Root SVG Background - Growing from TOP RIGHT with 3D Depth */}
           <svg
             className="lg:hidden fixed inset-0 w-full h-full pointer-events-none z-45"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
+            <defs>
+              {/* Filter for subtle depth shadow */}
+              <filter id="root-depth" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0.3" />
+                <feOffset dx="0.2" dy="0.3" result="offsetblur" />
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="0.3" />
+                </feComponentTransfer>
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
             {/* ORIGIN POINT: Top Right Corner (95, 5) */}
 
-            {/* Main trunk growing downward from top-right */}
+            {/* ===== MAIN TRUNK with 3D DEPTH ===== */}
+            {/* Outer contour (right side - highlight) */}
             <path
-              d="M 95 5 Q 93 12, 90 20 T 85 35 Q 82 45, 78 55 T 70 75"
+              d="M 95.5 5 Q 93.5 12, 90.5 20 T 85.5 35 Q 82.5 45, 78.5 55 T 70.5 75"
               stroke="#000000"
-              strokeWidth="1.2"
+              strokeWidth="1.3"
               fill="none"
               className="animate-root-grow"
               vectorEffect="non-scaling-stroke"
-              opacity="0.9"
-            />
-
-            {/* Primary branch extending down-left */}
-            <path
-              d="M 93 8 Q 85 15, 75 22 T 60 32 Q 50 38, 40 45"
-              stroke="#000000"
-              strokeWidth="1"
-              fill="none"
-              className="animate-root-branch-1 animation-delay-100"
-              vectorEffect="non-scaling-stroke"
               opacity="0.85"
             />
-
-            {/* Secondary branch curving left */}
+            {/* Inner contour (left side - shadow) */}
             <path
-              d="M 90 18 Q 80 25, 65 30 T 45 38"
+              d="M 94.3 5 Q 92.3 12, 89.3 20 T 84.3 35 Q 81.3 45, 77.3 55 T 69.3 75"
               stroke="#000000"
-              strokeWidth="0.9"
+              strokeWidth="1.1"
               fill="none"
-              className="animate-root-branch-2 animation-delay-150"
+              className="animate-root-grow"
               vectorEffect="non-scaling-stroke"
-              opacity="0.8"
+              opacity="0.95"
             />
-
-            {/* Thinner branch spreading far left */}
+            {/* Center line for depth */}
             <path
-              d="M 85 30 Q 70 35, 50 40 T 25 48"
-              stroke="#000000"
-              strokeWidth="0.7"
-              fill="none"
-              className="animate-root-branch-1 animation-delay-200"
-              vectorEffect="non-scaling-stroke"
-              opacity="0.75"
-            />
-
-            {/* Lower spreading branch */}
-            <path
-              d="M 78 48 Q 65 55, 50 60 T 30 68"
-              stroke="#000000"
-              strokeWidth="0.8"
-              fill="none"
-              className="animate-root-branch-2 animation-delay-250"
-              vectorEffect="non-scaling-stroke"
-              opacity="0.7"
-            />
-
-            {/* Deep lower branch */}
-            <path
-              d="M 70 68 Q 55 75, 35 82 T 15 90"
-              stroke="#000000"
-              strokeWidth="0.6"
-              fill="none"
-              className="animate-root-branch-1 animation-delay-300"
-              vectorEffect="non-scaling-stroke"
-              opacity="0.65"
-            />
-
-            {/* Wispy upper branch to left */}
-            <path
-              d="M 92 10 Q 82 12, 70 14 T 50 18"
+              d="M 95 5 Q 93 12, 90 20 T 85 35 Q 82 45, 78 55 T 70 75"
               stroke="#000000"
               strokeWidth="0.5"
               fill="none"
-              className="animate-root-grow animation-delay-80"
+              className="animate-root-grow"
               vectorEffect="non-scaling-stroke"
               opacity="0.6"
             />
 
-            {/* Fine tendril reaching far down */}
+            {/* ===== PRIMARY BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
             <path
-              d="M 75 55 Q 60 65, 40 75 T 20 88"
+              d="M 93.6 8 Q 85.6 15, 75.6 22 T 60.6 32 Q 50.6 38, 40.6 45"
               stroke="#000000"
-              strokeWidth="0.5"
+              strokeWidth="1.1"
               fill="none"
-              className="animate-root-branch-2 animation-delay-350"
+              className="animate-root-branch-1 animation-delay-100"
               vectorEffect="non-scaling-stroke"
-              opacity="0.55"
+              opacity="0.8"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 92.4 8 Q 84.4 15, 74.4 22 T 59.4 32 Q 49.4 38, 39.4 45"
+              stroke="#000000"
+              strokeWidth="0.9"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-100"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.9"
+            />
+            {/* Center line */}
+            <path
+              d="M 93 8 Q 85 15, 75 22 T 60 32 Q 50 38, 40 45"
+              stroke="#000000"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-100"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.5"
             />
 
-            {/* Subtle side branch */}
+            {/* ===== SECONDARY BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
             <path
-              d="M 88 22 Q 78 28, 65 35 T 48 44"
+              d="M 90.5 18 Q 80.5 25, 65.5 30 T 45.5 38"
+              stroke="#000000"
+              strokeWidth="1.0"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-150"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.75"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 89.5 18 Q 79.5 25, 64.5 30 T 44.5 38"
+              stroke="#000000"
+              strokeWidth="0.8"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-150"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.85"
+            />
+            {/* Center line */}
+            <path
+              d="M 90 18 Q 80 25, 65 30 T 45 38"
+              stroke="#000000"
+              strokeWidth="0.35"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-150"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.5"
+            />
+
+            {/* ===== THINNER BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 85.4 30 Q 70.4 35, 50.4 40 T 25.4 48"
+              stroke="#000000"
+              strokeWidth="0.8"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-200"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.7"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 84.6 30 Q 69.6 35, 49.6 40 T 24.6 48"
               stroke="#000000"
               strokeWidth="0.6"
               fill="none"
-              className="animate-root-branch-1 animation-delay-180"
+              className="animate-root-branch-1 animation-delay-200"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.8"
+            />
+
+            {/* ===== LOWER SPREADING BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 78.5 48 Q 65.5 55, 50.5 60 T 30.5 68"
+              stroke="#000000"
+              strokeWidth="0.9"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-250"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.65"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 77.5 48 Q 64.5 55, 49.5 60 T 29.5 68"
+              stroke="#000000"
+              strokeWidth="0.7"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-250"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.75"
+            />
+
+            {/* ===== DEEP LOWER BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 70.4 68 Q 55.4 75, 35.4 82 T 15.4 90"
+              stroke="#000000"
+              strokeWidth="0.7"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-300"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.6"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 69.6 68 Q 54.6 75, 34.6 82 T 14.6 90"
+              stroke="#000000"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-300"
               vectorEffect="non-scaling-stroke"
               opacity="0.7"
             />
 
-            {/* Root nodes - organic knots */}
+            {/* ===== WISPY UPPER BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 92.3 10 Q 82.3 12, 70.3 14 T 50.3 18"
+              stroke="#000000"
+              strokeWidth="0.6"
+              fill="none"
+              className="animate-root-grow animation-delay-80"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.55"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 91.7 10 Q 81.7 12, 69.7 14 T 49.7 18"
+              stroke="#000000"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-grow animation-delay-80"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.65"
+            />
+
+            {/* ===== FINE TENDRIL with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 75.3 55 Q 60.3 65, 40.3 75 T 20.3 88"
+              stroke="#000000"
+              strokeWidth="0.6"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-350"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.5"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 74.7 55 Q 59.7 65, 39.7 75 T 19.7 88"
+              stroke="#000000"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-350"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.6"
+            />
+
+            {/* ===== SUBTLE SIDE BRANCH with 3D DEPTH ===== */}
+            {/* Outer contour */}
+            <path
+              d="M 88.4 22 Q 78.4 28, 65.4 35 T 48.4 44"
+              stroke="#000000"
+              strokeWidth="0.7"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-180"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.65"
+            />
+            {/* Inner contour */}
+            <path
+              d="M 87.6 22 Q 77.6 28, 64.6 35 T 47.6 44"
+              stroke="#000000"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-180"
+              vectorEffect="non-scaling-stroke"
+              opacity="0.75"
+            />
+
+            {/* Root nodes - organic knots with 3D depth */}
+            <circle cx="90.2" cy="20.2" r="0.6" fill="#000000" className="animate-root-pulse animation-delay-150" opacity="0.6" />
             <circle cx="90" cy="20" r="0.5" fill="#000000" className="animate-root-pulse animation-delay-150" opacity="0.8" />
+
+            <circle cx="75.2" cy="30.2" r="0.5" fill="#000000" className="animate-root-pulse animation-delay-250" opacity="0.5" />
             <circle cx="75" cy="30" r="0.4" fill="#000000" className="animate-root-pulse animation-delay-250" opacity="0.7" />
+
+            <circle cx="65.2" cy="45.2" r="0.55" fill="#000000" className="animate-root-pulse animation-delay-350" opacity="0.55" />
             <circle cx="65" cy="45" r="0.45" fill="#000000" className="animate-root-pulse animation-delay-350" opacity="0.75" />
+
+            <circle cx="50.2" cy="60.2" r="0.45" fill="#000000" className="animate-root-pulse animation-delay-400" opacity="0.45" />
             <circle cx="50" cy="60" r="0.35" fill="#000000" className="animate-root-pulse animation-delay-400" opacity="0.65" />
           </svg>
 
