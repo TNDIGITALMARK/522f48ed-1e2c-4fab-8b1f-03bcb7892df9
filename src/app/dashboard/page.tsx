@@ -8,12 +8,8 @@ import {
   Heart,
   Droplets,
   Footprints,
-  Brain,
   Calendar,
   Moon,
-  Sun,
-  Wind,
-  Sparkles,
   Plus,
   ArrowRight,
   Dumbbell
@@ -293,45 +289,6 @@ export default function DashboardPage() {
               </p>
             </div>
           </Card>
-        </div>
-
-        {/* Quick Actions - Circular Buttons Inspired by Smart Home */}
-        <div className="grid grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1200">
-          <Link href="/workout" className="group">
-            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Heart className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-sm font-semibold">Workout</span>
-            </Card>
-          </Link>
-
-          <Link href="/nutrition" className="group">
-            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Sparkles className="w-6 h-6 text-secondary" />
-              </div>
-              <span className="text-sm font-semibold">Nutrition</span>
-            </Card>
-          </Link>
-
-          <Link href="/rituals" className="group">
-            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Sun className="w-6 h-6 text-accent-foreground" />
-              </div>
-              <span className="text-sm font-semibold">Rituals</span>
-            </Card>
-          </Link>
-
-          <Link href="/recommendations" className="group">
-            <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Brain className="w-6 h-6 text-primary" />
-              </div>
-              <span className="text-sm font-semibold">AI Plan</span>
-            </Card>
-          </Link>
         </div>
 
         {/* Swipeable Sleep Tracker Section */}
