@@ -118,7 +118,7 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
         {/* Aspiration Content - Simplified */}
         {isEditing ? (
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">Rooted Reset:</h3>
+            <h3 className="text-lg font-semibold mb-4">Daily Aspiration:</h3>
             <textarea
               value={customText}
               onChange={(e) => setCustomText(e.target.value)}
@@ -146,9 +146,9 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
           </div>
         ) : (
           <>
-            {/* Simplified Rooted Reset Display */}
+            {/* Daily Aspiration Display */}
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold">Rooted Reset:</h3>
+              <h3 className="text-lg font-semibold">Daily Aspiration:</h3>
               <blockquote className="text-xl md:text-2xl font-serif italic leading-relaxed text-foreground/90">
                 "{aspiration}"
               </blockquote>

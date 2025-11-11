@@ -153,7 +153,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Rooted Reset Section - MOVED AFTER CYCLE PHASE */}
+        {/* Daily Aspiration Section - MOVED AFTER CYCLE PHASE */}
         <div className="animate-fade-in-up animation-delay-300 mt-4">
           <DailyAspiration userId={MOCK_USER_ID} />
         </div>
