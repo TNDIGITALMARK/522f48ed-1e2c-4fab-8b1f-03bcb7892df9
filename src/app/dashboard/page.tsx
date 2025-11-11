@@ -102,7 +102,7 @@ export default function DashboardPage() {
         {/* Greeting Header */}
         <div className="pt-12 pb-8 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground">
+            <h1 className="text-4xl font-bold text-foreground">
               Hi {userData.name}
             </h1>
           </div>
