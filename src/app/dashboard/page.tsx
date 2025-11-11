@@ -126,20 +126,20 @@ export default function DashboardPage() {
             <p className="text-sm text-muted-foreground mb-2 text-center">Your Cycle Phase</p>
           </div>
 
-          {/* Animation in center */}
-          <div className="relative z-10 flex justify-center mb-6">
-            {/* Desktop flower - larger, prominent */}
-            <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
-              <BloomingFlower size={160} duration={2500} delay={800} />
-            </div>
-            {/* Mobile flower - smaller, compact */}
-            <div className="flex md:hidden items-center justify-center animate-fade-in-scale animation-delay-400">
-              <BloomingFlower size={90} duration={2000} delay={600} />
-            </div>
-          </div>
-
-          {/* Phase info below animation */}
+          {/* Phase info with animation above phase name */}
           <div className="relative z-10 mb-6 text-center">
+            {/* Animation directly above phase name */}
+            <div className="flex justify-center mb-4">
+              {/* Desktop flower - larger, prominent */}
+              <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
+                <BloomingFlower size={160} duration={2500} delay={800} />
+              </div>
+              {/* Mobile flower - smaller, compact */}
+              <div className="flex md:hidden items-center justify-center animate-fade-in-scale animation-delay-400">
+                <BloomingFlower size={90} duration={2000} delay={600} />
+              </div>
+            </div>
+
             <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
             <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
             <Link href="/cycle">
