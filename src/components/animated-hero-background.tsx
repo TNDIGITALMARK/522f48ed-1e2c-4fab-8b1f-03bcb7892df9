@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { Search } from 'lucide-react';
 
 export function AnimatedHeroBackground() {
   const [mounted, setMounted] = useState(false);
@@ -11,7 +13,7 @@ export function AnimatedHeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden">
       {/* Magazine-style textile texture background layer */}
       <div
         className={`absolute inset-0 transition-all duration-[2500ms] ease-out ${
@@ -75,6 +77,38 @@ export function AnimatedHeroBackground() {
           animation: mounted ? 'pulse-slow 7s ease-in-out infinite 1s' : 'none'
         }}
       />
+
+      {/* Clickable overlay with text and icon */}
+      <Link
+        href="/nutrition/quiz"
+        className="absolute inset-0 z-10 flex items-center justify-center group cursor-pointer hover:bg-primary/5 transition-all duration-500"
+      >
+        <div className={`flex flex-col items-center gap-4 transition-all duration-[2000ms] ${
+          mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}>
+          {/* Search icon with animation */}
+          <div className="relative">
+            <div className="w-16 h-16 rounded-full bg-primary/15 backdrop-blur-md flex items-center justify-center group-hover:bg-primary/25 transition-all duration-300 group-hover:scale-110 shadow-bloom-sm group-hover:shadow-bloom border border-primary/20">
+              <Search className="w-7 h-7 text-primary" strokeWidth={1.5} />
+            </div>
+            {/* Pulsing ring animation */}
+            <div
+              className="absolute inset-0 rounded-full border-2 border-primary/30 animate-ping"
+              style={{ animationDuration: '3s' }}
+            />
+          </div>
+
+          {/* Text overlay */}
+          <div className="text-center px-6">
+            <h3 className="text-2xl md:text-3xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300 drop-shadow-sm">
+              Personalize Your Meal Plans
+            </h3>
+            <p className="text-sm md:text-base text-muted-foreground mt-2 group-hover:text-foreground/80 transition-colors duration-300">
+              Take our quick survey to get started
+            </p>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 }
