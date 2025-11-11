@@ -118,6 +118,16 @@ export default function HomePage() {
               </Button>
             </Link>
           </div>
+
+          {/* Small clickable prompt beneath animation */}
+          <div className="mt-8 text-center animate-fade-in-up animation-delay-800">
+            <Link
+              href="/nutrition/quiz"
+              className="inline-block text-sm text-muted-foreground hover:text-primary transition-colors duration-300 underline underline-offset-4 decoration-primary/30 hover:decoration-primary"
+            >
+              Personalize your meal plans take the quiz
+            </Link>
+          </div>
         </div>
       </section>
 
