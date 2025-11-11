@@ -48,142 +48,331 @@ export function AnimatedHeroBackground() {
         }`}
       />
 
-      {/* EXTENSIVE ROOT SYSTEM - Spreading across entire screen */}
-      {/* Central root trunk */}
+      {/* REALISTIC ROOT SYSTEM - Growing from trunk, spreading horizontally across screen */}
+
+      {/* Three vertical trunk lines from which roots emerge */}
       <svg
-        className={`absolute left-1/2 top-0 w-1 h-full -translate-x-1/2 transition-opacity duration-[2500ms] ${
-          mounted ? 'opacity-20' : 'opacity-0'
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[2500ms] ${
+          mounted ? 'opacity-25' : 'opacity-0'
         }`}
-        style={{ animation: mounted ? 'root-pulse 4s ease-in-out infinite' : 'none' }}
       >
+        {/* Left trunk line */}
+        <line
+          x1="35%"
+          y1="0"
+          x2="35%"
+          y2="30%"
+          stroke="hsl(80 12% 37%)"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+
+        {/* Center trunk line */}
         <line
           x1="50%"
           y1="0"
           x2="50%"
-          y2="100%"
+          y2="30%"
           stroke="hsl(80 12% 37%)"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+
+        {/* Right trunk line */}
+        <line
+          x1="65%"
+          y1="0"
+          x2="65%"
+          y2="30%"
+          stroke="hsl(80 12% 37%)"
+          strokeWidth="3"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* MAJOR ROOT BRANCHES - Thick, gnarled roots spreading horizontally */}
+
+      {/* Left major root - spreading to far left */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-200 ${
+          mounted ? 'opacity-30' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 35% 30% Q 30% 35%, 25% 40% Q 18% 45%, 10% 50% Q 5% 52%, 0% 55%"
+          fill="none"
+          stroke="hsl(80 12% 37%)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Secondary branch from major root */}
+        <path
+          d="M 25% 40% Q 22% 50%, 18% 60% Q 15% 68%, 12% 75%"
+          fill="none"
+          stroke="hsl(80 12% 42%)"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Center-left major root */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-300 ${
+          mounted ? 'opacity-28' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 35% 30% Q 32% 38%, 28% 45% Q 22% 52%, 15% 58% Q 10% 62%, 5% 68%"
+          fill="none"
+          stroke="hsl(80 12% 35%)"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+
+      {/* Center major root - spreading left */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-400 ${
+          mounted ? 'opacity-25' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 50% 30% Q 42% 38%, 35% 45% Q 28% 52%, 20% 60% Q 15% 65%, 8% 72%"
+          fill="none"
+          stroke="hsl(80 12% 38%)"
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Secondary branch */}
+        <path
+          d="M 35% 45% Q 30% 55%, 25% 65% Q 22% 72%, 18% 80%"
+          fill="none"
+          stroke="hsl(80 12% 40%)"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Center major root - spreading right */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-500 ${
+          mounted ? 'opacity-25' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 50% 30% Q 58% 38%, 65% 45% Q 72% 52%, 80% 60% Q 85% 65%, 92% 72%"
+          fill="none"
+          stroke="hsl(80 12% 38%)"
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Secondary branch */}
+        <path
+          d="M 65% 45% Q 70% 55%, 75% 65% Q 78% 72%, 82% 80%"
+          fill="none"
+          stroke="hsl(80 12% 40%)"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Right major root - spreading to far right */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-600 ${
+          mounted ? 'opacity-30' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 65% 30% Q 70% 35%, 75% 40% Q 82% 45%, 90% 50% Q 95% 52%, 100% 55%"
+          fill="none"
+          stroke="hsl(80 12% 37%)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Secondary branch */}
+        <path
+          d="M 75% 40% Q 78% 50%, 82% 60% Q 85% 68%, 88% 75%"
+          fill="none"
+          stroke="hsl(80 12% 42%)"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Center-right major root */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-700 ${
+          mounted ? 'opacity-28' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 65% 30% Q 68% 38%, 72% 45% Q 78% 52%, 85% 58% Q 90% 62%, 95% 68%"
+          fill="none"
+          stroke="hsl(80 12% 35%)"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+
+      {/* TERTIARY ROOTS - Thinner roots filling the space */}
+
+      {/* Left tertiary roots */}
+      <svg
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-800 ${
+          mounted ? 'opacity-18' : 'opacity-0'
+        }`}
+      >
+        <path
+          d="M 25% 40% Q 20% 48%, 15% 55% Q 12% 60%, 8% 68%"
+          fill="none"
+          stroke="hsl(100 15% 67%)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 30% 45% Q 25% 58%, 20% 70% Q 16% 78%, 12% 85%"
+          fill="none"
+          stroke="hsl(100 15% 65%)"
           strokeWidth="2"
           strokeLinecap="round"
         />
-      </svg>
-
-      {/* Left branching roots */}
-      <svg
-        className={`absolute left-1/4 top-0 w-96 h-full transition-opacity duration-[2500ms] delay-200 ${
-          mounted ? 'opacity-15' : 'opacity-0'
-        }`}
-      >
         <path
-          d="M 200 0 Q 150 150, 100 300 T 50 600 L 30 1000"
+          d="M 20% 50% Q 15% 62%, 12% 72% Q 8% 80%, 5% 88%"
           fill="none"
-          stroke="hsl(80 12% 37%)"
+          stroke="hsl(100 15% 70%)"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
-        <path
-          d="M 200 100 Q 160 200, 120 350 T 80 650 L 60 1000"
-          fill="none"
-          stroke="hsl(100 15% 67%)"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
       </svg>
 
-      {/* Right branching roots */}
+      {/* Right tertiary roots */}
       <svg
-        className={`absolute right-1/4 top-0 w-96 h-full transition-opacity duration-[2500ms] delay-300 ${
-          mounted ? 'opacity-15' : 'opacity-0'
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-900 ${
+          mounted ? 'opacity-18' : 'opacity-0'
         }`}
       >
         <path
-          d="M 200 0 Q 250 150, 300 300 T 350 600 L 370 1000"
+          d="M 75% 40% Q 80% 48%, 85% 55% Q 88% 60%, 92% 68%"
           fill="none"
-          stroke="hsl(80 12% 37%)"
-          strokeWidth="1.5"
+          stroke="hsl(100 15% 67%)"
+          strokeWidth="2.5"
           strokeLinecap="round"
         />
         <path
-          d="M 200 100 Q 240 200, 280 350 T 320 650 L 340 1000"
+          d="M 70% 45% Q 75% 58%, 80% 70% Q 84% 78%, 88% 85%"
           fill="none"
-          stroke="hsl(100 15% 67%)"
-          strokeWidth="1"
+          stroke="hsl(100 15% 65%)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 80% 50% Q 85% 62%, 88% 72% Q 92% 80%, 95% 88%"
+          fill="none"
+          stroke="hsl(100 15% 70%)"
+          strokeWidth="1.5"
           strokeLinecap="round"
         />
       </svg>
 
-      {/* Far left spreading roots */}
+      {/* FINE ROOT TENDRILS - Hair-like roots across the screen */}
+
+      {/* Fine tendrils - left side */}
       <svg
-        className={`absolute left-0 top-1/4 w-64 h-3/4 transition-opacity duration-[2500ms] delay-400 ${
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-1000 ${
           mounted ? 'opacity-12' : 'opacity-0'
         }`}
       >
         <path
-          d="M 256 0 Q 200 100, 150 200 T 80 400 L 40 800"
+          d="M 18% 60% Q 15% 70%, 12% 80% Q 10% 88%, 7% 95%"
           fill="none"
-          stroke="hsl(80 12% 37%)"
+          stroke="hsl(100 15% 67%)"
           strokeWidth="1"
           strokeLinecap="round"
         />
         <path
-          d="M 256 50 Q 210 120, 170 240 T 100 450 L 60 800"
+          d="M 22% 65% Q 18% 75%, 14% 85% Q 11% 92%, 8% 98%"
           fill="none"
-          stroke="hsl(100 15% 67%)"
+          stroke="hsl(100 15% 70%)"
           strokeWidth="0.8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 10% 55% Q 7% 68%, 5% 80% Q 3% 88%, 1% 95%"
+          fill="none"
+          stroke="hsl(100 15% 72%)"
+          strokeWidth="0.7"
           strokeLinecap="round"
         />
       </svg>
 
-      {/* Far right spreading roots */}
+      {/* Fine tendrils - right side */}
       <svg
-        className={`absolute right-0 top-1/4 w-64 h-3/4 transition-opacity duration-[2500ms] delay-500 ${
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-1100 ${
           mounted ? 'opacity-12' : 'opacity-0'
         }`}
       >
         <path
-          d="M 0 0 Q 56 100, 106 200 T 176 400 L 216 800"
+          d="M 82% 60% Q 85% 70%, 88% 80% Q 90% 88%, 93% 95%"
           fill="none"
-          stroke="hsl(80 12% 37%)"
+          stroke="hsl(100 15% 67%)"
           strokeWidth="1"
           strokeLinecap="round"
         />
         <path
-          d="M 0 50 Q 46 120, 86 240 T 156 450 L 196 800"
+          d="M 78% 65% Q 82% 75%, 86% 85% Q 89% 92%, 92% 98%"
           fill="none"
-          stroke="hsl(100 15% 67%)"
+          stroke="hsl(100 15% 70%)"
           strokeWidth="0.8"
           strokeLinecap="round"
         />
-      </svg>
-
-      {/* Additional thin root tendrils - left side */}
-      <svg
-        className={`absolute left-1/3 top-1/3 w-48 h-2/3 transition-opacity duration-[2500ms] delay-600 ${
-          mounted ? 'opacity-10' : 'opacity-0'
-        }`}
-      >
         <path
-          d="M 192 0 Q 150 80, 120 180 T 80 350 L 50 700"
+          d="M 90% 55% Q 93% 68%, 95% 80% Q 97% 88%, 99% 95%"
           fill="none"
-          stroke="hsl(100 15% 67%)"
+          stroke="hsl(100 15% 72%)"
           strokeWidth="0.7"
           strokeLinecap="round"
-          strokeDasharray="4 4"
         />
       </svg>
 
-      {/* Additional thin root tendrils - right side */}
+      {/* Fine tendrils - center spreading */}
       <svg
-        className={`absolute right-1/3 top-1/3 w-48 h-2/3 transition-opacity duration-[2500ms] delay-700 ${
-          mounted ? 'opacity-10' : 'opacity-0'
+        className={`absolute inset-0 w-full h-full transition-opacity duration-[3000ms] delay-1200 ${
+          mounted ? 'opacity-15' : 'opacity-0'
         }`}
       >
         <path
-          d="M 0 0 Q 42 80, 72 180 T 112 350 L 142 700"
+          d="M 45% 55% Q 38% 68%, 30% 80% Q 25% 88%, 20% 95%"
           fill="none"
-          stroke="hsl(100 15% 67%)"
-          strokeWidth="0.7"
+          stroke="hsl(100 15% 68%)"
+          strokeWidth="1.2"
           strokeLinecap="round"
-          strokeDasharray="4 4"
+        />
+        <path
+          d="M 55% 55% Q 62% 68%, 70% 80% Q 75% 88%, 80% 95%"
+          fill="none"
+          stroke="hsl(100 15% 68%)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 50% 50% Q 45% 65%, 40% 78% Q 36% 88%, 32% 96%"
+          fill="none"
+          stroke="hsl(100 15% 70%)"
+          strokeWidth="0.9"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 50% 50% Q 55% 65%, 60% 78% Q 64% 88%, 68% 96%"
+          fill="none"
+          stroke="hsl(100 15% 70%)"
+          strokeWidth="0.9"
+          strokeLinecap="round"
         />
       </svg>
 
