@@ -147,22 +147,22 @@ export default function HomePage() {
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-12">
             <div>
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-6 h-6 text-primary" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <Heart className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Body Neutrality</h3>
               <p className="text-muted-foreground">Progress without before/after photos</p>
             </div>
             <div>
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-6 h-6 text-secondary" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <TrendingUp className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Empowerment</h3>
               <p className="text-muted-foreground">Build agency through cycle education</p>
             </div>
             <div>
-              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                <Users className="w-6 h-6 text-accent-foreground" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <Users className="w-10 h-10 text-accent-foreground" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Community</h3>
               <p className="text-muted-foreground">Collective empowerment over competition</p>
@@ -187,9 +187,7 @@ export default function HomePage() {
               return (
                 <Card key={index} className="magazine-feature-card text-center p-8 relative z-10">
                   <div className="flex justify-center mb-5">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center shadow-bloom-sm">
-                      <Icon className="w-9 h-9 text-primary" strokeWidth={1.5} />
-                    </div>
+                    <Icon className="w-12 h-12 text-primary" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
                   <p className="text-muted-foreground leading-relaxed text-[0.95rem]">{feature.description}</p>
@@ -219,9 +217,7 @@ export default function HomePage() {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Scale className="w-6 h-6 text-primary" strokeWidth={1.5} />
-                    </div>
+                    <Scale className="w-8 h-8 text-primary" strokeWidth={1.5} />
                     <h3 className="text-xl font-semibold">Current Weight</h3>
                   </div>
                   <div className="space-y-2">
@@ -263,9 +259,7 @@ export default function HomePage() {
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
-                      <Target className="w-6 h-6 text-secondary" strokeWidth={1.5} />
-                    </div>
+                    <Target className="w-8 h-8 text-secondary" strokeWidth={1.5} />
                     <h3 className="text-xl font-semibold">Active Goal</h3>
                   </div>
                   <div className="space-y-2">
@@ -318,8 +312,8 @@ export default function HomePage() {
           {/* Features Grid */}
           <div className="magazine-grid-3">
             <div className="magazine-feature-card text-center p-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mx-auto mb-4 shadow-bloom">
-                <Scale className="w-7 h-7 text-white" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <Scale className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
               <h4 className="text-lg font-semibold mb-2">Smart Weight Tracking</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -328,8 +322,8 @@ export default function HomePage() {
             </div>
 
             <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center mx-auto mb-4 shadow-bloom">
-                <Target className="w-7 h-7 text-white" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <Target className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
               <h4 className="text-lg font-semibold mb-2">Personalized Goals</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -338,8 +332,8 @@ export default function HomePage() {
             </div>
 
             <div className="magazine-feature-card text-center p-8">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary/80 to-accent flex items-center justify-center mx-auto mb-4 shadow-bloom">
-                <TrendingUp className="w-7 h-7 text-white" strokeWidth={1.5} />
+              <div className="flex justify-center mb-4">
+                <TrendingUp className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
               <h4 className="text-lg font-semibold mb-2">Progress Insights</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -383,9 +377,7 @@ export default function HomePage() {
             <div className="space-y-6">
               <div className="magazine-feature-card bg-gradient-to-br from-card to-primary/8 p-6">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
-                    <Calendar className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
+                  <Calendar className="w-8 h-8 text-primary flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Verified Plans? No Problem</h4>
                     <p className="text-muted-foreground leading-relaxed">
@@ -397,9 +389,7 @@ export default function HomePage() {
 
               <div className="magazine-feature-card bg-gradient-to-br from-card to-secondary/8 p-6">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center flex-shrink-0 shadow-bloom">
-                    <Activity className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
+                  <Activity className="w-8 h-8 text-secondary flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Cycle-Synced Intelligence</h4>
                     <p className="text-muted-foreground leading-relaxed">
@@ -411,9 +401,7 @@ export default function HomePage() {
 
               <div className="magazine-feature-card bg-gradient-to-br from-card to-accent/10 p-6">
                 <div className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-400 to-accent flex items-center justify-center flex-shrink-0 shadow-bloom">
-                    <TrendingUp className="w-6 h-6 text-white" strokeWidth={1.5} />
-                  </div>
+                  <TrendingUp className="w-8 h-8 text-accent-foreground flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Healthy Balance of Living</h4>
                     <p className="text-muted-foreground leading-relaxed">
@@ -438,7 +426,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                      <div className="text-3xl font-bold text-primary flex-shrink-0">
                         1
                       </div>
                       <div className="flex-1">
@@ -454,7 +442,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                      <div className="text-3xl font-bold text-secondary flex-shrink-0">
                         2
                       </div>
                       <div className="flex-1">
@@ -470,7 +458,7 @@ export default function HomePage() {
                 <div className="relative">
                   <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent to-pink-400 text-white flex items-center justify-center text-base font-bold flex-shrink-0 shadow-md">
+                      <div className="text-3xl font-bold text-accent-foreground flex-shrink-0">
                         3
                       </div>
                       <div className="flex-1">
@@ -496,32 +484,32 @@ export default function HomePage() {
           {/* Additional benefits row */}
           <div className="magazine-grid mt-12">
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Award className="w-6 h-6 text-primary" strokeWidth={1.5} />
+              <div className="flex justify-center mb-3">
+                <Award className="w-8 h-8 text-primary" strokeWidth={1.5} />
               </div>
               <h5 className="font-semibold mb-1 text-sm">Weekly Tracking</h5>
               <p className="text-xs text-muted-foreground">Flexible daily goals that balance out over 7 days</p>
             </div>
 
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-secondary/10">
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3">
-                <Brain className="w-6 h-6 text-secondary" strokeWidth={1.5} />
+              <div className="flex justify-center mb-3">
+                <Brain className="w-8 h-8 text-secondary" strokeWidth={1.5} />
               </div>
               <h5 className="font-semibold mb-1 text-sm">Smart AI</h5>
               <p className="text-xs text-muted-foreground">Learns your patterns and preferences over time</p>
             </div>
 
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-accent/20">
-              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-3">
-                <Heart className="w-6 h-6 text-accent-foreground" strokeWidth={1.5} />
+              <div className="flex justify-center mb-3">
+                <Heart className="w-8 h-8 text-accent-foreground" strokeWidth={1.5} />
               </div>
               <h5 className="font-semibold mb-1 text-sm">Zero Guilt</h5>
               <p className="text-xs text-muted-foreground">Enjoy life's moments without derailing progress</p>
             </div>
 
             <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                <Activity className="w-6 h-6 text-primary" strokeWidth={1.5} />
+              <div className="flex justify-center mb-3">
+                <Activity className="w-8 h-8 text-primary" strokeWidth={1.5} />
               </div>
               <h5 className="font-semibold mb-1 text-sm">Sustainable</h5>
               <p className="text-xs text-muted-foreground">Build habits that work with your lifestyle</p>
