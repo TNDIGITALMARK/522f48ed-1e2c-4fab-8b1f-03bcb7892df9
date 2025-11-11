@@ -77,88 +77,121 @@ export function DashboardMobileNav() {
         </div>
       </header>
 
-      {/* Tree Roots Mobile Menu - Right Side Dropdown */}
+      {/* Tree Roots Mobile Menu - Full Screen with Roots */}
       {isOpen && (
         <>
-          {/* Backdrop overlay */}
-          <div
-            className="lg:hidden fixed inset-0 bg-black/50 z-40 top-[60px]"
-            onClick={() => setIsOpen(false)}
-          />
+          {/* Decorative Tree Root SVG Background - FULL SCREEN */}
+          <svg
+            className="lg:hidden fixed inset-0 w-full h-full pointer-events-none z-40 top-[60px]"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            {/* Main central trunk spreading downward */}
+            <path
+              d="M 50 0 Q 48 15, 45 30 T 40 50 Q 38 60, 35 70 T 30 90"
+              stroke="hsl(var(--rooted-brown))"
+              strokeWidth="0.8"
+              fill="none"
+              className="animate-root-grow"
+              vectorEffect="non-scaling-stroke"
+            />
 
-          {/* Tree Roots Menu Container */}
-          <nav className="lg:hidden fixed top-[60px] right-0 w-[85%] max-w-[320px] h-[calc(100vh-60px)] bg-gradient-to-br from-white via-[hsl(var(--rooted-cream))] to-[hsl(var(--card))] z-40 shadow-bloom-lg overflow-hidden">
-            {/* Decorative Tree Root SVG Background */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none opacity-10"
-              viewBox="0 0 320 800"
-              preserveAspectRatio="xMaxYMin slice"
-            >
-              {/* Main root trunk */}
-              <path
-                d="M 280 0 Q 270 100, 260 200 T 240 400 Q 230 500, 220 600 T 200 800"
-                stroke="hsl(var(--rooted-brown))"
-                strokeWidth="8"
-                fill="none"
-                className="animate-root-grow"
-              />
+            {/* Left spreading roots */}
+            <path
+              d="M 48 10 Q 40 15, 30 20 T 10 30"
+              stroke="hsl(var(--rooted-olive))"
+              strokeWidth="0.6"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-100"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 45 25 Q 35 30, 20 35 T 5 45"
+              stroke="hsl(var(--rooted-sage))"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-200"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 40 40 Q 30 45, 15 50 T 0 60"
+              stroke="hsl(var(--rooted-olive))"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-300"
+              vectorEffect="non-scaling-stroke"
+            />
 
-              {/* Branch root 1 - upper right */}
-              <path
-                d="M 260 150 Q 280 180, 300 220 L 320 250"
-                stroke="hsl(var(--rooted-olive))"
-                strokeWidth="5"
-                fill="none"
-                className="animate-root-branch-1 animation-delay-150"
-              />
+            {/* Right spreading roots */}
+            <path
+              d="M 52 10 Q 60 15, 70 20 T 90 30"
+              stroke="hsl(var(--rooted-sage))"
+              strokeWidth="0.6"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-150"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 55 25 Q 65 30, 80 35 T 95 45"
+              stroke="hsl(var(--rooted-olive))"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-250"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 60 40 Q 70 45, 85 50 T 100 60"
+              stroke="hsl(var(--rooted-brown))"
+              strokeWidth="0.5"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-350"
+              vectorEffect="non-scaling-stroke"
+            />
 
-              {/* Branch root 2 - middle right */}
-              <path
-                d="M 240 350 Q 270 380, 300 420 L 320 460"
-                stroke="hsl(var(--rooted-sage))"
-                strokeWidth="6"
-                fill="none"
-                className="animate-root-branch-2 animation-delay-250"
-              />
+            {/* Upper spreading branches */}
+            <path
+              d="M 50 5 Q 35 8, 20 10 T 0 15"
+              stroke="hsl(var(--rooted-brown))"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-grow animation-delay-50"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 50 5 Q 65 8, 80 10 T 100 15"
+              stroke="hsl(var(--rooted-sage))"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-grow animation-delay-100"
+              vectorEffect="non-scaling-stroke"
+            />
 
-              {/* Branch root 3 - lower area */}
-              <path
-                d="M 220 550 Q 250 580, 280 620 L 310 670"
-                stroke="hsl(var(--rooted-olive))"
-                strokeWidth="5"
-                fill="none"
-                className="animate-root-branch-1 animation-delay-350"
-              />
+            {/* Lower spreading branches */}
+            <path
+              d="M 35 60 Q 25 70, 10 80 T 0 90"
+              stroke="hsl(var(--rooted-olive))"
+              strokeWidth="0.4"
+              fill="none"
+              className="animate-root-branch-1 animation-delay-400"
+              vectorEffect="non-scaling-stroke"
+            />
+            <path
+              d="M 30 75 Q 20 85, 5 92 T 0 100"
+              stroke="hsl(var(--rooted-sage))"
+              strokeWidth="0.3"
+              fill="none"
+              className="animate-root-branch-2 animation-delay-450"
+              vectorEffect="non-scaling-stroke"
+            />
 
-              {/* Small roots - details */}
-              <path
-                d="M 270 120 L 290 140"
-                stroke="hsl(var(--rooted-brown))"
-                strokeWidth="3"
-                fill="none"
-                className="animate-root-grow animation-delay-100"
-              />
-              <path
-                d="M 250 280 L 270 300"
-                stroke="hsl(var(--rooted-sage))"
-                strokeWidth="3"
-                fill="none"
-                className="animate-root-grow animation-delay-200"
-              />
-              <path
-                d="M 230 480 L 255 510"
-                stroke="hsl(var(--rooted-olive))"
-                strokeWidth="3"
-                fill="none"
-                className="animate-root-grow animation-delay-300"
-              />
+            {/* Organic root nodes */}
+            <circle cx="45" cy="30" r="0.4" fill="hsl(var(--rooted-brown))" className="animate-root-pulse animation-delay-200" />
+            <circle cx="40" cy="50" r="0.3" fill="hsl(var(--rooted-olive))" className="animate-root-pulse animation-delay-350" />
+            <circle cx="55" cy="25" r="0.35" fill="hsl(var(--rooted-sage))" className="animate-root-pulse animation-delay-300" />
+          </svg>
 
-              {/* Organic root nodes */}
-              <circle cx="260" cy="200" r="6" fill="hsl(var(--rooted-brown))" className="animate-root-pulse animation-delay-200" />
-              <circle cx="240" cy="400" r="5" fill="hsl(var(--rooted-olive))" className="animate-root-pulse animation-delay-350" />
-              <circle cx="220" cy="600" r="5" fill="hsl(var(--rooted-sage))" className="animate-root-pulse animation-delay-450" />
-            </svg>
-
+          {/* Menu Rectangle - Right Side Dropdown */}
+          <nav className="lg:hidden fixed top-[60px] right-0 w-[85%] max-w-[320px] h-[calc(100vh-60px)] bg-white z-50 shadow-bloom-lg overflow-hidden">
             {/* Menu Items with Staggered Animation */}
             <div className="relative z-10 p-6 pt-8 space-y-2">
               {navigationItems.map((item, index) => {
@@ -173,12 +206,11 @@ export function DashboardMobileNav() {
                     className={cn(
                       'flex items-center gap-4 px-5 py-4 rounded-xl transition-all duration-200',
                       'hover:bg-primary/10 hover:text-primary hover:shadow-bloom-sm hover:scale-[1.02]',
-                      'backdrop-blur-sm',
                       'animate-root-item',
                       `animation-delay-${100 + index * 50}`,
                       isActive
                         ? 'bg-primary text-primary-foreground shadow-bloom-sm scale-[1.02]'
-                        : 'text-muted-foreground bg-white/70'
+                        : 'text-muted-foreground bg-muted/10'
                     )}
                   >
                     <div className={cn(
