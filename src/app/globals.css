@@ -80,6 +80,16 @@ VISUAL EFFECTS:
   --rooted-cream: 38 38% 93%; /* #F5F0E8 - Light cream background */
   --rooted-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
+  /* EXTENDED ICON COLORS - FROM NEW REQUIREMENTS */
+  --icon-cycle: 100 18% 65%; /* Sage green for cycle icon */
+  --icon-nutrition: 220 45% 22%; /* Navy for nutrition icon */
+  --icon-workout: 25 18% 28%; /* Brown for workout icon */
+  --icon-community: 35 32% 88%; /* Light beige for community icon */
+  --icon-rituals: 140 25% 25%; /* Dark green for rituals icon */
+  --color-light-green: 85 35% 75%; /* Light green accent */
+  --color-dark-green: 140 30% 20%; /* Dark green accent */
+  --color-beige: 35 32% 88%; /* Beige accent */
+
   /* Light theme - Cream foundation with sage and olive accents */
   --background: 38 38% 93%; /* #F5F0E8 - Warm cream background */
   --foreground: 25 11% 21%; /* #3E3530 - Dark brown text */
@@ -178,6 +188,13 @@ VISUAL EFFECTS:
   --sidebar-accent-foreground: 38 38% 93%;
   --sidebar-border: 80 12% 35%;
   --sidebar-ring: 100 15% 67%;
+
+  /* EXTENDED ICON COLORS - DARK MODE */
+  --icon-cycle: 100 20% 70%; /* Lighter sage green for dark mode */
+  --icon-nutrition: 220 50% 65%; /* Lighter navy for dark mode */
+  --icon-workout: 25 25% 55%; /* Lighter brown for dark mode */
+  --icon-community: 35 35% 80%; /* Light beige stays similar */
+  --icon-rituals: 140 35% 50%; /* Lighter dark green for dark mode */
 }
 
 @theme {

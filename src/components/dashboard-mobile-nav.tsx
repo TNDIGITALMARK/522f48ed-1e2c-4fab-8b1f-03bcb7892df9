@@ -10,7 +10,8 @@ import {
   Utensils,
   Sparkles,
   Menu,
-  X
+  X,
+  Users
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { RootedLogo } from './rooted-logo';
@@ -21,26 +22,37 @@ const navigationItems = [
     title: 'Dashboard',
     href: '/dashboard',
     icon: LayoutDashboard,
+    iconColor: undefined,
   },
   {
     title: 'Cycle',
     href: '/cycle',
     icon: Heart,
+    iconColor: 'hsl(var(--icon-cycle))', // Sage green
   },
   {
     title: 'Workouts',
     href: '/workout',
     icon: Activity,
+    iconColor: 'hsl(var(--icon-workout))', // Brown
   },
   {
     title: 'Nutrition',
     href: '/nutrition',
     icon: Utensils,
+    iconColor: 'hsl(var(--icon-nutrition))', // Navy
   },
   {
     title: 'Rituals',
     href: '/rituals',
     icon: Sparkles,
+    iconColor: 'hsl(var(--icon-rituals))', // Dark green
+  },
+  {
+    title: 'Community',
+    href: '/community',
+    icon: Users,
+    iconColor: 'hsl(var(--icon-community))', // Light beige
   },
 ];
 
@@ -90,7 +102,10 @@ export function DashboardMobileNav() {
                       : 'text-muted-foreground'
                   )}
                 >
-                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  <Icon
+                    className="w-5 h-5 flex-shrink-0"
+                    style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
+                  />
                   <span className="font-medium">{item.title}</span>
                 </Link>
               );
@@ -117,7 +132,10 @@ export function DashboardMobileNav() {
                     : 'text-muted-foreground'
                 )}
               >
-                <Icon className="w-5 h-5 flex-shrink-0" />
+                <Icon
+                  className="w-5 h-5 flex-shrink-0"
+                  style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
+                />
                 <span className="text-xs font-medium truncate w-full text-center">{item.title}</span>
               </Link>
             );

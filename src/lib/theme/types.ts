@@ -53,26 +53,27 @@ export interface ColorScheme {
 export const DEFAULT_THEMES: Record<string, ColorScheme> = {
   brownBeige: {
     id: 'brown-beige',
-    name: 'Warm Brown & Beige',
-    description: 'Cozy brown and beige palette with earthy tones',
+    name: 'Rooted Earth Tones',
+    description: 'Sage green, olive, brown, and navy palette with natural earthy tones',
     isDefault: true,
     colors: {
-      primary: '80 12% 37%',
+      // Updated to match globals.css
+      primary: '80 12% 37%', // --rooted-olive
       primaryForeground: '0 0% 100%',
-      secondary: '100 15% 67%',
+      secondary: '100 15% 67%', // --rooted-sage
       secondaryForeground: '25 11% 21%',
-      background: '38 38% 93%',
-      foreground: '25 11% 21%',
-      card: '100 20% 95%',
+      background: '38 38% 93%', // --rooted-cream
+      foreground: '25 11% 21%', // --rooted-brown
+      card: '100 20% 95%', // Light sage-tinted cards
       cardForeground: '25 11% 21%',
-      accent: '215 43% 21%',
+      accent: '215 43% 21%', // --rooted-navy
       accentForeground: '0 0% 100%',
-      muted: '100 15% 88%',
+      muted: '100 15% 88%', // Light sage for muted elements
       mutedForeground: '80 12% 35%',
-      border: '100 15% 82%',
+      border: '100 15% 82%', // Soft sage border
       input: '100 15% 82%',
-      ring: '80 12% 37%',
-      destructive: '10 45% 48%',
+      ring: '80 12% 37%', // Olive green focus ring
+      destructive: '10 45% 48%', // Earth red
       destructiveForeground: '0 0% 100%',
       popover: '100 20% 95%',
       popoverForeground: '25 11% 21%',

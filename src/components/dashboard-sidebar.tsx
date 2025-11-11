@@ -22,36 +22,43 @@ const navigationItems = [
     title: 'Dashboard',
     href: '/dashboard',
     icon: LayoutDashboard,
+    iconColor: undefined, // Uses default
   },
   {
     title: 'Cycle Tracking',
     href: '/cycle',
     icon: Heart,
+    iconColor: 'hsl(var(--icon-cycle))', // Sage green
   },
   {
     title: 'Workouts',
     href: '/workout',
     icon: Activity,
+    iconColor: 'hsl(var(--icon-workout))', // Brown
   },
   {
     title: 'Nutrition',
     href: '/nutrition',
     icon: Utensils,
+    iconColor: 'hsl(var(--icon-nutrition))', // Navy
   },
   {
     title: 'Weight',
     href: '/weight',
     icon: Scale,
+    iconColor: undefined, // Uses default
   },
   {
     title: 'Daily Rituals',
     href: '/rituals',
     icon: Sparkles,
+    iconColor: 'hsl(var(--icon-rituals))', // Dark green
   },
   {
     title: 'Community',
     href: '/community',
     icon: Users,
+    iconColor: 'hsl(var(--icon-community))', // Light beige
   },
 ];
 
@@ -83,13 +90,19 @@ export function DashboardSidebar() {
                   : 'text-foreground hover:bg-primary/10 hover:text-primary'
               )}
             >
-              <div className={cn(
-                "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300",
-                isActive
-                  ? "bg-primary-foreground/20"
-                  : "bg-muted/50 group-hover:bg-primary/20"
-              )}>
-                <Icon className="w-5 h-5" />
+              <div
+                className={cn(
+                  "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300",
+                  isActive
+                    ? "bg-primary-foreground/20"
+                    : "bg-muted/50 group-hover:bg-primary/20"
+                )}
+                style={!isActive && item.iconColor ? { backgroundColor: `${item.iconColor}20` } : undefined}
+              >
+                <Icon
+                  className="w-5 h-5"
+                  style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
+                />
               </div>
               <span className="font-semibold text-base">{item.title}</span>
             </Link>
