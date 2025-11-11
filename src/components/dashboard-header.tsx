@@ -70,39 +70,39 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-6 py-2">
+      <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b-2 border-border/50 shadow-bloom-sm">
+        <div className="flex items-center justify-between px-6 py-5">
           {/* Search Bar */}
           <div className="flex-1 max-w-sm">
             <div className="relative">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search wellness data, rituals..."
-                className="pl-8 py-1 h-8 text-sm bg-muted/50 border-0 focus-visible:ring-2 focus-visible:ring-primary/20"
+                className="pl-9 py-2 h-10 text-sm bg-muted/50 border-0 focus-visible:ring-2 focus-visible:ring-primary/20"
               />
             </div>
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative rounded-full h-8 w-8">
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-secondary rounded-full" />
+            <Button variant="ghost" size="icon" className="relative rounded-full h-10 w-10">
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full" />
             </Button>
 
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <button className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                   <div className="text-right hidden md:block">
-                    <p className="text-xs font-medium">{userName}</p>
-                    <p className="text-[10px] text-muted-foreground">Premium Member</p>
+                    <p className="text-sm font-medium">{userName}</p>
+                    <p className="text-xs text-muted-foreground">Premium Member</p>
                   </div>
-                  <Avatar className="w-8 h-8">
+                  <Avatar className="w-10 h-10">
                     {profilePicture && <AvatarImage src={profilePicture} alt={userName} />}
-                    <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                    <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                       {getInitials()}
                     </AvatarFallback>
                   </Avatar>
