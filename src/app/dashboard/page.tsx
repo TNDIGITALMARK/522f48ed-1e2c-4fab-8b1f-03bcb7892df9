@@ -87,28 +87,25 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
-        {/* Modern Header with Greeting and rooteding Flower Animation */}
-        <div className="pt-6 pb-2 animate-fade-in-up">
-          <div className="flex flex-col items-center justify-center gap-4">
+      <div className="max-w-6xl mx-auto space-y-4 pb-12 px-6">
+        {/* Modern Header with Greeting - Reduced spacing */}
+        <div className="pt-6 pb-1 animate-fade-in-up">
+          <div className="flex flex-col items-center justify-center gap-3">
             <div className="text-center w-full">
               <p className="text-sm text-muted-foreground mb-1">
                 {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
               </p>
-              <h1 className="text-4xl font-bold mb-2">
+              <h1 className="text-4xl font-bold mb-1">
                 Hi {userData.name}
               </h1>
-              <p className="text-muted-foreground">
-                Welcome to your wellness dashboard
-              </p>
             </div>
             {/* Desktop flower - larger, prominent */}
             <div className="hidden md:flex items-center justify-center animate-fade-in-scale animation-delay-400">
-              <BloomingFlower size={180} duration={2500} delay={800} />
+              <BloomingFlower size={160} duration={2500} delay={800} />
             </div>
             {/* Mobile flower - smaller, compact */}
             <div className="flex md:hidden items-center justify-center animate-fade-in-scale animation-delay-400">
-              <BloomingFlower size={100} duration={2000} delay={600} />
+              <BloomingFlower size={90} duration={2000} delay={600} />
             </div>
           </div>
         </div>

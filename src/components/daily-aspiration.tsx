@@ -114,53 +114,11 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
       <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
 
-      {/* Blooming flower decoration */}
-      <div className="absolute bottom-4 right-4 opacity-15 pointer-events-none hidden lg:block">
-        <BloomingFlower size={100} duration={3500} delay={1000} />
-      </div>
-
       <div className="relative z-10">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Rooted Reset</h3>
-              <p className="text-xs text-muted-foreground">Your grounding moment</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {!isEditing && (
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleRefresh}
-                  className="rounded-full h-9 w-9 p-0"
-                  title="Get new aspiration"
-                >
-                  <RefreshCw className="w-4 h-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleStartEdit}
-                  className="rounded-full h-9 w-9 p-0"
-                  title="Write your own"
-                >
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Aspiration Content */}
+        {/* Aspiration Content - Simplified */}
         {isEditing ? (
           <div className="space-y-4">
+            <h3 className="text-lg font-semibold mb-4">Rooted Reset:</h3>
             <textarea
               value={customText}
               onChange={(e) => setCustomText(e.target.value)}
@@ -188,20 +146,13 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
           </div>
         ) : (
           <>
-            {/* Aspiration Text */}
-            <div
-              className={`relative bg-card/50 backdrop-blur-sm rounded-2xl p-6 mb-4 border border-border/40 transition-all duration-300 ${
-                isCompleted ? 'opacity-60' : ''
-              }`}
-            >
-              <blockquote className="text-2xl md:text-3xl font-serif italic leading-relaxed text-foreground/90">
+            {/* Simplified Rooted Reset Display */}
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold">Rooted Reset:</h3>
+              <blockquote className="text-xl md:text-2xl font-serif italic leading-relaxed text-foreground/90">
                 "{aspiration}"
               </blockquote>
-              {isCustom && (
-                <p className="text-xs text-muted-foreground mt-3 text-right">— Your personal aspiration</p>
-              )}
             </div>
-
           </>
         )}
       </div>
