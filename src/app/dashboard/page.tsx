@@ -24,6 +24,7 @@ import { GoalsTodoList } from '@/components/goals-todo-list';
 import { WorkoutSummary } from '@/components/workout-summary';
 import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
+import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -132,13 +133,58 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Shared Calendar Section - At Top of Dashboard */}
-        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-200 textile-overlay-cream">
+        {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave - MOVED TO TOP */}
+        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-200">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
+            <BloomingFlower size={120} duration={3000} delay={1500} />
+          </div>
+
+          {/* Top section with title and info */}
+          <div className="relative z-10 mb-6">
+            <div className="flex items-start justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
+                <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
+                <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
+                <Link href="/cycle">
+                  <Button className="rounded-full">
+                    View Details
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="hidden md:flex items-center gap-6">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
+                  <Heart className="w-16 h-16 text-primary" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 3D Animated Hormone Wave */}
+          <div className="relative z-10 mt-4 -mx-6 -mb-6">
+            <HormoneWave3D
+              phase="ovulation"
+              width={800}
+              height={180}
+              className="w-full"
+            />
+          </div>
+        </Card>
+
+        {/* Shared Calendar Section */}
+        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-400 textile-overlay-cream">
           <SharedCalendar userId={MOCK_USER_ID} />
         </Card>
 
+        {/* Todo List Section - MOVED UNDERNEATH CALENDAR */}
+        <div className="animate-fade-in-up animation-delay-600">
+          <GoalsTodoList userId={MOCK_USER_ID} />
+        </div>
+
         {/* Horizontal Week Calendar - Rounded Pill Style */}
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide animate-fade-in-up animation-delay-400">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide animate-fade-in-up animation-delay-800">
           {weekDates.map((date, index) => {
             const isToday = date.toDateString() === now.toDateString();
             return (
@@ -162,7 +208,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Quick Stats Grid - Inspired by Smart Home Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in-up animation-delay-600">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in-scale animation-delay-1000">
           {/* Hydration Card */}
           <Card className="glass-card card-marble group hover:scale-105 transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
@@ -227,48 +273,8 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave */}
-        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-800">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
-            <BloomingFlower size={120} duration={3000} delay={1500} />
-          </div>
-
-          {/* Top section with title and info */}
-          <div className="relative z-10 mb-6">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground mb-2">Your Cycle Phase</p>
-                <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
-                <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
-                <Link href="/cycle">
-                  <Button className="rounded-full">
-                    View Details
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </Link>
-              </div>
-              <div className="hidden md:flex items-center gap-6">
-                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center backdrop-blur-sm">
-                  <Heart className="w-16 h-16 text-primary" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 3D Animated Hormone Wave */}
-          <div className="relative z-10 mt-4 -mx-6 -mb-6">
-            <HormoneWave3D
-              phase="ovulation"
-              width={800}
-              height={180}
-              className="w-full"
-            />
-          </div>
-        </Card>
-
         {/* Quick Actions - Circular Buttons Inspired by Smart Home */}
-        <div className="grid grid-cols-4 gap-4 animate-fade-in-scale animation-delay-800">
+        <div className="grid grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1200">
           <Link href="/workout" className="group">
             <Card className="glass-card flex flex-col items-center justify-center h-32 hover:scale-105 transition-all duration-300 cursor-pointer">
               <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
@@ -306,11 +312,15 @@ export default function DashboardPage() {
           </Link>
         </div>
 
-        {/* Todo List Section */}
-        <GoalsTodoList userId={MOCK_USER_ID} />
+        {/* Swipeable Sleep Tracker Section */}
+        <div className="animate-fade-in-up animation-delay-1400">
+          <SwipeableSleepTracker />
+        </div>
 
         {/* Workout Summary Section */}
-        <WorkoutSummary workoutLogs={mockWorkoutLogs} cardioLogs={mockCardioLogs} />
+        <div className="animate-fade-in-up animation-delay-1600">
+          <WorkoutSummary workoutLogs={mockWorkoutLogs} cardioLogs={mockCardioLogs} />
+        </div>
       </div>
     </DashboardLayout>
   );

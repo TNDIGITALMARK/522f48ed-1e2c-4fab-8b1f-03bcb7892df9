@@ -17,11 +17,13 @@ import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
+import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
 
 const MOCK_USER_ID = 'demo-user-001';
 
 const mealSuggestions = [
   {
+    id: '1',
     title: 'Overnight Oats with Berries',
     type: 'Breakfast',
     calories: 320,
@@ -29,8 +31,10 @@ const mealSuggestions = [
     fiber: 8,
     bloomScore: 92,
     tags: ['High Fiber', 'Follicular Phase'],
+    description: 'Start your day with nutrient-rich oats, fresh berries, and a drizzle of honey. Packed with antioxidants and slow-release energy to fuel your morning.',
   },
   {
+    id: '2',
     title: 'Grilled Salmon with Sweet Potato',
     type: 'Lunch',
     calories: 450,
@@ -38,8 +42,10 @@ const mealSuggestions = [
     fiber: 6,
     bloomScore: 95,
     tags: ['High Protein', 'Magnesium Rich'],
+    description: 'Wild-caught salmon paired with roasted sweet potato and steamed broccoli. Rich in omega-3s and perfect for sustained afternoon energy.',
   },
   {
+    id: '3',
     title: 'Chickpea Buddha Bowl',
     type: 'Dinner',
     calories: 420,
@@ -47,6 +53,18 @@ const mealSuggestions = [
     fiber: 12,
     bloomScore: 88,
     tags: ['High Fiber', 'Plant-Based'],
+    description: 'Colorful bowl with roasted chickpeas, quinoa, mixed greens, avocado, and tahini dressing. A complete plant-based meal with excellent fiber content.',
+  },
+  {
+    id: '4',
+    title: 'Greek Yogurt Parfait',
+    type: 'Snack',
+    calories: 240,
+    protein: 15,
+    fiber: 4,
+    bloomScore: 90,
+    tags: ['High Protein', 'Probiotic'],
+    description: 'Layers of creamy Greek yogurt, granola, and mixed berries. Supports gut health and provides a satisfying protein boost.',
   },
 ];
 
@@ -360,65 +378,15 @@ export default function NutritionPage() {
           </div>
         </Card>
 
-        {/* AI Meal Suggestions */}
+        {/* Swipeable AI Meal Suggestions Carousel */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl flex items-center gap-2">
-              <ChefHat className="w-5 h-5 text-primary" />
-              Today's Meal Suggestions
-            </h3>
             <Badge variant="secondary" className="text-xs">
-              Follicular Phase
+              Follicular Phase · Personalized for You
             </Badge>
           </div>
 
-          <div className="space-y-4">
-            {mealSuggestions.map((meal, index) => (
-              <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-shadow cursor-pointer">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <Badge variant="outline" className="text-xs mb-2">{meal.type}</Badge>
-                    <h4 className="text-lg font-semibold">{meal.title}</h4>
-                  </div>
-                  <div className="text-right">
-                    <div className="flex items-center gap-2 mb-1">
-                      <div className={`px-3 py-1 rounded-full text-sm font-bold ${
-                        meal.bloomScore >= 90 ? 'bg-primary text-primary-foreground' :
-                        meal.bloomScore >= 80 ? 'bg-secondary text-secondary-foreground' :
-                        'bg-accent/50 text-accent-foreground'
-                      }`}>
-                        {meal.bloomScore}
-                      </div>
-                      <span className="text-xs text-muted-foreground">rooted Score</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 mb-3">
-                  <div className="text-center p-2 bg-muted/30 rounded-lg">
-                    <p className="text-xs text-muted-foreground mb-1">Calories</p>
-                    <p className="font-semibold">{meal.calories}</p>
-                  </div>
-                  <div className="text-center p-2 bg-muted/30 rounded-lg">
-                    <p className="text-xs text-muted-foreground mb-1">Protein</p>
-                    <p className="font-semibold">{meal.protein}g</p>
-                  </div>
-                  <div className="text-center p-2 bg-muted/30 rounded-lg">
-                    <p className="text-xs text-muted-foreground mb-1">Fiber</p>
-                    <p className="font-semibold">{meal.fiber}g</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {meal.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
+          <SwipeableNutritionCarousel steps={mealSuggestions} />
         </div>
 
         {/* Phase-Based Nutrition Tip */}
