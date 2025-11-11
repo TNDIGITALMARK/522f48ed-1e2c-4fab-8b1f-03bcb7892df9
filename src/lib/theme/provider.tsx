@@ -49,16 +49,19 @@ export function CustomThemeProvider({ children }: { children: React.ReactNode })
         setCurrentScheme(savedScheme);
         applyColorScheme(savedScheme);
       } else {
-        // Fallback to default
+        // Fallback to default - Force reapply with new color scheme
         const defaultScheme = DEFAULT_THEMES.brownBeige;
         setCurrentScheme(defaultScheme);
         applyColorScheme(defaultScheme);
+        // Save the new scheme ID to force refresh
+        localStorage.setItem('bloom-theme-scheme', defaultScheme.id);
       }
     } else {
-      // Apply default brown/beige theme
+      // Apply default sage/olive/brown theme - Force fresh application
       const defaultScheme = DEFAULT_THEMES.brownBeige;
       setCurrentScheme(defaultScheme);
       applyColorScheme(defaultScheme);
+      localStorage.setItem('bloom-theme-scheme', defaultScheme.id);
     }
 
     setIsLoading(false);
