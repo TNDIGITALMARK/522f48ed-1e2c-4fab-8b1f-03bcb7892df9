@@ -127,8 +127,8 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
               <Sparkles className="w-5 h-5 text-primary" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Daily Aspiration</h3>
-              <p className="text-xs text-muted-foreground">Your intention for today</p>
+              <h3 className="text-lg font-semibold">Rooted Reset</h3>
+              <p className="text-xs text-muted-foreground">Your grounding moment</p>
             </div>
           </div>
 
@@ -202,24 +202,6 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
               )}
             </div>
 
-            {/* Complete Button */}
-            <Button
-              onClick={handleToggleComplete}
-              variant={isCompleted ? "secondary" : "default"}
-              className="w-full rounded-full"
-            >
-              {isCompleted ? (
-                <>
-                  <Check className="w-4 h-4 mr-2" />
-                  Aspiration Embraced ✨
-                </>
-              ) : (
-                <>
-                  <Check className="w-4 h-4 mr-2" />
-                  Mark as Embraced
-                </>
-              )}
-            </Button>
           </>
         )}
       </div>

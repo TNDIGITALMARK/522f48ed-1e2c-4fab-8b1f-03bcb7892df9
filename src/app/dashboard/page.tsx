@@ -90,13 +90,13 @@ export default function DashboardPage() {
       <div className="max-w-6xl mx-auto space-y-6 pb-12 px-6">
         {/* Modern Header with Greeting and rooteding Flower Animation */}
         <div className="pt-6 pb-2 animate-fade-in-up">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="text-center w-full">
               <p className="text-sm text-muted-foreground mb-1">
                 {days[now.getDay()]}, {months[now.getMonth()]} {now.getDate()}
               </p>
               <h1 className="text-4xl font-bold mb-2">
-                Hi {userData.name} 👋
+                Hi {userData.name}
               </h1>
               <p className="text-muted-foreground">
                 Welcome to your wellness dashboard
@@ -152,6 +152,11 @@ export default function DashboardPage() {
             />
           </div>
         </Card>
+
+        {/* Rooted Reset Section - MOVED AFTER CYCLE PHASE */}
+        <div className="animate-fade-in-up animation-delay-300">
+          <DailyAspiration userId={MOCK_USER_ID} />
+        </div>
 
         {/* Shared Calendar Section */}
         <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-400 textile-overlay-cream">
@@ -295,11 +300,6 @@ export default function DashboardPage() {
         {/* Swipeable Sleep Tracker Section */}
         <div className="animate-fade-in-up animation-delay-1400">
           <SwipeableSleepTracker />
-        </div>
-
-        {/* Daily Aspiration Section */}
-        <div className="animate-fade-in-up animation-delay-1600">
-          <DailyAspiration userId={MOCK_USER_ID} />
         </div>
       </div>
     </DashboardLayout>
