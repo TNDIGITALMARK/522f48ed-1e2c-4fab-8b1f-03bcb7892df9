@@ -46,6 +46,121 @@ export function TreeOfLife3D({ position = [0, 0, 0], scale = 1 }: TreeOfLifeProp
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
+      {/* Root System - Natural organic roots extending downward */}
+      <group position={[0, -0.5, 0]}>
+        {/* Main central taproot */}
+        <mesh castShadow>
+          <cylinderGeometry args={[0.25, 0.15, 1.2, 8]} />
+          <meshStandardMaterial
+            color={hovered ? "#5D4129" : "#6B4423"}
+            roughness={0.95}
+            metalness={0}
+          />
+        </mesh>
+
+        {/* Primary root branches - 3 major roots extending outward */}
+        {/* Root 1 - Front right with curves */}
+        <group position={[0.3, -0.3, 0.3]} rotation={[0, 0, -0.4]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.15, 0.1, 1.0, 8]} />
+            <meshStandardMaterial color="#6B4423" roughness={0.95} />
+          </mesh>
+          {/* Secondary branch */}
+          <group position={[0.25, -0.4, 0]} rotation={[0, 0, -0.3]}>
+            <mesh castShadow>
+              <cylinderGeometry args={[0.08, 0.05, 0.7, 6]} />
+              <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+            </mesh>
+          </group>
+        </group>
+
+        {/* Root 2 - Front left with curves */}
+        <group position={[-0.3, -0.3, 0.3]} rotation={[0, 0, 0.4]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.15, 0.1, 1.0, 8]} />
+            <meshStandardMaterial color="#6B4423" roughness={0.95} />
+          </mesh>
+          {/* Secondary branch */}
+          <group position={[-0.25, -0.4, 0]} rotation={[0, 0, 0.3]}>
+            <mesh castShadow>
+              <cylinderGeometry args={[0.08, 0.05, 0.7, 6]} />
+              <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+            </mesh>
+          </group>
+        </group>
+
+        {/* Root 3 - Back with curves */}
+        <group position={[0, -0.3, -0.3]} rotation={[0.4, 0, 0]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.15, 0.1, 0.9, 8]} />
+            <meshStandardMaterial color="#6B4423" roughness={0.95} />
+          </mesh>
+        </group>
+
+        {/* Additional smaller root branches for naturalistic look */}
+        {/* Small root 1 */}
+        <group position={[0.2, -0.2, -0.2]} rotation={[0.3, 0.3, -0.3]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.08, 0.04, 0.6, 6]} />
+            <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+          </mesh>
+        </group>
+
+        {/* Small root 2 */}
+        <group position={[-0.2, -0.2, -0.2]} rotation={[0.3, -0.3, 0.3]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.08, 0.04, 0.6, 6]} />
+            <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+          </mesh>
+        </group>
+
+        {/* Small root 3 - side detail */}
+        <group position={[0.4, -0.1, 0]} rotation={[0, 0, -0.5]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.06, 0.03, 0.5, 6]} />
+            <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+          </mesh>
+        </group>
+
+        {/* Small root 4 - side detail */}
+        <group position={[-0.4, -0.1, 0]} rotation={[0, 0, 0.5]}>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.06, 0.03, 0.5, 6]} />
+            <meshStandardMaterial color="#7D5A3C" roughness={0.95} />
+          </mesh>
+        </group>
+
+        {/* Tertiary thin roots for detail */}
+        {Array.from({ length: 8 }).map((_, i) => {
+          const angle = (i / 8) * Math.PI * 2;
+          const radius = 0.35;
+          const x = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+
+          return (
+            <group
+              key={`thin-root-${i}`}
+              position={[x, -0.15, z]}
+              rotation={[
+                Math.sin(angle) * 0.4,
+                angle,
+                Math.cos(angle) * 0.5
+              ]}
+            >
+              <mesh castShadow>
+                <cylinderGeometry args={[0.04, 0.02, 0.5, 5]} />
+                <meshStandardMaterial
+                  color="#8D6E4F"
+                  roughness={0.95}
+                  transparent
+                  opacity={0.8}
+                />
+              </mesh>
+            </group>
+          );
+        })}
+      </group>
+
       {/* Tree trunk - Hay Day style with texture depth */}
       <group position={[0, 0.8, 0]}>
         <mesh castShadow>
