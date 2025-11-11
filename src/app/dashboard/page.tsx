@@ -98,9 +98,9 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="max-w-6xl mx-auto space-y-4 pb-12 px-6">
+      <div className="max-w-6xl mx-auto pb-12 px-6">
         {/* Modern Header with Greeting - Reduced spacing */}
-        <div className="pt-6 pb-1 animate-fade-in-up">
+        <div className="pt-6 pb-0 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center gap-3">
             <div className="text-center w-full">
               <p className="text-sm text-muted-foreground mb-1">
@@ -122,7 +122,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Cycle Phase Banner - Hero Card Style with 3D Hormone Wave - MOVED TO TOP */}
-        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-primary/20 overflow-hidden relative animate-fade-in-up animation-delay-200">
+        <Card className="glass-card bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 border-0 overflow-hidden relative animate-fade-in-up animation-delay-200 shadow-bloom-lg mt-2">
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
@@ -173,23 +173,23 @@ export default function DashboardPage() {
         </Card>
 
         {/* Rooted Reset Section - MOVED AFTER CYCLE PHASE */}
-        <div className="animate-fade-in-up animation-delay-300">
+        <div className="animate-fade-in-up animation-delay-300 mt-4">
           <DailyAspiration userId={MOCK_USER_ID} />
         </div>
 
         {/* Shared Calendar Section */}
-        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-400 textile-overlay-cream">
+        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-400 textile-overlay-cream mt-4">
           <SharedCalendar userId={MOCK_USER_ID} />
         </Card>
 
         {/* Todo List Section - MOVED UNDERNEATH CALENDAR */}
-        <div className="animate-fade-in-up animation-delay-600">
+        <div className="animate-fade-in-up animation-delay-600 mt-4">
           <GoalsTodoList userId={MOCK_USER_ID} />
         </div>
 
 
         {/* Health Metrics Grid - 4 Interactive Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1000">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1000 mt-4">
           {/* Hydration Card - Blue */}
           <Card
             className="glass-card card-marble group hover:scale-105 transition-all duration-300 cursor-pointer"
@@ -292,7 +292,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Swipeable Sleep Tracker Section */}
-        <div className="animate-fade-in-up animation-delay-1400">
+        <div className="animate-fade-in-up animation-delay-1400 mt-4">
           <SwipeableSleepTracker />
         </div>
 
