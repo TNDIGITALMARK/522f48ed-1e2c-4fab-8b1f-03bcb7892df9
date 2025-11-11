@@ -18,6 +18,7 @@ import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
 import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
+import { FoodSearchAnimation } from '@/components/food-search-animation';
 
 const MOCK_USER_ID = 'demo-user-001';
 
@@ -225,6 +226,11 @@ export default function NutritionPage() {
           <p className="text-muted-foreground text-lg">
             Your personalized meal planner synced to your cycle
           </p>
+        </div>
+
+        {/* Food Search Animation - Learning Patterns */}
+        <div className="mb-8 animate-fade-in-up animation-delay-400">
+          <FoodSearchAnimation />
         </div>
 
         {/* Food Quiz CTA */}
