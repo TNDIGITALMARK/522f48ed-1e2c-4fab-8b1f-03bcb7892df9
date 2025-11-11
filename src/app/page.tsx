@@ -49,7 +49,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image
-              src="/rooted-logo.png"
+              src="/generated/rooted-logo-uppercase.png"
               alt="Rooted Logo"
               width={48}
               height={48}
@@ -57,7 +57,7 @@ export default function HomePage() {
             />
             <div>
               <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
-                <span className="text-foreground">rooted</span>
+                <span className="text-foreground">ROOTED</span>
               </div>
               <div className="text-xs text-muted-foreground font-light tracking-wide">
                 Grounded in Nature
