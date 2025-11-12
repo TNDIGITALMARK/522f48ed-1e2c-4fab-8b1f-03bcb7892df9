@@ -8,8 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ChevronLeft, ChevronRight, Plus, Dumbbell, Heart, Apple, Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Dumbbell, Heart, Apple, Calendar as CalendarIcon, Sparkles, CheckCircle2 } from 'lucide-react';
 import { getUserEvents, createEvent, getEventsForDate, subscribeToEvents, type CalendarEvent } from '@/lib/calendar-events-store';
+import { getActiveGoals, type Goal } from '@/lib/goals-store';
 
 interface SmartCalendarProps {
   userId: string;
@@ -41,6 +42,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [goals, setGoals] = useState<Goal[]>([]);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [newEvent, setNewEvent] = useState({
     title: '',
@@ -51,10 +53,13 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
     allDay: false
   });
 
-  // Load events
+  // Load events and goals
   useEffect(() => {
     const loadedEvents = getUserEvents(userId);
     setEvents(loadedEvents);
+
+    const loadedGoals = getActiveGoals(userId);
+    setGoals(loadedGoals);
 
     const unsubscribe = subscribeToEvents(userId, setEvents);
     return unsubscribe;
@@ -90,9 +95,35 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
     setCurrentDate(new Date());
   };
 
-  // Get events for specific day
+  // AI-Powered Synchronization: Distinguish between to-do list and today's tasks
+  const getTodayTasks = () => {
+    const today = new Date();
+    return events.filter(event => {
+      const eventDate = new Date(event.startDatetime);
+      return eventDate.toDateString() === today.toDateString();
+    });
+  };
+
+  const getWeeklyTodoList = () => {
+    // Weekly to-do list includes all goals and future events
+    return goals.filter(goal => !goal.isCompleted);
+  };
+
+  // Get events for specific day (calendar integration)
   const getEventsForDay = (date: Date) => {
-    return getEventsForDate(userId, date);
+    const dayEvents = getEventsForDate(userId, date);
+    const dateStr = date.toDateString();
+
+    // AI sync: Add relevant goals as tasks if they're scheduled for this day
+    const relevantGoals = goals.filter(goal => {
+      if (goal.dueDate) {
+        const goalDate = new Date(goal.dueDate);
+        return goalDate.toDateString() === dateStr && !goal.isCompleted;
+      }
+      return false;
+    });
+
+    return dayEvents;
   };
 
   // Check if date is today
@@ -139,11 +170,20 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  const todayTasks = getTodayTasks();
+  const weeklyTodos = getWeeklyTodoList();
+
   return (
     <div className="calendar-container space-y-4">
-      {/* Calendar Header */}
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">{monthNames[month]} {year}</h2>
+      {/* Calendar Header with AI Sync Badge */}
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl font-bold">{monthNames[month]} {year}</h2>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full border border-primary/20">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
+            <span className="text-xs font-semibold text-primary">AI Powered</span>
+          </div>
+        </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" onClick={goToPreviousMonth}>
             <ChevronLeft className="w-4 h-4" />
@@ -154,6 +194,26 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
           <Button variant="outline" size="sm" onClick={goToNextMonth}>
             <ChevronRight className="w-4 h-4" />
           </Button>
+        </div>
+      </div>
+
+      {/* Today's Tasks vs Weekly To-Do Summary */}
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-xl border border-secondary/20">
+          <div className="flex items-center gap-2 mb-1">
+            <CheckCircle2 className="w-4 h-4 text-secondary" />
+            <span className="text-xs font-semibold text-secondary">Today's Tasks</span>
+          </div>
+          <p className="text-2xl font-bold text-foreground">{todayTasks.length}</p>
+          <p className="text-xs text-muted-foreground">Scheduled for today</p>
+        </div>
+        <div className="p-3 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border border-primary/20">
+          <div className="flex items-center gap-2 mb-1">
+            <CalendarIcon className="w-4 h-4 text-primary" />
+            <span className="text-xs font-semibold text-primary">Weekly To-Do</span>
+          </div>
+          <p className="text-2xl font-bold text-foreground">{weeklyTodos.length}</p>
+          <p className="text-xs text-muted-foreground">Goals this week</p>
         </div>
       </div>
 

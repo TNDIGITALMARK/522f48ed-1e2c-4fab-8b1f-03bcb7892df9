@@ -39,9 +39,9 @@ export function CircularNavigation() {
       endAngle: 45,
     },
     {
-      label: 'Cycle',
+      label: 'Cycle Activity',
       href: '/cycle',
-      color: 'hsl(250 25% 60%)', // Purple/lavender
+      color: 'hsl(100 18% 65%)', // Sage green for cycle (matching icon-cycle color)
       startAngle: 225,
       endAngle: 315,
     },
@@ -117,7 +117,9 @@ export function CircularNavigation() {
 
   return (
     <div className="flex items-center justify-center w-full py-8">
-      <div className="relative" style={{ width: size + 180, height: size + 180 }}>
+      {/* Cream white shadowed container box */}
+      <div className="bg-[hsl(38,65%,96%)] rounded-3xl shadow-[0_8px_24px_rgba(62,53,48,0.18),0_2px_6px_rgba(62,53,48,0.08)] p-8 border border-border/30">
+        <div className="relative" style={{ width: size + 180, height: size + 180 }}>
         <svg
           width={size + 180}
           height={size + 180}
@@ -295,6 +297,7 @@ export function CircularNavigation() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
