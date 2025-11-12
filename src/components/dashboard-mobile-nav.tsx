@@ -733,34 +733,6 @@ export function DashboardMobileNav() {
         </>
       )}
 
-      {/* Bottom Tab Bar */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-border z-40 safe-area-inset-bottom">
-        <div className="flex items-center justify-around px-1 py-2">
-          {navigationItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname === item.href;
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'flex flex-col items-center gap-1 px-2 py-2 rounded-xl transition-all duration-200 flex-1 min-w-0',
-                  isActive
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
-                )}
-              >
-                <Icon
-                  className="w-5 h-5 flex-shrink-0"
-                  style={!isActive && item.iconColor ? { color: item.iconColor } : undefined}
-                />
-                <span className="text-xs font-medium truncate w-full text-center">{item.title}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
     </>
   );
 }
