@@ -83,9 +83,9 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
   if (!cycle) {
     return (
-      <Card className="bloom-card cycle-insight-card">
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
         <div className="text-center py-8">
-          <Heart className="w-12 h-12 mx-auto mb-4 text-primary opacity-50" />
+          <Heart className="w-12 h-12 mx-auto mb-4 text-[hsl(80,12%,37%)] opacity-60" />
           <h3 className="text-lg font-semibold mb-2">Start Tracking Your Cycle</h3>
           <p className="text-sm text-muted-foreground mb-4">
             Get personalized insights based on your menstrual cycle phase
@@ -163,10 +163,10 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   const daysUntilPeriod = Math.max(0, cycle.cycleLength - ((currentDay - 1) % cycle.cycleLength));
 
   const phaseColors: Record<CyclePhase, string> = {
-    menstruation: 'from-rose-100 to-rose-50 border-rose-200',
-    follicular: 'from-purple-100 to-purple-50 border-purple-200',
-    ovulation: 'from-green-100 to-green-50 border-green-200',
-    luteal: 'from-amber-100 to-amber-50 border-amber-200'
+    menstruation: 'from-rose-50/50 to-rose-100/30',
+    follicular: 'from-purple-50/50 to-purple-100/30',
+    ovulation: 'from-[hsl(100,15%,92%)] to-[hsl(100,15%,85%)]',
+    luteal: 'from-amber-50/50 to-amber-100/30'
   };
 
   const phaseIcons: Record<CyclePhase, React.ReactNode> = {
@@ -186,7 +186,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   return (
     <div className="space-y-4">
       {/* Main Cycle Card */}
-      <Card className={`bloom-card cycle-insight-card bg-gradient-to-br ${phaseColors[insights.phase]}`}>
+      <Card className={`bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
         <div className="flex items-start justify-between mb-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -282,7 +282,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Energy Level */}
-        <div className="flex items-center justify-between p-3 bg-white/60 rounded-xl mb-4">
+        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow mb-4">
           <div className="flex items-center gap-2">
             <Activity className={`w-5 h-5 ${energyColors[insights.energyLevel]}`} />
             <span className="font-medium">Energy Level</span>
@@ -293,9 +293,9 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Next Period Prediction */}
-        <div className="flex items-center justify-between p-3 bg-white/60 rounded-xl">
+        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-primary" />
+            <Calendar className="w-5 h-5 text-[hsl(80,12%,37%)]" />
             <span className="font-medium">Next Period</span>
           </div>
           <div className="text-right">
@@ -306,7 +306,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Recommendations Card */}
-      <Card className="bloom-card">
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="w-5 h-5 text-primary" />
           <h4 className="font-semibold">Personalized Recommendations</h4>
@@ -322,9 +322,9 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Common Symptoms Card */}
-      <Card className="bloom-card bg-gradient-to-br from-muted/30 to-muted/10">
+      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
         <div className="flex items-center gap-2 mb-3">
-          <Heart className="w-5 h-5 text-secondary" />
+          <Heart className="w-5 h-5 text-[hsl(100,15%,67%)]" />
           <h4 className="font-semibold">What to Expect</h4>
         </div>
         <div className="flex flex-wrap gap-2">

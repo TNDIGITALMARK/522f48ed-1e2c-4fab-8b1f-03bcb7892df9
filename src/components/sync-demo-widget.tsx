@@ -41,10 +41,10 @@ export function SyncDemoWidget({ userId }: SyncDemoWidgetProps) {
   if (!profile) return null;
 
   return (
-    <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-accent/5 border-secondary/20">
+    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
       <div className="flex items-start gap-3 mb-4">
-        <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-          <Zap className="w-5 h-5 text-secondary-foreground" />
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(100,15%,67%)] to-[hsl(80,12%,37%)] flex items-center justify-center shadow-sm">
+          <Zap className="w-5 h-5 text-white" />
         </div>
         <div className="flex-1">
           <h3 className="font-semibold flex items-center gap-2">
@@ -61,19 +61,19 @@ export function SyncDemoWidget({ userId }: SyncDemoWidgetProps) {
       </div>
 
       <div className="space-y-3 mb-4">
-        <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="text-sm font-medium">Water Intake</span>
           <span className="text-sm">
             {profile.waterConsumed} / {profile.waterGoal} glasses
           </span>
         </div>
-        <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="text-sm font-medium">Steps</span>
           <span className="text-sm">
             {profile.stepsCompleted.toLocaleString()} / {profile.stepsGoal.toLocaleString()}
           </span>
         </div>
-        <div className="flex items-center justify-between p-3 bg-white/60 rounded-lg">
+        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="text-sm font-medium">Meditation</span>
           <span className="text-sm">
             {profile.meditationCompleted} / {profile.meditationGoal} min

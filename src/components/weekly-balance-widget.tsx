@@ -89,10 +89,10 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
     balanceData.moderateDays >= 2 && balanceData.moderateDays <= 4;
 
   const impactColors: Record<BalanceImpact, string> = {
-    rest: 'bg-blue-100 text-blue-700 border-blue-200',
-    moderate: 'bg-green-100 text-green-700 border-green-200',
-    active: 'bg-orange-100 text-orange-700 border-orange-200',
-    none: 'bg-gray-100 text-gray-700 border-gray-200'
+    rest: 'bg-[hsl(100,15%,92%)] text-[hsl(100,15%,35%)] border-0',
+    moderate: 'bg-[hsl(25,11%,88%)] text-[hsl(25,11%,28%)] border-0',
+    active: 'bg-[hsl(215,43%,88%)] text-[hsl(215,43%,28%)] border-0',
+    none: 'bg-gray-100 text-gray-700 border-0'
   };
 
   const impactIcons: Record<BalanceImpact, React.ReactNode> = {
@@ -103,7 +103,7 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
   };
 
   return (
-    <Card className="bloom-card">
+    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-lg font-semibold">Smart Weekly Balance</h3>
@@ -156,20 +156,20 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
 
       {/* Balance Breakdown */}
       <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="text-center p-3 rounded-xl bg-blue-50 border border-blue-100">
-          <Moon className="w-5 h-5 text-blue-600 mx-auto mb-1" />
-          <p className="text-2xl font-bold text-blue-700">{balanceData.restDays}</p>
-          <p className="text-xs text-blue-600">Rest</p>
+        <div className="text-center p-3 rounded-2xl bg-[hsl(100,15%,95%)] border-0 shadow-sm hover:shadow-md transition-shadow">
+          <Moon className="w-5 h-5 text-[hsl(100,15%,67%)] mx-auto mb-1" />
+          <p className="text-2xl font-bold text-[hsl(80,12%,37%)]">{balanceData.restDays}</p>
+          <p className="text-xs text-[hsl(80,12%,45%)]">Rest</p>
         </div>
-        <div className="text-center p-3 rounded-xl bg-green-50 border border-green-100">
-          <Activity className="w-5 h-5 text-green-600 mx-auto mb-1" />
-          <p className="text-2xl font-bold text-green-700">{balanceData.moderateDays}</p>
-          <p className="text-xs text-green-600">Moderate</p>
+        <div className="text-center p-3 rounded-2xl bg-[hsl(25,11%,92%)] border-0 shadow-sm hover:shadow-md transition-shadow">
+          <Activity className="w-5 h-5 text-[hsl(25,11%,35%)] mx-auto mb-1" />
+          <p className="text-2xl font-bold text-[hsl(25,11%,21%)]">{balanceData.moderateDays}</p>
+          <p className="text-xs text-[hsl(25,11%,35%)]">Moderate</p>
         </div>
-        <div className="text-center p-3 rounded-xl bg-orange-50 border border-orange-100">
-          <Zap className="w-5 h-5 text-orange-600 mx-auto mb-1" />
-          <p className="text-2xl font-bold text-orange-700">{balanceData.activeDays}</p>
-          <p className="text-xs text-orange-600">Active</p>
+        <div className="text-center p-3 rounded-2xl bg-[hsl(215,43%,92%)] border-0 shadow-sm hover:shadow-md transition-shadow">
+          <Zap className="w-5 h-5 text-[hsl(215,43%,35%)] mx-auto mb-1" />
+          <p className="text-2xl font-bold text-[hsl(215,43%,21%)]">{balanceData.activeDays}</p>
+          <p className="text-xs text-[hsl(215,43%,35%)]">Active</p>
         </div>
       </div>
 
@@ -185,7 +185,7 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
             return (
               <div
                 key={day.toISOString()}
-                className="flex items-center gap-3 p-2 rounded-lg border border-border hover:bg-muted/30 transition-colors"
+                className="flex items-center gap-3 p-2 rounded-xl bg-white/40 border-0 shadow-sm hover:shadow-md transition-all"
               >
                 <div className="text-center min-w-[60px]">
                   <p className="text-xs text-muted-foreground">{format(day, 'EEE')}</p>
@@ -227,8 +227,8 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
 
       {/* AI Recommendation */}
       {balanceData.recommendation && (
-        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-xl border border-primary/20">
-          <Sparkles className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-[hsl(100,15%,95%)] to-[hsl(100,15%,90%)] rounded-2xl border-0 shadow-sm">
+          <Sparkles className="w-5 h-5 text-[hsl(80,12%,37%)] flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="font-semibold text-sm mb-1">Smart Recommendation</h4>
             <p className="text-sm text-muted-foreground">
