@@ -77,7 +77,7 @@ VISUAL EFFECTS:
   --rooted-brown: 25 11% 21%; /* #3E3530 - Rich dark brown */
   --rooted-forest: 140 12% 18%; /* #2B2F2A - Deep charcoal/forest */
   --rooted-navy: 215 43% 21%; /* #1E2F4D - Deep navy blue */
-  --rooted-cream: 35 45% 96%; /* #FAF7F3 - Warm inviting white background */
+  --rooted-cream: 38 50% 94%; /* #F7F1E9 - Warm beige cream background */
   --rooted-white: 0 0% 100%; /* #FFFFFF - Pure white */
 
   /* EXTENDED ICON COLORS - FROM NEW REQUIREMENTS */
@@ -90,8 +90,8 @@ VISUAL EFFECTS:
   --color-dark-green: 140 30% 20%; /* Dark green accent */
   --color-beige: 35 32% 88%; /* Beige accent */
 
-  /* Light theme - Warm white foundation with sage and olive accents */
-  --background: 35 45% 96%; /* #FAF7F3 - Warm inviting white background */
+  /* Light theme - Warm beige cream foundation with sage and olive accents */
+  --background: 38 50% 94%; /* #F7F1E9 - Warm beige cream background */
   --foreground: 25 11% 21%; /* #3E3530 - Dark brown text */
 
   /* Cards with sage green tint */
@@ -520,12 +520,12 @@ label {
 /* Marble texture effect - beige with light green veining */
 .texture-marble {
   background: linear-gradient(135deg,
-    hsl(35 26% 96%) 0%,
-    hsl(35 26% 94%) 25%,
-    hsl(35 26% 96%) 50%,
-    hsl(35 26% 92%) 55%,
-    hsl(35 26% 94%) 75%,
-    hsl(35 26% 96%) 100%
+    hsl(38 50% 94%) 0%,
+    hsl(38 50% 92%) 25%,
+    hsl(38 50% 94%) 50%,
+    hsl(38 50% 90%) 55%,
+    hsl(38 50% 92%) 75%,
+    hsl(38 50% 94%) 100%
   );
   background-size: 200% 200%;
   position: relative;
@@ -544,14 +544,14 @@ label {
 /* Flowing fabric texture - beige waves */
 .texture-fabric {
   background: linear-gradient(120deg,
-    hsl(35 26% 96%) 0%,
-    hsl(35 26% 94%) 15%,
-    hsl(35 26% 92%) 30%,
-    hsl(35 26% 94%) 45%,
-    hsl(35 26% 95%) 60%,
-    hsl(35 26% 96%) 75%,
-    hsl(35 26% 94%) 90%,
-    hsl(35 26% 96%) 100%
+    hsl(38 50% 94%) 0%,
+    hsl(38 50% 92%) 15%,
+    hsl(38 50% 90%) 30%,
+    hsl(38 50% 92%) 45%,
+    hsl(38 50% 93%) 60%,
+    hsl(38 50% 94%) 75%,
+    hsl(38 50% 92%) 90%,
+    hsl(38 50% 94%) 100%
   );
   background-size: 400% 400%;
   position: relative;
@@ -615,12 +615,12 @@ label {
 
 .card-marble {
   background: linear-gradient(135deg,
-    hsl(35 26% 96%) 0%,
-    hsl(35 26% 94%) 25%,
-    hsl(35 26% 96%) 50%,
-    hsl(35 26% 92%) 55%,
-    hsl(35 26% 94%) 75%,
-    hsl(35 26% 96%) 100%
+    hsl(38 50% 94%) 0%,
+    hsl(38 50% 92%) 25%,
+    hsl(38 50% 94%) 50%,
+    hsl(38 50% 90%) 55%,
+    hsl(38 50% 92%) 75%,
+    hsl(38 50% 94%) 100%
   );
   background-size: 200% 200%;
   border: 1px solid hsl(var(--border));
@@ -639,12 +639,12 @@ label {
 
 .card-fabric {
   background: linear-gradient(120deg,
-    hsl(35 26% 96%) 0%,
-    hsl(35 26% 94%) 20%,
-    hsl(35 26% 92%) 40%,
-    hsl(35 26% 94%) 60%,
-    hsl(35 26% 96%) 80%,
-    hsl(35 26% 94%) 100%
+    hsl(38 50% 94%) 0%,
+    hsl(38 50% 92%) 20%,
+    hsl(38 50% 90%) 40%,
+    hsl(38 50% 92%) 60%,
+    hsl(38 50% 94%) 80%,
+    hsl(38 50% 92%) 100%
   );
   background-size: 300% 300%;
   border: 1px solid hsl(var(--border));
@@ -687,7 +687,7 @@ label {
 }
 
 .bg-textile-beige {
-  background: hsl(35 26% 96%);
+  background: hsl(38 50% 94%);
   background-image:
     repeating-linear-gradient(90deg,
       transparent 0px,
@@ -705,7 +705,7 @@ label {
 }
 
 .bg-textile-pearl {
-  background: hsl(35 26% 92%);
+  background: hsl(38 50% 92%);
   background-image:
     repeating-linear-gradient(45deg,
       transparent 0px,
