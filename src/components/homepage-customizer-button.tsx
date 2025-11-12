@@ -25,21 +25,12 @@ export function HomepageCustomizerButton() {
         onClick={openModal}
         className="bloom-card textile-overlay-cream cursor-pointer group hover:scale-[1.02] transition-all duration-300 animate-fade-in-up animation-delay-1000"
       >
-        <div className="flex items-center justify-between p-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-primary/10 to-secondary/10 group-hover:from-primary/20 group-hover:to-secondary/20 transition-all">
-              <Settings className="w-7 h-7 text-primary group-hover:rotate-90 transition-transform duration-300" />
-            </div>
-            <div>
-              <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70">
-                Customize your homepage
-              </p>
-            </div>
-          </div>
-          <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button className="rounded-full">
-              Customize
-            </Button>
+        <div className="flex items-center justify-center p-6">
+          <div className="flex flex-col items-center gap-3">
+            <Settings className="w-8 h-8 text-primary group-hover:rotate-90 transition-transform duration-300" />
+            <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70">
+              Customize your homepage
+            </p>
           </div>
         </div>
       </Card>
