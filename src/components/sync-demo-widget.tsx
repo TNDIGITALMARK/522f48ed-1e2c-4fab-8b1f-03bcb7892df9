@@ -41,9 +41,9 @@ export function SyncDemoWidget({ userId }: SyncDemoWidgetProps) {
   if (!profile) return null;
 
   return (
-    <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
+    <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
       <div className="flex items-start gap-3 mb-4">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(100,15%,67%)] to-[hsl(80,12%,37%)] flex items-center justify-center shadow-sm">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(100,15%,67%)] to-[hsl(80,12%,37%)] flex items-center justify-center shadow-lg">
           <Zap className="w-5 h-5 text-white" />
         </div>
         <div className="flex-1">
@@ -61,19 +61,19 @@ export function SyncDemoWidget({ userId }: SyncDemoWidgetProps) {
       </div>
 
       <div className="space-y-3 mb-4">
-        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
           <span className="text-sm font-medium">Water Intake</span>
           <span className="text-sm">
             {profile.waterConsumed} / {profile.waterGoal} glasses
           </span>
         </div>
-        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
           <span className="text-sm font-medium">Steps</span>
           <span className="text-sm">
             {profile.stepsCompleted.toLocaleString()} / {profile.stepsGoal.toLocaleString()}
           </span>
         </div>
-        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
           <span className="text-sm font-medium">Meditation</span>
           <span className="text-sm">
             {profile.meditationCompleted} / {profile.meditationGoal} min

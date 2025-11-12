@@ -83,7 +83,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
   if (!cycle) {
     return (
-      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
+      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
         <div className="text-center py-8">
           <Heart className="w-12 h-12 mx-auto mb-4 text-[hsl(80,12%,37%)] opacity-60" />
           <h3 className="text-lg font-semibold mb-2">Start Tracking Your Cycle</h3>
@@ -186,7 +186,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   return (
     <div className="space-y-4">
       {/* Main Cycle Card */}
-      <Card className={`bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
+      <Card className={`rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
         <div className="flex items-start justify-between mb-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
@@ -282,7 +282,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Energy Level */}
-        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow mb-4">
+        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 mb-4">
           <div className="flex items-center gap-2">
             <Activity className={`w-5 h-5 ${energyColors[insights.energyLevel]}`} />
             <span className="font-medium">Energy Level</span>
@@ -293,7 +293,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Next Period Prediction */}
-        <div className="flex items-center justify-between p-3 bg-white/40 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
           <div className="flex items-center gap-2">
             <Calendar className="w-5 h-5 text-[hsl(80,12%,37%)]" />
             <span className="font-medium">Next Period</span>
@@ -306,7 +306,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Recommendations Card */}
-      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
+      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="w-5 h-5 text-primary" />
           <h4 className="font-semibold">Personalized Recommendations</h4>
@@ -322,7 +322,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Common Symptoms Card */}
-      <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-[0_4px_24px_rgba(168,181,160,0.12)] hover:shadow-[0_8px_32px_rgba(168,181,160,0.2)] transition-all duration-300">
+      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex items-center gap-2 mb-3">
           <Heart className="w-5 h-5 text-[hsl(100,15%,67%)]" />
           <h4 className="font-semibold">What to Expect</h4>
