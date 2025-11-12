@@ -90,8 +90,8 @@ VISUAL EFFECTS:
   --color-dark-green: 140 30% 20%; /* Dark green accent */
   --color-beige: 35 32% 88%; /* Beige accent */
 
-  /* Light theme - Warm beige cream foundation with sage and olive accents */
-  --background: 38 50% 94%; /* #F7F1E9 - Warm beige cream background */
+  /* Light theme - Off-white background with cream/beige accents */
+  --background: 38 65% 96%; /* Off-white background - lighter and more neutral */
   --foreground: 25 11% 21%; /* #3E3530 - Dark brown text */
 
   /* Cards with sage green tint */
@@ -895,13 +895,13 @@ label {
   --event-nutrition: 15 40% 88%; /* Gentle peach for meals */
   --event-personal: 345 35% 88%; /* Soft rose for personal time */
 
-  /* Calendar container - light cream white with more opacity */
-  --calendar-container-bg: 38 65% 96%; /* Very light off-white cream - lighter than page background */
+  /* Calendar container - cream white matching new scheme */
+  --calendar-container-bg: 35 40% 94%; /* Cream white background for widgets */
 }
 
-/* Calendar container styling - matching Weight & Goals card */
+/* Calendar container styling - cream white opacity */
 .calendar-container {
-  background: hsl(100 18% 65% / 0.08);
+  background: hsl(35 40% 94% / 0.35);
   border-radius: 1.25rem;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(62, 53, 48, 0.10);

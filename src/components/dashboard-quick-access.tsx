@@ -94,7 +94,7 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in-up">
       {/* To-Do List Section */}
-      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300 md:col-span-2 lg:col-span-1" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
+      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300 md:col-span-2 lg:col-span-1" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Today's Tasks</h3>
           <Badge variant="secondary" className="text-xs">
@@ -130,7 +130,7 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
       </Card>
 
       {/* Weight & Goals Section */}
-      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
+      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
         <div className="flex items-center gap-2 mb-4">
           <Scale className="w-5 h-5 text-primary" />
           <h3 className="text-lg font-semibold">Weight & Goals</h3>
@@ -174,7 +174,7 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
       </Card>
 
       {/* Quick Meal Access Section */}
-      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
+      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
         <div className="flex items-center gap-2 mb-4">
           <MealIcon className="w-5 h-5 text-accent-foreground" />
           <h3 className="text-lg font-semibold capitalize">{currentMeal}</h3>

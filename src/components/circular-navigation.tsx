@@ -41,7 +41,7 @@ export function CircularNavigation() {
     {
       label: 'Cycle Activity',
       href: '/cycle',
-      color: 'hsl(100 18% 65%)', // Sage green for cycle (matching icon-cycle color)
+      color: 'hsl(35 40% 88%)', // Cream beige for cycle
       startAngle: 225,
       endAngle: 315,
     },

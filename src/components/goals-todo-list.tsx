@@ -105,7 +105,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
   const totalItems = goals.length + weekEvents.length;
 
   return (
-    <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
+    <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-light" style={{ fontFamily: 'Georgia, serif' }}>
           To Do List
@@ -126,9 +126,9 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
           <div
             key={event.id}
             className="flex items-center gap-4 p-4 rounded-xl border transition-colors"
-            style={{ backgroundColor: 'hsl(100 18% 65% / 0.1)', borderColor: 'hsl(100 18% 65% / 0.2)' }}
+            style={{ backgroundColor: 'hsl(35 40% 94% / 0.4)', borderColor: 'hsl(35 40% 88% / 0.5)' }}
           >
-            <CalendarIcon className="w-6 h-6 flex-shrink-0" style={{ color: 'hsl(100 18% 45%)' }} />
+            <CalendarIcon className="w-6 h-6 flex-shrink-0" style={{ color: 'hsl(35 40% 75%)' }} />
             <div className="flex-1">
               <span className="text-base font-medium">
                 {event.title}
@@ -141,7 +141,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
                     <span>{formatEventTime(event.startDatetime)}</span>
                   </>
                 )}
-                <span className="ml-2 px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'hsl(100 18% 65% / 0.2)', color: 'hsl(100 18% 35%)' }}>
+                <span className="ml-2 px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'hsl(35 40% 88% / 0.5)', color: 'hsl(35 40% 50%)' }}>
                   {event.eventType}
                 </span>
               </div>
