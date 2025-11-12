@@ -23,6 +23,7 @@ import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { DailyAspiration } from '@/components/daily-aspiration';
 import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
 import { CircularNavigation } from '@/components/circular-navigation';
+import { DashboardQuickAccess } from '@/components/dashboard-quick-access';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -203,7 +204,12 @@ export default function DashboardPage() {
           <SharedCalendar userId={MOCK_USER_ID} />
         </div>
 
-        {/* Todo List Section - MOVED UNDERNEATH CALENDAR */}
+        {/* Quick Access Dashboard Sections - 3 Cards: To-Do, Weight & Goals, Meal Tracker */}
+        <div className="animate-fade-in-up animation-delay-500 mt-4">
+          <DashboardQuickAccess userId={MOCK_USER_ID} />
+        </div>
+
+        {/* Todo List Section - MOVED UNDERNEATH QUICK ACCESS */}
         <div className="animate-fade-in-up animation-delay-600 mt-4">
           <GoalsTodoList userId={MOCK_USER_ID} />
         </div>
