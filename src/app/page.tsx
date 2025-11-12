@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatedHeroBackground } from '@/components/animated-hero-background';
+import { RootedBalanceCircle } from '@/components/rooted-balance-circle';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -169,6 +170,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Rooted Balance Circle Section */}
+      <section className="relative">
+        <RootedBalanceCircle />
       </section>
 
       {/* Features Section */}
