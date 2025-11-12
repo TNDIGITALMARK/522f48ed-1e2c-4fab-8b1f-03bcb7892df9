@@ -24,6 +24,7 @@ import { DailyAspiration } from '@/components/daily-aspiration';
 import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
 import { CircularNavigation } from '@/components/circular-navigation';
 import { DashboardQuickAccess } from '@/components/dashboard-quick-access';
+import { SmartScannerButton } from '@/components/smart-scanner-button';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -192,11 +193,16 @@ export default function DashboardPage() {
               </Button>
             </Link>
           </div>
+
+          {/* Daily Aspiration - MOVED INSIDE CYCLE PHASE CARD, BELOW CIRCLE */}
+          <div className="relative z-10 mt-6 -mx-6 px-6 pb-2">
+            <DailyAspiration userId={MOCK_USER_ID} />
+          </div>
         </div>
 
-        {/* Daily Aspiration Section - MOVED AFTER CYCLE PHASE */}
-        <div className="animate-fade-in-up animation-delay-300 mt-4">
-          <DailyAspiration userId={MOCK_USER_ID} />
+        {/* Smart Scanner Button - NEW: Above Calendar, Below Log a Symptom */}
+        <div className="animate-fade-in-up animation-delay-350 mt-4">
+          <SmartScannerButton />
         </div>
 
         {/* Shared Calendar Section */}
