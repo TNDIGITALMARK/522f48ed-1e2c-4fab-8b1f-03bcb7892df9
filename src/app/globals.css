@@ -894,6 +894,23 @@ label {
   --event-wellness: 280 30% 85%; /* Soft lavender for wellness */
   --event-nutrition: 15 40% 88%; /* Gentle peach for meals */
   --event-personal: 345 35% 88%; /* Soft rose for personal time */
+
+  /* Calendar container - light cream white, lighter than background */
+  --calendar-container-bg: 38 55% 97%; /* Very light warm cream - lighter than page background */
+}
+
+/* Calendar container styling - light cream with soft shadow */
+.calendar-container {
+  background: hsl(var(--calendar-container-bg));
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(62, 53, 48, 0.12), 0 2px 6px rgba(62, 53, 48, 0.06);
+  border: none;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.calendar-container:hover {
+  box-shadow: 0 12px 32px rgba(62, 53, 48, 0.16), 0 4px 8px rgba(62, 53, 48, 0.08);
 }
 
 /* Calendar grid styling */

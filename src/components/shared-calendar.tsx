@@ -178,7 +178,7 @@ export function SharedCalendar({ userId }: SharedCalendarProps) {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="space-y-4">
+    <div className="calendar-container space-y-4">
       {/* Calendar Header - Centered title with rooted font style */}
       <div className="flex items-center justify-between">
         <Button variant="outline" size="sm" onClick={goToPreviousMonth}>

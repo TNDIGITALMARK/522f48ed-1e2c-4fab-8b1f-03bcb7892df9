@@ -140,7 +140,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="space-y-4">
+    <div className="calendar-container space-y-4">
       {/* Calendar Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">{monthNames[month]} {year}</h2>

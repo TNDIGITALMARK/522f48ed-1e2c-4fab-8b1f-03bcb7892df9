@@ -198,9 +198,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Shared Calendar Section */}
-        <Card className="bloom-card card-fabric animate-fade-in-up animation-delay-400 textile-overlay-cream mt-4">
+        <div className="animate-fade-in-up animation-delay-400 mt-4">
           <SharedCalendar userId={MOCK_USER_ID} />
-        </Card>
+        </div>
 
         {/* Todo List Section - MOVED UNDERNEATH CALENDAR */}
         <div className="animate-fade-in-up animation-delay-600 mt-4">
