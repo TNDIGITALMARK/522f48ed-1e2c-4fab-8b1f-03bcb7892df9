@@ -263,7 +263,7 @@ export default function DashboardPage() {
 
           {/* Sleep Card - Light Sage Green with Sleep Stages Breakdown */}
           <Card
-            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer col-span-2"
+            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
             style={{ backgroundColor: 'hsl(100 25% 90%)', borderColor: 'hsl(100 20% 70%)' }}
             onClick={() => openMetricModal('sleep')}
           >
@@ -301,9 +301,9 @@ export default function DashboardPage() {
             </div>
           </Card>
 
-          {/* Workout Card - White/Black */}
+          {/* Workout Card - White/Black - Long Rectangle */}
           <Card
-            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
+            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer col-span-2"
             style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
             onClick={() => openMetricModal('workout')}
           >
