@@ -22,6 +22,7 @@ import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
 import { DailyAspiration } from '@/components/daily-aspiration';
+import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -276,6 +277,11 @@ export default function DashboardPage() {
         {/* Swipeable Sleep Tracker Section */}
         <div className="animate-fade-in-up animation-delay-1400 mt-4">
           <SwipeableSleepTracker />
+        </div>
+
+        {/* Homepage Customizer Button - At Bottom */}
+        <div className="animate-fade-in-up animation-delay-1600 mt-6 mb-8">
+          <HomepageCustomizerButton />
         </div>
 
         {/* Metric Insights/Edit Modal */}
