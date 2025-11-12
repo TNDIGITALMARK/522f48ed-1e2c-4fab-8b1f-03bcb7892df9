@@ -208,8 +208,8 @@ export default function DashboardPage() {
         </div>
 
 
-        {/* Health Metrics Grid - 4 Interactive Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-scale animation-delay-1000 mt-4">
+        {/* Health Metrics Grid - 3 Centered Interactive Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-fade-in-scale animation-delay-1000 mt-4 max-w-5xl mx-auto">
           {/* Hydration Card - Blue */}
           <Card
             className="glass-card card-marble group hover:scale-105 transition-all duration-300 cursor-pointer"
@@ -286,7 +286,7 @@ export default function DashboardPage() {
           </Card>
 
           {/* Workout Card - Full Width Skinny Rectangle with Arrow */}
-          <Link href="/workout" className="col-span-2 md:col-span-4">
+          <Link href="/workout" className="col-span-2 md:col-span-3">
             <Card
               className="glass-card group hover:scale-[1.02] transition-all duration-300 cursor-pointer h-[140px]"
               style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
