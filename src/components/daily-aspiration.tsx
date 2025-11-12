@@ -109,53 +109,44 @@ export function DailyAspiration({ userId }: DailyAspirationProps) {
   };
 
   return (
-    <Card className="glass-card bg-gradient-to-br from-accent/5 via-primary/5 to-secondary/5 border-primary/20 overflow-hidden relative">
-      {/* Decorative background elements */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-
-      <div className="relative z-10">
-        {/* Aspiration Content - Simplified */}
-        {isEditing ? (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold mb-4">Daily Aspiration:</h3>
-            <textarea
-              value={customText}
-              onChange={(e) => setCustomText(e.target.value)}
-              placeholder="Write your personal aspiration for today..."
-              className="w-full min-h-[100px] p-4 rounded-xl border border-border bg-card/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none font-serif text-lg"
-              autoFocus
-            />
-            <div className="flex items-center gap-2">
-              <Button
-                onClick={handleSaveCustom}
-                disabled={!customText.trim()}
-                className="rounded-full"
-              >
-                <Check className="w-4 h-4 mr-2" />
-                Save Aspiration
-              </Button>
-              <Button
-                variant="ghost"
-                onClick={handleCancelEdit}
-                className="rounded-full"
-              >
-                Cancel
-              </Button>
-            </div>
+    <div className="py-4">
+      {/* Aspiration Content - No Card Wrapper */}
+      {isEditing ? (
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold mb-4">Daily Aspiration:</h3>
+          <textarea
+            value={customText}
+            onChange={(e) => setCustomText(e.target.value)}
+            placeholder="Write your personal aspiration for today..."
+            className="w-full min-h-[100px] p-4 rounded-xl border border-border bg-card/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none font-serif text-lg"
+            autoFocus
+          />
+          <div className="flex items-center gap-2">
+            <Button
+              onClick={handleSaveCustom}
+              disabled={!customText.trim()}
+              className="rounded-full"
+            >
+              <Check className="w-4 h-4 mr-2" />
+              Save Aspiration
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={handleCancelEdit}
+              className="rounded-full"
+            >
+              Cancel
+            </Button>
           </div>
-        ) : (
-          <>
-            {/* Daily Aspiration Display */}
-            <div className="space-y-3">
-              <h3 className="text-lg font-semibold">Daily Aspiration:</h3>
-              <blockquote className="text-xl md:text-2xl font-serif italic leading-relaxed text-foreground/90">
-                "{aspiration}"
-              </blockquote>
-            </div>
-          </>
-        )}
-      </div>
-    </Card>
+        </div>
+      ) : (
+        <>
+          {/* Daily Aspiration Display - Just the text */}
+          <blockquote className="text-xl md:text-2xl font-serif italic leading-relaxed text-foreground/90 text-center">
+            "{aspiration}"
+          </blockquote>
+        </>
+      )}
+    </div>
   );
 }

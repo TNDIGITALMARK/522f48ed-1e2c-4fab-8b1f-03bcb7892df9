@@ -150,9 +150,9 @@ export default function DashboardPage() {
         </div>
 
         {/* Cycle Phase Banner - Rearranged Layout */}
-        <div className="bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6">
+        <div className="overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
           {/* Animated background gradient pulse */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-slow" />
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(100 18% 65% / 0.05)' }} />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
             <BloomingFlower size={120} duration={3000} delay={1500} />
           </div>
@@ -185,9 +185,9 @@ export default function DashboardPage() {
           </div>
 
           {/* Log a Symptom Button */}
-          <div className="relative z-10 mt-6 -mx-6 p-6 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 border-t border-primary/10">
+          <div className="relative z-10 mt-6 -mx-6 p-6 border-t" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)', borderTopColor: 'hsl(100 18% 65% / 0.1)' }}>
             <Link href="/log-symptom">
-              <Button className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white shadow-bloom">
+              <Button className="w-full rounded-full text-white shadow-bloom" style={{ backgroundColor: 'hsl(100 18% 65%)' }}>
                 <Plus className="mr-2 w-5 h-5" />
                 Log a Symptom
               </Button>

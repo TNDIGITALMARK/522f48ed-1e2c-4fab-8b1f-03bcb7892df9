@@ -125,9 +125,10 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
         {displayedEvents.map(event => (
           <div
             key={event.id}
-            className="flex items-center gap-4 p-4 rounded-xl bg-accent/10 border border-accent/20 transition-colors"
+            className="flex items-center gap-4 p-4 rounded-xl border transition-colors"
+            style={{ backgroundColor: 'hsl(100 18% 65% / 0.1)', borderColor: 'hsl(100 18% 65% / 0.2)' }}
           >
-            <CalendarIcon className="w-6 h-6 text-accent flex-shrink-0" />
+            <CalendarIcon className="w-6 h-6 flex-shrink-0" style={{ color: 'hsl(100 18% 45%)' }} />
             <div className="flex-1">
               <span className="text-base font-medium">
                 {event.title}
@@ -140,7 +141,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
                     <span>{formatEventTime(event.startDatetime)}</span>
                   </>
                 )}
-                <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">
+                <span className="ml-2 px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'hsl(100 18% 65% / 0.2)', color: 'hsl(100 18% 35%)' }}>
                   {event.eventType}
                 </span>
               </div>
