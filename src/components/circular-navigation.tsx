@@ -86,20 +86,47 @@ export function CircularNavigation() {
     `;
   };
 
-  // Calculate text position and rotation for curved labels
-  const getTextPosition = (startAngle: number, endAngle: number) => {
+  // Create a circular path for curved text
+  const createTextPath = (startAngle: number, endAngle: number, id: string) => {
     const midAngle = (startAngle + endAngle) / 2;
-    const textRadius = radius + strokeWidth / 2 + 45; // Increased distance from circle
-    const x = center + textRadius * Math.cos((midAngle * Math.PI) / 180);
-    const y = center + textRadius * Math.sin((midAngle * Math.PI) / 180);
+    const textRadius = radius + strokeWidth / 2 + 45; // Distance from circle center
 
-    // Adjust rotation so text is always readable
-    let rotation = midAngle;
-    if (rotation > 90 && rotation < 270) {
-      rotation += 180;
+    // Determine if text should be on the bottom half (flip the path)
+    const isBottomHalf = midAngle > 90 && midAngle < 270;
+
+    // Create an arc path for the text to follow
+    // If bottom half, reverse the arc direction so text reads correctly
+    let pathStartAngle, pathEndAngle;
+
+    if (isBottomHalf) {
+      // For bottom half, create path from right to left so text reads upright
+      pathStartAngle = startAngle + (endAngle - startAngle) * 0.9; // Start near end
+      pathEndAngle = startAngle + (endAngle - startAngle) * 0.1; // End near start
+    } else {
+      // For top half, create path from left to right
+      pathStartAngle = startAngle + (endAngle - startAngle) * 0.1;
+      pathEndAngle = startAngle + (endAngle - startAngle) * 0.9;
     }
 
-    return { x, y, rotation };
+    const startRad = (pathStartAngle * Math.PI) / 180;
+    const endRad = (pathEndAngle * Math.PI) / 180;
+
+    const x1 = center + textRadius * Math.cos(startRad);
+    const y1 = center + textRadius * Math.sin(startRad);
+    const x2 = center + textRadius * Math.cos(endRad);
+    const y2 = center + textRadius * Math.sin(endRad);
+
+    // Calculate if we need a large arc
+    const angleDiff = isBottomHalf
+      ? pathStartAngle - pathEndAngle
+      : pathEndAngle - pathStartAngle;
+    const largeArc = Math.abs(angleDiff) > 180 ? 1 : 0;
+    const sweepFlag = isBottomHalf ? 0 : 1;
+
+    return {
+      path: `M ${x1} ${y1} A ${textRadius} ${textRadius} 0 ${largeArc} ${sweepFlag} ${x2} ${y2}`,
+      id: `text-path-${id}`,
+    };
   };
 
   return (
@@ -148,6 +175,21 @@ export function CircularNavigation() {
             </radialGradient>
           </defs>
 
+          {/* Define text paths for curved labels */}
+          <defs>
+            {segments.map((segment) => {
+              const textPathData = createTextPath(segment.startAngle, segment.endAngle, segment.label);
+              return (
+                <path
+                  key={textPathData.id}
+                  id={textPathData.id}
+                  d={textPathData.path}
+                  fill="none"
+                />
+              );
+            })}
+          </defs>
+
           <g transform={`translate(90, 90)`}>
             {/* Shadow layer for depth - multiple shadows for 3D effect */}
             {segments.map((segment) => (
@@ -166,7 +208,7 @@ export function CircularNavigation() {
 
             {segments.map((segment) => {
               const isHovered = hoveredSegment === segment.label;
-              const textPos = getTextPosition(segment.startAngle, segment.endAngle);
+              const textPathData = createTextPath(segment.startAngle, segment.endAngle, segment.label);
 
               return (
                 <g key={segment.label}>
@@ -202,13 +244,8 @@ export function CircularNavigation() {
                     }}
                   />
 
-                  {/* Enhanced text label with stroke for visibility */}
+                  {/* Curved text label using textPath */}
                   <text
-                    x={textPos.x}
-                    y={textPos.y}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    transform={`rotate(${textPos.rotation}, ${textPos.x}, ${textPos.y})`}
                     className="font-['Cormorant_Garamond'] font-bold pointer-events-none select-none"
                     style={{
                       fill: 'hsl(25, 11%, 21%)', // Dark brown for high contrast
@@ -222,7 +259,13 @@ export function CircularNavigation() {
                       strokeLinejoin: 'round',
                     }}
                   >
-                    {segment.label}
+                    <textPath
+                      href={`#${textPathData.id}`}
+                      startOffset="50%"
+                      textAnchor="middle"
+                    >
+                      {segment.label}
+                    </textPath>
                   </text>
                 </g>
               );
