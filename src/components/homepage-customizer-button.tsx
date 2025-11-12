@@ -31,9 +31,8 @@ export function HomepageCustomizerButton() {
               <Settings className="w-7 h-7 text-primary group-hover:rotate-90 transition-transform duration-300" />
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-1">Customize Your Homepage</h3>
-              <p className="text-sm text-muted-foreground">
-                Personalize your dashboard layout, widgets, and appearance
+              <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70">
+                Customize your homepage
               </p>
             </div>
           </div>
