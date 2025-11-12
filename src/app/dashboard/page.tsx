@@ -20,7 +20,6 @@ import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
 import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
-import { SwipeableSleepTracker } from '@/components/swipeable-sleep-tracker';
 import { DailyAspiration } from '@/components/daily-aspiration';
 import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
 import Link from 'next/link';
@@ -261,7 +260,7 @@ export default function DashboardPage() {
             </div>
           </Card>
 
-          {/* Sleep Card - Light Sage Green with Sleep Stages Breakdown */}
+          {/* Sleep Card - Light Sage Green - Consolidated */}
           <Card
             className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
             style={{ backgroundColor: 'hsl(100 25% 90%)', borderColor: 'hsl(100 20% 70%)' }}
@@ -269,7 +268,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between mb-4">
               <div>
-                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(100 25% 35%)' }}>Last Night's Sleep</p>
+                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(100 25% 35%)' }}>Sleep</p>
                 <p className="text-3xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>
                   {userData.sleepHours.toFixed(1)}h
                 </p>
@@ -278,58 +277,46 @@ export default function DashboardPage() {
                 <Moon className="w-7 h-7" style={{ color: 'hsl(100 35% 40%)' }} />
               </div>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2">
               <Progress value={(userData.sleepHours / 8) * 100} className="h-2" />
+              <p className="text-xs" style={{ color: 'hsl(100 20% 40%)' }}>
+                of 8h goal
+              </p>
+            </div>
+          </Card>
 
-              {/* Sleep Stages Breakdown */}
-              <div className="grid grid-cols-4 gap-2 pt-2">
-                {sleepStages.map((stage) => (
-                  <div key={stage.id} className="text-center">
-                    <p className="text-xs font-medium mb-1" style={{ color: 'hsl(100 25% 35%)' }}>
-                      {stage.stage.split(' ')[0]}
+          {/* Workout Card - Full Width Skinny Rectangle with Arrow */}
+          <Link href="/workout" className="col-span-2 md:col-span-4">
+            <Card
+              className="glass-card group hover:scale-[1.02] transition-all duration-300 cursor-pointer h-[140px]"
+              style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
+            >
+              <div className="flex items-center justify-between h-full">
+                <div className="flex items-center gap-6">
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
+                    <Dumbbell className="w-8 h-8" style={{ color: 'hsl(0 0% 20%)' }} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium mb-2" style={{ color: 'hsl(0 0% 30%)' }}>Workout</p>
+                    <p className="text-4xl font-bold mb-2" style={{ color: 'hsl(0 0% 10%)' }}>
+                      3<span className="text-2xl opacity-70">/5</span>
                     </p>
-                    <p className="text-lg font-bold" style={{ color: 'hsl(100 30% 25%)' }}>
-                      {stage.duration}h
+                    <p className="text-sm" style={{ color: 'hsl(0 0% 45%)' }}>
+                      2 sessions this week
                     </p>
                   </div>
-                ))}
+                </div>
+                <div className="flex items-center gap-4 pr-4">
+                  <div className="hidden md:block w-48">
+                    <Progress value={60} className="h-3" />
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                    <ArrowRight className="w-6 h-6" style={{ color: 'hsl(0 0% 20%)' }} />
+                  </div>
+                </div>
               </div>
-
-              <p className="text-xs text-center pt-1" style={{ color: 'hsl(100 20% 40%)' }}>
-                Tap for detailed breakdown
-              </p>
-            </div>
-          </Card>
-
-          {/* Workout Card - White/Black - Long Rectangle */}
-          <Card
-            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer col-span-2"
-            style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
-            onClick={() => openMetricModal('workout')}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(0 0% 30%)' }}>Workout</p>
-                <p className="text-3xl font-bold" style={{ color: 'hsl(0 0% 10%)' }}>
-                  3<span className="text-lg opacity-70">/5</span>
-                </p>
-              </div>
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
-                <Dumbbell className="w-7 h-7" style={{ color: 'hsl(0 0% 20%)' }} />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Progress value={60} className="h-2" />
-              <p className="text-xs" style={{ color: 'hsl(0 0% 45%)' }}>
-                2 sessions this week
-              </p>
-            </div>
-          </Card>
-        </div>
-
-        {/* Swipeable Sleep Tracker Section */}
-        <div className="animate-fade-in-up animation-delay-1400 mt-4">
-          <SwipeableSleepTracker />
+            </Card>
+          </Link>
         </div>
 
         {/* Homepage Customizer Button - At Bottom */}
@@ -421,60 +408,94 @@ export default function DashboardPage() {
               )}
 
               {selectedMetric === 'sleep' && (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="max-h-[80vh] overflow-y-auto">
+                  <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 80%)' }}>
                       <Moon className="w-6 h-6" style={{ color: 'hsl(100 35% 40%)' }} />
                     </div>
-                    <h3 className="text-2xl font-bold">Sleep Insights</h3>
-                  </div>
-                  <div className="space-y-4">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-2">Total Sleep</p>
-                      <p className="text-3xl font-bold" style={{ color: 'hsl(100 35% 35%)' }}>
-                        {userData.sleepHours.toFixed(1)} hours
+                      <h3 className="text-2xl font-bold">Sleep Insights</h3>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
                       </p>
-                      <p className="text-xs text-muted-foreground mt-1">Goal: 8.0 hours</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-5">
+                    {/* Total Sleep Summary */}
+                    <div className="p-4 rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Total Sleep</p>
+                          <p className="text-4xl font-bold" style={{ color: 'hsl(100 35% 35%)' }}>
+                            {userData.sleepHours.toFixed(1)}h
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-muted-foreground">Goal</p>
+                          <p className="text-2xl font-semibold">8.0h</p>
+                        </div>
+                      </div>
+                      <Progress value={(userData.sleepHours / 8) * 100} className="h-3 mb-2" />
+                      <p className="text-sm text-muted-foreground">
+                        {userData.sleepHours >= 7.5
+                          ? '🎉 Excellent sleep! You hit your goal!'
+                          : userData.sleepHours >= 7
+                          ? '✨ Great sleep! Almost at your goal'
+                          : userData.sleepHours >= 6
+                          ? '💤 Good rest, but could be better'
+                          : '😴 Try to get more rest tonight'}
+                      </p>
                     </div>
 
                     {/* Sleep Stages Breakdown */}
                     <div>
-                      <p className="text-sm font-medium mb-3">Sleep Stages Breakdown</p>
+                      <h4 className="text-lg font-semibold mb-3">Sleep Stages</h4>
                       <div className="space-y-3">
                         {sleepStages.map((stage) => (
-                          <div key={stage.id} className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: 'hsl(100 30% 95%)' }}>
-                            <div className="flex items-center gap-3">
-                              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 85%)' }}>
-                                <span className="text-lg">
-                                  {stage.icon === 'moon' && '🌙'}
-                                  {stage.icon === 'star' && '⭐'}
-                                  {stage.icon === 'cloud-moon' && '☁️'}
-                                  {stage.icon === 'sun' && '☀️'}
-                                </span>
+                          <div key={stage.id} className="p-4 rounded-xl border border-border/50 bg-card/50 hover:border-primary/30 transition-colors">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 85%)' }}>
+                                  <span className="text-2xl">
+                                    {stage.icon === 'moon' && '🌙'}
+                                    {stage.icon === 'star' && '⭐'}
+                                    {stage.icon === 'cloud-moon' && '☁️'}
+                                    {stage.icon === 'sun' && '☀️'}
+                                  </span>
+                                </div>
+                                <div>
+                                  <p className="font-semibold text-base">{stage.stage}</p>
+                                  <p className="text-xs text-muted-foreground capitalize">{stage.quality} quality</p>
+                                </div>
                               </div>
-                              <div>
-                                <p className="text-sm font-medium">{stage.stage}</p>
-                                <p className="text-xs text-muted-foreground capitalize">{stage.quality} quality</p>
+                              <div className="text-right">
+                                <p className="text-2xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>{stage.duration}h</p>
+                                <p className="text-xs text-muted-foreground">{((stage.duration / totalSleep) * 100).toFixed(0)}% of total</p>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className="text-xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>{stage.duration}h</p>
-                              <p className="text-xs text-muted-foreground">{((stage.duration / totalSleep) * 100).toFixed(0)}%</p>
-                            </div>
+                            <Progress
+                              value={(stage.duration / totalSleep) * 100}
+                              className="h-2"
+                            />
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg" style={{ backgroundColor: 'hsl(100 30% 95%)' }}>
-                      <p className="text-sm font-medium mb-2">💡 Insight</p>
-                      <p className="text-sm text-muted-foreground">
+                    {/* Sleep Insight */}
+                    <div className="p-4 rounded-xl" style={{ backgroundColor: 'hsl(100 30% 95%)' }}>
+                      <p className="text-sm font-semibold mb-2 flex items-center gap-2">
+                        <span>💡</span> Sleep Quality Analysis
+                      </p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
                         {userData.sleepHours >= 7
-                          ? 'Excellent! You got quality rest with good distribution across all sleep stages. Your deep sleep and REM are both on target.'
-                          : `Try to get ${(8 - userData.sleepHours).toFixed(1)} more hours tonight for optimal recovery across all sleep stages.`}
+                          ? 'Excellent! You got quality rest with good distribution across all sleep stages. Your deep sleep (2.3h) and REM (1.8h) are both on target for optimal recovery and cognitive function.'
+                          : `Try to get ${(8 - userData.sleepHours).toFixed(1)} more hours tonight for optimal recovery across all sleep stages. Aim for at least 1.5-2 hours each of deep sleep and REM sleep.`}
                       </p>
                     </div>
-                    <Button className="w-full">View Full Sleep Analysis</Button>
+
+                    <Button className="w-full" onClick={closeModal}>Close</Button>
                   </div>
                 </div>
               )}
