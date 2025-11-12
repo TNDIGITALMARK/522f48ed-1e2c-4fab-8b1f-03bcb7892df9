@@ -1,17 +1,18 @@
 "use client";
 
 import React from 'react';
+import { Card } from '@/components/ui/card';
 
 /**
  * Rooted Balance Circle Component
  *
- * A circular diagram showing the "smart cycle" phases with a full-screen
- * rectangle background and "Rooted Balance" title in the left corner.
+ * A circular diagram showing the "smart cycle" phases in a rectangular card
+ * that matches the height and styling of the todo list.
  *
  * Design features:
  * - Circular diagram divided into colored sections (sage green, navy, brown, beige, dark green)
  * - "smart cycle" text in center (replacing "circle" with "cycle")
- * - Full-screen rectangle background with reduced opacity
+ * - Rectangle card background with reduced opacity
  * - Small "Rooted Balance" title in left corner
  * - Uses exact colors from the rooted color palette
  */
@@ -70,18 +71,18 @@ export function RootedBalanceCircle() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      {/* Full-screen rectangle background with reduced opacity */}
+    <Card className="bloom-card relative overflow-hidden">
+      {/* Rectangle background with reduced opacity - height adjusted to match todo list card */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
           backgroundColor: colors.sage,
-          opacity: 0.15, // Reduced opacity
+          opacity: 0.1, // Subtle background tint
         }}
       />
 
       {/* Rooted Balance title in small font in left corner */}
-      <div className="absolute top-8 left-8 z-20">
+      <div className="absolute top-6 left-6 z-20">
         <h2
           className="text-sm font-light tracking-widest uppercase"
           style={{
@@ -95,13 +96,13 @@ export function RootedBalanceCircle() {
       </div>
 
       {/* Center the circle */}
-      <div className="relative z-10 flex items-center justify-center h-full">
+      <div className="relative z-10 flex items-center justify-center py-8 px-6 min-h-[450px] sm:min-h-[500px]">
         <div className="relative">
           <svg
             width="400"
             height="400"
             viewBox="0 0 400 400"
-            className="drop-shadow-lg"
+            className="drop-shadow-lg max-w-full h-auto"
           >
             {/* Draw each section */}
             {sections.map((section, index) => (
@@ -185,6 +186,6 @@ export function RootedBalanceCircle() {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

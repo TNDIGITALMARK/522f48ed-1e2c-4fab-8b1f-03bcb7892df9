@@ -173,8 +173,10 @@ export default function HomePage() {
       </section>
 
       {/* Rooted Balance Circle Section */}
-      <section className="relative">
-        <RootedBalanceCircle />
+      <section className="relative section-spacing bg-textile-beige">
+        <div className="max-w-6xl mx-auto px-6">
+          <RootedBalanceCircle />
+        </div>
       </section>
 
       {/* Features Section */}
