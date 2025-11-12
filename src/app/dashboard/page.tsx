@@ -22,6 +22,7 @@ import { BloomingFlower } from '@/components/blooming-flower';
 import { HormoneWave3D } from '@/components/hormone-wave-3d';
 import { DailyAspiration } from '@/components/daily-aspiration';
 import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
+import { CircularNavigation } from '@/components/circular-navigation';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -208,115 +209,9 @@ export default function DashboardPage() {
         </div>
 
 
-        {/* Health Metrics Grid - 3 Centered Interactive Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-fade-in-scale animation-delay-1000 mt-4 max-w-5xl mx-auto">
-          {/* Hydration Card - Blue */}
-          <Card
-            className="glass-card card-marble group hover:scale-105 transition-all duration-300 cursor-pointer"
-            style={{ backgroundColor: 'hsl(210 100% 92%)', borderColor: 'hsl(210 80% 75%)' }}
-            onClick={() => openMetricModal('hydration')}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(210 60% 40%)' }}>Hydration</p>
-                <p className="text-3xl font-bold" style={{ color: 'hsl(210 80% 30%)' }}>
-                  {userData.water.completed}<span className="text-lg opacity-70">/{userData.water.goal}</span>
-                </p>
-              </div>
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(210 100% 85%)' }}>
-                <Droplets className="w-7 h-7" style={{ color: 'hsl(210 90% 45%)' }} />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Progress value={(userData.water.completed / userData.water.goal) * 100} className="h-2" />
-              <p className="text-xs" style={{ color: 'hsl(210 40% 50%)' }}>
-                {userData.water.goal - userData.water.completed} glasses remaining
-              </p>
-            </div>
-          </Card>
-
-          {/* Steps Card - Brown */}
-          <Card
-            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
-            style={{ backgroundColor: 'hsl(25 30% 90%)', borderColor: 'hsl(25 25% 70%)' }}
-            onClick={() => openMetricModal('steps')}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(25 25% 35%)' }}>Steps</p>
-                <p className="text-3xl font-bold" style={{ color: 'hsl(25 30% 25%)' }}>
-                  {(userData.steps.completed / 1000).toFixed(1)}k
-                </p>
-              </div>
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(25 35% 80%)' }}>
-                <Footprints className="w-7 h-7" style={{ color: 'hsl(25 40% 40%)' }} />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Progress value={(userData.steps.completed / userData.steps.goal) * 100} className="h-2" />
-              <p className="text-xs" style={{ color: 'hsl(25 20% 45%)' }}>
-                {((userData.steps.goal - userData.steps.completed) / 1000).toFixed(1)}k to goal
-              </p>
-            </div>
-          </Card>
-
-          {/* Sleep Card - Light Sage Green - Consolidated */}
-          <Card
-            className="glass-card group hover:scale-105 transition-all duration-300 cursor-pointer"
-            style={{ backgroundColor: 'hsl(100 25% 90%)', borderColor: 'hsl(100 20% 70%)' }}
-            onClick={() => openMetricModal('sleep')}
-          >
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm font-medium mb-1" style={{ color: 'hsl(100 25% 35%)' }}>Sleep</p>
-                <p className="text-3xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>
-                  {userData.sleepHours.toFixed(1)}h
-                </p>
-              </div>
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 80%)' }}>
-                <Moon className="w-7 h-7" style={{ color: 'hsl(100 35% 40%)' }} />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Progress value={(userData.sleepHours / 8) * 100} className="h-2" />
-              <p className="text-xs" style={{ color: 'hsl(100 20% 40%)' }}>
-                of 8h goal
-              </p>
-            </div>
-          </Card>
-
-          {/* Workout Card - Full Width Skinny Rectangle with Arrow */}
-          <Link href="/workout" className="col-span-2 md:col-span-3">
-            <Card
-              className="glass-card group hover:scale-[1.02] transition-all duration-300 cursor-pointer h-[140px]"
-              style={{ backgroundColor: 'hsl(0 0% 98%)', borderColor: 'hsl(0 0% 85%)' }}
-            >
-              <div className="flex items-center justify-between h-full">
-                <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
-                    <Dumbbell className="w-8 h-8" style={{ color: 'hsl(0 0% 20%)' }} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium mb-2" style={{ color: 'hsl(0 0% 30%)' }}>Workout</p>
-                    <p className="text-4xl font-bold mb-2" style={{ color: 'hsl(0 0% 10%)' }}>
-                      3<span className="text-2xl opacity-70">/5</span>
-                    </p>
-                    <p className="text-sm" style={{ color: 'hsl(0 0% 45%)' }}>
-                      2 sessions this week
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 pr-4">
-                  <div className="hidden md:block w-48">
-                    <Progress value={60} className="h-3" />
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                    <ArrowRight className="w-6 h-6" style={{ color: 'hsl(0 0% 20%)' }} />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </Link>
+        {/* Circular Navigation - Replacing Health Metrics Grid */}
+        <div className="animate-fade-in-scale animation-delay-1000 mt-4">
+          <CircularNavigation />
         </div>
 
         {/* Homepage Customizer Button - At Bottom */}
