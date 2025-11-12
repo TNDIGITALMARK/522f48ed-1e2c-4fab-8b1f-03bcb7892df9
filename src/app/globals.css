@@ -896,7 +896,7 @@ label {
   --event-personal: 345 35% 88%; /* Soft rose for personal time */
 
   /* Calendar container - light cream white with more opacity */
-  --calendar-container-bg: 38 55% 92%; /* More opaque warm cream - more visible than page background */
+  --calendar-container-bg: 38 65% 96%; /* Very light off-white cream - lighter than page background */
 }
 
 /* Calendar container styling - more opaque cream with soft shadow */
@@ -929,7 +929,7 @@ label {
   min-height: 48px;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 1.5px solid hsl(var(--border));
+  border: 1.5px solid hsl(var(--foreground) / 0.6); /* Use foreground color (same as month title) */
   background: hsl(var(--calendar-container-bg)); /* Match calendar container color */
   cursor: pointer;
   transition: all 0.15s ease;
@@ -972,22 +972,22 @@ label {
 /* Period phase indicators */
 .calendar-day.menstruation {
   background: linear-gradient(135deg, hsl(var(--cycle-menstruation)) 0%, hsl(var(--cycle-menstruation) / 0.5) 100%);
-  border-color: hsl(345 50% 75%);
+  border-color: hsl(var(--foreground) / 0.6); /* Use foreground color */
 }
 
 .calendar-day.follicular {
   background: linear-gradient(135deg, hsl(var(--cycle-follicular)) 0%, hsl(var(--cycle-follicular) / 0.5) 100%);
-  border-color: hsl(280 45% 70%);
+  border-color: hsl(var(--foreground) / 0.6); /* Use foreground color */
 }
 
 .calendar-day.ovulation {
   background: linear-gradient(135deg, hsl(var(--cycle-ovulation)) 0%, hsl(var(--cycle-ovulation) / 0.5) 100%);
-  border-color: hsl(135 25% 70%);
+  border-color: hsl(var(--foreground) / 0.6); /* Use foreground color */
 }
 
 .calendar-day.luteal {
   background: linear-gradient(135deg, hsl(var(--cycle-luteal)) 0%, hsl(var(--cycle-luteal) / 0.5) 100%);
-  border-color: hsl(15 70% 80%);
+  border-color: hsl(var(--foreground) / 0.6); /* Use foreground color */
 }
 
 /* Event dots indicator */
@@ -1079,7 +1079,7 @@ label {
   width: 20px;
   height: 20px;
   border-radius: 0.5rem;
-  border: 2px solid hsl(var(--border));
+  border: 2px solid hsl(var(--foreground) / 0.6); /* Use foreground color */
 }
 
 /* Event modal styling */
