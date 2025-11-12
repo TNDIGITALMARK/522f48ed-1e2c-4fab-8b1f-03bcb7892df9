@@ -39,7 +39,7 @@ export function CircularNavigation() {
       endAngle: 45,
     },
     {
-      label: 'Circle',
+      label: 'Cycle',
       href: '/cycle',
       color: 'hsl(250 25% 60%)', // Purple/lavender
       startAngle: 225,
@@ -86,27 +86,15 @@ export function CircularNavigation() {
     `;
   };
 
-  // Create a circular path for curved text
+  // Create a circular path for curved text - all text facing the same direction (horizontal/upright)
   const createTextPath = (startAngle: number, endAngle: number, id: string) => {
     const midAngle = (startAngle + endAngle) / 2;
     const textRadius = radius + strokeWidth / 2 + 45; // Distance from circle center
 
-    // Determine if text should be on the bottom half (flip the path)
-    const isBottomHalf = midAngle > 90 && midAngle < 270;
-
-    // Create an arc path for the text to follow
-    // If bottom half, reverse the arc direction so text reads correctly
-    let pathStartAngle, pathEndAngle;
-
-    if (isBottomHalf) {
-      // For bottom half, create path from right to left so text reads upright
-      pathStartAngle = startAngle + (endAngle - startAngle) * 0.9; // Start near end
-      pathEndAngle = startAngle + (endAngle - startAngle) * 0.1; // End near start
-    } else {
-      // For top half, create path from left to right
-      pathStartAngle = startAngle + (endAngle - startAngle) * 0.1;
-      pathEndAngle = startAngle + (endAngle - startAngle) * 0.9;
-    }
+    // All text will read left-to-right in a horizontal orientation
+    // Create path from left to right for all segments
+    const pathStartAngle = startAngle + (endAngle - startAngle) * 0.1;
+    const pathEndAngle = startAngle + (endAngle - startAngle) * 0.9;
 
     const startRad = (pathStartAngle * Math.PI) / 180;
     const endRad = (pathEndAngle * Math.PI) / 180;
@@ -117,11 +105,9 @@ export function CircularNavigation() {
     const y2 = center + textRadius * Math.sin(endRad);
 
     // Calculate if we need a large arc
-    const angleDiff = isBottomHalf
-      ? pathStartAngle - pathEndAngle
-      : pathEndAngle - pathStartAngle;
+    const angleDiff = pathEndAngle - pathStartAngle;
     const largeArc = Math.abs(angleDiff) > 180 ? 1 : 0;
-    const sweepFlag = isBottomHalf ? 0 : 1;
+    const sweepFlag = 1; // Always sweep clockwise for consistent text direction
 
     return {
       path: `M ${x1} ${y1} A ${textRadius} ${textRadius} 0 ${largeArc} ${sweepFlag} ${x2} ${y2}`,

@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { CheckCircle2, Circle, Plus, ChevronDown, ChevronUp, Target } from 'lucide-react';
+import { CheckCircle2, Circle, Plus, ChevronDown, ChevronUp, Target, Calendar as CalendarIcon } from 'lucide-react';
 import {
   getUserGoals,
   getActiveGoals,
@@ -16,6 +16,11 @@ import {
   GOAL_TEMPLATES,
   type Goal
 } from '@/lib/goals-store';
+import {
+  getWeekEvents,
+  subscribeToEvents,
+  type CalendarEvent
+} from '@/lib/calendar-events-store';
 
 interface GoalsTodoListProps {
   userId: string;
@@ -23,20 +28,31 @@ interface GoalsTodoListProps {
 
 export function GoalsTodoList({ userId }: GoalsTodoListProps) {
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [weekEvents, setWeekEvents] = useState<CalendarEvent[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
   const [customGoalTitle, setCustomGoalTitle] = useState('');
 
-  // Load goals
+  // Load goals and week's calendar events
   useEffect(() => {
     const loadedGoals = getActiveGoals(userId);
     setGoals(loadedGoals);
 
-    const unsubscribe = subscribeToGoals(userId, (allGoals) => {
+    const loadedWeekEvents = getWeekEvents(userId);
+    setWeekEvents(loadedWeekEvents);
+
+    const unsubscribeGoals = subscribeToGoals(userId, (allGoals) => {
       setGoals(allGoals.filter(g => !g.isCompleted));
     });
 
-    return unsubscribe;
+    const unsubscribeEvents = subscribeToEvents(userId, () => {
+      setWeekEvents(getWeekEvents(userId));
+    });
+
+    return () => {
+      unsubscribeGoals();
+      unsubscribeEvents();
+    };
   }, [userId]);
 
   const handleToggleGoal = (goalId: string) => {
@@ -60,9 +76,33 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
     setIsAddGoalOpen(false);
   };
 
-  // Show first 3 goals when collapsed
+  // Format event time
+  const formatEventTime = (datetime: string) => {
+    const date = new Date(datetime);
+    return date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+  };
+
+  // Format event date
+  const formatEventDate = (datetime: string) => {
+    const date = new Date(datetime);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    } else if (date.toDateString() === tomorrow.toDateString()) {
+      return 'Tomorrow';
+    } else {
+      return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+  };
+
+  // Show first 3 goals + all week events when collapsed
   const displayedGoals = isExpanded ? goals : goals.slice(0, 3);
-  const hasMoreGoals = goals.length > 3;
+  const displayedEvents = isExpanded ? weekEvents : weekEvents.slice(0, 5);
+  const hasMoreItems = goals.length > 3 || weekEvents.length > 5;
+  const totalItems = goals.length + weekEvents.length;
 
   return (
     <Card className="bloom-card">
@@ -81,6 +121,34 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
       </div>
 
       <div className="space-y-3">
+        {/* Week's Calendar Events */}
+        {displayedEvents.map(event => (
+          <div
+            key={event.id}
+            className="flex items-center gap-4 p-4 rounded-xl bg-accent/10 border border-accent/20 transition-colors"
+          >
+            <CalendarIcon className="w-6 h-6 text-accent flex-shrink-0" />
+            <div className="flex-1">
+              <span className="text-base font-medium">
+                {event.title}
+              </span>
+              <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
+                <span>{formatEventDate(event.startDatetime)}</span>
+                {!event.allDay && (
+                  <>
+                    <span>•</span>
+                    <span>{formatEventTime(event.startDatetime)}</span>
+                  </>
+                )}
+                <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-accent/20 text-accent">
+                  {event.eventType}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* Goals */}
         {displayedGoals.map(goal => (
           <div
             key={goal.id}
@@ -105,16 +173,16 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
           </div>
         ))}
 
-        {goals.length === 0 && (
+        {totalItems === 0 && (
           <div className="text-center py-12 text-muted-foreground">
             <Target className="w-12 h-12 mx-auto mb-3 opacity-50" />
-            <p className="text-lg">No goals yet</p>
-            <p className="text-sm">Add your first goal to get started!</p>
+            <p className="text-lg">No tasks or events yet</p>
+            <p className="text-sm">Add goals or schedule events to get started!</p>
           </div>
         )}
       </div>
 
-      {hasMoreGoals && (
+      {hasMoreItems && (
         <Button
           variant="ghost"
           className="w-full mt-4"
@@ -128,7 +196,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
           ) : (
             <>
               <ChevronDown className="w-4 h-4 mr-2" />
-              Show {goals.length - 3} More
+              Show {totalItems - 8} More
             </>
           )}
         </Button>

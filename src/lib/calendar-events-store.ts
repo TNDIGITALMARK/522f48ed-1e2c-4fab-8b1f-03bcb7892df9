@@ -181,3 +181,52 @@ export function getEventsByType(userId: string): Record<string, CalendarEvent[]>
 
   return grouped;
 }
+
+// Get today's upcoming events (smart curation for today's tasks)
+export function getTodaysUpcomingEvents(userId: string): CalendarEvent[] {
+  const now = new Date();
+  const todayStart = new Date(now);
+  todayStart.setHours(0, 0, 0, 0);
+  const todayEnd = new Date(now);
+  todayEnd.setHours(23, 59, 59, 999);
+
+  const events = getUserEvents(userId);
+
+  return events
+    .filter(event => {
+      const eventDate = new Date(event.startDatetime);
+      // Include today's events that haven't ended yet
+      return eventDate >= todayStart && eventDate <= todayEnd && eventDate >= now;
+    })
+    .sort((a, b) => new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime());
+}
+
+// Get this week's events (for todo list curation)
+export function getWeekEvents(userId: string): CalendarEvent[] {
+  const now = new Date();
+  const weekStart = new Date(now);
+  weekStart.setDate(now.getDate() - now.getDay()); // Start of week (Sunday)
+  weekStart.setHours(0, 0, 0, 0);
+
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekStart.getDate() + 7); // End of week
+  weekEnd.setHours(23, 59, 59, 999);
+
+  const events = getUserEvents(userId);
+
+  return events
+    .filter(event => {
+      const eventDate = new Date(event.startDatetime);
+      return eventDate >= weekStart && eventDate <= weekEnd;
+    })
+    .sort((a, b) => new Date(a.startDatetime).getTime() - new Date(b.startDatetime).getTime());
+}
+
+// Get upcoming events (appointments, due dates, etc.)
+export function getUpcomingEvents(userId: string, days: number = 7): CalendarEvent[] {
+  const now = new Date();
+  const futureDate = new Date(now);
+  futureDate.setDate(now.getDate() + days);
+
+  return getEventsInRange(userId, now, futureDate);
+}
