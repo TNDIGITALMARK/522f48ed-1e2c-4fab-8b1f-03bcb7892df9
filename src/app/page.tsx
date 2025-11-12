@@ -537,51 +537,6 @@ export default function HomePage() {
         </Card>
       </section>
 
-      {/* Footer */}
-      <footer className="texture-fabric textile-overlay-cream border-t-2 border-border py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight mb-4">
-                <span className="text-foreground italic">rooted</span>
-                <span className="text-sm text-muted-foreground font-light ml-2">
-                  by <span className="font-medium">Rooted</span>
-                </span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Empowering women through holistic wellness and self-care.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-primary transition-colors">About Us</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Blog</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Support</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-primary transition-colors">Help Center</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Privacy</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-3">Follow Us</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="#" className="hover:text-primary transition-colors">Instagram</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Facebook</Link></li>
-                <li><Link href="#" className="hover:text-primary transition-colors">Twitter</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border pt-6 text-center text-sm text-muted-foreground">
-            <p>© 2025 rooted. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
