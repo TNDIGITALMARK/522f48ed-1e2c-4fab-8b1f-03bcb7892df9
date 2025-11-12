@@ -7,8 +7,8 @@ export function RootedLogo({ className = "" }: { className?: string }) {
       <Image
         src="/rooted-logo.png"
         alt="rooted"
-        width={180}
-        height={60}
+        width={120}
+        height={40}
         className="object-contain"
         priority
       />
