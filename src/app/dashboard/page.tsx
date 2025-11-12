@@ -193,11 +193,6 @@ export default function DashboardPage() {
               </Button>
             </Link>
           </div>
-
-          {/* Daily Aspiration - MOVED INSIDE CYCLE PHASE CARD, BELOW CIRCLE */}
-          <div className="relative z-10 mt-6 -mx-6 px-6 pb-2">
-            <DailyAspiration userId={MOCK_USER_ID} />
-          </div>
         </div>
 
         {/* Smart Scanner Button - NEW: Above Calendar, Below Log a Symptom */}
@@ -220,6 +215,10 @@ export default function DashboardPage() {
           <GoalsTodoList userId={MOCK_USER_ID} />
         </div>
 
+        {/* Daily Aspiration - MOVED ABOVE CIRCULAR NAVIGATION, BELOW TODO LIST */}
+        <div className="animate-fade-in-up animation-delay-800 mt-4">
+          <DailyAspiration userId={MOCK_USER_ID} />
+        </div>
 
         {/* Circular Navigation - Replacing Health Metrics Grid */}
         <div className="animate-fade-in-scale animation-delay-1000 mt-4">
