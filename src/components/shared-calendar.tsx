@@ -270,19 +270,156 @@ export function SharedCalendar({ userId }: SharedCalendarProps) {
         })}
       </div>
 
-      {/* Event Legend */}
-      <div className="calendar-legend">
-        {Object.entries(EVENT_TYPE_CONFIG).map(([type, config]) => {
-          const Icon = config.icon;
-          return (
-            <div key={type} className="legend-item">
-              <div className="legend-color" style={{ backgroundColor: config.color }}>
-                <Icon className="w-3 h-3" style={{ margin: '3px auto' }} />
+      {/* Event Legend centered above Add Event button */}
+      <div className="flex flex-col items-center gap-3">
+        <div className="calendar-legend justify-center">
+          {Object.entries(EVENT_TYPE_CONFIG).map(([type, config]) => {
+            const Icon = config.icon;
+            return (
+              <div key={type} className="legend-item">
+                <div className="legend-color" style={{ backgroundColor: config.color }}>
+                  <Icon className="w-3 h-3" style={{ margin: '3px auto' }} />
+                </div>
+                <span>{config.label}</span>
               </div>
-              <span>{config.label}</span>
+            );
+          })}
+        </div>
+
+        {/* Add Event Button - centered below legend */}
+        <Dialog open={isAddEventOpen} onOpenChange={setIsAddEventOpen}>
+          <DialogTrigger asChild>
+            <Button className="w-full max-w-md" size="lg">
+              <Plus className="w-5 h-5 mr-2" />
+              Add Event
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px]">
+            <DialogHeader>
+              <DialogTitle>
+                Add Event
+                {selectedDate && ` - ${selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="event-title">Event Title *</Label>
+                <Input
+                  id="event-title"
+                  placeholder="e.g., Morning Run, Yoga Class"
+                  value={newEvent.title}
+                  onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="event-type">Event Type</Label>
+                <Select
+                  value={newEvent.eventType}
+                  onValueChange={(value) => {
+                    const eventType = value as CalendarEvent['eventType'];
+                    setNewEvent({
+                      ...newEvent,
+                      eventType,
+                      color: EVENT_TYPE_CONFIG[eventType].color
+                    });
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(EVENT_TYPE_CONFIG).map(([type, config]) => {
+                      const Icon = config.icon;
+                      return (
+                        <SelectItem key={type} value={type}>
+                          <div className="flex items-center gap-2">
+                            <Icon className="w-4 h-4" />
+                            {config.label}
+                          </div>
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Event Color</Label>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-6 gap-2">
+                    {PRESET_COLORS.map((colorOption) => (
+                      <button
+                        key={colorOption.value}
+                        type="button"
+                        className={`w-full aspect-square rounded-xl transition-all hover:scale-110 ${
+                          newEvent.color === colorOption.value
+                            ? 'ring-2 ring-primary ring-offset-2 scale-105'
+                            : 'hover:ring-2 hover:ring-muted-foreground/30'
+                        }`}
+                        style={{ backgroundColor: colorOption.value }}
+                        onClick={() => setNewEvent({ ...newEvent, color: colorOption.value })}
+                        title={colorOption.name}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Label htmlFor="custom-color" className="text-xs text-muted-foreground">
+                      Custom:
+                    </Label>
+                    <input
+                      id="custom-color"
+                      type="color"
+                      value={newEvent.color}
+                      onChange={(e) => setNewEvent({ ...newEvent, color: e.target.value })}
+                      className="w-12 h-8 rounded-lg border border-border cursor-pointer"
+                    />
+                    <span className="text-xs text-muted-foreground font-mono">
+                      {newEvent.color}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="event-time">Time</Label>
+                <Input
+                  id="event-time"
+                  type="time"
+                  value={newEvent.time}
+                  onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
+                  disabled={newEvent.allDay}
+                />
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    id="all-day"
+                    checked={newEvent.allDay}
+                    onChange={(e) => setNewEvent({ ...newEvent, allDay: e.target.checked })}
+                    className="rounded"
+                  />
+                  <Label htmlFor="all-day" className="cursor-pointer">All day event</Label>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="event-description">Description (optional)</Label>
+                <Textarea
+                  id="event-description"
+                  placeholder="Add details about this event..."
+                  rows={3}
+                  value={newEvent.description}
+                  onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
+                />
+              </div>
+
+              <Button className="w-full" onClick={handleAddEvent} disabled={!newEvent.title}>
+                <Plus className="w-4 h-4 mr-2" />
+                Add Event
+              </Button>
             </div>
-          );
-        })}
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Share Dialog */}
@@ -335,141 +472,6 @@ export function SharedCalendar({ userId }: SharedCalendarProps) {
                 <li>Coordinate schedules together</li>
               </ul>
             </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      {/* Add Event Dialog */}
-      <Dialog open={isAddEventOpen} onOpenChange={setIsAddEventOpen}>
-        <DialogTrigger asChild>
-          <Button className="w-full" size="lg">
-            <Plus className="w-5 h-5 mr-2" />
-            Add Event
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle>
-              Add Event
-              {selectedDate && ` - ${selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="event-title">Event Title *</Label>
-              <Input
-                id="event-title"
-                placeholder="e.g., Morning Run, Yoga Class"
-                value={newEvent.title}
-                onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="event-type">Event Type</Label>
-              <Select
-                value={newEvent.eventType}
-                onValueChange={(value) => {
-                  const eventType = value as CalendarEvent['eventType'];
-                  setNewEvent({
-                    ...newEvent,
-                    eventType,
-                    color: EVENT_TYPE_CONFIG[eventType].color
-                  });
-                }}
-              >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(EVENT_TYPE_CONFIG).map(([type, config]) => {
-                    const Icon = config.icon;
-                    return (
-                      <SelectItem key={type} value={type}>
-                        <div className="flex items-center gap-2">
-                          <Icon className="w-4 h-4" />
-                          {config.label}
-                        </div>
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Event Color</Label>
-              <div className="space-y-3">
-                <div className="grid grid-cols-6 gap-2">
-                  {PRESET_COLORS.map((colorOption) => (
-                    <button
-                      key={colorOption.value}
-                      type="button"
-                      className={`w-full aspect-square rounded-xl transition-all hover:scale-110 ${
-                        newEvent.color === colorOption.value
-                          ? 'ring-2 ring-primary ring-offset-2 scale-105'
-                          : 'hover:ring-2 hover:ring-muted-foreground/30'
-                      }`}
-                      style={{ backgroundColor: colorOption.value }}
-                      onClick={() => setNewEvent({ ...newEvent, color: colorOption.value })}
-                      title={colorOption.name}
-                    />
-                  ))}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Label htmlFor="custom-color" className="text-xs text-muted-foreground">
-                    Custom:
-                  </Label>
-                  <input
-                    id="custom-color"
-                    type="color"
-                    value={newEvent.color}
-                    onChange={(e) => setNewEvent({ ...newEvent, color: e.target.value })}
-                    className="w-12 h-8 rounded-lg border border-border cursor-pointer"
-                  />
-                  <span className="text-xs text-muted-foreground font-mono">
-                    {newEvent.color}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="event-time">Time</Label>
-              <Input
-                id="event-time"
-                type="time"
-                value={newEvent.time}
-                onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
-                disabled={newEvent.allDay}
-              />
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="all-day"
-                  checked={newEvent.allDay}
-                  onChange={(e) => setNewEvent({ ...newEvent, allDay: e.target.checked })}
-                  className="rounded"
-                />
-                <Label htmlFor="all-day" className="cursor-pointer">All day event</Label>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="event-description">Description (optional)</Label>
-              <Textarea
-                id="event-description"
-                placeholder="Add details about this event..."
-                rows={3}
-                value={newEvent.description}
-                onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
-              />
-            </div>
-
-            <Button className="w-full" onClick={handleAddEvent} disabled={!newEvent.title}>
-              <Plus className="w-4 h-4 mr-2" />
-              Add Event
-            </Button>
           </div>
         </DialogContent>
       </Dialog>
