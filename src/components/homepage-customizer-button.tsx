@@ -20,20 +20,16 @@ export function HomepageCustomizerButton() {
 
   return (
     <>
-      {/* Clickable Customization Button */}
-      <Card
+      {/* Clickable Customization Button - No Card Wrapper */}
+      <div
         onClick={openModal}
-        className="bloom-card textile-overlay-cream cursor-pointer group hover:scale-[1.02] transition-all duration-300 animate-fade-in-up animation-delay-1000"
+        className="cursor-pointer group flex flex-col items-center gap-3 py-6 transition-all duration-300 animate-fade-in-up animation-delay-1000 hover:opacity-80"
       >
-        <div className="flex items-center justify-center p-6">
-          <div className="flex flex-col items-center gap-3">
-            <Settings className="w-8 h-8 text-primary group-hover:rotate-90 transition-transform duration-300" />
-            <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70">
-              Customize your homepage
-            </p>
-          </div>
-        </div>
-      </Card>
+        <Settings className="w-8 h-8 text-primary group-hover:rotate-90 transition-transform duration-300" />
+        <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+          Customize your homepage
+        </p>
+      </div>
 
       {/* Customization Modal */}
       {isModalOpen && (
