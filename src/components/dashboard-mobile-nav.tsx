@@ -64,15 +64,15 @@ export function DashboardMobileNav() {
     <>
       {/* Mobile Header */}
       <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-border">
-        <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center justify-between px-4 py-2">
           <RootedLogo />
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setIsOpen(!isOpen)}
-            className="rounded-xl"
+            className="rounded-xl h-7 w-7"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
           </Button>
         </div>
       </header>
@@ -694,7 +694,7 @@ export function DashboardMobileNav() {
           </svg>
 
           {/* Individual Menu Item Cards - Floating Down from Right */}
-          <div className="lg:hidden fixed top-[80px] right-4 z-50 space-y-3 w-[280px] max-w-[calc(100vw-2rem)]">
+          <div className="lg:hidden fixed top-[52px] right-4 z-50 space-y-3 w-[280px] max-w-[calc(100vw-2rem)]">
             {navigationItems.map((item, index) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;

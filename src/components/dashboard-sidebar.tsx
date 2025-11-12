@@ -68,7 +68,7 @@ export function DashboardSidebar() {
   return (
     <aside className="fixed left-0 top-0 h-screen w-72 bg-gradient-to-b from-card/95 to-card/90 backdrop-blur-xl border-r border-border/50 flex flex-col shadow-bloom">
       {/* Logo */}
-      <div className="px-6 py-5 border-b border-border/30">
+      <div className="px-4 py-2 border-b border-border/30">
         <RootedLogo />
       </div>
 
