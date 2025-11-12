@@ -105,7 +105,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
   const totalItems = goals.length + weekEvents.length;
 
   return (
-    <Card className="bloom-card">
+    <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(100 18% 65% / 0.08)' }}>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-light" style={{ fontFamily: 'Georgia, serif' }}>
           To Do List

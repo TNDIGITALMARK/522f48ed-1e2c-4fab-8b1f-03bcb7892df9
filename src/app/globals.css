@@ -899,19 +899,20 @@ label {
   --calendar-container-bg: 38 65% 96%; /* Very light off-white cream - lighter than page background */
 }
 
-/* Calendar container styling - more opaque cream with soft shadow */
+/* Calendar container styling - matching Weight & Goals card */
 .calendar-container {
-  background: hsl(var(--calendar-container-bg));
-  border-radius: 1.5rem;
+  background: hsl(100 18% 65% / 0.08);
+  border-radius: 1.25rem;
   padding: 1.5rem;
-  box-shadow: 0 8px 24px rgba(62, 53, 48, 0.18), 0 2px 6px rgba(62, 53, 48, 0.08);
-  border: 1px solid hsl(var(--border));
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 20px rgba(62, 53, 48, 0.10);
+  border: 1px solid hsl(var(--border) / 0.4);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
   opacity: 1;
 }
 
 .calendar-container:hover {
-  box-shadow: 0 12px 32px rgba(62, 53, 48, 0.22), 0 4px 8px rgba(62, 53, 48, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(62, 53, 48, 0.18);
 }
 
 /* Calendar grid styling */
