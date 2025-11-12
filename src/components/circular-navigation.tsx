@@ -52,10 +52,10 @@ export function CircularNavigation() {
   };
 
   // SVG dimensions
-  const size = 320;
+  const size = 380;
   const center = size / 2;
-  const radius = 140;
-  const strokeWidth = 36;
+  const radius = 150;
+  const strokeWidth = 42;
 
   // Create SVG path for each segment
   const createArcPath = (startAngle: number, endAngle: number): string => {
@@ -89,7 +89,7 @@ export function CircularNavigation() {
   // Calculate text position and rotation for curved labels
   const getTextPosition = (startAngle: number, endAngle: number) => {
     const midAngle = (startAngle + endAngle) / 2;
-    const textRadius = radius + strokeWidth / 2 + 30;
+    const textRadius = radius + strokeWidth / 2 + 45; // Increased distance from circle
     const x = center + textRadius * Math.cos((midAngle * Math.PI) / 180);
     const y = center + textRadius * Math.sin((midAngle * Math.PI) / 180);
 
@@ -104,30 +104,84 @@ export function CircularNavigation() {
 
   return (
     <div className="flex items-center justify-center w-full py-8">
-      <div className="relative" style={{ width: size + 120, height: size + 120 }}>
+      <div className="relative" style={{ width: size + 180, height: size + 180 }}>
         <svg
-          width={size + 120}
-          height={size + 120}
-          viewBox={`0 0 ${size + 120} ${size + 120}`}
+          width={size + 180}
+          height={size + 180}
+          viewBox={`0 0 ${size + 180} ${size + 180}`}
           className="mx-auto"
         >
-          <g transform={`translate(60, 60)`}>
+          {/* Define 3D shadow gradient filters */}
+          <defs>
+            <filter id="inner-shadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+              <feOffset dx="0" dy="3" result="offsetblur" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.3" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <filter id="drop-shadow-3d" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
+              <feOffset dx="0" dy="8" result="offsetblur" />
+              <feComponentTransfer>
+                <feFuncA type="linear" slope="0.4" />
+              </feComponentTransfer>
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <radialGradient id="segment-gradient-1" cx="50%" cy="40%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.6)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.15)" />
+            </radialGradient>
+
+            <radialGradient id="segment-gradient-2" cx="50%" cy="40%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.5)" />
+              <stop offset="100%" stopColor="rgba(0,0,0,0.2)" />
+            </radialGradient>
+          </defs>
+
+          <g transform={`translate(90, 90)`}>
+            {/* Shadow layer for depth - multiple shadows for 3D effect */}
+            {segments.map((segment) => (
+              <path
+                key={`shadow-${segment.label}`}
+                d={createArcPath(segment.startAngle, segment.endAngle)}
+                fill="rgba(0,0,0,0.12)"
+                stroke="transparent"
+                strokeWidth={0}
+                style={{
+                  transform: 'translate(0, 6px)',
+                  transformOrigin: 'center',
+                }}
+              />
+            ))}
+
             {segments.map((segment) => {
               const isHovered = hoveredSegment === segment.label;
               const textPos = getTextPosition(segment.startAngle, segment.endAngle);
 
               return (
                 <g key={segment.label}>
-                  {/* Clickable segment */}
+                  {/* Clickable segment with 3D effect */}
                   <path
                     d={createArcPath(segment.startAngle, segment.endAngle)}
                     fill={segment.color}
-                    stroke="transparent"
-                    strokeWidth={0}
+                    stroke="rgba(0,0,0,0.1)"
+                    strokeWidth={1}
                     className="cursor-pointer transition-all duration-300"
                     style={{
-                      filter: isHovered ? 'brightness(1.1)' : 'none',
-                      transform: isHovered ? 'scale(1.03)' : 'scale(1)',
+                      filter: isHovered
+                        ? 'drop-shadow(0 12px 24px rgba(0,0,0,0.25)) brightness(1.08)'
+                        : 'drop-shadow(0 6px 16px rgba(0,0,0,0.15))',
+                      transform: isHovered ? 'translateY(-3px)' : 'translateY(0)',
                       transformOrigin: 'center',
                     }}
                     onMouseEnter={() => setHoveredSegment(segment.label)}
@@ -135,18 +189,37 @@ export function CircularNavigation() {
                     onClick={() => handleSegmentClick(segment.href)}
                   />
 
-                  {/* Curved text label */}
+                  {/* Inner highlight for 3D effect */}
+                  <path
+                    d={createArcPath(segment.startAngle, segment.endAngle)}
+                    fill="url(#segment-gradient-1)"
+                    stroke="transparent"
+                    strokeWidth={0}
+                    className="pointer-events-none"
+                    style={{
+                      opacity: 0.4,
+                      mixBlendMode: 'overlay',
+                    }}
+                  />
+
+                  {/* Enhanced text label with stroke for visibility */}
                   <text
                     x={textPos.x}
                     y={textPos.y}
                     textAnchor="middle"
                     dominantBaseline="middle"
                     transform={`rotate(${textPos.rotation}, ${textPos.x}, ${textPos.y})`}
-                    className="font-['Cormorant_Garamond'] text-xl font-semibold pointer-events-none select-none"
+                    className="font-['Cormorant_Garamond'] font-bold pointer-events-none select-none"
                     style={{
-                      fill: 'hsl(var(--foreground))',
-                      fontStyle: 'italic',
-                      letterSpacing: '0.05em',
+                      fill: 'hsl(25, 11%, 21%)', // Dark brown for high contrast
+                      fontSize: '22px',
+                      fontStyle: 'normal',
+                      letterSpacing: '0.08em',
+                      paintOrder: 'stroke fill',
+                      stroke: 'hsl(38, 50%, 94%)', // Light cream stroke for visibility
+                      strokeWidth: '3px',
+                      strokeLinecap: 'round',
+                      strokeLinejoin: 'round',
                     }}
                   >
                     {segment.label}
@@ -155,15 +228,30 @@ export function CircularNavigation() {
               );
             })}
 
-            {/* Center circle (optional - for visual balance) */}
+            {/* Center circle with 3D depth effect */}
             <circle
               cx={center}
               cy={center}
-              r={radius - strokeWidth / 2 - 2}
+              r={radius - strokeWidth / 2 - 3}
               fill="hsl(var(--background))"
-              stroke="hsl(var(--border))"
-              strokeWidth={1}
-              opacity={0.5}
+              stroke="rgba(0,0,0,0.08)"
+              strokeWidth={2}
+              style={{
+                filter: 'drop-shadow(inset 0 4px 12px rgba(0,0,0,0.1))',
+              }}
+            />
+
+            {/* Inner shadow ring for depth */}
+            <circle
+              cx={center}
+              cy={center}
+              r={radius - strokeWidth / 2 - 5}
+              fill="transparent"
+              stroke="rgba(0,0,0,0.06)"
+              strokeWidth={8}
+              style={{
+                filter: 'blur(4px)',
+              }}
             />
           </g>
         </svg>
