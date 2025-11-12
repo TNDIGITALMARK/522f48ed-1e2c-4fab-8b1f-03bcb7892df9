@@ -895,22 +895,23 @@ label {
   --event-nutrition: 15 40% 88%; /* Gentle peach for meals */
   --event-personal: 345 35% 88%; /* Soft rose for personal time */
 
-  /* Calendar container - light cream white, lighter than background */
-  --calendar-container-bg: 38 55% 97%; /* Very light warm cream - lighter than page background */
+  /* Calendar container - light cream white with more opacity */
+  --calendar-container-bg: 38 55% 92%; /* More opaque warm cream - more visible than page background */
 }
 
-/* Calendar container styling - light cream with soft shadow */
+/* Calendar container styling - more opaque cream with soft shadow */
 .calendar-container {
   background: hsl(var(--calendar-container-bg));
   border-radius: 1.5rem;
   padding: 1.5rem;
-  box-shadow: 0 8px 24px rgba(62, 53, 48, 0.12), 0 2px 6px rgba(62, 53, 48, 0.06);
-  border: none;
+  box-shadow: 0 8px 24px rgba(62, 53, 48, 0.18), 0 2px 6px rgba(62, 53, 48, 0.08);
+  border: 1px solid hsl(var(--border));
   transition: box-shadow 0.3s ease, transform 0.2s ease;
+  opacity: 1;
 }
 
 .calendar-container:hover {
-  box-shadow: 0 12px 32px rgba(62, 53, 48, 0.16), 0 4px 8px rgba(62, 53, 48, 0.08);
+  box-shadow: 0 12px 32px rgba(62, 53, 48, 0.22), 0 4px 8px rgba(62, 53, 48, 0.1);
 }
 
 /* Calendar grid styling */
@@ -921,7 +922,7 @@ label {
   margin-top: 0.5rem;
 }
 
-/* Calendar day cell - Minimalist styling */
+/* Calendar day cell - Minimalist styling matching container */
 .calendar-day {
   position: relative;
   aspect-ratio: 1;
@@ -929,7 +930,7 @@ label {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: 1.5px solid hsl(var(--border));
-  background: hsl(var(--card));
+  background: hsl(var(--calendar-container-bg)); /* Match calendar container color */
   cursor: pointer;
   transition: all 0.15s ease;
   display: flex;
@@ -947,11 +948,12 @@ label {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Today indicator - Bold and minimal */
+/* Today indicator - Bold and minimal with container color */
 .calendar-day.today {
   border-color: hsl(var(--foreground));
   border-width: 2px;
-  background: hsl(var(--foreground) / 0.03);
+  background: hsl(var(--calendar-container-bg)); /* Keep container color */
+  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.1);
 }
 
 .calendar-day.today .day-number {
@@ -959,11 +961,12 @@ label {
   color: hsl(var(--foreground));
 }
 
-/* Selected day - Clean emphasis */
+/* Selected day - Clean emphasis with container color */
 .calendar-day.selected {
-  background: hsl(var(--foreground) / 0.08);
+  background: hsl(var(--calendar-container-bg)); /* Keep container color */
   border-color: hsl(var(--foreground));
   border-width: 2px;
+  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.15);
 }
 
 /* Period phase indicators */
