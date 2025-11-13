@@ -105,7 +105,7 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
   const totalItems = goals.length + weekEvents.length;
 
   return (
-    <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+    <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300 relative" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-light" style={{ fontFamily: 'Georgia, serif' }}>
           To Do List
@@ -120,7 +120,14 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
         </Button>
       </div>
 
-      <div className="space-y-3">
+      {/* Scrollable container with fixed max height */}
+      <div
+        className="space-y-3 overflow-y-auto scrollbar-hide pr-2 pb-16"
+        style={{
+          maxHeight: isExpanded ? '600px' : '400px',
+          transition: 'max-height 0.3s ease-in-out'
+        }}
+      >
         {/* Week's Calendar Events */}
         {displayedEvents.map(event => (
           <div
@@ -183,22 +190,19 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
         )}
       </div>
 
+      {/* Expandable button in bottom right corner */}
       {hasMoreItems && (
         <Button
-          variant="ghost"
-          className="w-full mt-4"
+          variant="outline"
+          size="icon"
+          className="absolute bottom-4 right-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-card border-2"
           onClick={() => setIsExpanded(!isExpanded)}
+          title={isExpanded ? 'Show Less' : 'Show More'}
         >
           {isExpanded ? (
-            <>
-              <ChevronUp className="w-4 h-4 mr-2" />
-              Show Less
-            </>
+            <ChevronUp className="w-5 h-5" />
           ) : (
-            <>
-              <ChevronDown className="w-4 h-4 mr-2" />
-              Show {totalItems - 8} More
-            </>
+            <ChevronDown className="w-5 h-5" />
           )}
         </Button>
       )}
