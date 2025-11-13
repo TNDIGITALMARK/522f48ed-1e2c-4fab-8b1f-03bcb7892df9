@@ -98,11 +98,11 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
     }
   };
 
-  // Show first 3 goals + all week events when collapsed
-  const displayedGoals = isExpanded ? goals : goals.slice(0, 3);
-  const displayedEvents = isExpanded ? weekEvents : weekEvents.slice(0, 5);
-  const hasMoreItems = goals.length > 3 || weekEvents.length > 5;
-  const totalItems = goals.length + weekEvents.length;
+  // Show first 5 combined items when collapsed, all when expanded
+  const allItems = [...weekEvents, ...goals];
+  const displayedItems = isExpanded ? allItems : allItems.slice(0, 5);
+  const hasMoreItems = allItems.length > 5;
+  const totalItems = allItems.length;
 
   return (
     <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300 relative" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
@@ -122,64 +122,71 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
 
       {/* Scrollable container with fixed max height */}
       <div
-        className="space-y-3 overflow-y-auto scrollbar-hide pr-2 pb-16"
+        className="space-y-3 overflow-y-auto scrollbar-hide pr-2 pb-16 md:pb-16 sm:pb-14"
         style={{
-          maxHeight: isExpanded ? '600px' : '400px',
+          maxHeight: isExpanded ? '600px' : '320px',
           transition: 'max-height 0.3s ease-in-out'
         }}
       >
-        {/* Week's Calendar Events */}
-        {displayedEvents.map(event => (
-          <div
-            key={event.id}
-            className="flex items-center gap-4 p-4 rounded-xl border transition-colors"
-            style={{ backgroundColor: 'hsl(35 40% 94% / 0.4)', borderColor: 'hsl(35 40% 88% / 0.5)' }}
-          >
-            <CalendarIcon className="w-6 h-6 flex-shrink-0" style={{ color: 'hsl(35 40% 75%)' }} />
-            <div className="flex-1">
-              <span className="text-base font-medium">
-                {event.title}
-              </span>
-              <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
-                <span>{formatEventDate(event.startDatetime)}</span>
-                {!event.allDay && (
-                  <>
-                    <span>•</span>
-                    <span>{formatEventTime(event.startDatetime)}</span>
-                  </>
-                )}
-                <span className="ml-2 px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'hsl(35 40% 88% / 0.5)', color: 'hsl(35 40% 50%)' }}>
-                  {event.eventType}
-                </span>
-              </div>
-            </div>
-          </div>
-        ))}
-
-        {/* Goals */}
-        {displayedGoals.map(goal => (
-          <div
-            key={goal.id}
-            className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted/30 transition-colors cursor-pointer group"
-            onClick={() => handleToggleGoal(goal.id)}
-          >
-            {goal.isCompleted ? (
-              <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0" />
-            ) : (
-              <Circle className="w-6 h-6 text-muted-foreground flex-shrink-0 group-hover:text-secondary transition-colors" />
-            )}
-            <div className="flex-1">
-              <span className={`text-base ${goal.isCompleted ? 'line-through text-muted-foreground' : ''}`}>
-                {goal.title}
-              </span>
-              {goal.targetValue && (
-                <div className="text-sm text-muted-foreground mt-1">
-                  {goal.currentValue || 0} / {goal.targetValue} {goal.unit}
+        {/* Render combined items (events first, then goals) */}
+        {displayedItems.map((item) => {
+          // Check if item is a CalendarEvent (has startDatetime)
+          if ('startDatetime' in item) {
+            const event = item as CalendarEvent;
+            return (
+              <div
+                key={event.id}
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl border transition-colors"
+                style={{ backgroundColor: 'hsl(35 40% 94% / 0.4)', borderColor: 'hsl(35 40% 88% / 0.5)' }}
+              >
+                <CalendarIcon className="w-6 h-6 flex-shrink-0" style={{ color: 'hsl(35 40% 75%)' }} />
+                <div className="flex-1">
+                  <span className="text-base font-medium">
+                    {event.title}
+                  </span>
+                  <div className="text-sm text-muted-foreground mt-1 flex items-center gap-2">
+                    <span>{formatEventDate(event.startDatetime)}</span>
+                    {!event.allDay && (
+                      <>
+                        <span>•</span>
+                        <span>{formatEventTime(event.startDatetime)}</span>
+                      </>
+                    )}
+                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs" style={{ backgroundColor: 'hsl(35 40% 88% / 0.5)', color: 'hsl(35 40% 50%)' }}>
+                      {event.eventType}
+                    </span>
+                  </div>
                 </div>
-              )}
-            </div>
-          </div>
-        ))}
+              </div>
+            );
+          } else {
+            // Item is a Goal
+            const goal = item as Goal;
+            return (
+              <div
+                key={goal.id}
+                className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl hover:bg-muted/30 active:bg-muted/40 transition-colors cursor-pointer group"
+                onClick={() => handleToggleGoal(goal.id)}
+              >
+                {goal.isCompleted ? (
+                  <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0" />
+                ) : (
+                  <Circle className="w-6 h-6 text-muted-foreground flex-shrink-0 group-hover:text-secondary transition-colors" />
+                )}
+                <div className="flex-1">
+                  <span className={`text-base ${goal.isCompleted ? 'line-through text-muted-foreground' : ''}`}>
+                    {goal.title}
+                  </span>
+                  {goal.targetValue && (
+                    <div className="text-sm text-muted-foreground mt-1">
+                      {goal.currentValue || 0} / {goal.targetValue} {goal.unit}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          }
+        })}
 
         {totalItems === 0 && (
           <div className="text-center py-12 text-muted-foreground">
@@ -190,21 +197,28 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
         )}
       </div>
 
-      {/* Expandable button in bottom right corner */}
+      {/* Expandable button in bottom right corner - Always visible and accessible */}
       {hasMoreItems && (
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute bottom-4 right-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-card border-2"
-          onClick={() => setIsExpanded(!isExpanded)}
-          title={isExpanded ? 'Show Less' : 'Expand View'}
-        >
-          {isExpanded ? (
-            <Minimize2 className="w-5 h-5" />
-          ) : (
-            <Maximize2 className="w-5 h-5" />
+        <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 flex items-center gap-2 z-20">
+          {!isExpanded && totalItems > 5 && (
+            <div className="hidden sm:block px-3 py-1.5 rounded-full text-sm font-medium shadow-md backdrop-blur-sm" style={{ backgroundColor: 'hsl(35 40% 94% / 0.95)', color: 'hsl(25 11% 21%)' }}>
+              +{totalItems - 5} more
+            </div>
           )}
-        </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-card/95 backdrop-blur-sm border-2"
+            onClick={() => setIsExpanded(!isExpanded)}
+            title={isExpanded ? 'Show Less' : `Show ${totalItems - 5} more`}
+          >
+            {isExpanded ? (
+              <Minimize2 className="w-5 h-5" />
+            ) : (
+              <Maximize2 className="w-5 h-5" />
+            )}
+          </Button>
+        </div>
       )}
 
       {/* Add Goal Dialog */}
