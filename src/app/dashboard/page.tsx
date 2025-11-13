@@ -170,6 +170,20 @@ export default function DashboardPage() {
               height={180}
               className="w-full"
             />
+            {/* "hi Brooklyn" text overlay */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <h3
+                className="text-5xl md:text-6xl font-bold tracking-wide"
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  color: 'hsl(25 11% 21%)',
+                  textShadow: '0 2px 8px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)',
+                  opacity: 0.85
+                }}
+              >
+                hi Brooklyn
+              </h3>
+            </div>
           </div>
 
           {/* Phase info - Now below the animation */}
