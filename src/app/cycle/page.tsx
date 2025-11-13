@@ -214,7 +214,7 @@ export default function CyclePage() {
                   <PhaseIcon className="w-7 h-7 text-secondary-foreground" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-1">{phase.name} Phase Guidance</h3>
+                  <h3 className="text-xl font-semibold mb-1">{phase.name} Phase Overview</h3>
                   <p className="text-muted-foreground italic">&quot;{phase.affirmation}&quot;</p>
                 </div>
               </div>
