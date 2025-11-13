@@ -129,13 +129,13 @@ export function AISymptomTracker({
           <Heart className="w-5 h-5 text-primary" />
           How are you feeling today?
         </h3>
-        <Card className="calendar-container">
-          <div className="grid grid-cols-5 gap-3">
+        <Card className="calendar-container overflow-hidden">
+          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
             {moodOptions.map((mood) => (
               <button
                 key={mood.label}
                 onClick={() => onMoodChange(mood.value)}
-                className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all ${
+                className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all flex-shrink-0 snap-center min-w-[120px] ${
                   selectedMood === mood.value
                     ? 'bg-primary/10 ring-2 ring-primary'
                     : 'bg-muted/30 hover:bg-muted/50'
@@ -163,8 +163,8 @@ export function AISymptomTracker({
             </Badge>
           )}
         </div>
-        <Card className="calendar-container">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <Card className="calendar-container overflow-hidden">
+          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
             {symptoms.map((symptom) => {
               const isSelected = selectedSymptoms.includes(symptom);
               const trend = getSymptomTrend(symptom);
@@ -173,7 +173,7 @@ export function AISymptomTracker({
                 <button
                   key={symptom}
                   onClick={() => toggleSymptom(symptom)}
-                  className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`relative px-4 py-3 rounded-xl text-sm font-medium transition-all flex-shrink-0 snap-center min-w-[140px] ${
                     isSelected
                       ? 'bg-primary text-primary-foreground shadow-bloom-sm'
                       : 'bg-muted/30 text-foreground hover:bg-muted/50'
