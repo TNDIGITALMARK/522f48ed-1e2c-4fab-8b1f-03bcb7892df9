@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { CheckCircle2, Circle, Plus, Maximize2, Minimize2, Target, Calendar as CalendarIcon, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle2, Circle, Plus, Maximize2, Minimize2, Target, Calendar as CalendarIcon } from 'lucide-react';
 import {
   getUserGoals,
   getActiveGoals,
@@ -32,7 +32,6 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAddGoalOpen, setIsAddGoalOpen] = useState(false);
   const [customGoalTitle, setCustomGoalTitle] = useState('');
-  const [expandedGoalIds, setExpandedGoalIds] = useState<Set<string>>(new Set());
 
   // Load goals and week's calendar events
   useEffect(() => {
@@ -58,19 +57,6 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
 
   const handleToggleGoal = (goalId: string) => {
     toggleGoalCompletion(userId, goalId);
-  };
-
-  const toggleGoalExpansion = (goalId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setExpandedGoalIds((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(goalId)) {
-        newSet.delete(goalId);
-      } else {
-        newSet.add(goalId);
-      }
-      return newSet;
-    });
   };
 
   const handleAddTemplateGoal = (template: typeof GOAL_TEMPLATES[number]) => {
@@ -176,54 +162,33 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
           } else {
             // Item is a Goal
             const goal = item as Goal;
-            const isGoalExpanded = expandedGoalIds.has(goal.id);
             return (
               <div
                 key={goal.id}
-                className="rounded-xl hover:bg-muted/30 active:bg-muted/40 transition-colors"
+                className="rounded-xl hover:bg-muted/30 active:bg-muted/40 transition-colors p-3 md:p-4 cursor-pointer group"
+                onClick={() => handleToggleGoal(goal.id)}
               >
-                <div
-                  className="flex items-center gap-3 md:gap-4 p-3 md:p-4 cursor-pointer group"
-                  onClick={() => handleToggleGoal(goal.id)}
-                >
+                <div className="flex items-center gap-3 md:gap-4">
                   {goal.isCompleted ? (
                     <CheckCircle2 className="w-6 h-6 text-secondary flex-shrink-0" />
                   ) : (
                     <Circle className="w-6 h-6 text-muted-foreground flex-shrink-0 group-hover:text-secondary transition-colors" />
                   )}
-                  <div className="flex-1">
-                    <span className={`text-base ${goal.isCompleted ? 'line-through text-muted-foreground' : ''}`}>
+                  <div className="flex-1 min-w-0">
+                    <div className={`text-base ${goal.isCompleted ? 'line-through text-muted-foreground' : ''}`}>
                       {goal.title}
-                    </span>
-                    {goal.targetValue && !isGoalExpanded && (
-                      <div className="text-sm text-muted-foreground mt-1">
-                        {goal.currentValue || 0} / {goal.targetValue} {goal.unit}
-                      </div>
-                    )}
-                  </div>
-                  <button
-                    onClick={(e) => toggleGoalExpansion(goal.id, e)}
-                    className="ml-2 p-1 rounded-full hover:bg-muted/50 transition-colors"
-                    aria-label={isGoalExpanded ? 'Collapse goal details' : 'Expand goal details'}
-                  >
-                    {isGoalExpanded ? (
-                      <ChevronUp className="w-5 h-5 text-muted-foreground" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground" />
-                    )}
-                  </button>
-                </div>
-                {isGoalExpanded && (
-                  <div className="px-3 md:px-4 pb-3 md:pb-4 pt-0 space-y-2 animate-accordion-down">
+                    </div>
                     {goal.targetValue && (
-                      <div className="space-y-1">
+                      <div className="mt-2 space-y-1">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-muted-foreground">Progress</span>
-                          <span className="font-medium">
+                          <span className="text-muted-foreground">
                             {goal.currentValue || 0} / {goal.targetValue} {goal.unit}
                           </span>
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-muted/40">
+                            {goal.category}
+                          </span>
                         </div>
-                        <div className="w-full bg-muted/30 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-muted/30 rounded-full h-1.5 overflow-hidden">
                           <div
                             className="h-full bg-secondary transition-all duration-300"
                             style={{
@@ -233,18 +198,8 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
                         </div>
                       </div>
                     )}
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="px-2 py-1 rounded-full bg-muted/40">
-                        {goal.category}
-                      </span>
-                      {goal.createdAt && (
-                        <span>
-                          Created {new Date(goal.createdAt).toLocaleDateString()}
-                        </span>
-                      )}
-                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           }
