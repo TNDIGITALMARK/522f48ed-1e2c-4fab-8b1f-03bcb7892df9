@@ -182,45 +182,7 @@ function CustomDashboard() {
                 WebkitFontSmoothing: 'antialiased'
               }}
             >
-              Hi
-            </h1>
-          </div>
-          {/* Visual break - small background space */}
-          <div className="w-full h-8 relative overflow-hidden">
-            <div
-              className="absolute inset-0 blur-sm"
-              style={{
-                background: 'linear-gradient(to bottom, hsl(38 65% 96%) 0%, hsl(35 40% 94% / 0.5) 50%, transparent 100%)'
-              }}
-            />
-          </div>
-          <div className="relative text-center py-8">
-            <h1
-              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide"
-              style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                color: 'hsl(25 11% 21%)',
-                textShadow: `
-                  0 1px 0 hsl(25 11% 31%),
-                  0 2px 0 hsl(25 11% 36%),
-                  0 3px 0 hsl(25 11% 41%),
-                  0 4px 0 hsl(25 11% 46%),
-                  0 5px 0 hsl(25 11% 51%),
-                  0 6px 0 hsl(25 11% 56%),
-                  0 7px 0 hsl(25 11% 61%),
-                  0 8px 0 hsl(25 11% 66%),
-                  0 9px 0 hsl(25 11% 71%),
-                  0 10px 10px rgba(0, 0, 0, 0.15),
-                  0 20px 25px rgba(0, 0, 0, 0.10),
-                  0 30px 35px rgba(0, 0, 0, 0.05)
-                `,
-                letterSpacing: '0.03em',
-                lineHeight: 1.2,
-                transform: 'translateZ(0)',
-                WebkitFontSmoothing: 'antialiased'
-              }}
-            >
-              Brooklyn
+              Hi Brooklyn
             </h1>
           </div>
         </div>
