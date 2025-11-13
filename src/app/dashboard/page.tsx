@@ -141,9 +141,9 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="max-w-6xl mx-auto pb-12 px-6">
         {/* Greeting Header */}
-        <div className="pt-12 pb-8 animate-fade-in-up">
+        <div className="pt-8 pb-6 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center">
-            <h1 className="text-4xl font-bold text-foreground">
+            <h1 className="text-3xl font-bold text-foreground">
               Hi {userData.name}
             </h1>
           </div>
