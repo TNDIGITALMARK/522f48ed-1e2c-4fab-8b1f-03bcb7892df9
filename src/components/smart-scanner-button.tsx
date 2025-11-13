@@ -15,8 +15,8 @@ export function SmartScannerButton() {
     <div className="w-full animate-fade-in-up animation-delay-300">
       <Link href="/calorie-tracking" className="block">
         <Button
-          className="w-full h-16 rounded-full text-white shadow-bloom transition-all duration-300 hover:shadow-bloom-lg hover:scale-[1.02] active:scale-[0.98]"
-          style={{ backgroundColor: 'hsl(35 40% 88%)', border: '2px solid black' }}
+          className="w-full h-16 rounded-full shadow-bloom transition-all duration-300 hover:shadow-bloom-lg hover:scale-[1.02] active:scale-[0.98]"
+          style={{ backgroundColor: 'hsl(35 40% 88%)', border: '2px solid rgba(0, 0, 0, 0.4)', color: 'hsl(var(--foreground))', fontFamily: 'Montserrat, sans-serif', fontWeight: 500 }}
           size="lg"
         >
           <div className="flex items-center justify-center gap-3">
