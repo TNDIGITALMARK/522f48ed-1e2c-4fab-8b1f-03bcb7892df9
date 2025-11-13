@@ -158,9 +158,8 @@ function CustomDashboard() {
         <div className="animate-fade-in-up animation-delay-200 mt-1 mb-4">
           <div className="relative text-center py-8">
             <h1
-              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide"
+              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide font-['Playfair_Display']"
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
                 color: 'hsl(25 11% 21%)',
                 textShadow: `
                   0 1px 0 hsl(25 11% 31%),
