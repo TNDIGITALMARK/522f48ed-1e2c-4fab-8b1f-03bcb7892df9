@@ -237,7 +237,7 @@ export default function NutritionPage() {
       <main className="max-w-4xl mx-auto px-6 py-0 pb-8">
 
         {/* Food Quiz CTA */}
-        <Card className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-primary/10 to-secondary/5 border-2 border-primary/20 mb-6">
+        <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 mb-6">
           <div className="flex items-center gap-4">
             <div className="text-5xl">🍽️</div>
             <div className="flex-1">
@@ -268,7 +268,7 @@ export default function NutritionPage() {
           <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Calorie Balance */}
-        <Card className="magazine-feature-card texture-fabric mb-6 bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20">
+        <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-semibold mb-1">Weekly Balance</h3>
@@ -317,7 +317,7 @@ export default function NutritionPage() {
 
         {/* Macros Today */}
         <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <Card className="p-5">
+          <Card className="magazine-feature-card bg-white/60 p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
                 <Flame className="w-6 h-6 text-secondary" />
@@ -335,7 +335,7 @@ export default function NutritionPage() {
             />
           </Card>
 
-          <Card className="p-5">
+          <Card className="magazine-feature-card bg-white/60 p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Apple className="w-6 h-6 text-primary" />
@@ -353,7 +353,7 @@ export default function NutritionPage() {
             />
           </Card>
 
-          <Card className="p-5">
+          <Card className="magazine-feature-card bg-white/60 p-5">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
                 <Droplets className="w-6 h-6 text-accent-foreground" />
@@ -370,7 +370,7 @@ export default function NutritionPage() {
         </div>
 
         {/* rooted Score Scanner CTA */}
-        <Card className="magazine-feature-card textile-overlay-green bg-gradient-to-br from-secondary/10 to-accent/10 border-2 border-secondary/20 mb-6">
+        <Card className="magazine-feature-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20 mb-6">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
               <ScanLine className="w-7 h-7 text-secondary-foreground" />
@@ -399,7 +399,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Phase-Based Nutrition Tip */}
-        <Card className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-accent/10 to-primary/5 border-2 border-accent/15">
+        <Card className="magazine-feature-card bg-gradient-to-br from-accent/10 to-primary/5 border-2 border-accent/15">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-6 h-6 text-primary-foreground" />
@@ -417,7 +417,7 @@ export default function NutritionPage() {
 
           {/* GROCERY LIST TAB */}
           <TabsContent value="grocery" className="space-y-6">
-            <Card className="magazine-feature-card card-fabric">
+            <Card className="magazine-feature-card bg-white/60">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2">
@@ -523,7 +523,7 @@ export default function NutritionPage() {
 
           {/* MEAL PLANNING TAB */}
           <TabsContent value="meals" className="space-y-6">
-            <Card className="magazine-feature-card card-marble">
+            <Card className="magazine-feature-card bg-white/60">
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
                   <Calendar className="w-6 h-6 text-primary" />
@@ -612,7 +612,7 @@ export default function NutritionPage() {
 
           {/* AI MEAL IDEAS TAB */}
           <TabsContent value="ai-meals" className="space-y-6">
-            <Card className="magazine-feature-card texture-linen">
+            <Card className="magazine-feature-card bg-white/60">
               <Tabs defaultValue="breakfast" className="w-full">
                 <TabsList className="grid w-full grid-cols-5 mb-6">
                   <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
