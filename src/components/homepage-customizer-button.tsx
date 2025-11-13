@@ -1,10 +1,17 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Settings, X, Eye, Layout, Palette, Home } from 'lucide-react';
+import { Settings, X, Eye, Layout, Palette, Home, Utensils, Dumbbell, Sparkles, Check } from 'lucide-react';
 import Link from 'next/link';
+import {
+  type HomepageTemplateId,
+  HOMEPAGE_TEMPLATES,
+  getPremadeTemplates,
+  getCurrentTemplate,
+  saveTemplateSelection,
+} from '@/types/homepage-templates';
 
 /**
  * Homepage Customizer Button Component
@@ -14,9 +21,39 @@ import Link from 'next/link';
  */
 export function HomepageCustomizerButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<HomepageTemplateId>('custom');
+
+  useEffect(() => {
+    const current = getCurrentTemplate();
+    setSelectedTemplate(current.id);
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const handleTemplateSelect = (templateId: HomepageTemplateId) => {
+    setSelectedTemplate(templateId);
+  };
+
+  const handleSaveChanges = () => {
+    saveTemplateSelection(selectedTemplate);
+    closeModal();
+    // Reload page to apply new template
+    window.location.reload();
+  };
+
+  const premadeTemplates = getPremadeTemplates();
+
+  const getIconForTemplate = (icon: string) => {
+    switch (icon) {
+      case 'utensils':
+        return Utensils;
+      case 'dumbbell':
+        return Dumbbell;
+      default:
+        return Layout;
+    }
+  };
 
   return (
     <>
@@ -64,83 +101,72 @@ export function HomepageCustomizerButton() {
 
             {/* Modal Content */}
             <div className="p-6 space-y-6">
-              {/* Layout Customization Section */}
+              {/* Premade Templates Section */}
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <Layout className="w-5 h-5 text-primary" />
-                  <h3 className="text-lg font-semibold">Layout Options</h3>
+                  <Sparkles className="w-5 h-5 text-primary" />
+                  <h3 className="text-lg font-semibold">Choose Your Homepage</h3>
                 </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Select a premade homepage tailored to your focus, or build your own custom layout.
+                </p>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="p-4 cursor-pointer hover:border-primary/50 transition-colors">
-                    <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg mb-3 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-8 h-8 bg-primary/20 rounded mx-auto mb-2"></div>
-                        <div className="space-y-1">
-                          <div className="w-16 h-2 bg-primary/20 rounded mx-auto"></div>
-                          <div className="w-20 h-2 bg-primary/20 rounded mx-auto"></div>
-                        </div>
+                  {/* Custom Layout Option */}
+                  <Card
+                    className={`p-5 cursor-pointer transition-all ${
+                      selectedTemplate === 'custom'
+                        ? 'border-primary/70 bg-primary/5 shadow-lg'
+                        : 'hover:border-primary/30'
+                    }`}
+                    onClick={() => handleTemplateSelect('custom')}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
+                        <Layout className="w-6 h-6 text-primary" />
                       </div>
+                      {selectedTemplate === 'custom' && (
+                        <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                          <Check className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
-                    <h4 className="font-medium mb-1">Compact View</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Dense layout with smaller widgets
+                    <h4 className="font-semibold mb-2">Custom Layout</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {HOMEPAGE_TEMPLATES.custom.description}
                     </p>
                   </Card>
 
-                  <Card className="p-4 cursor-pointer border-primary/50 bg-primary/5 hover:border-primary transition-colors">
-                    <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg mb-3 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-primary/30 rounded-lg mx-auto mb-3"></div>
-                        <div className="space-y-2">
-                          <div className="w-20 h-2 bg-primary/30 rounded mx-auto"></div>
-                          <div className="w-24 h-2 bg-primary/30 rounded mx-auto"></div>
+                  {/* Premade Templates */}
+                  {premadeTemplates.map((template) => {
+                    const IconComponent = getIconForTemplate(template.icon);
+                    return (
+                      <Card
+                        key={template.id}
+                        className={`p-5 cursor-pointer transition-all ${
+                          selectedTemplate === template.id
+                            ? 'border-primary/70 bg-primary/5 shadow-lg'
+                            : 'hover:border-primary/30'
+                        }`}
+                        onClick={() => handleTemplateSelect(template.id)}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
+                            <IconComponent className="w-6 h-6 text-primary" />
+                          </div>
+                          {selectedTemplate === template.id && (
+                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                              <Check className="w-4 h-4 text-white" />
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-medium mb-1">Standard View</h4>
-                        <p className="text-xs text-muted-foreground">
-                          Balanced layout (current)
+                        <h4 className="font-semibold mb-2">{template.name}</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {template.description}
                         </p>
-                      </div>
-                      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </Card>
-
-                  <Card className="p-4 cursor-pointer hover:border-primary/50 transition-colors">
-                    <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg mb-3 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-16 h-16 bg-primary/20 rounded-xl mx-auto mb-4"></div>
-                        <div className="space-y-2">
-                          <div className="w-24 h-3 bg-primary/20 rounded mx-auto"></div>
-                          <div className="w-28 h-2 bg-primary/20 rounded mx-auto"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <h4 className="font-medium mb-1">Spacious View</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Generous spacing, larger elements
-                    </p>
-                  </Card>
-
-                  <Card className="p-4 cursor-pointer hover:border-primary/50 transition-colors">
-                    <div className="aspect-video bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg mb-3 flex items-center justify-center">
-                      <div className="grid grid-cols-2 gap-2 p-2">
-                        <div className="bg-primary/20 rounded h-12"></div>
-                        <div className="bg-primary/20 rounded h-12"></div>
-                        <div className="bg-primary/20 rounded h-12 col-span-2"></div>
-                      </div>
-                    </div>
-                    <h4 className="font-medium mb-1">Grid View</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Widget-based modular layout
-                    </p>
-                  </Card>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -209,12 +235,9 @@ export function HomepageCustomizerButton() {
                 </Button>
                 <Button
                   className="flex-1 rounded-full"
-                  onClick={() => {
-                    // Save customization logic here
-                    closeModal();
-                  }}
+                  onClick={handleSaveChanges}
                 >
-                  Save Changes
+                  Apply Template
                 </Button>
               </div>
             </div>

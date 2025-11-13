@@ -1,5 +1,11 @@
 "use client";
 
+import { useState, useEffect } from 'react';
+import { getCurrentTemplate, type HomepageTemplateId } from '@/types/homepage-templates';
+import { NutritionFocusedDashboard } from '@/components/nutrition-focused-dashboard';
+import { FitnessFocusedDashboard } from '@/components/fitness-focused-dashboard';
+
+// Default/Custom Dashboard
 import { DashboardLayout } from '@/components/dashboard-layout';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -14,7 +20,6 @@ import {
   ArrowRight,
   Dumbbell
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
 import { useDashboardData } from '@/hooks/use-user-profile';
 import { SharedCalendar } from '@/components/shared-calendar';
 import { GoalsTodoList } from '@/components/goals-todo-list';
@@ -29,7 +34,7 @@ import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
 
-export default function DashboardPage() {
+function CustomDashboard() {
   // Use centralized dashboard data hook
   const {
     profile,
@@ -456,4 +461,31 @@ export default function DashboardPage() {
       </div>
     </DashboardLayout>
   );
+}
+
+export default function DashboardPage() {
+  const [currentTemplate, setCurrentTemplate] = useState<HomepageTemplateId>('custom');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const template = getCurrentTemplate();
+    setCurrentTemplate(template.id);
+  }, []);
+
+  // Prevent hydration mismatch by rendering null on server
+  if (!isClient) {
+    return null;
+  }
+
+  // Render the appropriate dashboard based on selected template
+  switch (currentTemplate) {
+    case 'nutrition-focus':
+      return <NutritionFocusedDashboard />;
+    case 'fitness-focus':
+      return <FitnessFocusedDashboard />;
+    case 'custom':
+    default:
+      return <CustomDashboard />;
+  }
 }
