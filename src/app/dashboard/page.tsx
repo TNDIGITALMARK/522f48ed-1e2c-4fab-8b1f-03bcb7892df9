@@ -154,8 +154,79 @@ function CustomDashboard() {
           </div>
         </div>
 
-        {/* Cycle Phase Banner - Rearranged Layout */}
-        <div className="overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-1 p-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+        {/* Hi Brooklyn Greeting with Dramatic 3D Shadow */}
+        <div className="animate-fade-in-up animation-delay-200 mt-1 mb-4">
+          <div className="relative text-center py-8">
+            <h1
+              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide"
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                color: 'hsl(25 11% 21%)',
+                textShadow: `
+                  0 1px 0 hsl(25 11% 31%),
+                  0 2px 0 hsl(25 11% 36%),
+                  0 3px 0 hsl(25 11% 41%),
+                  0 4px 0 hsl(25 11% 46%),
+                  0 5px 0 hsl(25 11% 51%),
+                  0 6px 0 hsl(25 11% 56%),
+                  0 7px 0 hsl(25 11% 61%),
+                  0 8px 0 hsl(25 11% 66%),
+                  0 9px 0 hsl(25 11% 71%),
+                  0 10px 10px rgba(0, 0, 0, 0.15),
+                  0 20px 25px rgba(0, 0, 0, 0.10),
+                  0 30px 35px rgba(0, 0, 0, 0.05)
+                `,
+                letterSpacing: '0.03em',
+                lineHeight: 1.2,
+                transform: 'translateZ(0)',
+                WebkitFontSmoothing: 'antialiased'
+              }}
+            >
+              Hi
+            </h1>
+          </div>
+          {/* Visual break - small background space */}
+          <div className="w-full h-8 relative overflow-hidden">
+            <div
+              className="absolute inset-0 blur-sm"
+              style={{
+                background: 'linear-gradient(to bottom, hsl(38 65% 96%) 0%, hsl(35 40% 94% / 0.5) 50%, transparent 100%)'
+              }}
+            />
+          </div>
+          <div className="relative text-center py-8">
+            <h1
+              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide"
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                color: 'hsl(25 11% 21%)',
+                textShadow: `
+                  0 1px 0 hsl(25 11% 31%),
+                  0 2px 0 hsl(25 11% 36%),
+                  0 3px 0 hsl(25 11% 41%),
+                  0 4px 0 hsl(25 11% 46%),
+                  0 5px 0 hsl(25 11% 51%),
+                  0 6px 0 hsl(25 11% 56%),
+                  0 7px 0 hsl(25 11% 61%),
+                  0 8px 0 hsl(25 11% 66%),
+                  0 9px 0 hsl(25 11% 71%),
+                  0 10px 10px rgba(0, 0, 0, 0.15),
+                  0 20px 25px rgba(0, 0, 0, 0.10),
+                  0 30px 35px rgba(0, 0, 0, 0.05)
+                `,
+                letterSpacing: '0.03em',
+                lineHeight: 1.2,
+                transform: 'translateZ(0)',
+                WebkitFontSmoothing: 'antialiased'
+              }}
+            >
+              Brooklyn
+            </h1>
+          </div>
+        </div>
+
+        {/* Cycle Phase Banner - Ovulation Widget with Animation */}
+        <div className="overflow-hidden relative animate-fade-in-up animation-delay-300 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-1 p-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
@@ -167,7 +238,7 @@ function CustomDashboard() {
             <p className="text-sm text-muted-foreground mb-2 text-center">Your Cycle Phase</p>
           </div>
 
-          {/* 3D Animated Hormone Wave - Moved here underneath title */}
+          {/* 3D Animated Hormone Wave - Main focus now */}
           <div className="relative z-10 mb-6 -mx-6">
             <HormoneWave3D
               phase="ovulation"
@@ -175,21 +246,6 @@ function CustomDashboard() {
               height={180}
               className="w-full"
             />
-            {/* "Hi Brooklyn" text overlay - positioned over the ovulation phase wave */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <h3
-                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-wide"
-                style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  color: 'hsl(25 11% 21%)',
-                  textShadow: '0 2px 12px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.7), 0 4px 20px rgba(168, 184, 165, 0.3)',
-                  opacity: 0.9,
-                  letterSpacing: '0.05em'
-                }}
-              >
-                Hi Brooklyn
-              </h3>
-            </div>
           </div>
 
           {/* Phase info - Now below the animation */}
