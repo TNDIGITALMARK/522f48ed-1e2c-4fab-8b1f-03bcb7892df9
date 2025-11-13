@@ -170,18 +170,19 @@ export default function DashboardPage() {
               height={180}
               className="w-full"
             />
-            {/* "hi Brooklyn" text overlay */}
+            {/* "Hi Brooklyn" text overlay - positioned over the ovulation phase wave */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <h3
-                className="text-5xl md:text-6xl font-bold tracking-wide"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-wide"
                 style={{
                   fontFamily: "'Cormorant Garamond', Georgia, serif",
                   color: 'hsl(25 11% 21%)',
-                  textShadow: '0 2px 8px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)',
-                  opacity: 0.85
+                  textShadow: '0 2px 12px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.7), 0 4px 20px rgba(168, 184, 165, 0.3)',
+                  opacity: 0.9,
+                  letterSpacing: '0.05em'
                 }}
               >
-                hi Brooklyn
+                Hi Brooklyn
               </h3>
             </div>
           </div>
