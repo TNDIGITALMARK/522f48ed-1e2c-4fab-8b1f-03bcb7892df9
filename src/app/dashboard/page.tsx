@@ -187,7 +187,7 @@ export default function DashboardPage() {
           {/* Log a Symptom Button */}
           <div className="relative z-10 mt-6 -mx-6 p-6 border-t" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)', borderTopColor: 'hsl(35 40% 94% / 0.4)' }}>
             <Link href="/log-symptom">
-              <Button className="w-full rounded-full text-white shadow-bloom" style={{ backgroundColor: 'hsl(35 40% 88%)' }}>
+              <Button className="w-full rounded-full text-white shadow-bloom" style={{ backgroundColor: 'hsl(35 40% 88%)', border: '2px solid black' }}>
                 <Plus className="mr-2 w-5 h-5" />
                 Log a Symptom
               </Button>

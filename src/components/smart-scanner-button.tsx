@@ -16,7 +16,7 @@ export function SmartScannerButton() {
       <Link href="/calorie-tracking" className="block">
         <Button
           className="w-full h-16 rounded-full text-white shadow-bloom transition-all duration-300 hover:shadow-bloom-lg hover:scale-[1.02] active:scale-[0.98]"
-          style={{ backgroundColor: 'hsl(35 40% 88%)' }}
+          style={{ backgroundColor: 'hsl(35 40% 88%)', border: '2px solid black' }}
           size="lg"
         >
           <div className="flex items-center justify-center gap-3">
