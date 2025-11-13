@@ -129,7 +129,7 @@ export function AISymptomTracker({
           <Heart className="w-5 h-5 text-primary" />
           How are you feeling today?
         </h3>
-        <Card className="bloom-card">
+        <Card className="calendar-container">
           <div className="grid grid-cols-5 gap-3">
             {moodOptions.map((mood) => (
               <button
@@ -163,7 +163,7 @@ export function AISymptomTracker({
             </Badge>
           )}
         </div>
-        <Card className="bloom-card">
+        <Card className="calendar-container">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {symptoms.map((symptom) => {
               const isSelected = selectedSymptoms.includes(symptom);
@@ -205,7 +205,7 @@ export function AISymptomTracker({
 
       {/* Quick AI Insight */}
       {showInsight && symptomInsight && (
-        <Card className="bloom-card bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30">
+        <Card className="calendar-container">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-5 h-5 text-secondary" />

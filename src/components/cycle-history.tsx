@@ -138,7 +138,7 @@ export function CycleHistory() {
   return (
     <div className="space-y-6">
       {/* Header with Stats */}
-      <Card className="p-6 bg-gradient-to-br from-primary/10 to-secondary/10">
+      <Card className="calendar-container">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Cycle History</h2>
           <Badge variant="secondary" className="text-sm">

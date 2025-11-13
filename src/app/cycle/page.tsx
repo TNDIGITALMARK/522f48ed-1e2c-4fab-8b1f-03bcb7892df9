@@ -135,7 +135,7 @@ export default function CyclePage() {
           <TabsContent value="today" className="space-y-6">
 
         {/* Current Cycle Status */}
-        <Card className="magazine-feature-card mb-6 bg-gradient-to-br from-secondary/20 to-secondary/5 border-2 border-secondary/20">
+        <Card className="calendar-container mb-6">
           <div className="flex items-center justify-between mb-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
@@ -208,7 +208,7 @@ export default function CyclePage() {
         {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
           const PhaseIcon = phase.icon;
           return (
-            <Card key={phase.name} className="magazine-feature-card textile-overlay-cream bg-gradient-to-br from-secondary/10 to-secondary/5 border-2 border-secondary/15 mb-6">
+            <Card key={phase.name} className="calendar-container textile-overlay-cream mb-6">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
                   <PhaseIcon className="w-7 h-7 text-secondary-foreground" />
