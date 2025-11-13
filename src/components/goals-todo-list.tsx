@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { CheckCircle2, Circle, Plus, ChevronDown, ChevronUp, Target, Calendar as CalendarIcon } from 'lucide-react';
+import { CheckCircle2, Circle, Plus, Maximize2, Minimize2, Target, Calendar as CalendarIcon } from 'lucide-react';
 import {
   getUserGoals,
   getActiveGoals,
@@ -197,12 +197,12 @@ export function GoalsTodoList({ userId }: GoalsTodoListProps) {
           size="icon"
           className="absolute bottom-4 right-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-card border-2"
           onClick={() => setIsExpanded(!isExpanded)}
-          title={isExpanded ? 'Show Less' : 'Show More'}
+          title={isExpanded ? 'Show Less' : 'Expand View'}
         >
           {isExpanded ? (
-            <ChevronUp className="w-5 h-5" />
+            <Minimize2 className="w-5 h-5" />
           ) : (
-            <ChevronDown className="w-5 h-5" />
+            <Maximize2 className="w-5 h-5" />
           )}
         </Button>
       )}

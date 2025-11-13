@@ -15,7 +15,9 @@ import {
   Salad,
   Moon as DinnerIcon,
   Clock,
-  Flame
+  Flame,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -34,6 +36,7 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
   };
 
   const [currentMeal, setCurrentMeal] = useState<'breakfast' | 'lunch' | 'dinner'>('breakfast');
+  const [isTodayTasksExpanded, setIsTodayTasksExpanded] = useState(false);
 
   useEffect(() => {
     setCurrentMeal(getCurrentMealPeriod());
@@ -94,7 +97,7 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in-up">
       {/* To-Do List Section */}
-      <Card className="magazine-feature-card p-6 hover:shadow-bloom-lg transition-all duration-300 md:col-span-2 lg:col-span-1" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+      <Card className="magazine-feature-card hover:shadow-bloom-lg transition-all duration-300 md:col-span-2 lg:col-span-1 relative" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Today's Tasks</h3>
           <Badge variant="secondary" className="text-xs">
@@ -102,8 +105,15 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
           </Badge>
         </div>
 
-        <div className="space-y-3 mb-4">
-          {todos.slice(0, 3).map(todo => (
+        {/* Scrollable container with fixed max height */}
+        <div
+          className="space-y-3 mb-4 overflow-y-auto scrollbar-hide pr-2 pb-16"
+          style={{
+            maxHeight: isTodayTasksExpanded ? '600px' : '280px',
+            transition: 'max-height 0.3s ease-in-out'
+          }}
+        >
+          {todos.map(todo => (
             <button
               key={todo.id}
               onClick={() => toggleTodo(todo.id)}
@@ -127,6 +137,23 @@ export function DashboardQuickAccess({ userId }: QuickAccessProps) {
             Add Task
           </Button>
         </Link>
+
+        {/* Expand/Collapse button in bottom right corner */}
+        {todos.length > 3 && (
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute bottom-4 right-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-card border-2"
+            onClick={() => setIsTodayTasksExpanded(!isTodayTasksExpanded)}
+            title={isTodayTasksExpanded ? 'Show Less' : 'Expand View'}
+          >
+            {isTodayTasksExpanded ? (
+              <Minimize2 className="w-5 h-5" />
+            ) : (
+              <Maximize2 className="w-5 h-5" />
+            )}
+          </Button>
+        )}
       </Card>
 
       {/* Weight & Goals Section */}
