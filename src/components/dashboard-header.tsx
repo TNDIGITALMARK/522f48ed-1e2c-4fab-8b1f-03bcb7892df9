@@ -71,15 +71,15 @@ export function DashboardHeader() {
   return (
     <>
       <header className="sticky top-0 z-10 bg-card/95 backdrop-blur-md border-b border-border/50 shadow-sm">
-        <div className="flex items-center justify-between px-4 py-1">
+        <div className="flex items-center justify-between px-4 py-0.5">
           {/* Search Bar */}
           <div className="flex-1 max-w-xs">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground" />
+              <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search wellness data, rituals..."
-                className="pl-7 py-0.5 h-7 text-xs bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary/20"
+                className="pl-6 py-0 h-6 text-[10px] bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary/20"
               />
             </div>
           </div>
@@ -87,22 +87,22 @@ export function DashboardHeader() {
           {/* Right Actions */}
           <div className="flex items-center gap-1.5">
             {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative rounded-full h-7 w-7">
-              <Bell className="w-3.5 h-3.5" />
-              <span className="absolute top-0.5 right-0.5 w-1 h-1 bg-secondary rounded-full" />
+            <Button variant="ghost" size="icon" className="relative rounded-full h-6 w-6">
+              <Bell className="w-3 h-3" />
+              <span className="absolute top-0 right-0 w-1 h-1 bg-secondary rounded-full" />
             </Button>
 
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+                <button className="flex items-center gap-1 hover:opacity-80 transition-opacity">
                   <div className="text-right hidden md:block">
-                    <p className="text-[10px] font-medium leading-tight">{userName}</p>
-                    <p className="text-[8px] text-muted-foreground leading-tight">Premium Member</p>
+                    <p className="text-[9px] font-medium leading-tight">{userName}</p>
+                    <p className="text-[7px] text-muted-foreground leading-tight">Premium Member</p>
                   </div>
-                  <Avatar className="w-7 h-7">
+                  <Avatar className="w-6 h-6">
                     {profilePicture && <AvatarImage src={profilePicture} alt={userName} />}
-                    <AvatarFallback className="bg-primary text-primary-foreground text-[10px]">
+                    <AvatarFallback className="bg-primary text-primary-foreground text-[9px]">
                       {getInitials()}
                     </AvatarFallback>
                   </Avatar>

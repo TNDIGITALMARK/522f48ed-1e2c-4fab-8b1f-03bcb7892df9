@@ -141,16 +141,16 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="max-w-6xl mx-auto pb-12 px-6">
         {/* Greeting Header */}
-        <div className="pt-8 pb-6 animate-fade-in-up">
+        <div className="pt-2 pb-3 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="text-2xl font-bold text-foreground">
               Hi {userData.name}
             </h1>
           </div>
         </div>
 
         {/* Cycle Phase Banner - Rearranged Layout */}
-        <div className="overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-2 p-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+        <div className="overflow-hidden relative animate-fade-in-up animation-delay-200 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-1 p-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
