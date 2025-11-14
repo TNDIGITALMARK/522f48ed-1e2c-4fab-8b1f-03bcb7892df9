@@ -71,8 +71,8 @@ export function RootedBalanceCircle() {
   };
 
   return (
-    <Card className="bloom-card relative overflow-hidden">
-      {/* Rectangle background with reduced opacity - height adjusted to match todo list card */}
+    <Card className="bloom-card relative overflow-hidden max-w-md mx-auto">
+      {/* Smaller rectangle background with reduced opacity */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
@@ -82,9 +82,9 @@ export function RootedBalanceCircle() {
       />
 
       {/* Rooted Balance title in small font in left corner */}
-      <div className="absolute top-6 left-6 z-20">
+      <div className="absolute top-4 left-4 z-20">
         <h2
-          className="text-sm font-light tracking-widest uppercase"
+          className="text-xs font-light tracking-widest uppercase"
           style={{
             fontFamily: "'Cormorant Garamond', Georgia, serif",
             color: colors.brown,
@@ -95,12 +95,12 @@ export function RootedBalanceCircle() {
         </h2>
       </div>
 
-      {/* Center the circle */}
-      <div className="relative z-10 flex items-center justify-center py-8 px-6 min-h-[450px] sm:min-h-[500px]">
+      {/* Center the circle in a more compact space */}
+      <div className="relative z-10 flex items-center justify-center py-6 px-4 min-h-[320px]">
         <div className="relative">
           <svg
-            width="400"
-            height="400"
+            width="280"
+            height="280"
             viewBox="0 0 400 400"
             className="drop-shadow-lg max-w-full h-auto"
           >
@@ -157,8 +157,8 @@ export function RootedBalanceCircle() {
             </text>
           </svg>
 
-          {/* Phase labels around the circle */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          {/* Phase labels around the circle - scaled for smaller size */}
+          <div className="absolute inset-0 flex items-center justify-center scale-[0.7]">
             {sections.map((section, index) => {
               const angle = toRadians(((section.startAngle + section.endAngle) / 2) - 90);
               const labelRadius = radius + 40;
@@ -168,7 +168,7 @@ export function RootedBalanceCircle() {
               return (
                 <div
                   key={index}
-                  className="absolute text-xs font-medium"
+                  className="absolute text-[11px] font-medium"
                   style={{
                     left: `${x}px`,
                     top: `${y}px`,
