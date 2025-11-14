@@ -292,7 +292,7 @@ export default function WorkoutPage() {
           <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Progress */}
-        <Card className="magazine-feature-card texture-fabric mb-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-2 border-secondary/20">
+        <Card className="magazine-feature-card texture-fabric mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
           <h3 className="text-xl font-semibold mb-4">This Week's Progress</h3>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
@@ -345,7 +345,7 @@ export default function WorkoutPage() {
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
-          <Card className="magazine-feature-card card-marble mb-6 bg-gradient-to-br from-accent/10 to-accent/5 border-2 border-accent/20">
+          <Card className="magazine-feature-card card-marble mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Weight & Goals</h3>
               <Link href="/weight">
@@ -565,7 +565,7 @@ export default function WorkoutPage() {
         </div>
 
         {/* Phase-Based Training Info */}
-        <Card className="magazine-feature-card textile-overlay-green bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/15 mt-6">
+        <Card className="magazine-feature-card textile-overlay-green border-2 border-border/40 mt-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary-foreground" />
@@ -597,7 +597,7 @@ export default function WorkoutPage() {
 
               {/* CARDIO SUB-TAB */}
               <TabsContent value="cardio" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="bloom-card border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
@@ -719,7 +719,7 @@ export default function WorkoutPage() {
 
               {/* WEIGHTS SUB-TAB */}
               <TabsContent value="weights" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="bloom-card border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
@@ -905,7 +905,7 @@ export default function WorkoutPage() {
 
           {/* WORKOUT PLAN TAB */}
           <TabsContent value="plan" className="space-y-6">
-            <Card className="bloom-card">
+            <Card className="bloom-card border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2">
