@@ -1,8 +1,11 @@
 "use client";
 
-import { useState, useMemo } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useMemo, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { AddCalendarEventDialog } from './add-calendar-event-dialog';
+import { getCalendarEventsByMonth } from '@/lib/supabase/calendar-events';
+import type { CalendarEvent } from '@/lib/types/calendar-events';
 
 interface MonthlyCalendarProps {
   className?: string;
@@ -10,6 +13,9 @@ interface MonthlyCalendarProps {
 
 export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [showAddDialog, setShowAddDialog] = useState(false);
 
   // Get calendar data
   const calendarData = useMemo(() => {
@@ -78,6 +84,48 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
+  // Load events for current month
+  useEffect(() => {
+    async function loadEvents() {
+      try {
+        const monthEvents = await getCalendarEventsByMonth(
+          currentDate.getFullYear(),
+          currentDate.getMonth()
+        );
+        setEvents(monthEvents);
+      } catch (error) {
+        console.error('Failed to load events:', error);
+      }
+    }
+    loadEvents();
+  }, [currentDate]);
+
+  // Get events for a specific date
+  const getEventsForDate = (date: number) => {
+    return events.filter((event) => {
+      const eventDate = new Date(event.start_date);
+      return (
+        eventDate.getDate() === date &&
+        eventDate.getMonth() === currentDate.getMonth() &&
+        eventDate.getFullYear() === currentDate.getFullYear()
+      );
+    });
+  };
+
+  const handleDayClick = (date: number, isCurrentMonth: boolean) => {
+    if (!isCurrentMonth) return;
+    const clickedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), date);
+    setSelectedDate(clickedDate);
+    setShowAddDialog(true);
+  };
+
+  const handleEventCreated = () => {
+    // Reload events
+    getCalendarEventsByMonth(currentDate.getFullYear(), currentDate.getMonth()).then(
+      setEvents
+    );
+  };
+
   return (
     <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-border ${className}`}>
       {/* Header */}
@@ -85,7 +133,17 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
         <h3 className="text-xl font-semibold font-['Cormorant_Garamond'] text-foreground">
           {monthName}
         </h3>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <AddCalendarEventDialog
+            onEventCreated={handleEventCreated}
+            selectedDate={selectedDate || undefined}
+            trigger={
+              <Button variant="outline" size="sm" className="gap-1 text-xs">
+                <Plus className="h-3 w-3" />
+                Add Event
+              </Button>
+            }
+          />
           <Button
             variant="ghost"
             size="sm"
@@ -119,27 +177,49 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
 
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-1">
-        {calendarData.map((day, index) => (
-          <div
-            key={index}
-            className={`
-              aspect-square flex items-center justify-center rounded-lg text-sm
-              transition-all duration-200 cursor-pointer
-              ${
-                day.isCurrentMonth
-                  ? 'text-foreground hover:bg-muted/50'
-                  : 'text-muted-foreground opacity-40'
-              }
-              ${
-                day.isToday
-                  ? 'bg-primary text-primary-foreground font-bold hover:bg-primary/90'
-                  : ''
-              }
-            `}
-          >
-            {day.date}
-          </div>
-        ))}
+        {calendarData.map((day, index) => {
+          const dayEvents = day.isCurrentMonth ? getEventsForDate(day.date) : [];
+
+          return (
+            <div
+              key={index}
+              onClick={() => handleDayClick(day.date, day.isCurrentMonth)}
+              className={`
+                aspect-square flex flex-col items-center justify-start p-1 rounded-lg text-sm
+                transition-all duration-200 cursor-pointer relative
+                ${
+                  day.isCurrentMonth
+                    ? 'text-foreground hover:bg-muted/50 hover:shadow-sm'
+                    : 'text-muted-foreground opacity-40'
+                }
+                ${
+                  day.isToday
+                    ? 'bg-primary text-primary-foreground font-bold hover:bg-primary/90'
+                    : ''
+                }
+              `}
+            >
+              <span className="mb-auto">{day.date}</span>
+
+              {/* Event indicators */}
+              {dayEvents.length > 0 && (
+                <div className="flex gap-0.5 flex-wrap justify-center mt-auto">
+                  {dayEvents.slice(0, 3).map((event) => (
+                    <div
+                      key={event.id}
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ backgroundColor: event.color }}
+                      title={event.title}
+                    />
+                  ))}
+                  {dayEvents.length > 3 && (
+                    <span className="text-[8px] ml-0.5">+{dayEvents.length - 3}</span>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
