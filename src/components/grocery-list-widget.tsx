@@ -52,13 +52,13 @@ export function GroceryListWidget() {
 
   return (
     <Card className="p-6 animate-fade-in-up widget-card">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-primary/10">
-          <ShoppingCart className="w-5 h-5 text-primary" />
+      <div className="flex flex-col items-center text-center mb-6">
+        <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-primary/10 mb-3">
+          <ShoppingCart className="w-4 h-4 text-primary" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold">Grocery List</h3>
-          <p className="text-xs text-muted-foreground">
+          <h3 className="text-sm font-semibold">Grocery List</h3>
+          <p className="text-[0.6875rem] text-muted-foreground leading-tight">
             {uncheckedCount} {uncheckedCount === 1 ? 'item' : 'items'} remaining
           </p>
         </div>
@@ -81,14 +81,14 @@ export function GroceryListWidget() {
             />
             <div className="flex-1">
               <p
-                className={`font-medium text-sm ${
+                className={`font-medium text-xs ${
                   item.checked ? 'line-through text-muted-foreground' : ''
                 }`}
               >
                 {item.name}
               </p>
               {item.quantity && (
-                <p className="text-xs text-muted-foreground">{item.quantity}</p>
+                <p className="text-[0.625rem] text-muted-foreground">{item.quantity}</p>
               )}
             </div>
             <Button

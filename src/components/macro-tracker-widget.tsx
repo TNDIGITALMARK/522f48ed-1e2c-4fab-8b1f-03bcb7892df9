@@ -21,13 +21,13 @@ export function MacroTrackerWidget() {
 
   return (
     <Card className="p-6 animate-fade-in-up widget-card">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-primary/10">
-          <TrendingUp className="w-5 h-5 text-primary" />
+      <div className="flex flex-col items-center text-center mb-6">
+        <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-primary/10 mb-3">
+          <TrendingUp className="w-4 h-4 text-primary" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold">Macros Today</h3>
-          <p className="text-xs text-muted-foreground">Track your daily nutrition</p>
+          <h3 className="text-sm font-semibold">Macros Today</h3>
+          <p className="text-[0.6875rem] text-muted-foreground leading-tight">Track your daily nutrition</p>
         </div>
       </div>
 
@@ -35,17 +35,17 @@ export function MacroTrackerWidget() {
         {macros.map((macro) => {
           const percentage = (macro.current / macro.goal) * 100;
           return (
-            <div key={macro.name} className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
+            <div key={macro.name} className="space-y-1.5">
+              <div className="flex items-center justify-between text-xs">
                 <span className="font-medium">{macro.name}</span>
-                <span className="text-muted-foreground">
+                <span className="text-muted-foreground text-[0.6875rem]">
                   {macro.current}/{macro.goal}{macro.unit}
                 </span>
               </div>
-              <Progress value={percentage} className="h-3" style={{
+              <Progress value={percentage} className="h-2" style={{
                 ['--progress-color' as string]: macro.color
               }} />
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <div className="flex items-center justify-between text-[0.625rem] text-muted-foreground">
                 <span>{percentage.toFixed(0)}% complete</span>
                 <span>{macro.goal - macro.current}{macro.unit} remaining</span>
               </div>
@@ -54,8 +54,8 @@ export function MacroTrackerWidget() {
         })}
       </div>
 
-      <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
-        <p className="text-xs text-muted-foreground">
+      <div className="mt-6 p-3 rounded-lg bg-primary/5 border border-primary/20">
+        <p className="text-[0.6875rem] text-muted-foreground leading-snug">
           💡 <span className="font-medium">Insight:</span> You're on track! Add a protein-rich
           snack to hit your goals.
         </p>

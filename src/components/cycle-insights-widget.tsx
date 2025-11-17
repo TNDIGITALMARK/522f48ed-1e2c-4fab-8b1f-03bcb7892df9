@@ -84,10 +84,10 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   if (!cycle) {
     return (
       <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 widget-card">
-        <div className="text-center py-8">
-          <Heart className="w-10 h-10 mx-auto mb-4 text-[hsl(80,12%,37%)] opacity-60" />
-          <h3 className="text-base font-semibold mb-2">Start Tracking Your Cycle</h3>
-          <p className="text-xs text-muted-foreground mb-4">
+        <div className="text-center py-6">
+          <Heart className="w-8 h-8 mx-auto mb-3 text-[hsl(80,12%,37%)] opacity-60" />
+          <h3 className="text-sm font-semibold mb-1.5">Start Tracking Your Cycle</h3>
+          <p className="text-[0.625rem] text-muted-foreground mb-3 leading-snug">
             Get personalized insights based on your menstrual cycle phase
           </p>
           <Dialog open={showSetupDialog} onOpenChange={setShowSetupDialog}>
@@ -187,15 +187,15 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
     <div className="space-y-4 widget-card">
       {/* Main Cycle Card */}
       <Card className={`rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex items-start justify-between mb-3">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center">
+            <div className="flex flex-col items-center text-center gap-1.5 mb-2">
+              <div className="w-7 h-7 rounded-full bg-white/80 flex items-center justify-center">
                 {phaseIcons[insights.phase]}
               </div>
               <div>
-                <h3 className="text-base font-semibold capitalize">{insights.phase} Phase</h3>
-                <p className="text-xs text-muted-foreground">
+                <h3 className="text-sm font-semibold capitalize">{insights.phase} Phase</h3>
+                <p className="text-[0.625rem] text-muted-foreground leading-tight">
                   Day {insights.dayInPhase} of {insights.totalDaysInPhase}
                 </p>
               </div>
@@ -265,8 +265,8 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Phase Progress */}
-        <div className="space-y-2 mb-4">
-          <div className="flex justify-between text-xs">
+        <div className="space-y-1.5 mb-3">
+          <div className="flex justify-between text-[0.625rem]">
             <span>Phase Progress</span>
             <span className="font-medium">{Math.round(insights.phaseProgress)}%</span>
           </div>
@@ -282,40 +282,40 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         </div>
 
         {/* Energy Level */}
-        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 mb-4">
-          <div className="flex items-center gap-2">
-            <Activity className={`w-4 h-4 ${energyColors[insights.energyLevel]}`} />
-            <span className="font-medium text-xs">Energy Level</span>
+        <div className="flex items-center justify-between p-2 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 mb-3">
+          <div className="flex items-center gap-1.5">
+            <Activity className={`w-3 h-3 ${energyColors[insights.energyLevel]}`} />
+            <span className="font-medium text-[0.625rem]">Energy Level</span>
           </div>
-          <Badge variant="secondary" className="capitalize text-xs">
+          <Badge variant="secondary" className="capitalize text-[0.625rem] px-2 py-0.5">
             {insights.energyLevel}
           </Badge>
         </div>
 
         {/* Next Period Prediction */}
-        <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-[hsl(80,12%,37%)]" />
-            <span className="font-medium text-xs">Next Period</span>
+        <div className="flex items-center justify-between p-2 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
+          <div className="flex items-center gap-1.5">
+            <Calendar className="w-3 h-3 text-[hsl(80,12%,37%)]" />
+            <span className="font-medium text-[0.625rem]">Next Period</span>
           </div>
           <div className="text-right">
-            <p className="font-semibold text-xs">{format(nextPeriod, 'MMM d')}</p>
-            <p className="text-xs text-muted-foreground">{daysUntilPeriod} days</p>
+            <p className="font-semibold text-[0.625rem]">{format(nextPeriod, 'MMM d')}</p>
+            <p className="text-[0.5625rem] text-muted-foreground leading-tight">{daysUntilPeriod} days</p>
           </div>
         </div>
       </Card>
 
       {/* Recommendations Card */}
       <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
-        <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="w-4 h-4 text-primary" />
-          <h4 className="font-semibold text-sm">Personalized Recommendations</h4>
+        <div className="flex flex-col items-center text-center gap-1.5 mb-3">
+          <Sparkles className="w-3.5 h-3.5 text-primary" />
+          <h4 className="font-semibold text-[0.6875rem]">Personalized Recommendations</h4>
         </div>
-        <ul className="space-y-2">
+        <ul className="space-y-1.5">
           {insights.recommendations.map((rec, index) => (
-            <li key={index} className="flex items-start gap-2 text-xs">
-              <TrendingUp className="w-3 h-3 text-primary mt-0.5 flex-shrink-0" />
-              <span>{rec}</span>
+            <li key={index} className="flex items-start gap-1.5 text-[0.625rem]">
+              <TrendingUp className="w-2.5 h-2.5 text-primary mt-0.5 flex-shrink-0" />
+              <span className="leading-snug">{rec}</span>
             </li>
           ))}
         </ul>
@@ -323,13 +323,13 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
       {/* Common Symptoms Card */}
       <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
-        <div className="flex items-center gap-2 mb-3">
-          <Heart className="w-4 h-4 text-[hsl(100,15%,67%)]" />
-          <h4 className="font-semibold text-sm">What to Expect</h4>
+        <div className="flex flex-col items-center text-center gap-1.5 mb-2.5">
+          <Heart className="w-3.5 h-3.5 text-[hsl(100,15%,67%)]" />
+          <h4 className="font-semibold text-[0.6875rem]">What to Expect</h4>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {insights.symptoms.map((symptom, index) => (
-            <Badge key={index} variant="outline" className="text-xs">
+            <Badge key={index} variant="outline" className="text-[0.625rem] px-2 py-0.5">
               {symptom}
             </Badge>
           ))}

@@ -106,8 +106,8 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
     <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 widget-card">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-base font-semibold">Smart Weekly Balance</h3>
-          <p className="text-xs text-muted-foreground">
+          <h3 className="text-sm font-semibold">Smart Weekly Balance</h3>
+          <p className="text-[0.625rem] text-muted-foreground leading-tight">
             {format(weekStart, 'MMM d')} - {format(weekEnd, 'MMM d, yyyy')}
           </p>
         </div>
@@ -140,42 +140,42 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
       </div>
 
       {/* Balance Score */}
-      <div className="space-y-2 mb-6">
+      <div className="space-y-1.5 mb-5">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium">Weekly Activity Balance</span>
-          <Badge variant={isBalanced ? 'default' : 'secondary'} className="text-xs">
+          <span className="text-[0.6875rem] font-medium">Weekly Activity Balance</span>
+          <Badge variant={isBalanced ? 'default' : 'secondary'} className="text-[0.625rem]">
             {isBalanced ? 'Well Balanced' : 'Adjusting'}
           </Badge>
         </div>
-        <Progress value={balanceScore} className="h-3" />
-        <div className="flex justify-between text-xs text-muted-foreground">
+        <Progress value={balanceScore} className="h-2" />
+        <div className="flex justify-between text-[0.625rem] text-muted-foreground">
           <span>{totalBalanceDays} of 7 days planned</span>
           <span>{Math.round(balanceScore)}%</span>
         </div>
       </div>
 
       {/* Balance Breakdown */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="text-center p-3 rounded-3xl bg-gradient-to-br from-[hsl(100,15%,95%)] to-[hsl(100,15%,92%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-          <Moon className="w-4 h-4 text-[hsl(100,15%,67%)] mx-auto mb-1" />
-          <p className="text-xl font-bold text-[hsl(80,12%,37%)]">{balanceData.restDays}</p>
-          <p className="text-xs text-[hsl(80,12%,45%)]">Rest</p>
+      <div className="grid grid-cols-3 gap-2 mb-5">
+        <div className="text-center p-2 rounded-3xl bg-gradient-to-br from-[hsl(100,15%,95%)] to-[hsl(100,15%,92%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
+          <Moon className="w-3.5 h-3.5 text-[hsl(100,15%,67%)] mx-auto mb-1.5" />
+          <p className="text-base font-bold text-[hsl(80,12%,37%)]">{balanceData.restDays}</p>
+          <p className="text-[0.625rem] text-[hsl(80,12%,45%)] leading-tight">Rest</p>
         </div>
-        <div className="text-center p-3 rounded-3xl bg-gradient-to-br from-[hsl(25,11%,92%)] to-[hsl(25,11%,88%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-          <Activity className="w-4 h-4 text-[hsl(25,11%,35%)] mx-auto mb-1" />
-          <p className="text-xl font-bold text-[hsl(25,11%,21%)]">{balanceData.moderateDays}</p>
-          <p className="text-xs text-[hsl(25,11%,35%)]">Moderate</p>
+        <div className="text-center p-2 rounded-3xl bg-gradient-to-br from-[hsl(25,11%,92%)] to-[hsl(25,11%,88%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
+          <Activity className="w-3.5 h-3.5 text-[hsl(25,11%,35%)] mx-auto mb-1.5" />
+          <p className="text-base font-bold text-[hsl(25,11%,21%)]">{balanceData.moderateDays}</p>
+          <p className="text-[0.625rem] text-[hsl(25,11%,35%)] leading-tight">Moderate</p>
         </div>
-        <div className="text-center p-3 rounded-3xl bg-gradient-to-br from-[hsl(215,43%,92%)] to-[hsl(215,43%,88%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
-          <Zap className="w-4 h-4 text-[hsl(215,43%,35%)] mx-auto mb-1" />
-          <p className="text-xl font-bold text-[hsl(215,43%,21%)]">{balanceData.activeDays}</p>
-          <p className="text-xs text-[hsl(215,43%,35%)]">Active</p>
+        <div className="text-center p-2 rounded-3xl bg-gradient-to-br from-[hsl(215,43%,92%)] to-[hsl(215,43%,88%)] border-0 shadow-sm hover:shadow-lg hover:scale-105 transition-all duration-300">
+          <Zap className="w-3.5 h-3.5 text-[hsl(215,43%,35%)] mx-auto mb-1.5" />
+          <p className="text-base font-bold text-[hsl(215,43%,21%)]">{balanceData.activeDays}</p>
+          <p className="text-[0.625rem] text-[hsl(215,43%,35%)] leading-tight">Active</p>
         </div>
       </div>
 
       {/* Week Calendar View */}
-      <div className="space-y-2 mb-6">
-        <h4 className="text-xs font-medium">This Week's Schedule</h4>
+      <div className="space-y-1.5 mb-5">
+        <h4 className="text-[0.6875rem] font-medium">This Week's Schedule</h4>
         <div className="space-y-2">
           {weekDays.map(day => {
             const dayEvents = weekEvents.filter(event =>
@@ -185,25 +185,25 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
             return (
               <div
                 key={day.toISOString()}
-                className="flex items-center gap-3 p-3 rounded-2xl bg-white/50 border-0 shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300"
+                className="flex items-center gap-2 p-2 rounded-2xl bg-white/50 border-0 shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300"
               >
-                <div className="text-center min-w-[50px]">
-                  <p className="text-xs text-muted-foreground">{format(day, 'EEE')}</p>
-                  <p className="font-semibold text-xs">{format(day, 'd')}</p>
+                <div className="text-center min-w-[40px]">
+                  <p className="text-[0.625rem] text-muted-foreground leading-tight">{format(day, 'EEE')}</p>
+                  <p className="font-semibold text-[0.6875rem]">{format(day, 'd')}</p>
                 </div>
                 <div className="flex-1">
                   {dayEvents.length === 0 ? (
-                    <p className="text-xs text-muted-foreground italic">No events</p>
+                    <p className="text-[0.625rem] text-muted-foreground italic">No events</p>
                   ) : (
-                    <div className="space-y-1">
+                    <div className="space-y-0.5">
                       {dayEvents.slice(0, 2).map(event => (
                         <div
                           key={event.id}
-                          className="flex items-center gap-2 text-xs"
+                          className="flex items-center gap-1.5 text-[0.625rem]"
                         >
                           <Badge
                             variant="outline"
-                            className={`${impactColors[event.balanceImpactType]} flex items-center gap-1 text-xs`}
+                            className={`${impactColors[event.balanceImpactType]} flex items-center gap-1 text-[0.625rem] px-1.5 py-0.5`}
                           >
                             {impactIcons[event.balanceImpactType]}
                             <span className="capitalize">{event.balanceImpactType}</span>
@@ -212,7 +212,7 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
                         </div>
                       ))}
                       {dayEvents.length > 2 && (
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-[0.625rem] text-muted-foreground">
                           +{dayEvents.length - 2} more
                         </p>
                       )}
@@ -227,11 +227,11 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
 
       {/* AI Recommendation */}
       {balanceData.recommendation && (
-        <div className="flex items-start gap-3 p-4 bg-gradient-to-br from-[hsl(100,15%,95%)] to-[hsl(100,15%,90%)] rounded-3xl border-0 shadow-sm hover:shadow-lg transition-all duration-300">
-          <Sparkles className="w-4 h-4 text-[hsl(80,12%,37%)] flex-shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 p-3 bg-gradient-to-br from-[hsl(100,15%,95%)] to-[hsl(100,15%,90%)] rounded-3xl border-0 shadow-sm hover:shadow-lg transition-all duration-300">
+          <Sparkles className="w-3 h-3 text-[hsl(80,12%,37%)] flex-shrink-0 mt-0.5" />
           <div>
-            <h4 className="font-semibold text-xs mb-1">Smart Recommendation</h4>
-            <p className="text-xs text-muted-foreground">
+            <h4 className="font-semibold text-[0.6875rem] mb-0.5">Smart Recommendation</h4>
+            <p className="text-[0.625rem] text-muted-foreground leading-snug">
               {balanceData.recommendation}
             </p>
           </div>
