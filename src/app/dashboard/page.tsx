@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { ExpandableSidebar } from '@/components/expandable-sidebar';
+import { EventsSidebar } from '@/components/events-sidebar';
 import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { Card } from '@/components/ui/card';
@@ -27,8 +28,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background relative">
-      {/* Expandable Sidebar */}
+      {/* Left Expandable Sidebar */}
       <ExpandableSidebar />
+
+      {/* Right Events Sidebar */}
+      <EventsSidebar />
 
       {/* Main Content Area */}
       <div className="min-h-screen p-8">
