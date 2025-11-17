@@ -271,7 +271,7 @@ export default function WorkoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+    <div className="min-h-screen bg-white pb-24">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
@@ -438,7 +438,7 @@ export default function WorkoutPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mb-4">
+                <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-3 bg-muted/30 rounded-lg">
                     <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
                     <p className="text-sm font-semibold">{workout.duration}</p>
@@ -455,11 +455,6 @@ export default function WorkoutPage() {
                     <p className="text-xs text-muted-foreground">Est. Calories</p>
                   </div>
                 </div>
-
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full">
-                  Start Workout
-                  <Play className="ml-2 w-4 h-4" />
-                </Button>
               </Card>
             ))}
           </div>
