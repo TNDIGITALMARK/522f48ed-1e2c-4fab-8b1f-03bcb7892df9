@@ -20,14 +20,14 @@ export function MacroTrackerWidget() {
   ];
 
   return (
-    <Card className="p-6 animate-fade-in-up">
+    <Card className="p-6 animate-fade-in-up widget-card">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-primary/10">
-          <TrendingUp className="w-6 h-6 text-primary" />
+          <TrendingUp className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h3 className="text-xl font-semibold">Macros Today</h3>
-          <p className="text-sm text-muted-foreground">Track your daily nutrition</p>
+          <h3 className="text-lg font-semibold">Macros Today</h3>
+          <p className="text-xs text-muted-foreground">Track your daily nutrition</p>
         </div>
       </div>
 
@@ -55,7 +55,7 @@ export function MacroTrackerWidget() {
       </div>
 
       <div className="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           💡 <span className="font-medium">Insight:</span> You're on track! Add a protein-rich
           snack to hit your goals.
         </p>

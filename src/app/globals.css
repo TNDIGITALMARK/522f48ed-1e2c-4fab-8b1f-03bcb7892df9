@@ -938,9 +938,32 @@ label {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-size: 0.875rem;
+  font-size: 0.75rem; /* Reduced from 0.875rem */
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+}
+
+/* Widget card base styling - Global widget font size reduction */
+.widget-card {
+  font-size: 0.875rem; /* Base widget text */
+}
+
+.widget-card h3,
+.widget-card .text-xl {
+  font-size: 1rem !important; /* Reduced heading size in widgets */
+}
+
+.widget-card .text-lg {
+  font-size: 0.9375rem !important; /* Reduced large text in widgets */
+}
+
+.widget-card .text-sm,
+.widget-card p {
+  font-size: 0.75rem !important; /* Smaller body text in widgets */
+}
+
+.widget-card .text-xs {
+  font-size: 0.625rem !important; /* Even smaller text */
 }
 
 .calendar-day:hover {

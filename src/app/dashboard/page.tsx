@@ -57,15 +57,14 @@ export default function DashboardPage() {
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
             {/* Quick Stats Row - Half Circle Widgets */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Link href="/cycle">
                 <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-end pb-6">
                   <div className="absolute top-4 w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Calendar className="w-5 h-5 text-black" />
                   </div>
                   <div className="text-center mt-2">
-                    <h3 className="font-semibold text-foreground text-sm">Cycle Tracking</h3>
-                    <p className="text-xs text-muted-foreground">Day 12 - Follicular</p>
+                    <h3 className="font-semibold text-foreground text-xs">Cycle Tracking</h3>
                   </div>
                 </div>
               </Link>
@@ -76,8 +75,7 @@ export default function DashboardPage() {
                     <Activity className="w-5 h-5 text-black" />
                   </div>
                   <div className="text-center mt-2">
-                    <h3 className="font-semibold text-foreground text-sm">Today's Workout</h3>
-                    <p className="text-xs text-muted-foreground">Strength Training</p>
+                    <h3 className="font-semibold text-foreground text-xs">Today's Workout</h3>
                   </div>
                 </div>
               </Link>
@@ -88,8 +86,18 @@ export default function DashboardPage() {
                     <Heart className="w-5 h-5 text-black" />
                   </div>
                   <div className="text-center mt-2">
-                    <h3 className="font-semibold text-foreground text-sm">Wellness Score</h3>
-                    <p className="text-xs text-muted-foreground">85% - Great!</p>
+                    <h3 className="font-semibold text-foreground text-xs">Wellness Score</h3>
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/community">
+                <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-end pb-6">
+                  <div className="absolute top-4 w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Users className="w-5 h-5 text-black" />
+                  </div>
+                  <div className="text-center mt-2">
+                    <h3 className="font-semibold text-foreground text-xs">Community</h3>
                   </div>
                 </div>
               </Link>

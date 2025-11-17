@@ -83,11 +83,11 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
   if (!cycle) {
     return (
-      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
+      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 widget-card">
         <div className="text-center py-8">
-          <Heart className="w-12 h-12 mx-auto mb-4 text-[hsl(80,12%,37%)] opacity-60" />
-          <h3 className="text-lg font-semibold mb-2">Start Tracking Your Cycle</h3>
-          <p className="text-sm text-muted-foreground mb-4">
+          <Heart className="w-10 h-10 mx-auto mb-4 text-[hsl(80,12%,37%)] opacity-60" />
+          <h3 className="text-base font-semibold mb-2">Start Tracking Your Cycle</h3>
+          <p className="text-xs text-muted-foreground mb-4">
             Get personalized insights based on your menstrual cycle phase
           </p>
           <Dialog open={showSetupDialog} onOpenChange={setShowSetupDialog}>
@@ -184,18 +184,18 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 widget-card">
       {/* Main Cycle Card */}
       <Card className={`rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
         <div className="flex items-start justify-between mb-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <div className="w-10 h-10 rounded-full bg-white/80 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center">
                 {phaseIcons[insights.phase]}
               </div>
               <div>
-                <h3 className="text-lg font-semibold capitalize">{insights.phase} Phase</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="text-base font-semibold capitalize">{insights.phase} Phase</h3>
+                <p className="text-xs text-muted-foreground">
                   Day {insights.dayInPhase} of {insights.totalDaysInPhase}
                 </p>
               </div>
@@ -266,7 +266,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
         {/* Phase Progress */}
         <div className="space-y-2 mb-4">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-xs">
             <span>Phase Progress</span>
             <span className="font-medium">{Math.round(insights.phaseProgress)}%</span>
           </div>
@@ -284,10 +284,10 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         {/* Energy Level */}
         <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300 mb-4">
           <div className="flex items-center gap-2">
-            <Activity className={`w-5 h-5 ${energyColors[insights.energyLevel]}`} />
-            <span className="font-medium">Energy Level</span>
+            <Activity className={`w-4 h-4 ${energyColors[insights.energyLevel]}`} />
+            <span className="font-medium text-xs">Energy Level</span>
           </div>
-          <Badge variant="secondary" className="capitalize">
+          <Badge variant="secondary" className="capitalize text-xs">
             {insights.energyLevel}
           </Badge>
         </div>
@@ -295,11 +295,11 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
         {/* Next Period Prediction */}
         <div className="flex items-center justify-between p-3 bg-white/50 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white/60 transition-all duration-300">
           <div className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-[hsl(80,12%,37%)]" />
-            <span className="font-medium">Next Period</span>
+            <Calendar className="w-4 h-4 text-[hsl(80,12%,37%)]" />
+            <span className="font-medium text-xs">Next Period</span>
           </div>
           <div className="text-right">
-            <p className="font-semibold">{format(nextPeriod, 'MMM d')}</p>
+            <p className="font-semibold text-xs">{format(nextPeriod, 'MMM d')}</p>
             <p className="text-xs text-muted-foreground">{daysUntilPeriod} days</p>
           </div>
         </div>
@@ -308,13 +308,13 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       {/* Recommendations Card */}
       <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="w-5 h-5 text-primary" />
-          <h4 className="font-semibold">Personalized Recommendations</h4>
+          <Sparkles className="w-4 h-4 text-primary" />
+          <h4 className="font-semibold text-sm">Personalized Recommendations</h4>
         </div>
         <ul className="space-y-2">
           {insights.recommendations.map((rec, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm">
-              <TrendingUp className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+            <li key={index} className="flex items-start gap-2 text-xs">
+              <TrendingUp className="w-3 h-3 text-primary mt-0.5 flex-shrink-0" />
               <span>{rec}</span>
             </li>
           ))}
@@ -324,12 +324,12 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       {/* Common Symptoms Card */}
       <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex items-center gap-2 mb-3">
-          <Heart className="w-5 h-5 text-[hsl(100,15%,67%)]" />
-          <h4 className="font-semibold">What to Expect</h4>
+          <Heart className="w-4 h-4 text-[hsl(100,15%,67%)]" />
+          <h4 className="font-semibold text-sm">What to Expect</h4>
         </div>
         <div className="flex flex-wrap gap-2">
           {insights.symptoms.map((symptom, index) => (
-            <Badge key={index} variant="outline">
+            <Badge key={index} variant="outline" className="text-xs">
               {symptom}
             </Badge>
           ))}

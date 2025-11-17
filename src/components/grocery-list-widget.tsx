@@ -51,14 +51,14 @@ export function GroceryListWidget() {
   const uncheckedCount = items.filter(item => !item.checked).length;
 
   return (
-    <Card className="p-6 animate-fade-in-up">
+    <Card className="p-6 animate-fade-in-up widget-card">
       <div className="flex items-center gap-3 mb-6">
         <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-primary/10">
-          <ShoppingCart className="w-6 h-6 text-primary" />
+          <ShoppingCart className="w-5 h-5 text-primary" />
         </div>
         <div>
-          <h3 className="text-xl font-semibold">Grocery List</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="text-lg font-semibold">Grocery List</h3>
+          <p className="text-xs text-muted-foreground">
             {uncheckedCount} {uncheckedCount === 1 ? 'item' : 'items'} remaining
           </p>
         </div>
@@ -81,7 +81,7 @@ export function GroceryListWidget() {
             />
             <div className="flex-1">
               <p
-                className={`font-medium ${
+                className={`font-medium text-sm ${
                   item.checked ? 'line-through text-muted-foreground' : ''
                 }`}
               >
