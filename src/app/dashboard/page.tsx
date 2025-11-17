@@ -7,6 +7,7 @@ import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
+import { VisionBoardWidget } from '@/components/vision-board-widget';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
@@ -58,6 +59,9 @@ export default function DashboardPage() {
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
+            {/* Monthly Vision Board - New Feature */}
+            <VisionBoardWidget />
+
             {/* Important Tasks with integrated Wellness Bars */}
             <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
 

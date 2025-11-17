@@ -52,31 +52,31 @@ export interface ColorScheme {
 
 export const DEFAULT_THEMES: Record<string, ColorScheme> = {
   brownBeige: {
-    id: 'brown-beige-v7', // Updated to v7 with pure white background
+    id: 'brown-beige-v8', // Updated to v8 - synchronized with globals.css :root values
     name: 'Rooted Earth Tones',
     description: 'Sage green, olive, brown, and navy palette with pure white background',
     isDefault: true,
     colors: {
-      // Updated to match globals.css - Pure white background
-      primary: '80 12% 37%', // --rooted-olive (Medium olive green)
-      primaryForeground: '0 0% 100%',
-      secondary: '100 15% 67%', // --rooted-sage (Light sage green)
-      secondaryForeground: '25 11% 21%',
-      background: '0 0% 100%', // Pure white background (#FFFFFF) - matching planner aesthetic
-      foreground: '25 11% 21%', // --rooted-brown (Dark brown text)
-      card: '100 20% 95%', // Light sage-tinted cards
-      cardForeground: '25 11% 21%',
-      accent: '215 43% 21%', // --rooted-navy (Deep navy accent)
-      accentForeground: '0 0% 100%',
-      muted: '100 15% 88%', // Light sage for muted elements
-      mutedForeground: '80 12% 35%',
-      border: '100 15% 82%', // Soft sage border
-      input: '100 15% 82%',
-      ring: '80 12% 37%', // Olive green focus ring
-      destructive: '10 45% 48%', // Earth red
-      destructiveForeground: '0 0% 100%',
-      popover: '100 20% 95%',
-      popoverForeground: '25 11% 21%',
+      // SYNCHRONIZED WITH globals.css :root section (lines 70-142)
+      primary: '80 12% 37%', // --primary: 80 12% 37% (Medium olive green #5A604D)
+      primaryForeground: '0 0% 100%', // --primary-foreground: 0 0% 100%
+      secondary: '100 15% 67%', // --secondary: 100 15% 67% (Light sage green #A8B8A5)
+      secondaryForeground: '25 11% 21%', // --secondary-foreground: 25 11% 21%
+      background: '0 0% 100%', // --background: 0 0% 100% (Pure white #FFFFFF)
+      foreground: '25 11% 21%', // --foreground: 25 11% 21% (Dark brown text #3E3530)
+      card: '100 20% 95%', // --card: 100 20% 95% (Light sage-tinted cards)
+      cardForeground: '25 11% 21%', // --card-foreground: 25 11% 21%
+      accent: '215 43% 21%', // --accent: 215 43% 21% (Deep navy accent #1E2F4D)
+      accentForeground: '0 0% 100%', // --accent-foreground: 0 0% 100%
+      muted: '100 15% 88%', // --muted: 100 15% 88% (Light sage for muted elements)
+      mutedForeground: '80 12% 35%', // --muted-foreground: 80 12% 35%
+      border: '100 15% 82%', // --border: 100 15% 82% (Soft sage border)
+      input: '100 15% 82%', // --input: 100 15% 82%
+      ring: '80 12% 37%', // --ring: 80 12% 37% (Olive green focus ring)
+      destructive: '10 45% 48%', // --destructive: 10 45% 48% (Earth red)
+      destructiveForeground: '0 0% 100%', // --destructive-foreground: 0 0% 100%
+      popover: '100 20% 95%', // --popover: 100 20% 95%
+      popoverForeground: '25 11% 21%', // --popover-foreground: 25 11% 21%
     },
   },
   minimalistNeutral: {
