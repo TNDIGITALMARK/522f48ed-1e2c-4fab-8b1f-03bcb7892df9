@@ -35,7 +35,28 @@ const PRESET_COLORS = [
   { name: 'Lemon', value: '#f5f5b5' },
   { name: 'Aqua', value: '#b5f5f0' },
   { name: 'Sunset', value: '#f5c5b5' },
-  { name: 'Ocean', value: '#b5c5f5' }
+  { name: 'Ocean', value: '#b5c5f5' },
+  { name: 'Tangerine', value: '#ffb86c' },
+  { name: 'Orchid', value: '#e8c1ff' },
+  { name: 'Seafoam', value: '#9aedca' },
+  { name: 'Blush', value: '#ffccd5' },
+  { name: 'Honey', value: '#ffd89b' },
+  { name: 'Periwinkle', value: '#c5d0f7' },
+  { name: 'Apricot', value: '#ffc5a1' },
+  { name: 'Mint Green', value: '#b5f0d4' },
+  { name: 'Powder Blue', value: '#d4e8ff' },
+  { name: 'Cantaloupe', value: '#ffdab9' },
+  { name: 'Wisteria', value: '#d4b3ff' },
+  { name: 'Lime', value: '#d4f5b5' },
+  { name: 'Cherry', value: '#ffc1d1' },
+  { name: 'Turquoise', value: '#b5f5ea' },
+  { name: 'Buttercup', value: '#fff5b5' },
+  { name: 'Plum', value: '#ddb5f5' },
+  { name: 'Pistachio', value: '#d1f5c1' },
+  { name: 'Berry', value: '#f5b5d8' },
+  { name: 'Teal', value: '#b5e8f5' },
+  { name: 'Marigold', value: '#ffe4b5' },
+  { name: 'Iris', value: '#d4c1ff' }
 ];
 
 export function SmartCalendar({ userId }: SmartCalendarProps) {
@@ -358,7 +379,7 @@ export function SmartCalendar({ userId }: SmartCalendarProps) {
             <div className="space-y-2">
               <Label>Event Color</Label>
               <div className="space-y-3">
-                <div className="grid grid-cols-6 gap-2">
+                <div className="grid grid-cols-8 gap-2 max-h-48 overflow-y-auto pr-2 scrollbar-thin">
                   {PRESET_COLORS.map((colorOption) => (
                     <button
                       key={colorOption.value}

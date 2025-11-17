@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 export interface WellnessJourney {
   id: string;
   title: string;
-  goalType: 'half-marathon' | 'marathon' | 'hyrox' | 'running-endurance' | '5k' | '10k' | 'triathlon' | 'custom';
+  goalType: 'half-marathon' | 'marathon' | 'hyrox' | 'running-endurance' | '5k' | '10k' | 'triathlon' | '75-hard' | 'custom';
   targetDate: string;
   currentLevel: 'beginner' | 'intermediate' | 'advanced';
   weeklyCommitment: number; // hours per week
@@ -132,6 +132,20 @@ const JOURNEY_TEMPLATES = {
       { week: 12, title: 'Brick Workouts', description: 'Successfully complete bike-to-run transitions' },
       { week: 16, title: 'Full Simulation', description: 'Complete a full triathlon distance in training' },
       { week: 20, title: 'Race Day', description: 'Complete your triathlon!' },
+    ],
+  },
+  '75-hard': {
+    title: '75 Hard Challenge',
+    description: 'Mental toughness program: 2 workouts daily (1 outdoor), gallon of water, read 10 pages, follow diet, progress photo - 75 days straight',
+    duration: '75 days',
+    icon: '🔥',
+    focusAreas: ['Mental Toughness', 'Discipline', 'Daily Workouts', 'Nutrition', 'Reading', 'Consistency'],
+    weeklyHours: '7-10 hours',
+    milestones: [
+      { week: 3, title: 'Establish Routine', description: 'Complete first 21 days - habits forming' },
+      { week: 6, title: 'Quarter Mark', description: 'Hit 45 days - mental strength building' },
+      { week: 9, title: 'Two-Thirds Complete', description: 'Reach 60 days - the finish line is in sight' },
+      { week: 11, title: '75 Days Complete!', description: 'Finish all 75 days - you did it!' },
     ],
   },
 };
