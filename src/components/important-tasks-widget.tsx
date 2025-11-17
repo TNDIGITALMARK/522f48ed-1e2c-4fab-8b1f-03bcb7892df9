@@ -46,6 +46,9 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
         completed_at: !completed ? new Date().toISOString() : undefined
       });
       loadMonthlyGoals();
+
+      // Trigger a custom event to notify wellness bars of the change
+      window.dispatchEvent(new CustomEvent('wellness-update'));
     } catch (error) {
       console.error('Error toggling goal:', error);
     }
