@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ExpandableSidebar } from '@/components/expandable-sidebar';
 import { EventsSidebar } from '@/components/events-sidebar';
+import { TasksSidebar } from '@/components/tasks-sidebar';
 import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
@@ -10,13 +11,14 @@ import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
+import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [userName] = useState('Brooklyn');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isTasksSidebarOpen, setIsTasksSidebarOpen] = useState(false);
   const goalsPanelRef = useRef<{ reloadGoals: () => void } | null>(null);
 
   useEffect(() => {
@@ -35,8 +37,8 @@ export default function DashboardPage() {
       {/* Left Expandable Sidebar */}
       <ExpandableSidebar />
 
-      {/* Right Events Sidebar - Controlled state */}
-      <EventsSidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
+      {/* Right Tasks Sidebar - Controlled state */}
+      <TasksSidebar isOpen={isTasksSidebarOpen} onOpenChange={setIsTasksSidebarOpen} />
 
       {/* Main Content Area */}
       <div className="min-h-screen p-8">
@@ -59,8 +61,19 @@ export default function DashboardPage() {
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
-            {/* Monthly Vision Board - New Feature */}
-            <VisionBoardWidget />
+            {/* Monthly Vision Board with Tasks Button */}
+            <div className="relative">
+              <VisionBoardWidget />
+              <Button
+                onClick={() => setIsTasksSidebarOpen(true)}
+                variant="outline"
+                size="sm"
+                className="absolute top-4 right-4 gap-2 bg-white/80 backdrop-blur-sm hover:bg-white"
+              >
+                <CheckCircle2 className="w-4 h-4" />
+                View Tasks
+              </Button>
+            </div>
 
             {/* Important Tasks with integrated Wellness Bars */}
             <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />

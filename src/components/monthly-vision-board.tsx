@@ -113,40 +113,136 @@ export function MonthlyVisionBoard({ userId }: VisionBoardProps) {
               </p>
             </div>
 
-            {/* Vision Board Grid */}
+            {/* Vision Board Collage Grid */}
             {visionImages.length > 0 ? (
-              <div className="grid grid-cols-3 gap-3 mb-4">
-                {visionImages.map((image, index) => (
-                  <div
-                    key={image.id}
-                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    {/* Image Preview */}
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 33vw, 200px"
-                    />
-
-                    {/* Remove Button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveImage(image.id);
-                      }}
-                      className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
-                      aria-label={`Remove ${image.alt}`}
-                    >
-                      <X className="w-3 h-3 text-destructive-foreground" />
-                    </button>
-
-                    {/* Overlay on Hover */}
-                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="mb-4">
+                {/* Dynamic Collage Layout based on number of photos */}
+                {visionImages.length === 1 && (
+                  <div className="grid grid-cols-1 gap-3">
+                    {visionImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="relative aspect-[16/9] rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleRemoveImage(image.id); }}
+                          className="absolute top-2 right-2 p-1.5 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                          aria-label={`Remove ${image.alt}`}
+                        >
+                          <X className="w-4 h-4 text-destructive-foreground" />
+                        </button>
+                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
+
+                {visionImages.length === 2 && (
+                  <div className="grid grid-cols-2 gap-3">
+                    {visionImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="relative aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 300px" />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleRemoveImage(image.id); }}
+                          className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                          aria-label={`Remove ${image.alt}`}
+                        >
+                          <X className="w-3 h-3 text-destructive-foreground" />
+                        </button>
+                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {visionImages.length === 3 && (
+                  <div className="grid grid-cols-3 gap-3">
+                    {visionImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="relative aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 33vw, 200px" />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleRemoveImage(image.id); }}
+                          className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                          aria-label={`Remove ${image.alt}`}
+                        >
+                          <X className="w-3 h-3 text-destructive-foreground" />
+                        </button>
+                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {visionImages.length === 4 && (
+                  <div className="grid grid-cols-2 gap-3">
+                    {visionImages.map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="relative aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 300px" />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleRemoveImage(image.id); }}
+                          className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                          aria-label={`Remove ${image.alt}`}
+                        >
+                          <X className="w-3 h-3 text-destructive-foreground" />
+                        </button>
+                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {visionImages.length >= 5 && (
+                  <div className="grid grid-cols-6 gap-3">
+                    {/* First image spans 2 rows and 3 columns (large feature) */}
+                    <div
+                      className="relative col-span-3 row-span-2 rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                      style={{ animationDelay: '0ms' }}
+                    >
+                      <Image src={visionImages[0].src} alt={visionImages[0].alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 400px" />
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleRemoveImage(visionImages[0].id); }}
+                        className="absolute top-2 right-2 p-1.5 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                        aria-label={`Remove ${visionImages[0].alt}`}
+                      >
+                        <X className="w-4 h-4 text-destructive-foreground" />
+                      </button>
+                      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+
+                    {/* Remaining images in a grid */}
+                    {visionImages.slice(1).map((image, index) => (
+                      <div
+                        key={image.id}
+                        className="relative col-span-3 aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                        style={{ animationDelay: `${(index + 1) * 50}ms` }}
+                      >
+                        <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 33vw, 200px" />
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleRemoveImage(image.id); }}
+                          className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                          aria-label={`Remove ${image.alt}`}
+                        >
+                          <X className="w-3 h-3 text-destructive-foreground" />
+                        </button>
+                        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ) : (
               <div className="mb-4 p-8 rounded-lg border-2 border-dashed border-border/50 bg-muted/10 flex flex-col items-center justify-center text-center">
