@@ -7,7 +7,7 @@ import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
-import { WellnessBars, AllInOneWellness } from '@/components/wellness-bars';
+import { WellnessBars } from '@/components/wellness-bars';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
@@ -59,13 +59,6 @@ export default function DashboardPage() {
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
-            {/* All in One Wellness - Under November heading */}
-            <div className="flex justify-center">
-              <div className="w-full max-w-sm">
-                <AllInOneWellness />
-              </div>
-            </div>
-
             {/* Important Tasks and Wellness Bars - Side by side */}
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
               <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
