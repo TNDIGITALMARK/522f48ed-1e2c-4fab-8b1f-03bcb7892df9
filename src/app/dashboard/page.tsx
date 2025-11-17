@@ -10,14 +10,26 @@ import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles, CheckCircle2, Apple, Brain, Moon } from 'lucide-react';
 import Link from 'next/link';
+import { DashboardSettings } from '@/components/dashboard-settings';
+import { useWellnessGoals } from '@/hooks/use-wellness-goals';
+
+const GOAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  fitness: Activity,
+  nutrition: Apple,
+  mental: Brain,
+  sleep: Moon,
+  cycle: Heart,
+  holistic: Sparkles,
+};
 
 export default function DashboardPage() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [userName] = useState('Brooklyn');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isTasksSidebarOpen, setIsTasksSidebarOpen] = useState(false);
+  const { goals, isLoading: goalsLoading } = useWellnessGoals();
 
   useEffect(() => {
     // Get current month name
@@ -44,9 +56,30 @@ export default function DashboardPage() {
             </h1>
 
             <div className="text-center flex-1">
-              <p className="text-sm text-muted-foreground font-light tracking-wide">
+              <p className="text-sm text-muted-foreground font-light tracking-wide mb-2">
                 Hi {userName}
               </p>
+              {!goalsLoading && goals.length > 0 && (
+                <div className="flex items-center justify-center gap-1.5 flex-wrap">
+                  {goals.slice(0, 4).map((goalId) => {
+                    const Icon = GOAL_ICONS[goalId] || Sparkles;
+                    return (
+                      <div
+                        key={goalId}
+                        className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center"
+                        title={`${goalId} goal active`}
+                      >
+                        <Icon className="w-3.5 h-3.5 text-primary" />
+                      </div>
+                    );
+                  })}
+                  {goals.length > 4 && (
+                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-medium text-primary">
+                      +{goals.length - 4}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="w-32"></div> {/* Spacer for balance */}
@@ -127,25 +160,76 @@ export default function DashboardPage() {
 
               {/* RIGHT SIDE - Focus, Progress, and Goals */}
               <div className="lg:col-span-1 space-y-8">
-                {/* Today's Focus Card */}
+                {/* Today's Focus Card - Personalized based on wellness goals */}
                 <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
                   <div className="flex items-center gap-3 mb-4">
                     <Sparkles className="w-5 h-5 text-primary" />
                     <h2 className="text-xl font-semibold font-['Cormorant_Garamond']">Today's Focus</h2>
                   </div>
                   <div className="space-y-3">
-                    <div className="p-3 bg-background/50 rounded-lg">
-                      <h3 className="font-medium text-foreground mb-1 text-sm">Morning Intention</h3>
-                      <p className="text-xs text-muted-foreground">
-                        Start your day with gratitude and movement. Your body is ready for energy and nourishment.
-                      </p>
-                    </div>
-                    <div className="p-3 bg-background/50 rounded-lg">
-                      <h3 className="font-medium text-foreground mb-1 text-sm">Nutrition Tip</h3>
-                      <p className="text-xs text-muted-foreground">
-                        You're in your follicular phase - great time for complex carbs and lean proteins.
-                      </p>
-                    </div>
+                    {goals.includes('fitness') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
+                          <Activity className="w-3.5 h-3.5" />
+                          Movement & Strength
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Your body is ready for movement today. Focus on exercises that energize and strengthen you.
+                        </p>
+                      </div>
+                    )}
+                    {goals.includes('nutrition') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
+                          <Apple className="w-3.5 h-3.5" />
+                          Nutrition Tip
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Prioritize whole foods and stay hydrated. Your nutrition choices today support your goals.
+                        </p>
+                      </div>
+                    )}
+                    {goals.includes('mental') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
+                          <Brain className="w-3.5 h-3.5" />
+                          Mindfulness Moment
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Take time for stillness today. Even 5 minutes of meditation can ground your mind.
+                        </p>
+                      </div>
+                    )}
+                    {goals.includes('sleep') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
+                          <Moon className="w-3.5 h-3.5" />
+                          Rest & Recovery
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Quality rest is essential. Create a calming evening routine for better sleep tonight.
+                        </p>
+                      </div>
+                    )}
+                    {goals.includes('cycle') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
+                          <Heart className="w-3.5 h-3.5" />
+                          Cycle Awareness
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          Listen to your body's rhythms. Align your activities with your natural cycle.
+                        </p>
+                      </div>
+                    )}
+                    {(goals.includes('holistic') || goals.length === 0) && !goals.includes('fitness') && !goals.includes('nutrition') && (
+                      <div className="p-3 bg-background/50 rounded-lg">
+                        <h3 className="font-medium text-foreground mb-1 text-sm">Morning Intention</h3>
+                        <p className="text-xs text-muted-foreground">
+                          Start your day with gratitude and balance. Your wellness journey is uniquely yours.
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </Card>
 
@@ -214,6 +298,16 @@ export default function DashboardPage() {
                 </Button>
               </Link>
             </Card>
+
+            {/* Dashboard Customization Settings - Bottom of page */}
+            <div className="flex justify-center items-center py-8 border-t border-border/30 mt-8">
+              <div className="text-center space-y-3">
+                <p className="text-xs text-muted-foreground">
+                  Personalize your wellness dashboard
+                </p>
+                <DashboardSettings />
+              </div>
+            </div>
           </div>
         </div>
       </div>
