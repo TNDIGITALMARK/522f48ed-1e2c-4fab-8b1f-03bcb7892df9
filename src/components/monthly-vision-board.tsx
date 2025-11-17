@@ -89,7 +89,7 @@ export function MonthlyVisionBoard({ userId }: VisionBoardProps) {
         aria-label={`${isOpen ? 'Collapse' : 'Expand'} monthly vision board`}
       >
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground font-medium tracking-wide">
+          <span className="text-xs text-muted-foreground font-medium tracking-wide font-['Cormorant_Garamond']">
             Monthly Vision Board
           </span>
         </div>

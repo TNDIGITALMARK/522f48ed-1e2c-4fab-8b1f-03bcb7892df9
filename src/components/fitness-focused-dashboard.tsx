@@ -66,7 +66,7 @@ export function FitnessFocusedDashboard() {
         {/* Greeting Header */}
         <div className="pt-2 pb-3 animate-fade-in-up">
           <div className="flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-bold text-foreground">
+            <h1 className="text-2xl font-bold text-foreground text-center font-['Cormorant_Garamond']">
               Hi {userData.name}
             </h1>
           </div>

@@ -102,7 +102,7 @@ export function ExpandableSidebar() {
           <div className="p-5 space-y-3">
             {/* Close Button */}
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800">My Daily Life</h2>
+              <h2 className="text-lg font-semibold text-gray-800 font-['Cormorant_Garamond']">My Daily Life</h2>
               <Button
                 onClick={() => setIsExpanded(false)}
                 variant="ghost"
@@ -121,7 +121,7 @@ export function ExpandableSidebar() {
               >
                 <div className="flex items-center gap-2">
                   <span className="text-lg">⭐</span>
-                  <h3 className="text-sm font-medium text-gray-800">Morning Routines</h3>
+                  <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Morning Routines</h3>
                 </div>
                 {morningExpanded ? (
                   <ChevronDown className="w-4 h-4 text-black/70" />
@@ -164,7 +164,7 @@ export function ExpandableSidebar() {
               >
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🌙</span>
-                  <h3 className="text-sm font-medium text-gray-800">Evening Routines</h3>
+                  <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Evening Routines</h3>
                 </div>
                 {nightExpanded ? (
                   <ChevronDown className="w-4 h-4 text-black/70" />
@@ -207,7 +207,7 @@ export function ExpandableSidebar() {
               >
                 <div className="flex items-center gap-2">
                   <span className="text-lg">🖤</span>
-                  <h3 className="text-sm font-medium text-gray-800">Monthly Goals</h3>
+                  <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Monthly Goals</h3>
                 </div>
                 {goalsExpanded ? (
                   <ChevronDown className="w-4 h-4 text-black/70" />
@@ -241,7 +241,7 @@ export function ExpandableSidebar() {
             <div className="space-y-2 pt-1">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-lg">🖤</span>
-                <h3 className="text-sm font-medium text-gray-800">Life Progress Bar</h3>
+                <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Life Progress Bar</h3>
               </div>
               {progressBars.map((bar) => {
                 const Icon = bar.icon;

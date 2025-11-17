@@ -130,7 +130,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
           <div className="p-5 space-y-3">
             {/* Close Button */}
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800">Daily & Weekly Tasks</h2>
+              <h2 className="text-lg font-semibold text-gray-800 font-['Cormorant_Garamond']">Daily & Weekly Tasks</h2>
               <Button
                 onClick={() => setIsExpanded(false)}
                 variant="ghost"
@@ -149,7 +149,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
-                  <h3 className="text-sm font-medium text-gray-800">Daily Tasks</h3>
+                  <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Daily Tasks</h3>
                   <span className="text-xs text-gray-500">
                     ({dailyCompleted}/{dailyTasks.length})
                   </span>
@@ -239,7 +239,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
               >
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-secondary" />
-                  <h3 className="text-sm font-medium text-gray-800">Weekly Tasks</h3>
+                  <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Weekly Tasks</h3>
                   <span className="text-xs text-gray-500">
                     ({weeklyCompleted}/{weeklyTasks.length})
                   </span>
