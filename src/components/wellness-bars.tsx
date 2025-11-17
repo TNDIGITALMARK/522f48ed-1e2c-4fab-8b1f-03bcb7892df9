@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { TrendingUp, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { getWeeklyGoals, getMonthlyGoals, type WeeklyGoal, type MonthlyGoal } from '@/lib/supabase/goals';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfQuarter, endOfQuarter, startOfYear, endOfYear } from 'date-fns';
 
@@ -132,71 +132,43 @@ export function WellnessBars() {
 
   if (isLoading) {
     return (
-      <Card className="p-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30">
-        <div className="flex items-center gap-3 mb-6">
-          <TrendingUp className="w-6 h-6 text-secondary animate-pulse" />
-          <h3 className="text-xl font-semibold font-['Cormorant_Garamond']">
-            Wellness Progress
-          </h3>
-        </div>
-        <div className="space-y-4">
-          <div className="h-8 bg-muted/30 rounded animate-pulse" />
-          <div className="h-8 bg-muted/30 rounded animate-pulse" />
-          <div className="h-8 bg-muted/30 rounded animate-pulse" />
-          <div className="h-8 bg-muted/30 rounded animate-pulse" />
-        </div>
-      </Card>
+      <div className="space-y-4">
+        <div className="h-8 bg-muted/30 rounded animate-pulse" />
+        <div className="h-8 bg-muted/30 rounded animate-pulse" />
+        <div className="h-8 bg-muted/30 rounded animate-pulse" />
+        <div className="h-8 bg-muted/30 rounded animate-pulse" />
+      </div>
     );
   }
 
   return (
-    <Card className="p-6 bg-gradient-to-br from-secondary/10 to-secondary/5 border-secondary/30">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <TrendingUp className="w-6 h-6 text-secondary" />
-        <h3 className="text-xl font-semibold font-['Cormorant_Garamond']">
-          Wellness Progress
-        </h3>
-      </div>
-
-      {/* Progress Bars */}
-      <div className="space-y-4">
-        <WellnessBar
-          label="Weekly"
-          completed={weeklyStats.completed}
-          total={weeklyStats.total}
-          color="bg-gradient-to-r from-primary to-primary/80"
-        />
-        <WellnessBar
-          label="Monthly"
-          completed={monthlyStats.completed}
-          total={monthlyStats.total}
-          color="bg-gradient-to-r from-secondary to-secondary/80"
-        />
-        <WellnessBar
-          label="Quarterly"
-          completed={quarterlyStats.completed}
-          total={quarterlyStats.total}
-          color="bg-gradient-to-r from-accent to-accent/80"
-        />
-        <WellnessBar
-          label="Yearly"
-          completed={yearlyStats.completed}
-          total={yearlyStats.total}
-          color="bg-gradient-to-r from-primary/70 to-secondary/70"
-        />
-      </div>
-
-      {/* Footer Insight */}
-      <div className="mt-6 pt-4 border-t border-border/50">
-        <div className="flex items-start gap-2">
-          <Calendar className="w-4 h-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-muted-foreground leading-relaxed">
-            Your wellness bars grow as you complete tasks. Stay consistent to reach your goals!
-          </p>
-        </div>
-      </div>
-    </Card>
+    <div className="space-y-4">
+      {/* Progress Bars - Just the bars, no wrapper */}
+      <WellnessBar
+        label="Weekly"
+        completed={weeklyStats.completed}
+        total={weeklyStats.total}
+        color="bg-gradient-to-r from-primary to-primary/80"
+      />
+      <WellnessBar
+        label="Monthly"
+        completed={monthlyStats.completed}
+        total={monthlyStats.total}
+        color="bg-gradient-to-r from-secondary to-secondary/80"
+      />
+      <WellnessBar
+        label="Quarterly"
+        completed={quarterlyStats.completed}
+        total={quarterlyStats.total}
+        color="bg-gradient-to-r from-accent to-accent/80"
+      />
+      <WellnessBar
+        label="Yearly"
+        completed={yearlyStats.completed}
+        total={yearlyStats.total}
+        color="bg-gradient-to-r from-primary/70 to-secondary/70"
+      />
+    </div>
   );
 }
 

@@ -60,7 +60,7 @@ export default function DashboardPage() {
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
             {/* Important Tasks and Wellness Bars - Side by side */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
               <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
               <WellnessBars />
             </div>
