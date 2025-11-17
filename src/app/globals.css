@@ -90,8 +90,8 @@ VISUAL EFFECTS:
   --color-dark-green: 140 30% 20%; /* Dark green accent */
   --color-beige: 35 32% 88%; /* Beige accent */
 
-  /* Light theme - Lighter white background with cream/beige accents */
-  --background: 0 0% 98%; /* Lighter white background - very close to pure white */
+  /* Light theme - Pure white background matching planner photo */
+  --background: 0 0% 100%; /* Pure white background (#FFFFFF) - matching planner aesthetic */
   --foreground: 25 11% 21%; /* #3E3530 - Dark brown text */
 
   /* Cards with sage green tint */

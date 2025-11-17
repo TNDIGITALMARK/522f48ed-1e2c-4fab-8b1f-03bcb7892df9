@@ -30,6 +30,7 @@ import { HomepageCustomizerButton } from '@/components/homepage-customizer-butto
 import { CircularNavigation } from '@/components/circular-navigation';
 import { DashboardQuickAccess } from '@/components/dashboard-quick-access';
 import { SmartScannerButton } from '@/components/smart-scanner-button';
+import { MonthlyVisionBoard } from '@/components/monthly-vision-board';
 import Link from 'next/link';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -186,59 +187,53 @@ function CustomDashboard() {
           </div>
         </div>
 
-        {/* Cycle Phase Banner - Ovulation Widget with Animation */}
-        <div className="overflow-hidden relative animate-fade-in-up animation-delay-300 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] mt-1 p-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
-          {/* Animated background gradient pulse */}
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
-          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
-            <BloomingFlower size={120} duration={3000} delay={1500} />
-          </div>
+        {/* Simplified Cycle Phase Card */}
+        <div className="animate-fade-in-up animation-delay-300 mt-1">
+          <Card className="calendar-container p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Your Cycle Phase</p>
+                <h2 className="text-2xl font-bold">{userData.phase}</h2>
+                <p className="text-muted-foreground">Day {userData.cycleDay} of your cycle</p>
+              </div>
+              <Link href="/cycle">
+                <Button variant="outline" className="rounded-full">
+                  View Details
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
 
-          {/* Title at top */}
-          <div className="relative z-10 mb-6">
-            <p className="text-sm text-muted-foreground mb-2 text-center">Your Cycle Phase</p>
-          </div>
+            {/* Cycle progress bar */}
+            <div className="relative h-2 bg-muted/30 rounded-full overflow-hidden mb-4">
+              <div
+                className="absolute h-full bg-gradient-to-r from-accent via-primary to-secondary rounded-full transition-all"
+                style={{ width: `${(userData.cycleDay / 28) * 100}%` }}
+              />
+            </div>
 
-          {/* 3D Animated Hormone Wave - Main focus now */}
-          <div className="relative z-10 mb-6 -mx-6">
-            <HormoneWave3D
-              phase="ovulation"
-              width={800}
-              height={180}
-              className="w-full"
-            />
-          </div>
-
-          {/* Phase info - Now below the animation */}
-          <div className="relative z-10 mb-6 text-center">
-            <h2 className="text-3xl font-bold mb-2">{userData.phase}</h2>
-            <p className="text-muted-foreground mb-4">Day {userData.cycleDay} of your cycle</p>
-            <Link href="/cycle">
-              <Button className="rounded-full">
-                View Details
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-          </div>
-
-          {/* Log a Symptom Button */}
-          <div className="relative z-10 mt-6 -mx-6 p-6 border-t" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)', borderTopColor: 'hsl(35 40% 94% / 0.4)' }}>
-            <Link href="/log-symptom">
-              <Button className="w-full rounded-full shadow-bloom" style={{ backgroundColor: 'hsl(35 40% 88%)', border: '2px solid rgba(0, 0, 0, 0.4)', color: 'hsl(var(--foreground))', fontFamily: 'Montserrat, sans-serif', fontWeight: 500 }}>
+            {/* Log a Symptom Button */}
+            <Link href="/log-symptom" className="w-full">
+              <Button className="w-full rounded-full" variant="outline">
                 <Plus className="mr-2 w-5 h-5" />
                 Log a Symptom
               </Button>
             </Link>
-          </div>
+          </Card>
         </div>
 
-        {/* Smart Scanner Button - NEW: Above Calendar, Below Log a Symptom */}
+        {/* Monthly Vision Board Dropdown - NEW */}
         <div className="animate-fade-in-up animation-delay-350 mt-4">
+          <MonthlyVisionBoard userId={MOCK_USER_ID} />
+        </div>
+
+        {/* Smart Scanner Button */}
+        <div className="animate-fade-in-up animation-delay-400 mt-4">
           <SmartScannerButton />
         </div>
 
         {/* Shared Calendar Section */}
-        <div className="animate-fade-in-up animation-delay-400 mt-4">
+        <div className="animate-fade-in-up animation-delay-450 mt-4">
           <SharedCalendar userId={MOCK_USER_ID} />
         </div>
 
@@ -247,23 +242,23 @@ function CustomDashboard() {
           <DashboardQuickAccess userId={MOCK_USER_ID} />
         </div>
 
-        {/* Todo List Section - MOVED UNDERNEATH QUICK ACCESS */}
-        <div className="animate-fade-in-up animation-delay-600 mt-4">
+        {/* Todo List Section */}
+        <div className="animate-fade-in-up animation-delay-550 mt-4">
           <GoalsTodoList userId={MOCK_USER_ID} />
         </div>
 
-        {/* Daily Aspiration - MOVED ABOVE CIRCULAR NAVIGATION, BELOW TODO LIST */}
-        <div className="animate-fade-in-up animation-delay-800 mt-4">
+        {/* Daily Aspiration */}
+        <div className="animate-fade-in-up animation-delay-600 mt-4">
           <DailyAspiration userId={MOCK_USER_ID} />
         </div>
 
-        {/* Circular Navigation - Replacing Health Metrics Grid */}
-        <div className="animate-fade-in-scale animation-delay-1000 mt-4">
+        {/* Circular Navigation */}
+        <div className="animate-fade-in-scale animation-delay-650 mt-4">
           <CircularNavigation />
         </div>
 
         {/* Homepage Customizer Button - At Bottom */}
-        <div className="animate-fade-in-up animation-delay-1600 mt-6 mb-8">
+        <div className="animate-fade-in-up animation-delay-700 mt-6 mb-8">
           <HomepageCustomizerButton />
         </div>
 

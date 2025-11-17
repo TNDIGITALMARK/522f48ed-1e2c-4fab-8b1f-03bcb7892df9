@@ -10,6 +10,8 @@ import { AICycleInsights } from '@/components/ai-cycle-insights';
 import { AISymptomTracker } from '@/components/ai-symptom-tracker';
 import { CycleHistory } from '@/components/cycle-history';
 import { CycleInsightsGraphs } from '@/components/cycle-insights-graphs';
+import { HormoneWave3D } from '@/components/hormone-wave-3d';
+import { BloomingFlower } from '@/components/blooming-flower';
 
 const cyclePhases = [
   {
@@ -134,48 +136,66 @@ export default function CyclePage() {
           {/* Today Tab */}
           <TabsContent value="today" className="space-y-6">
 
-        {/* Current Cycle Status */}
-        <Card className="calendar-container mb-6">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center">
-                  <Sparkles className="w-7 h-7 text-secondary-foreground" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-semibold">{currentPhase}</h2>
-                  <p className="text-muted-foreground">Day {currentCycleDay} of {cycleLength}</p>
+        {/* Current Cycle Status with Animated Hormone Wave */}
+        <Card className="calendar-container mb-6 overflow-hidden relative">
+          {/* Animated background gradient pulse */}
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
+          <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
+            <BloomingFlower size={120} duration={3000} delay={1500} />
+          </div>
+
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center">
+                    <Sparkles className="w-7 h-7 text-secondary-foreground" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-semibold">{currentPhase}</h2>
+                    <p className="text-muted-foreground">Day {currentCycleDay} of {cycleLength}</p>
+                  </div>
                 </div>
               </div>
+              <div className="text-right">
+                <div className="text-3xl font-bold text-secondary">{currentCycleDay}</div>
+                <p className="text-sm text-muted-foreground">Current Day</p>
+              </div>
             </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold text-secondary">{currentCycleDay}</div>
-              <p className="text-sm text-muted-foreground">Current Day</p>
+
+            {/* 3D Animated Hormone Wave - Main focus */}
+            <div className="relative z-10 mb-6 -mx-6">
+              <HormoneWave3D
+                phase={currentPhase === 'Menstruation' ? 'menstruation' : currentPhase === 'Follicular' ? 'follicular' : currentPhase === 'Ovulation' ? 'ovulation' : 'luteal'}
+                width={800}
+                height={180}
+                className="w-full"
+              />
             </div>
-          </div>
 
-          {/* Cycle Progress */}
-          <div className="relative h-3 bg-muted/30 rounded-full overflow-hidden">
-            <div
-              className="absolute h-full bg-gradient-to-r from-accent via-primary to-secondary rounded-full transition-all"
-              style={{ width: `${(currentCycleDay / cycleLength) * 100}%` }}
-            />
-          </div>
-
-          <div className="mt-4 grid grid-cols-4 gap-2">
-            {cyclePhases.map((phase) => (
+            {/* Cycle Progress */}
+            <div className="relative h-3 bg-muted/30 rounded-full overflow-hidden">
               <div
-                key={phase.name}
-                className={`text-center p-2 rounded-lg ${
-                  phase.name === currentPhase ? 'bg-white shadow-bloom-sm' : 'bg-white/50'
-                }`}
-              >
-                <phase.icon className={`w-5 h-5 mx-auto mb-1 ${
-                  phase.name === currentPhase ? 'text-secondary' : 'text-muted-foreground'
-                }`} />
-                <p className="text-xs font-medium">{phase.name}</p>
-              </div>
-            ))}
+                className="absolute h-full bg-gradient-to-r from-accent via-primary to-secondary rounded-full transition-all"
+                style={{ width: `${(currentCycleDay / cycleLength) * 100}%` }}
+              />
+            </div>
+
+            <div className="mt-4 grid grid-cols-4 gap-2">
+              {cyclePhases.map((phase) => (
+                <div
+                  key={phase.name}
+                  className={`text-center p-2 rounded-lg ${
+                    phase.name === currentPhase ? 'bg-white shadow-bloom-sm' : 'bg-white/50'
+                  }`}
+                >
+                  <phase.icon className={`w-5 h-5 mx-auto mb-1 ${
+                    phase.name === currentPhase ? 'text-secondary' : 'text-muted-foreground'
+                  }`} />
+                  <p className="text-xs font-medium">{phase.name}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </Card>
 
