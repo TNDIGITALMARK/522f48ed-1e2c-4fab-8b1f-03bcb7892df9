@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, Clock, MapPin, Calendar as CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { AddCalendarEventDialog } from './add-calendar-event-dialog';
 import { getCalendarEventsByMonth } from '@/lib/supabase/calendar-events';
 import type { CalendarEvent } from '@/lib/types/calendar-events';
@@ -11,11 +12,19 @@ interface MonthlyCalendarProps {
   className?: string;
 }
 
+const EVENT_TYPE_ICONS: Record<string, React.ReactNode> = {
+  fitness: '💪',
+  wellness: '❤️',
+  nutrition: '🍎',
+  personal: '📅',
+};
+
 export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showAddDialog, setShowAddDialog] = useState(false);
+  const [expandedEvents, setExpandedEvents] = useState(false);
 
   // Get calendar data
   const calendarData = useMemo(() => {
@@ -126,6 +135,21 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
     );
   };
 
+  // Get upcoming events (next 7 days)
+  const upcomingEvents = useMemo(() => {
+    const today = new Date();
+    const nextWeek = new Date(today);
+    nextWeek.setDate(today.getDate() + 7);
+
+    return events
+      .filter((event) => {
+        const eventDate = new Date(event.start_date);
+        return eventDate >= today && eventDate <= nextWeek;
+      })
+      .sort((a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime())
+      .slice(0, 5); // Show max 5 upcoming events
+  }, [events]);
+
   return (
     <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-border ${className}`}>
       {/* Header */}
@@ -221,6 +245,95 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
           );
         })}
       </div>
+
+      {/* Upcoming Events Section */}
+      {upcomingEvents.length > 0 && (
+        <div className="mt-6 pt-6 border-t border-border">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-base font-semibold font-['Cormorant_Garamond'] text-foreground flex items-center gap-2">
+              <CalendarIcon className="w-4 h-4 text-secondary" />
+              Upcoming Schedule
+            </h4>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setExpandedEvents(!expandedEvents)}
+              className="text-xs"
+            >
+              {expandedEvents ? 'Show Less' : 'View All'}
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {(expandedEvents ? upcomingEvents : upcomingEvents.slice(0, 3)).map((event) => {
+              const eventDate = new Date(event.start_date);
+              const isToday =
+                eventDate.toDateString() === new Date().toDateString();
+
+              return (
+                <div
+                  key={event.id}
+                  className="p-3 rounded-lg border border-border bg-background/50 hover:border-primary/40 transition-all"
+                >
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                      style={{ backgroundColor: event.color }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <h5 className="font-medium text-sm text-foreground">
+                          {event.title}
+                        </h5>
+                        {isToday && (
+                          <Badge
+                            variant="secondary"
+                            className="text-[10px] px-2 py-0"
+                          >
+                            Today
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {eventDate.toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                          })}{' '}
+                          at{' '}
+                          {eventDate.toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
+                        </span>
+                        {event.location && (
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3 h-3" />
+                            {event.location}
+                          </span>
+                        )}
+                      </div>
+                      {event.description && (
+                        <p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+                          {event.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {upcomingEvents.length === 0 && (
+            <div className="text-center py-6 text-muted-foreground">
+              <CalendarIcon className="w-8 h-8 mx-auto mb-2 opacity-50" />
+              <p className="text-sm">No upcoming events this week</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

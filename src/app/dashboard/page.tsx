@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ExpandableSidebar } from '@/components/expandable-sidebar';
 import { EventsSidebar } from '@/components/events-sidebar';
 import { TasksSidebar } from '@/components/tasks-sidebar';
 import { GoalsPanel } from '@/components/goals-panel';
-import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
@@ -19,18 +18,12 @@ export default function DashboardPage() {
   const [userName] = useState('Brooklyn');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isTasksSidebarOpen, setIsTasksSidebarOpen] = useState(false);
-  const goalsPanelRef = useRef<{ reloadGoals: () => void } | null>(null);
 
   useEffect(() => {
     // Get current month name
     const monthName = new Date().toLocaleString('default', { month: 'long' });
     setCurrentMonth(monthName);
   }, []);
-
-  function handleGoalsGenerated() {
-    // Trigger reload of goals panel when goals are generated
-    window.location.reload(); // Simple approach to refresh data
-  }
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -125,14 +118,14 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            {/* Main Dashboard Widgets - Split into three columns */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* LEFT SIDE - Calendar */}
+            {/* Main Dashboard Widgets - Split into two columns */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* LEFT SIDE - Calendar with integrated schedule */}
               <div className="lg:col-span-1">
                 <MonthlyCalendar />
               </div>
 
-              {/* MIDDLE - Existing Dashboard Content */}
+              {/* RIGHT SIDE - Focus, Progress, and Goals */}
               <div className="lg:col-span-1 space-y-8">
                 {/* Today's Focus Card */}
                 <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
@@ -177,12 +170,6 @@ export default function DashboardPage() {
                     </div>
                   </div>
                 </Card>
-              </div>
-
-              {/* RIGHT SIDE - Goals and Scheduling System */}
-              <div className="lg:col-span-1 space-y-8">
-                {/* Events Scheduler */}
-                <EventsScheduler onGoalsGenerated={handleGoalsGenerated} />
 
                 {/* Goals Panel - Daily/Weekly/Monthly */}
                 <GoalsPanel />
