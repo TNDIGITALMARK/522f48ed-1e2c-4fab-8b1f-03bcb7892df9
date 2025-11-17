@@ -180,10 +180,10 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
       {!isExpanded && (
         <Button
           onClick={() => setIsExpanded(true)}
-          className="fixed right-0 top-1/2 -translate-y-1/2 rounded-l-full rounded-r-none bg-primary hover:bg-primary/90 text-primary-foreground shadow-bloom z-50 px-2 py-6"
+          className="fixed right-0 top-1/2 -translate-y-1/2 rounded-l-full rounded-r-none bg-white hover:bg-gray-50 border border-gray-200 shadow-bloom z-50 px-2 py-6"
           size="sm"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="w-5 h-5 text-black" />
         </Button>
       )}
 
@@ -205,7 +205,7 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                 size="sm"
                 className="h-8 w-8 p-0 rounded-md hover:bg-gray-100"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-4 h-4 text-black" />
               </Button>
             </div>
 
@@ -214,7 +214,7 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
               <Card className="p-3 bg-white border border-gray-200 shadow-sm">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-gray-700" />
+                    <Sparkles className="w-4 h-4 text-black/80" />
                     <h3 className="text-sm font-medium text-gray-800">AI Task Planner</h3>
                   </div>
                   <Button
@@ -269,14 +269,14 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                 className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <Calendar className="w-4 h-4 text-black/80" />
                   <h3 className="text-sm font-medium text-gray-800">Today</h3>
                   <span className="text-xs text-gray-500">({todayEvents.length})</span>
                 </div>
                 {dailyExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 
@@ -299,7 +299,7 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                               <p className="text-xs text-gray-600 mt-1">{event.description}</p>
                             )}
                             <div className="flex items-center gap-1.5 mt-1.5">
-                              <Clock className="w-3 h-3 text-gray-500" />
+                              <Clock className="w-3 h-3 text-black/60" />
                               <span className="text-xs text-gray-600">{formatEventTime(event)}</span>
                             </div>
                           </div>
@@ -321,14 +321,14 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                 className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <Calendar className="w-4 h-4 text-black/80" />
                   <h3 className="text-sm font-medium text-gray-800">This Week</h3>
                   <span className="text-xs text-gray-500">({weekEvents.length})</span>
                 </div>
                 {weeklyExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 
@@ -371,14 +371,14 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                 className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <Calendar className="w-4 h-4 text-black/80" />
                   <h3 className="text-sm font-medium text-gray-800">This Month</h3>
                   <span className="text-xs text-gray-500">({monthEvents.length})</span>
                 </div>
                 {monthlyExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 

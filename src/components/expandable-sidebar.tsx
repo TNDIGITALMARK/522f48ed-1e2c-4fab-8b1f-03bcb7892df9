@@ -84,10 +84,10 @@ export function ExpandableSidebar() {
       {!isExpanded && (
         <Button
           onClick={() => setIsExpanded(true)}
-          className="fixed left-0 top-1/2 -translate-y-1/2 rounded-r-full rounded-l-none bg-primary hover:bg-primary/90 text-primary-foreground shadow-bloom z-50 px-2 py-6"
+          className="fixed left-0 top-1/2 -translate-y-1/2 rounded-r-full rounded-l-none bg-white hover:bg-gray-50 border border-gray-200 shadow-bloom z-50 px-2 py-6"
           size="sm"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="w-5 h-5 text-black" />
         </Button>
       )}
 
@@ -109,7 +109,7 @@ export function ExpandableSidebar() {
                 size="sm"
                 className="h-8 w-8 p-0 rounded-md hover:bg-gray-100"
               >
-                <ChevronRight className="w-4 h-4 rotate-180" />
+                <ChevronRight className="w-4 h-4 rotate-180 text-black" />
               </Button>
             </div>
 
@@ -124,9 +124,9 @@ export function ExpandableSidebar() {
                   <h3 className="text-sm font-medium text-gray-800">Morning Routines</h3>
                 </div>
                 {morningExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 
@@ -167,9 +167,9 @@ export function ExpandableSidebar() {
                   <h3 className="text-sm font-medium text-gray-800">Evening Routines</h3>
                 </div>
                 {nightExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 
@@ -210,9 +210,9 @@ export function ExpandableSidebar() {
                   <h3 className="text-sm font-medium text-gray-800">Monthly Goals</h3>
                 </div>
                 {goalsExpanded ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-4 h-4 text-black/70" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-4 h-4 text-black/70" />
                 )}
               </button>
 
