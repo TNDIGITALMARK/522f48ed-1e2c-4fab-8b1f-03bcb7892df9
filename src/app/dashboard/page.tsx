@@ -1,503 +1,181 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { getCurrentTemplate, type HomepageTemplateId } from '@/types/homepage-templates';
-import { NutritionFocusedDashboard } from '@/components/nutrition-focused-dashboard';
-import { FitnessFocusedDashboard } from '@/components/fitness-focused-dashboard';
-
-// Default/Custom Dashboard
-import { DashboardLayout } from '@/components/dashboard-layout';
+import { ExpandableSidebar } from '@/components/expandable-sidebar';
 import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import {
-  Heart,
-  Droplets,
-  Footprints,
-  Calendar,
-  Moon,
-  Plus,
-  ArrowRight,
-  Dumbbell
-} from 'lucide-react';
-import { useDashboardData } from '@/hooks/use-user-profile';
-import { SharedCalendar } from '@/components/shared-calendar';
-import { GoalsTodoList } from '@/components/goals-todo-list';
-import { BloomingFlower } from '@/components/blooming-flower';
-import { HormoneWave3D } from '@/components/hormone-wave-3d';
-import { DailyAspiration } from '@/components/daily-aspiration';
-import { HomepageCustomizerButton } from '@/components/homepage-customizer-button';
-import { CircularNavigation } from '@/components/circular-navigation';
-import { DashboardQuickAccess } from '@/components/dashboard-quick-access';
-import { SmartScannerButton } from '@/components/smart-scanner-button';
-import { MonthlyVisionBoard } from '@/components/monthly-vision-board';
+import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
-const MOCK_USER_ID = 'demo-user-001';
+export default function DashboardPage() {
+  const [currentMonth, setCurrentMonth] = useState('');
+  const [userName] = useState('Brooklyn');
 
-function CustomDashboard() {
-  // Use centralized dashboard data hook
-  const {
-    profile,
-    updateWellness,
-    isLoading
-  } = useDashboardData(MOCK_USER_ID);
-
-  // Modal state for metric cards
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedMetric, setSelectedMetric] = useState<'hydration' | 'steps' | 'sleep' | 'workout' | null>(null);
-
-  const openMetricModal = (metric: 'hydration' | 'steps' | 'sleep' | 'workout') => {
-    setSelectedMetric(metric);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedMetric(null);
-  };
-
-  // Sleep stages data (from SwipeableSleepTracker)
-  const sleepStages = [
-    {
-      id: 'deep',
-      stage: 'Deep Sleep',
-      duration: 2.3,
-      quality: 'good' as const,
-      icon: 'moon' as const,
-      color: 'from-indigo-500/20 to-purple-500/20',
-    },
-    {
-      id: 'rem',
-      stage: 'REM Sleep',
-      duration: 1.8,
-      quality: 'good' as const,
-      icon: 'star' as const,
-      color: 'from-violet-500/20 to-fuchsia-500/20',
-    },
-    {
-      id: 'light',
-      stage: 'Light Sleep',
-      duration: 3.4,
-      quality: 'excellent' as const,
-      icon: 'cloud-moon' as const,
-      color: 'from-blue-500/20 to-cyan-500/20',
-    },
-    {
-      id: 'awake',
-      stage: 'Awake Time',
-      duration: 0.2,
-      quality: 'excellent' as const,
-      icon: 'sun' as const,
-      color: 'from-amber-500/20 to-orange-500/20',
-    },
-  ];
-
-  const totalSleep = sleepStages.reduce((sum, stage) => sum + stage.duration, 0);
-
-  // Mock wellness data
-  const userData = {
-    name: "Sarah",
-    cycleDay: 14,
-    phase: "Ovulation Phase",
-    sleepHours: totalSleep,
-    meditation: {
-      completed: profile?.meditationCompleted || 12,
-      goal: profile?.meditationGoal || 15
-    },
-    steps: {
-      completed: profile?.stepsCompleted || 8000,
-      goal: profile?.stepsGoal || 10000
-    },
-    water: {
-      completed: profile?.waterConsumed || 6,
-      goal: profile?.waterGoal || 8
-    }
-  };
-
-  // Handler for updating water intake
-  const handleAddWater = () => {
-    if (profile) {
-      updateWellness({
-        waterConsumed: Math.min(profile.waterConsumed + 1, profile.waterGoal)
-      });
-    }
-  };
-
-  // Get current date info
-  const now = new Date();
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  // Generate week dates (centered on today)
-  const getWeekDates = () => {
-    const dates = [];
-    const today = now.getDay();
-    for (let i = -3; i <= 3; i++) {
-      const date = new Date(now);
-      date.setDate(now.getDate() + i);
-      dates.push(date);
-    }
-    return dates;
-  };
-
-  const weekDates = getWeekDates();
+  useEffect(() => {
+    // Get current month name
+    const monthName = new Date().toLocaleString('default', { month: 'long' });
+    setCurrentMonth(monthName);
+  }, []);
 
   return (
-    <DashboardLayout>
-      <div className="max-w-6xl mx-auto pb-12 px-6">
-        {/* Greeting Header */}
-        <div className="pt-2 pb-3 animate-fade-in-up">
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-bold text-foreground">
-              Hi {userData.name}
-            </h1>
-          </div>
-        </div>
+    <div className="min-h-screen bg-background relative">
+      {/* Expandable Sidebar */}
+      <ExpandableSidebar />
 
-        {/* Hi Brooklyn Greeting with Dramatic 3D Shadow */}
-        <div className="animate-fade-in-up animation-delay-200 mt-1 mb-4">
-          <div className="relative text-center py-8">
-            <h1
-              className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-wide font-['Playfair_Display']"
-              style={{
-                color: 'hsl(25 11% 21%)',
-                textShadow: `
-                  0 1px 0 hsl(25 11% 31%),
-                  0 2px 0 hsl(25 11% 36%),
-                  0 3px 0 hsl(25 11% 41%),
-                  0 4px 0 hsl(25 11% 46%),
-                  0 5px 0 hsl(25 11% 51%),
-                  0 6px 0 hsl(25 11% 56%),
-                  0 7px 0 hsl(25 11% 61%),
-                  0 8px 0 hsl(25 11% 66%),
-                  0 9px 0 hsl(25 11% 71%),
-                  0 10px 10px rgba(0, 0, 0, 0.15),
-                  0 20px 25px rgba(0, 0, 0, 0.10),
-                  0 30px 35px rgba(0, 0, 0, 0.05)
-                `,
-                letterSpacing: '0.03em',
-                lineHeight: 1.2,
-                transform: 'translateZ(0)',
-                WebkitFontSmoothing: 'antialiased'
-              }}
-            >
-              Hi Brooklyn
+      {/* Main Content Area */}
+      <div className="min-h-screen p-8">
+        {/* Header Section */}
+        <div className="max-w-7xl mx-auto">
+          {/* Month at top left, greeting in center */}
+          <div className="flex items-start justify-between mb-12">
+            <h1 className="text-4xl font-bold text-foreground font-['Cormorant_Garamond']">
+              {currentMonth}
             </h1>
-          </div>
-        </div>
 
-        {/* Simplified Cycle Phase Card */}
-        <div className="animate-fade-in-up animation-delay-300 mt-1">
-          <Card className="calendar-container p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm text-muted-foreground mb-1">Your Cycle Phase</p>
-                <h2 className="text-2xl font-bold">{userData.phase}</h2>
-                <p className="text-muted-foreground">Day {userData.cycleDay} of your cycle</p>
-              </div>
+            <div className="text-center flex-1">
+              <p className="text-sm text-muted-foreground font-light tracking-wide">
+                Hi {userName}
+              </p>
+            </div>
+
+            <div className="w-32"></div> {/* Spacer for balance */}
+          </div>
+
+          {/* Dashboard Content Grid - No boxes, clean layout */}
+          <div className="space-y-12">
+            {/* Quick Stats Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Link href="/cycle">
-                <Button variant="outline" className="rounded-full">
-                  View Details
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
+                <Card className="p-6 hover:shadow-bloom transition-all duration-300 cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Calendar className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">Cycle Tracking</h3>
+                      <p className="text-sm text-muted-foreground">Day 12 - Follicular</p>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+
+              <Link href="/workout">
+                <Card className="p-6 hover:shadow-bloom transition-all duration-300 cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Activity className="w-6 h-6 text-secondary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">Today's Workout</h3>
+                      <p className="text-sm text-muted-foreground">Strength Training</p>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+
+              <Link href="/wellness">
+                <Card className="p-6 hover:shadow-bloom transition-all duration-300 cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Heart className="w-6 h-6 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">Wellness Score</h3>
+                      <p className="text-sm text-muted-foreground">85% - Great!</p>
+                    </div>
+                  </div>
+                </Card>
               </Link>
             </div>
 
-            {/* Cycle progress bar */}
-            <div className="relative h-2 bg-muted/30 rounded-full overflow-hidden mb-4">
-              <div
-                className="absolute h-full bg-gradient-to-r from-accent via-primary to-secondary rounded-full transition-all"
-                style={{ width: `${(userData.cycleDay / 28) * 100}%` }}
-              />
+            {/* Main Dashboard Widgets */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Today's Focus Card */}
+              <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <Sparkles className="w-6 h-6 text-primary" />
+                  <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Today's Focus</h2>
+                </div>
+                <div className="space-y-4">
+                  <div className="p-4 bg-background/50 rounded-lg">
+                    <h3 className="font-medium text-foreground mb-2">Morning Intention</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Start your day with gratitude and movement. Your body is ready for energy and nourishment.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-background/50 rounded-lg">
+                    <h3 className="font-medium text-foreground mb-2">Nutrition Tip</h3>
+                    <p className="text-sm text-muted-foreground">
+                      You're in your follicular phase - great time for complex carbs and lean proteins.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Weekly Progress Card */}
+              <Card className="p-8 bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <TrendingUp className="w-6 h-6 text-secondary" />
+                  <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">This Week</h2>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                    <span className="text-sm text-foreground">Workouts Completed</span>
+                    <span className="text-2xl font-bold text-primary">3/5</span>
+                  </div>
+                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                    <span className="text-sm text-foreground">Water Intake</span>
+                    <span className="text-2xl font-bold text-secondary">64oz</span>
+                  </div>
+                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                    <span className="text-sm text-foreground">Sleep Average</span>
+                    <span className="text-2xl font-bold text-accent-foreground">7.5h</span>
+                  </div>
+                </div>
+              </Card>
             </div>
 
-            {/* Log a Symptom Button */}
-            <Link href="/log-symptom" className="w-full">
-              <Button className="w-full rounded-full" variant="outline">
-                <Plus className="mr-2 w-5 h-5" />
-                Log a Symptom
-              </Button>
-            </Link>
-          </Card>
-        </div>
-
-        {/* Monthly Vision Board Dropdown - NEW */}
-        <div className="animate-fade-in-up animation-delay-350 mt-4">
-          <MonthlyVisionBoard userId={MOCK_USER_ID} />
-        </div>
-
-        {/* Smart Scanner Button */}
-        <div className="animate-fade-in-up animation-delay-400 mt-4">
-          <SmartScannerButton />
-        </div>
-
-        {/* Shared Calendar Section */}
-        <div className="animate-fade-in-up animation-delay-450 mt-4">
-          <SharedCalendar userId={MOCK_USER_ID} />
-        </div>
-
-        {/* Quick Access Dashboard Sections - 3 Cards: To-Do, Weight & Goals, Meal Tracker */}
-        <div className="animate-fade-in-up animation-delay-500 mt-4">
-          <DashboardQuickAccess userId={MOCK_USER_ID} />
-        </div>
-
-        {/* Todo List Section */}
-        <div className="animate-fade-in-up animation-delay-550 mt-4">
-          <GoalsTodoList userId={MOCK_USER_ID} />
-        </div>
-
-        {/* Daily Aspiration */}
-        <div className="animate-fade-in-up animation-delay-600 mt-4">
-          <DailyAspiration userId={MOCK_USER_ID} />
-        </div>
-
-        {/* Circular Navigation */}
-        <div className="animate-fade-in-scale animation-delay-650 mt-4">
-          <CircularNavigation />
-        </div>
-
-        {/* Homepage Customizer Button - At Bottom */}
-        <div className="animate-fade-in-up animation-delay-700 mt-6 mb-8">
-          <HomepageCustomizerButton />
-        </div>
-
-        {/* Metric Insights/Edit Modal */}
-        {modalOpen && (
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in"
-            onClick={closeModal}
-          >
-            <Card
-              className="w-full max-w-md p-6 relative animate-fade-in-scale"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {selectedMetric === 'hydration' && (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(210 100% 85%)' }}>
-                      <Droplets className="w-6 h-6" style={{ color: 'hsl(210 90% 45%)' }} />
-                    </div>
-                    <h3 className="text-2xl font-bold">Hydration Tracker</h3>
+            {/* Activity Calendar Preview */}
+            <Card className="p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Activity Calendar</h2>
+                <Link href="/cycle">
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    View Full Calendar
+                    <Calendar className="w-4 h-4" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="grid grid-cols-7 gap-2">
+                {Array.from({ length: 14 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="aspect-square rounded-lg border border-border bg-muted/20 hover:bg-muted/40 transition-colors cursor-pointer flex items-center justify-center"
+                  >
+                    <span className="text-xs text-muted-foreground">{i + 1}</span>
                   </div>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Daily Goal</p>
-                      <p className="text-3xl font-bold">{userData.water.goal} glasses</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Completed Today</p>
-                      <p className="text-3xl font-bold" style={{ color: 'hsl(210 80% 40%)' }}>
-                        {userData.water.completed} glasses
-                      </p>
-                    </div>
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <p className="text-sm font-medium mb-2">💡 Insight</p>
-                      <p className="text-sm text-muted-foreground">
-                        You're {Math.round((userData.water.completed / userData.water.goal) * 100)}% of the way to your daily hydration goal. Keep it up!
-                      </p>
-                    </div>
-                    <Button className="w-full" onClick={handleAddWater}>
-                      Add Glass of Water
-                    </Button>
-                  </div>
-                </div>
-              )}
+                ))}
+              </div>
+            </Card>
 
-              {selectedMetric === 'steps' && (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(25 35% 80%)' }}>
-                      <Footprints className="w-6 h-6" style={{ color: 'hsl(25 40% 40%)' }} />
-                    </div>
-                    <h3 className="text-2xl font-bold">Steps Tracker</h3>
-                  </div>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Daily Goal</p>
-                      <p className="text-3xl font-bold">{userData.steps.goal.toLocaleString()} steps</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Steps Today</p>
-                      <p className="text-3xl font-bold" style={{ color: 'hsl(25 40% 35%)' }}>
-                        {userData.steps.completed.toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg" style={{ backgroundColor: 'hsl(25 40% 95%)' }}>
-                      <p className="text-sm font-medium mb-2">💡 Insight</p>
-                      <p className="text-sm text-muted-foreground">
-                        Great progress! You've walked {(userData.steps.completed / userData.steps.goal * 100).toFixed(0)}% of your daily goal.
-                      </p>
-                    </div>
-                    <Link href="/workout">
-                      <Button className="w-full">Log Activity</Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
-
-              {selectedMetric === 'sleep' && (
-                <div className="max-h-[80vh] overflow-y-auto">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 80%)' }}>
-                      <Moon className="w-6 h-6" style={{ color: 'hsl(100 35% 40%)' }} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold">Sleep Insights</h3>
-                      <p className="text-xs text-muted-foreground">
-                        {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-5">
-                    {/* Total Sleep Summary */}
-                    <div className="p-4 rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20">
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Total Sleep</p>
-                          <p className="text-4xl font-bold" style={{ color: 'hsl(100 35% 35%)' }}>
-                            {userData.sleepHours.toFixed(1)}h
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs text-muted-foreground">Goal</p>
-                          <p className="text-2xl font-semibold">8.0h</p>
-                        </div>
-                      </div>
-                      <Progress value={(userData.sleepHours / 8) * 100} className="h-3 mb-2" />
-                      <p className="text-sm text-muted-foreground">
-                        {userData.sleepHours >= 7.5
-                          ? '🎉 Excellent sleep! You hit your goal!'
-                          : userData.sleepHours >= 7
-                          ? '✨ Great sleep! Almost at your goal'
-                          : userData.sleepHours >= 6
-                          ? '💤 Good rest, but could be better'
-                          : '😴 Try to get more rest tonight'}
-                      </p>
-                    </div>
-
-                    {/* Sleep Stages Breakdown */}
-                    <div>
-                      <h4 className="text-lg font-semibold mb-3">Sleep Stages</h4>
-                      <div className="space-y-3">
-                        {sleepStages.map((stage) => (
-                          <div key={stage.id} className="p-4 rounded-xl border border-border/50 bg-card/50 hover:border-primary/30 transition-colors">
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'hsl(100 30% 85%)' }}>
-                                  <span className="text-2xl">
-                                    {stage.icon === 'moon' && '🌙'}
-                                    {stage.icon === 'star' && '⭐'}
-                                    {stage.icon === 'cloud-moon' && '☁️'}
-                                    {stage.icon === 'sun' && '☀️'}
-                                  </span>
-                                </div>
-                                <div>
-                                  <p className="font-semibold text-base">{stage.stage}</p>
-                                  <p className="text-xs text-muted-foreground capitalize">{stage.quality} quality</p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <p className="text-2xl font-bold" style={{ color: 'hsl(100 30% 25%)' }}>{stage.duration}h</p>
-                                <p className="text-xs text-muted-foreground">{((stage.duration / totalSleep) * 100).toFixed(0)}% of total</p>
-                              </div>
-                            </div>
-                            <Progress
-                              value={(stage.duration / totalSleep) * 100}
-                              className="h-2"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Sleep Insight */}
-                    <div className="p-4 rounded-xl" style={{ backgroundColor: 'hsl(100 30% 95%)' }}>
-                      <p className="text-sm font-semibold mb-2 flex items-center gap-2">
-                        <span>💡</span> Sleep Quality Analysis
-                      </p>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {userData.sleepHours >= 7
-                          ? 'Excellent! You got quality rest with good distribution across all sleep stages. Your deep sleep (2.3h) and REM (1.8h) are both on target for optimal recovery and cognitive function.'
-                          : `Try to get ${(8 - userData.sleepHours).toFixed(1)} more hours tonight for optimal recovery across all sleep stages. Aim for at least 1.5-2 hours each of deep sleep and REM sleep.`}
-                      </p>
-                    </div>
-
-                    <Button className="w-full" onClick={closeModal}>Close</Button>
-                  </div>
-                </div>
-              )}
-
-              {selectedMetric === 'workout' && (
-                <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center" style={{ backgroundColor: 'hsl(0 0% 90%)' }}>
-                      <Dumbbell className="w-6 h-6" style={{ color: 'hsl(0 0% 20%)' }} />
-                    </div>
-                    <h3 className="text-2xl font-bold">Workout Tracker</h3>
-                  </div>
-                  <div className="space-y-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">Weekly Goal</p>
-                      <p className="text-3xl font-bold">5 sessions</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-2">This Week</p>
-                      <p className="text-3xl font-bold">3 sessions</p>
-                    </div>
-                    <div className="p-4 bg-gray-50 rounded-lg">
-                      <p className="text-sm font-medium mb-2">💡 Insight</p>
-                      <p className="text-sm text-muted-foreground">
-                        You're on track! Complete 2 more sessions this week to hit your goal.
-                      </p>
-                    </div>
-                    <Link href="/workout">
-                      <Button className="w-full">Start Workout</Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
+            {/* Community Section */}
+            <Card className="p-8 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+              <div className="flex items-center gap-3 mb-6">
+                <Users className="w-6 h-6 text-accent-foreground" />
+                <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Community</h2>
+              </div>
+              <p className="text-muted-foreground mb-4">
+                Connect with others on their wellness journey. Share experiences, tips, and support.
+              </p>
+              <Link href="/community">
+                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                  Join the Conversation
+                </Button>
+              </Link>
             </Card>
           </div>
-        )}
+        </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
-}
-
-export default function DashboardPage() {
-  const [currentTemplate, setCurrentTemplate] = useState<HomepageTemplateId>('custom');
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-    const template = getCurrentTemplate();
-    setCurrentTemplate(template.id);
-  }, []);
-
-  // Prevent hydration mismatch by rendering null on server
-  if (!isClient) {
-    return null;
-  }
-
-  // Render the appropriate dashboard based on selected template
-  switch (currentTemplate) {
-    case 'nutrition-focus':
-      return <NutritionFocusedDashboard />;
-    case 'fitness-focus':
-      return <FitnessFocusedDashboard />;
-    case 'custom':
-    default:
-      return <CustomDashboard />;
-  }
 }
