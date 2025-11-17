@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ExpandableSidebar } from '@/components/expandable-sidebar';
+import { GoalsPanel } from '@/components/goals-panel';
+import { EventsScheduler } from '@/components/events-scheduler';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
@@ -10,12 +12,18 @@ import Link from 'next/link';
 export default function DashboardPage() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [userName] = useState('Brooklyn');
+  const goalsPanelRef = useRef<{ reloadGoals: () => void } | null>(null);
 
   useEffect(() => {
     // Get current month name
     const monthName = new Date().toLocaleString('default', { month: 'long' });
     setCurrentMonth(monthName);
   }, []);
+
+  function handleGoalsGenerated() {
+    // Trigger reload of goals panel when goals are generated
+    window.location.reload(); // Simple approach to refresh data
+  }
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -88,51 +96,63 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            {/* Main Dashboard Widgets */}
+            {/* Main Dashboard Widgets - Split into left and right columns */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Today's Focus Card */}
-              <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <Sparkles className="w-6 h-6 text-primary" />
-                  <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Today's Focus</h2>
-                </div>
-                <div className="space-y-4">
-                  <div className="p-4 bg-background/50 rounded-lg">
-                    <h3 className="font-medium text-foreground mb-2">Morning Intention</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Start your day with gratitude and movement. Your body is ready for energy and nourishment.
-                    </p>
+              {/* LEFT SIDE - Existing Dashboard Content */}
+              <div className="space-y-8">
+                {/* Today's Focus Card */}
+                <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Sparkles className="w-6 h-6 text-primary" />
+                    <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Today's Focus</h2>
                   </div>
-                  <div className="p-4 bg-background/50 rounded-lg">
-                    <h3 className="font-medium text-foreground mb-2">Nutrition Tip</h3>
-                    <p className="text-sm text-muted-foreground">
-                      You're in your follicular phase - great time for complex carbs and lean proteins.
-                    </p>
+                  <div className="space-y-4">
+                    <div className="p-4 bg-background/50 rounded-lg">
+                      <h3 className="font-medium text-foreground mb-2">Morning Intention</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Start your day with gratitude and movement. Your body is ready for energy and nourishment.
+                      </p>
+                    </div>
+                    <div className="p-4 bg-background/50 rounded-lg">
+                      <h3 className="font-medium text-foreground mb-2">Nutrition Tip</h3>
+                      <p className="text-sm text-muted-foreground">
+                        You're in your follicular phase - great time for complex carbs and lean proteins.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
 
-              {/* Weekly Progress Card */}
-              <Card className="p-8 bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20">
-                <div className="flex items-center gap-3 mb-6">
-                  <TrendingUp className="w-6 h-6 text-secondary" />
-                  <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">This Week</h2>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
-                    <span className="text-sm text-foreground">Workouts Completed</span>
-                    <span className="text-2xl font-bold text-primary">3/5</span>
+                {/* Weekly Progress Card */}
+                <Card className="p-8 bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20">
+                  <div className="flex items-center gap-3 mb-6">
+                    <TrendingUp className="w-6 h-6 text-secondary" />
+                    <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">This Week</h2>
                   </div>
-                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
-                    <span className="text-sm text-foreground">Water Intake</span>
-                    <span className="text-2xl font-bold text-secondary">64oz</span>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                      <span className="text-sm text-foreground">Workouts Completed</span>
+                      <span className="text-2xl font-bold text-primary">3/5</span>
+                    </div>
+                    <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                      <span className="text-sm text-foreground">Water Intake</span>
+                      <span className="text-2xl font-bold text-secondary">64oz</span>
+                    </div>
+                    <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
+                      <span className="text-sm text-foreground">Sleep Average</span>
+                      <span className="text-2xl font-bold text-accent-foreground">7.5h</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center p-4 bg-background/50 rounded-lg">
-                    <span className="text-sm text-foreground">Sleep Average</span>
-                    <span className="text-2xl font-bold text-accent-foreground">7.5h</span>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </div>
+
+              {/* RIGHT SIDE - Goals and Scheduling System */}
+              <div className="space-y-8">
+                {/* Events Scheduler */}
+                <EventsScheduler onGoalsGenerated={handleGoalsGenerated} />
+
+                {/* Goals Panel - Daily/Weekly/Monthly */}
+                <GoalsPanel />
+              </div>
             </div>
 
             {/* Activity Calendar Preview */}
