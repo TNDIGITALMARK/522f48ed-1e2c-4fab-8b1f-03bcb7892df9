@@ -7,7 +7,6 @@ import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
-import { WellnessBars } from '@/components/wellness-bars';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
@@ -59,11 +58,8 @@ export default function DashboardPage() {
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
-            {/* Important Tasks and Wellness Bars - Side by side */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-              <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
-              <WellnessBars />
-            </div>
+            {/* Important Tasks with integrated Wellness Bars */}
+            <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
 
             {/* Quick Stats Row - Half Circle Widgets */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
