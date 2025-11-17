@@ -6,6 +6,7 @@ import { EventsSidebar } from '@/components/events-sidebar';
 import { GoalsPanel } from '@/components/goals-panel';
 import { EventsScheduler } from '@/components/events-scheduler';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
+import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles } from 'lucide-react';
@@ -14,6 +15,7 @@ import Link from 'next/link';
 export default function DashboardPage() {
   const [currentMonth, setCurrentMonth] = useState('');
   const [userName] = useState('Brooklyn');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const goalsPanelRef = useRef<{ reloadGoals: () => void } | null>(null);
 
   useEffect(() => {
@@ -32,8 +34,8 @@ export default function DashboardPage() {
       {/* Left Expandable Sidebar */}
       <ExpandableSidebar />
 
-      {/* Right Events Sidebar */}
-      <EventsSidebar />
+      {/* Right Events Sidebar - Controlled state */}
+      <EventsSidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
 
       {/* Main Content Area */}
       <div className="min-h-screen p-8">
@@ -56,6 +58,9 @@ export default function DashboardPage() {
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
+            {/* Important Tasks for This Month - New Feature */}
+            <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
+
             {/* Quick Stats Row - Half Circle Widgets */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Link href="/cycle">

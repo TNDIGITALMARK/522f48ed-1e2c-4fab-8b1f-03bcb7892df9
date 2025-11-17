@@ -19,8 +19,23 @@ interface AITodoItem {
   relatedEvent?: string;
 }
 
-export function EventsSidebar() {
-  const [isExpanded, setIsExpanded] = useState(false);
+interface EventsSidebarProps {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {}) {
+  const [internalIsExpanded, setInternalIsExpanded] = useState(false);
+
+  // Use controlled state if provided, otherwise use internal state
+  const isExpanded = isOpen !== undefined ? isOpen : internalIsExpanded;
+  const setIsExpanded = (value: boolean) => {
+    if (onOpenChange) {
+      onOpenChange(value);
+    } else {
+      setInternalIsExpanded(value);
+    }
+  };
   const [dailyExpanded, setDailyExpanded] = useState(true);
   const [weeklyExpanded, setWeeklyExpanded] = useState(false);
   const [monthlyExpanded, setMonthlyExpanded] = useState(false);
