@@ -79,7 +79,7 @@ export function VisionBoardWidget({ className }: VisionBoardWidgetProps) {
         aria-label={isOpen ? 'Collapse monthly vision board' : 'Expand monthly vision board'}
       >
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground font-medium tracking-wide">
+          <span className="text-xs text-muted-foreground font-medium tracking-wide font-['Cormorant_Garamond']">
             Monthly Vision Board
           </span>
         </div>
@@ -94,10 +94,10 @@ export function VisionBoardWidget({ className }: VisionBoardWidgetProps) {
         <div className="px-4 pb-4 animate-fade-in-up">
           <div className="border-t border-border/50 pt-4">
             <div className="mb-3">
-              <h3 className="text-lg font-semibold mb-1">
+              <h3 className="text-lg font-semibold mb-1 font-['Cormorant_Garamond']">
                 {currentMonth}
               </h3>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground font-['Cormorant_Garamond']">
                 Add photos that represent your goals and aspirations
               </p>
             </div>
@@ -184,10 +184,10 @@ export function VisionBoardWidget({ className }: VisionBoardWidgetProps) {
             ) : (
               <div className="mb-4 p-8 rounded-lg border-2 border-dashed border-border/50 bg-muted/10 flex flex-col items-center justify-center text-center">
                 <Upload className="w-10 h-10 text-muted-foreground/30 mb-3" />
-                <p className="text-sm text-muted-foreground mb-1">
+                <p className="text-sm text-muted-foreground mb-1 font-['Cormorant_Garamond']">
                   No photos yet
                 </p>
-                <p className="text-xs text-muted-foreground/70">
+                <p className="text-xs text-muted-foreground/70 font-['Cormorant_Garamond']">
                   Click the button below to add your first photo
                 </p>
               </div>
@@ -213,7 +213,7 @@ export function VisionBoardWidget({ className }: VisionBoardWidgetProps) {
             </Button>
 
             {visionImages.length > 0 && (
-              <p className="text-xs text-muted-foreground text-center mt-2">
+              <p className="text-xs text-muted-foreground text-center mt-2 font-['Cormorant_Garamond']">
                 {visionImages.length} {visionImages.length === 1 ? 'photo' : 'photos'} added
               </p>
             )}

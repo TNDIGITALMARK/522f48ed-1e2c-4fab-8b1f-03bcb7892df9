@@ -26,8 +26,8 @@ export function MacroTrackerWidget() {
           <TrendingUp className="w-4 h-4 text-primary" />
         </div>
         <div>
-          <h3 className="text-sm font-semibold">Macros Today</h3>
-          <p className="text-[0.6875rem] text-muted-foreground leading-tight">Track your daily nutrition</p>
+          <h3 className="text-sm font-semibold font-['Cormorant_Garamond']">Macros Today</h3>
+          <p className="text-[0.6875rem] text-muted-foreground leading-tight font-['Cormorant_Garamond']">Track your daily nutrition</p>
         </div>
       </div>
 
@@ -37,8 +37,8 @@ export function MacroTrackerWidget() {
           return (
             <div key={macro.name} className="space-y-1.5">
               <div className="flex items-center justify-between text-xs">
-                <span className="font-medium">{macro.name}</span>
-                <span className="text-muted-foreground text-[0.6875rem]">
+                <span className="font-medium font-['Cormorant_Garamond']">{macro.name}</span>
+                <span className="text-muted-foreground text-[0.6875rem] font-['Cormorant_Garamond']">
                   {macro.current}/{macro.goal}{macro.unit}
                 </span>
               </div>
@@ -46,8 +46,8 @@ export function MacroTrackerWidget() {
                 ['--progress-color' as string]: macro.color
               }} />
               <div className="flex items-center justify-between text-[0.625rem] text-muted-foreground">
-                <span>{percentage.toFixed(0)}% complete</span>
-                <span>{macro.goal - macro.current}{macro.unit} remaining</span>
+                <span className="font-['Cormorant_Garamond']">{percentage.toFixed(0)}% complete</span>
+                <span className="font-['Cormorant_Garamond']">{macro.goal - macro.current}{macro.unit} remaining</span>
               </div>
             </div>
           );
@@ -55,7 +55,7 @@ export function MacroTrackerWidget() {
       </div>
 
       <div className="mt-6 p-3 rounded-lg bg-primary/5 border border-primary/20">
-        <p className="text-[0.6875rem] text-muted-foreground leading-snug">
+        <p className="text-[0.6875rem] text-muted-foreground leading-snug font-['Cormorant_Garamond']">
           💡 <span className="font-medium">Insight:</span> You're on track! Add a protein-rich
           snack to hit your goals.
         </p>

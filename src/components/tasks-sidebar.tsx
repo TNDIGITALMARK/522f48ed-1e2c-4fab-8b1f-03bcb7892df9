@@ -150,7 +150,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-primary" />
                   <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Daily Tasks</h3>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-500 font-['Cormorant_Garamond']">
                     ({dailyCompleted}/{dailyTasks.length})
                   </span>
                 </div>
@@ -165,7 +165,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                 <div className="space-y-2 mt-2">
                   {/* Task List */}
                   {dailyTasks.length === 0 ? (
-                    <p className="text-xs text-gray-500 text-center py-3">
+                    <p className="text-xs text-gray-500 text-center py-3 font-['Cormorant_Garamond']">
                       No daily tasks yet
                     </p>
                   ) : (
@@ -187,7 +187,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                         </button>
                         <span
                           className={cn(
-                            "flex-1 text-sm",
+                            "flex-1 text-sm font-['Cormorant_Garamond']",
                             task.completed
                               ? "line-through text-gray-400"
                               : "text-gray-700"
@@ -240,7 +240,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-secondary" />
                   <h3 className="text-sm font-medium text-gray-800 font-['Cormorant_Garamond']">Weekly Tasks</h3>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-gray-500 font-['Cormorant_Garamond']">
                     ({weeklyCompleted}/{weeklyTasks.length})
                   </span>
                 </div>
@@ -255,7 +255,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                 <div className="space-y-2 mt-2">
                   {/* Task List */}
                   {weeklyTasks.length === 0 ? (
-                    <p className="text-xs text-gray-500 text-center py-3">
+                    <p className="text-xs text-gray-500 text-center py-3 font-['Cormorant_Garamond']">
                       No weekly tasks yet
                     </p>
                   ) : (
@@ -277,7 +277,7 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                         </button>
                         <span
                           className={cn(
-                            "flex-1 text-sm",
+                            "flex-1 text-sm font-['Cormorant_Garamond']",
                             task.completed
                               ? "line-through text-gray-400"
                               : "text-gray-700"
@@ -329,8 +329,8 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
               <div className="space-y-2">
                 <div>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-700">Daily Tasks</span>
-                    <span className="text-gray-600">
+                    <span className="text-gray-700 font-['Cormorant_Garamond']">Daily Tasks</span>
+                    <span className="text-gray-600 font-['Cormorant_Garamond']">
                       {dailyTasks.length > 0
                         ? `${Math.round((dailyCompleted / dailyTasks.length) * 100)}%`
                         : '0%'}
@@ -349,8 +349,8 @@ export function TasksSidebar({ isOpen, onOpenChange }: TasksSidebarProps = {}) {
                 </div>
                 <div>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-700">Weekly Goals</span>
-                    <span className="text-gray-600">
+                    <span className="text-gray-700 font-['Cormorant_Garamond']">Weekly Goals</span>
+                    <span className="text-gray-600 font-['Cormorant_Garamond']">
                       {weeklyTasks.length > 0
                         ? `${Math.round((weeklyCompleted / weeklyTasks.length) * 100)}%`
                         : '0%'}
