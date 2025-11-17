@@ -23,14 +23,14 @@ function WellnessBar({ label, completed, total, color }: WellnessBarProps) {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <div className="space-y-1.5">
-      <div className="flex items-center justify-between text-xs">
+    <div className="space-y-0.5">
+      <div className="flex items-center justify-between text-[10px]">
         <span className="font-medium text-foreground">{label}</span>
-        <span className="text-xs text-muted-foreground">
-          {completed}/{total} ({percentage}%)
+        <span className="text-[9px] text-muted-foreground">
+          {completed}/{total}
         </span>
       </div>
-      <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-muted/30 rounded-full overflow-hidden">
         <div
           className={`h-full ${color} rounded-full transition-all duration-500 ease-out`}
           style={{ width: `${percentage}%` }}
@@ -201,12 +201,12 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
   const monthName = format(currentMonth, 'MMMM');
 
   return (
-    <Card className={`p-6 bg-gradient-to-br from-accent/10 to-accent/5 border-accent/30 ${className}`}>
+    <Card className={`p-5 bg-gradient-to-br from-accent/10 to-accent/5 border-accent/30 ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-6 h-6 text-accent-foreground" />
-          <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2.5">
+          <Sparkles className="w-5 h-5 text-accent-foreground" />
+          <h2 className="text-xl font-semibold font-['Cormorant_Garamond']">
             Important Tasks for {monthName}
           </h2>
         </div>
@@ -214,35 +214,35 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
           onClick={onOpenSidebar}
           variant="ghost"
           size="sm"
-          className="gap-2 hover:bg-accent/20"
+          className="gap-1.5 hover:bg-accent/20 text-xs"
         >
           View All
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="w-3.5 h-3.5" />
         </Button>
       </div>
 
       {/* Tasks List */}
       {isLoading ? (
-        <div className="text-center py-8 text-muted-foreground">
-          <Calendar className="w-8 h-8 mx-auto mb-2 animate-pulse" />
-          <p className="text-sm">Loading tasks...</p>
+        <div className="text-center py-6 text-muted-foreground">
+          <Calendar className="w-6 h-6 mx-auto mb-2 animate-pulse" />
+          <p className="text-xs">Loading tasks...</p>
         </div>
       ) : monthlyGoals.length === 0 ? (
-        <div className="text-center py-8 text-muted-foreground">
-          <CheckCircle2 className="w-12 h-12 mx-auto mb-3 opacity-50 text-secondary" />
-          <p className="text-sm font-medium">All caught up!</p>
-          <p className="text-xs mt-1">No important tasks for this month yet</p>
+        <div className="text-center py-6 text-muted-foreground">
+          <CheckCircle2 className="w-10 h-10 mx-auto mb-2 opacity-50 text-secondary" />
+          <p className="text-xs font-medium">All caught up!</p>
+          <p className="text-[10px] mt-1">No important tasks for this month yet</p>
           <Button
             onClick={onOpenSidebar}
             size="sm"
             variant="outline"
-            className="mt-4"
+            className="mt-3 text-xs"
           >
             Add Tasks
           </Button>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-2.5">
           {monthlyGoals.map((goal) => {
             // Calculate progress (0-100%)
             // For this demo, we'll use completion status
@@ -252,36 +252,36 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
             return (
               <div
                 key={goal.id}
-                className="p-4 rounded-lg border border-border bg-background/60 hover:bg-background/80 hover:border-accent/40 transition-all"
+                className="p-3 rounded-lg border border-border bg-background/60 hover:bg-background/80 hover:border-accent/40 transition-all"
               >
-                <div className="flex gap-4">
+                <div className="flex gap-3 items-center">
                   {/* Left side - Task content */}
-                  <div className="flex-1 space-y-3">
+                  <div className="flex-1 min-w-0 space-y-2">
                     {/* Task Header */}
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-foreground leading-snug">
+                        <h3 className="text-sm font-medium text-foreground leading-snug line-clamp-1">
                           {goal.title}
                         </h3>
                         {goal.description && (
-                          <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
+                          <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
                             {goal.description}
                           </p>
                         )}
                       </div>
-                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground shrink-0">
-                        <Calendar className="w-3.5 h-3.5" />
+                      <div className="flex items-center gap-1 text-[10px] text-muted-foreground shrink-0">
+                        <Calendar className="w-3 h-3" />
                         <span className="font-medium">{formatDueDate(goal)}</span>
                       </div>
                     </div>
 
                     {/* Progress Bar with Tasks Completed Label */}
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-medium text-muted-foreground">
+                        <span className="text-[10px] font-medium text-muted-foreground">
                           Tasks Completed
                         </span>
-                        <span className="text-xs font-semibold text-foreground">
+                        <span className="text-[10px] font-semibold text-foreground">
                           {progress}%
                         </span>
                       </div>
@@ -291,7 +291,7 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
                         onClick={() => handleToggleGoal(goal.id, goal.completed)}
                         className="w-full cursor-pointer"
                       >
-                        <div className="progress-copper h-2.5 w-full">
+                        <div className="progress-copper h-1.5 w-full">
                           <div
                             className="progress-copper-fill transition-all duration-500"
                             style={{ width: `${progress}%` }}
@@ -301,25 +301,25 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
                     </div>
 
                     {/* Tags */}
-                    <div className="flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-1.5 flex-wrap">
                       {goal.priority === 1 && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-destructive/10 text-destructive font-medium">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-destructive/10 text-destructive font-medium">
                           High Priority
                         </span>
                       )}
                       {goal.priority === 2 && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-accent/15 text-accent-foreground font-medium">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-accent/15 text-accent-foreground font-medium">
                           Important
                         </span>
                       )}
                       {goal.category && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-secondary/10 text-secondary capitalize">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-secondary/10 text-secondary capitalize">
                           {goal.category}
                         </span>
                       )}
                       {goal.completed && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-secondary/20 text-secondary font-medium flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3" />
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-secondary/20 text-secondary font-medium flex items-center gap-0.5">
+                          <CheckCircle2 className="w-2.5 h-2.5" />
                           Complete
                         </span>
                       )}
@@ -327,7 +327,7 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
                   </div>
 
                   {/* Right side - Wellness Bars */}
-                  <div className="w-48 shrink-0 space-y-3 pl-4 border-l border-border/30">
+                  <div className="w-32 shrink-0 space-y-1.5">
                     <WellnessBar
                       label="Weekly"
                       completed={weeklyStats.completed}
@@ -362,13 +362,14 @@ export function ImportantTasksWidget({ onOpenSidebar, className }: ImportantTask
 
       {/* Footer with action button */}
       {monthlyGoals.length > 0 && (
-        <div className="mt-6 pt-4 border-t border-border/50">
+        <div className="mt-4 pt-3 border-t border-border/50">
           <Button
             onClick={onOpenSidebar}
             variant="outline"
-            className="w-full gap-2 hover:bg-accent/10 hover:border-accent/40"
+            size="sm"
+            className="w-full gap-1.5 hover:bg-accent/10 hover:border-accent/40 text-xs"
           >
-            <Calendar className="w-4 h-4" />
+            <Calendar className="w-3.5 h-3.5" />
             View Full Schedule
           </Button>
         </div>
