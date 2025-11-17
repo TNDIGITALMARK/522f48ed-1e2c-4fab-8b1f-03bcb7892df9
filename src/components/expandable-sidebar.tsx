@@ -94,66 +94,62 @@ export function ExpandableSidebar() {
       {/* Expandable Sidebar */}
       <div
         className={cn(
-          "fixed left-0 top-0 h-full bg-card/95 backdrop-blur-md border-r border-border shadow-bloom-lg transition-all duration-300 z-40 overflow-y-auto",
+          "fixed left-0 top-0 h-full bg-white border-r border-gray-200 shadow-sm transition-all duration-300 z-40 overflow-y-auto",
           isExpanded ? "w-80" : "w-0"
         )}
       >
         {isExpanded && (
-          <div className="p-6 space-y-4">
+          <div className="p-5 space-y-3">
             {/* Close Button */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-foreground font-['Cormorant_Garamond']">My Daily Life</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">My Daily Life</h2>
               <Button
                 onClick={() => setIsExpanded(false)}
                 variant="ghost"
                 size="sm"
-                className="rounded-full"
+                className="h-8 w-8 p-0 rounded-md hover:bg-gray-100"
               >
-                <ChevronRight className="w-5 h-5 rotate-180" />
+                <ChevronRight className="w-4 h-4 rotate-180" />
               </Button>
             </div>
 
             {/* Morning Routine Section */}
-            <Card className="p-4 bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setMorningExpanded(!morningExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                    ☀️
-                  </div>
-                  <h3 className="font-semibold text-foreground">Morning Routine</h3>
+                  <span className="text-lg">⭐</span>
+                  <h3 className="text-sm font-medium text-gray-800">Morning Routines</h3>
                 </div>
                 {morningExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {morningExpanded && (
-                <div className="space-y-2 mt-3">
+                <div className="space-y-1 mt-2">
+                  <div className="text-xs text-gray-500 mb-2">📅 Today</div>
                   {morningRoutine.map((item) => (
                     <label
                       key={item.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-background/50 cursor-pointer transition-colors"
+                      className="flex items-center gap-2 p-1.5 rounded hover:bg-gray-50 cursor-pointer transition-colors"
                     >
                       <input
                         type="checkbox"
                         checked={item.completed}
                         onChange={() => toggleItem(morningRoutine, setMorningRoutine, item.id)}
-                        className="w-5 h-5 rounded border-2 border-primary text-primary focus:ring-2 focus:ring-primary/20"
+                        className="w-4 h-4 rounded border border-gray-300 text-gray-800 focus:ring-1 focus:ring-gray-400"
                       />
                       <span className={cn(
                         "text-sm flex-1",
-                        item.completed ? "line-through text-muted-foreground" : "text-foreground"
+                        item.completed ? "line-through text-gray-400" : "text-gray-700"
                       )}>
                         {item.label}
                       </span>
-                      {item.completed && (
-                        <Check className="w-4 h-4 text-primary" />
-                      )}
                     </label>
                   ))}
                 </div>
@@ -161,46 +157,42 @@ export function ExpandableSidebar() {
             </Card>
 
             {/* Night Routine Section */}
-            <Card className="p-4 bg-gradient-to-br from-secondary/5 to-secondary/10 border border-secondary/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setNightExpanded(!nightExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                    🌙
-                  </div>
-                  <h3 className="font-semibold text-foreground">Night Routine</h3>
+                  <span className="text-lg">🌙</span>
+                  <h3 className="text-sm font-medium text-gray-800">Evening Routines</h3>
                 </div>
                 {nightExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {nightExpanded && (
-                <div className="space-y-2 mt-3">
+                <div className="space-y-1 mt-2">
+                  <div className="text-xs text-gray-500 mb-2">📅 Today</div>
                   {nightRoutine.map((item) => (
                     <label
                       key={item.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-background/50 cursor-pointer transition-colors"
+                      className="flex items-center gap-2 p-1.5 rounded hover:bg-gray-50 cursor-pointer transition-colors"
                     >
                       <input
                         type="checkbox"
                         checked={item.completed}
                         onChange={() => toggleItem(nightRoutine, setNightRoutine, item.id)}
-                        className="w-5 h-5 rounded border-2 border-secondary text-secondary focus:ring-2 focus:ring-secondary/20"
+                        className="w-4 h-4 rounded border border-gray-300 text-gray-800 focus:ring-1 focus:ring-gray-400"
                       />
                       <span className={cn(
                         "text-sm flex-1",
-                        item.completed ? "line-through text-muted-foreground" : "text-foreground"
+                        item.completed ? "line-through text-gray-400" : "text-gray-700"
                       )}>
                         {item.label}
                       </span>
-                      {item.completed && (
-                        <Check className="w-4 h-4 text-secondary" />
-                      )}
                     </label>
                   ))}
                 </div>
@@ -208,44 +200,37 @@ export function ExpandableSidebar() {
             </Card>
 
             {/* Monthly Goals Section */}
-            <Card className="p-4 bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setGoalsExpanded(!goalsExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <Target className="w-6 h-6 text-accent-foreground" />
-                  <h3 className="font-semibold text-foreground">Monthly Goals</h3>
+                  <span className="text-lg">🖤</span>
+                  <h3 className="text-sm font-medium text-gray-800">Monthly Goals</h3>
                 </div>
                 {goalsExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {goalsExpanded && (
-                <div className="space-y-2 mt-3">
+                <div className="space-y-1 mt-2">
+                  <div className="text-xs text-gray-500 mb-2">⭕ Add goals</div>
                   {monthlyGoals.map((item) => (
                     <label
                       key={item.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-background/50 cursor-pointer transition-colors"
+                      className="flex items-start gap-2 p-1.5 rounded hover:bg-gray-50 cursor-pointer transition-colors"
                     >
-                      <input
-                        type="checkbox"
-                        checked={item.completed}
-                        onChange={() => toggleItem(monthlyGoals, setMonthlyGoals, item.id)}
-                        className="w-5 h-5 rounded border-2 border-accent text-accent focus:ring-2 focus:ring-accent/20"
-                      />
+                      <span className="text-sm mt-0.5">•</span>
                       <span className={cn(
                         "text-sm flex-1",
-                        item.completed ? "line-through text-muted-foreground" : "text-foreground"
+                        item.completed ? "line-through text-gray-400" : "text-gray-700"
                       )}>
                         {item.label}
                       </span>
-                      {item.completed && (
-                        <Check className="w-4 h-4 text-accent-foreground" />
-                      )}
                     </label>
                   ))}
                 </div>
@@ -253,27 +238,23 @@ export function ExpandableSidebar() {
             </Card>
 
             {/* Life Progress Bars */}
-            <div className="space-y-3 pt-2">
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">Life Progress</h3>
+            <div className="space-y-2 pt-1">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-lg">🖤</span>
+                <h3 className="text-sm font-medium text-gray-800">Life Progress Bar</h3>
+              </div>
               {progressBars.map((bar) => {
                 const Icon = bar.icon;
                 const percentage = Math.min((bar.current / bar.target) * 100, 100);
 
                 return (
-                  <Card key={bar.id} className="p-4 bg-muted/30">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Icon className="w-5 h-5 text-primary" />
-                      <span className="text-sm font-medium text-foreground">{bar.label}</span>
-                    </div>
+                  <Card key={bar.id} className="p-3 bg-white border border-gray-200 shadow-sm">
                     <div className="space-y-2">
-                      <div className="flex justify-between text-xs text-muted-foreground">
-                        <span>{bar.current} {bar.unit}</span>
-                        <span>{bar.target} {bar.unit}</span>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-gray-600">{bar.label}</span>
+                        <span className="text-gray-500 font-medium">{percentage.toFixed(0)}%</span>
                       </div>
-                      <Progress value={percentage} className="h-2" />
-                      <p className="text-xs text-center text-primary font-medium">
-                        {percentage.toFixed(0)}% Complete
-                      </p>
+                      <Progress value={percentage} className="h-1.5 bg-gray-100" />
                     </div>
                   </Card>
                 );

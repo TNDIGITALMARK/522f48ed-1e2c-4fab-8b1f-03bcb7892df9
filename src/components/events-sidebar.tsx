@@ -190,64 +190,64 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
       {/* Expandable Sidebar */}
       <div
         className={cn(
-          "fixed right-0 top-0 h-full bg-card/95 backdrop-blur-md border-l border-border shadow-bloom-lg transition-all duration-300 z-40 overflow-y-auto",
+          "fixed right-0 top-0 h-full bg-white border-l border-gray-200 shadow-sm transition-all duration-300 z-40 overflow-y-auto",
           isExpanded ? "w-96" : "w-0"
         )}
       >
         {isExpanded && (
-          <div className="p-6 space-y-4">
+          <div className="p-5 space-y-3">
             {/* Close Button */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-foreground font-['Cormorant_Garamond']">Events & Schedule</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-lg font-semibold text-gray-800">Events & Schedule</h2>
               <Button
                 onClick={() => setIsExpanded(false)}
                 variant="ghost"
                 size="sm"
-                className="rounded-full"
+                className="h-8 w-8 p-0 rounded-md hover:bg-gray-100"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4" />
               </Button>
             </div>
 
             {/* AI Todo List Generator */}
             {todayEvents.length > 0 && (
-              <Card className="p-4 bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/30">
-                <div className="flex items-center justify-between mb-3">
+              <Card className="p-3 bg-white border border-gray-200 shadow-sm">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-accent-foreground" />
-                    <h3 className="font-semibold text-foreground">AI Task Planner</h3>
+                    <Sparkles className="w-4 h-4 text-gray-700" />
+                    <h3 className="text-sm font-medium text-gray-800">AI Task Planner</h3>
                   </div>
                   <Button
                     onClick={generateAITodos}
                     size="sm"
                     variant="outline"
-                    className="text-xs"
+                    className="h-7 text-xs border-gray-300 hover:bg-gray-50"
                   >
                     Generate
                   </Button>
                 </div>
 
                 {aiTodos.length > 0 && (
-                  <div className="space-y-2 mt-3">
+                  <div className="space-y-1 mt-2">
                     {aiTodos.map((todo) => (
                       <label
                         key={todo.id}
-                        className="flex items-start gap-3 p-2 rounded-lg hover:bg-background/50 cursor-pointer transition-colors"
+                        className="flex items-start gap-2 p-1.5 rounded hover:bg-gray-50 cursor-pointer transition-colors"
                       >
                         <input
                           type="checkbox"
                           checked={todo.completed}
                           onChange={() => toggleTodo(todo.id)}
-                          className="w-4 h-4 mt-0.5 rounded border-2 border-accent text-accent focus:ring-2 focus:ring-accent/20"
+                          className="w-4 h-4 mt-0.5 rounded border border-gray-300 text-gray-800 focus:ring-1 focus:ring-gray-400"
                         />
                         <div className="flex-1">
                           <span className={cn(
                             "text-sm block",
-                            todo.completed ? "line-through text-muted-foreground" : "text-foreground"
+                            todo.completed ? "line-through text-gray-400" : "text-gray-700"
                           )}>
                             {todo.title}
                           </span>
-                          <span className="text-xs text-muted-foreground">{todo.timeBlock}</span>
+                          <span className="text-xs text-gray-500">{todo.timeBlock}</span>
                         </div>
                       </label>
                     ))}
@@ -255,60 +255,55 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
                 )}
 
                 {aiTodos.length === 0 && (
-                  <p className="text-sm text-muted-foreground text-center py-2">
-                    Click "Generate" to create a smart todo list based on your events
+                  <p className="text-xs text-gray-500 text-center py-2">
+                    Click "Generate" to create a smart todo list
                   </p>
                 )}
               </Card>
             )}
 
             {/* Daily Events Section */}
-            <Card className="p-4 bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setDailyExpanded(!dailyExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground">Today</h3>
-                  <span className="text-xs text-muted-foreground">({todayEvents.length})</span>
+                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <h3 className="text-sm font-medium text-gray-800">Today</h3>
+                  <span className="text-xs text-gray-500">({todayEvents.length})</span>
                 </div>
                 {dailyExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {dailyExpanded && (
-                <div className="space-y-2 mt-3">
+                <div className="space-y-2 mt-2">
                   {todayEvents.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-4">
+                    <p className="text-xs text-gray-500 text-center py-3">
                       No events scheduled for today
                     </p>
                   ) : (
                     todayEvents.map((event) => (
                       <div
                         key={event.id}
-                        className={cn(
-                          "p-3 rounded-lg border transition-colors hover:shadow-sm",
-                          getEventTypeColor(event.eventType)
-                        )}
+                        className="p-2.5 rounded-md border border-gray-200 bg-gray-50/50 transition-colors hover:bg-gray-50"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1">
-                            <h4 className="font-medium text-sm">{event.title}</h4>
+                            <h4 className="font-medium text-sm text-gray-800">{event.title}</h4>
                             {event.description && (
-                              <p className="text-xs opacity-80 mt-1">{event.description}</p>
+                              <p className="text-xs text-gray-600 mt-1">{event.description}</p>
                             )}
-                            <div className="flex items-center gap-2 mt-2">
-                              <Clock className="w-3 h-3" />
-                              <span className="text-xs">{formatEventTime(event)}</span>
+                            <div className="flex items-center gap-1.5 mt-1.5">
+                              <Clock className="w-3 h-3 text-gray-500" />
+                              <span className="text-xs text-gray-600">{formatEventTime(event)}</span>
                             </div>
                           </div>
-                          <span className="text-xs font-medium capitalize px-2 py-1 rounded-full bg-background/50">
+                          <span className="text-xs text-gray-600 capitalize px-2 py-0.5 rounded-full bg-white border border-gray-200">
                             {event.eventType}
                           </span>
                         </div>
@@ -320,50 +315,45 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
             </Card>
 
             {/* Weekly Events Section */}
-            <Card className="p-4 bg-gradient-to-br from-secondary/5 to-secondary/10 border border-secondary/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setWeeklyExpanded(!weeklyExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-secondary" />
-                  </div>
-                  <h3 className="font-semibold text-foreground">This Week</h3>
-                  <span className="text-xs text-muted-foreground">({weekEvents.length})</span>
+                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <h3 className="text-sm font-medium text-gray-800">This Week</h3>
+                  <span className="text-xs text-gray-500">({weekEvents.length})</span>
                 </div>
                 {weeklyExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {weeklyExpanded && (
-                <div className="space-y-2 mt-3">
+                <div className="space-y-2 mt-2">
                   {weekEvents.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-4">
+                    <p className="text-xs text-gray-500 text-center py-3">
                       No events scheduled this week
                     </p>
                   ) : (
                     weekEvents.slice(0, 10).map((event) => (
                       <div
                         key={event.id}
-                        className={cn(
-                          "p-3 rounded-lg border transition-colors hover:shadow-sm",
-                          getEventTypeColor(event.eventType)
-                        )}
+                        className="p-2.5 rounded-md border border-gray-200 bg-gray-50/50 transition-colors hover:bg-gray-50"
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-medium">{formatEventDate(event)}</span>
-                              <span className="text-xs opacity-60">•</span>
-                              <span className="text-xs">{formatEventTime(event)}</span>
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <span className="text-xs font-medium text-gray-700">{formatEventDate(event)}</span>
+                              <span className="text-xs text-gray-400">•</span>
+                              <span className="text-xs text-gray-600">{formatEventTime(event)}</span>
                             </div>
-                            <h4 className="font-medium text-sm">{event.title}</h4>
+                            <h4 className="font-medium text-sm text-gray-800">{event.title}</h4>
                           </div>
-                          <span className="text-xs capitalize px-2 py-1 rounded-full bg-background/50">
+                          <span className="text-xs text-gray-600 capitalize px-2 py-0.5 rounded-full bg-white border border-gray-200">
                             {event.eventType}
                           </span>
                         </div>
@@ -375,48 +365,43 @@ export function EventsSidebar({ isOpen, onOpenChange }: EventsSidebarProps = {})
             </Card>
 
             {/* Monthly Events Section */}
-            <Card className="p-4 bg-gradient-to-br from-accent/5 to-accent/10 border border-accent/20">
+            <Card className="p-3 bg-white border border-gray-200 shadow-sm">
               <button
                 onClick={() => setMonthlyExpanded(!monthlyExpanded)}
-                className="w-full flex items-center justify-between mb-2"
+                className="w-full flex items-center justify-between mb-1"
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center">
-                    <Calendar className="w-4 h-4 text-accent-foreground" />
-                  </div>
-                  <h3 className="font-semibold text-foreground">This Month</h3>
-                  <span className="text-xs text-muted-foreground">({monthEvents.length})</span>
+                  <Calendar className="w-4 h-4 text-gray-700" />
+                  <h3 className="text-sm font-medium text-gray-800">This Month</h3>
+                  <span className="text-xs text-gray-500">({monthEvents.length})</span>
                 </div>
                 {monthlyExpanded ? (
-                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                  <ChevronDown className="w-4 h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
+                  <ChevronRight className="w-4 h-4 text-gray-500" />
                 )}
               </button>
 
               {monthlyExpanded && (
-                <div className="space-y-2 mt-3 max-h-96 overflow-y-auto">
+                <div className="space-y-1.5 mt-2 max-h-96 overflow-y-auto">
                   {monthEvents.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-4">
+                    <p className="text-xs text-gray-500 text-center py-3">
                       No events scheduled this month
                     </p>
                   ) : (
                     monthEvents.slice(0, 20).map((event) => (
                       <div
                         key={event.id}
-                        className={cn(
-                          "p-2 rounded-lg border transition-colors hover:shadow-sm",
-                          getEventTypeColor(event.eventType)
-                        )}
+                        className="p-2 rounded-md border border-gray-200 bg-gray-50/50 transition-colors hover:bg-gray-50"
                       >
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-0.5">
-                              <span className="text-xs font-medium">{formatEventDate(event)}</span>
+                            <div className="flex items-center gap-1.5 mb-0.5">
+                              <span className="text-xs font-medium text-gray-700">{formatEventDate(event)}</span>
                             </div>
-                            <h4 className="font-medium text-sm">{event.title}</h4>
+                            <h4 className="font-medium text-sm text-gray-800">{event.title}</h4>
                           </div>
-                          <span className="text-xs capitalize">{event.eventType}</span>
+                          <span className="text-xs text-gray-600 capitalize">{event.eventType}</span>
                         </div>
                       </div>
                     ))
