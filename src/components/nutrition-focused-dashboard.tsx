@@ -96,12 +96,12 @@ export function NutritionFocusedDashboard() {
             />
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <h3
-                className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-wide font-['Playfair_Display']"
+                className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight font-['Playfair_Display']"
                 style={{
                   color: 'hsl(25 11% 21%)',
                   textShadow: '0 2px 12px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.7), 0 4px 20px rgba(168, 184, 165, 0.3)',
                   opacity: 0.9,
-                  letterSpacing: '0.05em'
+                  letterSpacing: '0.02em'
                 }}
               >
                 Hi Brooklyn
