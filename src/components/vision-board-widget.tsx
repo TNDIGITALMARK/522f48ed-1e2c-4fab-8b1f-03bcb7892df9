@@ -1,166 +1,176 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
-import { ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { ChevronDown, ChevronUp, Plus, X, Upload } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 interface VisionBoardWidgetProps {
   className?: string;
 }
 
+interface VisionImage {
+  id: string;
+  src: string;
+  alt: string;
+  file?: File;
+}
+
 export function VisionBoardWidget({ className }: VisionBoardWidgetProps) {
-  const [isNovemberExpanded, setIsNovemberExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [visionImages, setVisionImages] = useState<VisionImage[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const currentMonth = new Date().toLocaleString('default', { month: 'long' });
-  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-  // Monthly vision statement
-  const visionStatement = "Embrace growth, nourish your body, and cultivate inner strength through consistent self-care and mindful living.";
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
 
-  // Important tasks for November with descriptions
-  const novemberTasks = [
-    {
-      title: "Complete Cycle Tracking Setup",
-      description: "Set up your menstrual cycle tracking to understand your body's natural rhythms and optimize wellness routines accordingly.",
-      completed: false,
-    },
-    {
-      title: "Establish Morning Ritual Consistency",
-      description: "Practice your morning ritual 20 out of 30 days to build a sustainable foundation for daily wellness and mental clarity.",
-      completed: false,
-    },
-    {
-      title: "Nutrition Planning Framework",
-      description: "Create a personalized meal planning system aligned with your cycle phases to support energy levels and hormonal balance.",
-      completed: false,
-    },
-    {
-      title: "Movement Practice 4x/Week",
-      description: "Engage in intentional movement four times weekly, adapting intensity to your cycle phase for optimal results and recovery.",
-      completed: true,
-    },
-    {
-      title: "Community Connection Goals",
-      description: "Join three community discussions and share one personal wellness insight to build supportive connections.",
-      completed: false,
-    },
-  ];
+    Array.from(files).forEach((file) => {
+      if (!file.type.startsWith('image/')) {
+        alert('Please select only image files');
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size should be less than 5MB');
+        return;
+      }
+
+      const objectUrl = URL.createObjectURL(file);
+      const newImage: VisionImage = {
+        id: Date.now() + '-' + Math.random(),
+        src: objectUrl,
+        alt: file.name,
+        file: file,
+      };
+
+      setVisionImages((prev) => [...prev, newImage]);
+    });
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleRemoveImage = (imageId: string) => {
+    setVisionImages((prev) => {
+      const imageToRemove = prev.find((img) => img.id === imageId);
+      if (imageToRemove?.src.startsWith('blob:')) {
+        URL.revokeObjectURL(imageToRemove.src);
+      }
+      return prev.filter((img) => img.id !== imageId);
+    });
+  };
+
+  const handleAddPhotoClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
-    <Card className={cn("p-8 bg-gradient-to-br from-secondary/10 to-accent/5 border-secondary/30 shadow-bloom", className)}>
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <Sparkles className="w-6 h-6 text-primary" />
-        <h2 className="text-2xl font-semibold font-['Cormorant_Garamond'] text-foreground">
-          {currentMonth} Vision Board
-        </h2>
-      </div>
-
-      {/* Vision Statement */}
-      <div className="mb-8 p-6 bg-background/60 rounded-2xl border border-border/40">
-        <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3 font-['DM_Sans']">
-          Monthly Vision
-        </h3>
-        <p className="text-foreground text-base leading-relaxed italic font-['Inter']">
-          "{visionStatement}"
-        </p>
-      </div>
-
-      {/* Important Tasks Section */}
-      <div className="space-y-4">
-        <div
-          className="flex items-center justify-between cursor-pointer group"
-          onClick={() => setIsNovemberExpanded(!isNovemberExpanded)}
-        >
-          <h3 className="text-lg font-semibold text-foreground font-['Cormorant_Garamond'] group-hover:text-primary transition-colors">
-            Important Tasks for {currentMonth}
-          </h3>
-          <button
-            className="p-2 rounded-full hover:bg-primary/10 transition-colors"
-            aria-label={isNovemberExpanded ? "Collapse tasks" : "Expand tasks"}
-          >
-            {isNovemberExpanded ? (
-              <ChevronUp className="w-5 h-5 text-primary" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-primary" />
-            )}
-          </button>
+    <Card className={cn("calendar-container overflow-hidden", className)}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/5 transition-colors group"
+        aria-expanded={isOpen}
+        aria-label={isOpen ? 'Collapse monthly vision board' : 'Expand monthly vision board'}
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground font-medium tracking-wide">
+            Monthly Vision Board
+          </span>
         </div>
-
-        {/* Expandable Tasks List */}
-        <div
-          className={cn(
-            "overflow-hidden transition-all duration-500 ease-in-out",
-            isNovemberExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-          )}
-        >
-          <div className="space-y-3 pt-2">
-            {novemberTasks.map((task, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "p-5 rounded-xl border transition-all duration-300",
-                  task.completed
-                    ? "bg-primary/5 border-primary/20"
-                    : "bg-background/50 border-border/40 hover:border-primary/30 hover:shadow-sm"
-                )}
-              >
-                <div className="flex items-start gap-3">
-                  {/* Checkbox */}
-                  <div
-                    className={cn(
-                      "mt-0.5 w-5 h-5 rounded-md border-2 flex items-center justify-center flex-shrink-0 transition-colors",
-                      task.completed
-                        ? "bg-primary border-primary"
-                        : "border-muted-foreground/40 hover:border-primary/50"
-                    )}
-                  >
-                    {task.completed && (
-                      <svg
-                        className="w-3 h-3 text-primary-foreground"
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M10 3L4.5 8.5L2 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    )}
-                  </div>
-
-                  {/* Task Content */}
-                  <div className="flex-1 space-y-1.5">
-                    <h4
-                      className={cn(
-                        "font-semibold text-sm font-['DM_Sans']",
-                        task.completed ? "text-muted-foreground line-through" : "text-foreground"
-                      )}
-                    >
-                      {task.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground leading-relaxed font-['Inter']">
-                      {task.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Summary when collapsed */}
-        {!isNovemberExpanded && (
-          <div className="text-sm text-muted-foreground font-['Inter'] pt-1">
-            {novemberTasks.filter((t) => t.completed).length} of {novemberTasks.length} tasks completed
-          </div>
+        {isOpen ? (
+          <ChevronUp className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+        ) : (
+          <ChevronDown className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
         )}
-      </div>
+      </button>
+
+      {isOpen && (
+        <div className="px-4 pb-4 animate-fade-in-up">
+          <div className="border-t border-border/50 pt-4">
+            <div className="mb-3">
+              <h3 className="text-lg font-semibold mb-1">
+                {currentMonth}
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                Add photos that represent your goals and aspirations
+              </p>
+            </div>
+
+            {visionImages.length > 0 ? (
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                {visionImages.map((image, index) => (
+                  <div
+                    key={image.id}
+                    className="relative aspect-square rounded-lg overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all animate-fade-in-scale group"
+                  >
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 33vw, 200px"
+                    />
+
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveImage(image.id);
+                      }}
+                      className="absolute top-1 right-1 p-1 bg-destructive/90 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive"
+                      aria-label="Remove image"
+                    >
+                      <X className="w-3 h-3 text-destructive-foreground" />
+                    </button>
+
+                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mb-4 p-8 rounded-lg border-2 border-dashed border-border/50 bg-muted/10 flex flex-col items-center justify-center text-center">
+                <Upload className="w-10 h-10 text-muted-foreground/30 mb-3" />
+                <p className="text-sm text-muted-foreground mb-1">
+                  No photos yet
+                </p>
+                <p className="text-xs text-muted-foreground/70">
+                  Click the button below to add your first photo
+                </p>
+              </div>
+            )}
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleFileSelect}
+              className="hidden"
+              aria-label="Upload vision board photos"
+            />
+
+            <Button
+              variant="outline"
+              className="w-full rounded-full border-dashed hover:border-primary/50 hover:bg-primary/5"
+              onClick={handleAddPhotoClick}
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Add Photos
+            </Button>
+
+            {visionImages.length > 0 && (
+              <p className="text-xs text-muted-foreground text-center mt-2">
+                {visionImages.length} {visionImages.length === 1 ? 'photo' : 'photos'} added
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </Card>
   );
 }
