@@ -7,13 +7,17 @@ interface HormoneWave3DProps {
   width?: number;
   height?: number;
   className?: string;
+  onClick?: () => void;
+  clickable?: boolean;
 }
 
 export function HormoneWave3D({
   phase = 'ovulation',
   width = 800,
   height = 200,
-  className = ''
+  className = '',
+  onClick,
+  clickable = false
 }: HormoneWave3DProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -120,7 +124,13 @@ export function HormoneWave3D({
   }, [phase, width, height]);
 
   return (
-    <div className={`relative ${className}`}>
+    <div
+      className={`relative ${className} ${clickable ? 'cursor-pointer transition-all hover:scale-[1.02] hover:shadow-bloom-lg' : ''}`}
+      onClick={clickable ? onClick : undefined}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      onKeyDown={clickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick?.(); } : undefined}
+    >
       <canvas
         ref={canvasRef}
         style={{ width: `${width}px`, height: `${height}px` }}
@@ -130,6 +140,7 @@ export function HormoneWave3D({
       {/* Label overlay */}
       <div className="absolute bottom-2 left-4 text-xs font-semibold text-primary/70 uppercase tracking-wider">
         {phase} Phase
+        {clickable && <span className="ml-2 text-xs opacity-70">→ Click to log period</span>}
       </div>
     </div>
   );

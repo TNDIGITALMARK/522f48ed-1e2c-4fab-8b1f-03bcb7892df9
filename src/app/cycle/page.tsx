@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Calendar, Heart, Zap, CloudRain, Sun, Moon, Sparkles, TrendingUp, BarChart3 } from 'lucide-react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AICycleInsights } from '@/components/ai-cycle-insights';
 import { AISymptomTracker } from '@/components/ai-symptom-tracker';
 import { CycleHistory } from '@/components/cycle-history';
@@ -78,6 +79,7 @@ const symptoms = [
 ];
 
 export default function CyclePage() {
+  const router = useRouter();
   const [selectedMood, setSelectedMood] = useState(8);
   const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>(['Increased Energy']);
 
@@ -91,6 +93,10 @@ export default function CyclePage() {
         ? prev.filter(s => s !== symptom)
         : [...prev, symptom]
     );
+  };
+
+  const handleNavigateToCalendar = () => {
+    router.push('/cycle/period-calendar');
   };
 
   return (
@@ -163,13 +169,15 @@ export default function CyclePage() {
               </div>
             </div>
 
-            {/* 3D Animated Hormone Wave - Main focus */}
+            {/* 3D Animated Hormone Wave - Main focus - Clickable */}
             <div className="relative z-10 mb-6 -mx-6">
               <HormoneWave3D
                 phase={currentPhase === 'Menstruation' ? 'menstruation' : currentPhase === 'Follicular' ? 'follicular' : currentPhase === 'Ovulation' ? 'ovulation' : 'luteal'}
                 width={800}
                 height={180}
                 className="w-full"
+                clickable={true}
+                onClick={handleNavigateToCalendar}
               />
             </div>
 
