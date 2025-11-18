@@ -103,7 +103,7 @@ export function WeeklyBalanceWidget({ userId }: WeeklyBalanceWidgetProps) {
   };
 
   return (
-    <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 widget-card">
+    <Card className="rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500 widget-card">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-sm font-semibold">Smart Weekly Balance</h3>

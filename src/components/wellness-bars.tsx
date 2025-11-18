@@ -234,7 +234,7 @@ export function AllInOneWellness() {
 
   if (isLoading) {
     return (
-      <Card className="p-6 bg-gradient-to-br from-primary/12 to-accent/8 border-primary/30">
+      <Card className="p-6 rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)]">
         <div className="text-center">
           <div className="h-32 w-32 mx-auto mb-4 rounded-full bg-muted/30 animate-pulse" />
           <div className="h-6 w-32 mx-auto bg-muted/30 rounded animate-pulse" />
@@ -244,7 +244,7 @@ export function AllInOneWellness() {
   }
 
   return (
-    <Card className="p-6 bg-gradient-to-br from-primary/12 to-accent/8 border-primary/30">
+    <Card className="p-6 rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500">
       <div className="text-center">
         {/* Circular Progress */}
         <div className="relative inline-flex items-center justify-center mb-4">

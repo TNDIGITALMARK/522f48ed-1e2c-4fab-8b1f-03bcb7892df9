@@ -80,7 +80,7 @@ export function MonthlyVisionBoard({ userId }: VisionBoardProps) {
   };
 
   return (
-    <Card className="calendar-container overflow-hidden">
+    <Card className="calendar-container overflow-hidden !border-0">
       {/* Small Header - Always Visible */}
       <button
         onClick={() => setIsOpen(!isOpen)}

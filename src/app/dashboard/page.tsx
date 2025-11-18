@@ -124,7 +124,7 @@ export default function DashboardPage() {
             {/* Widget Header - Single Line */}
             <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
               <Link href="/cycle" className="block flex-shrink-0">
-                <div className="bg-card hover:bg-card/80 border border-black rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                <div className="bg-[hsl(35,40%,94%)] hover:bg-[hsl(35,40%,92%)] border border-black/10 rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Calendar className="w-4 h-4 text-primary" />
                   </div>
@@ -133,7 +133,7 @@ export default function DashboardPage() {
               </Link>
 
               <Link href="/workout" className="block flex-shrink-0">
-                <div className="bg-card hover:bg-card/80 border border-black rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                <div className="bg-[hsl(35,40%,94%)] hover:bg-[hsl(35,40%,92%)] border border-black/10 rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Activity className="w-4 h-4 text-accent" />
                   </div>
@@ -142,7 +142,7 @@ export default function DashboardPage() {
               </Link>
 
               <Link href="/wellness" className="block flex-shrink-0">
-                <div className="bg-card hover:bg-card/80 border border-black rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                <div className="bg-[hsl(35,40%,94%)] hover:bg-[hsl(35,40%,92%)] border border-black/10 rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
                   <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Heart className="w-4 h-4 text-primary" />
                   </div>
@@ -151,7 +151,7 @@ export default function DashboardPage() {
               </Link>
 
               <Link href="/community" className="block flex-shrink-0">
-                <div className="bg-card hover:bg-card/80 border border-black rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                <div className="bg-[hsl(35,40%,94%)] hover:bg-[hsl(35,40%,92%)] border border-black/10 rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
                   <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                     <Users className="w-4 h-4 text-foreground" />
                   </div>

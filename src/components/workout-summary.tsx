@@ -55,7 +55,7 @@ export function WorkoutSummary({ workoutLogs = [], cardioLogs = [] }: WorkoutSum
   }, 0);
 
   return (
-    <Card className="bloom-card">
+    <Card className="rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500 widget-card">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-xl font-semibold flex items-center gap-2">

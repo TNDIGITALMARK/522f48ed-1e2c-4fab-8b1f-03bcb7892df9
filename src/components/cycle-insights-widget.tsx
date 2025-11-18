@@ -83,7 +83,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
 
   if (!cycle) {
     return (
-      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 widget-card">
+      <Card className="rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500 widget-card">
         <div className="text-center py-6">
           <Heart className="w-8 h-8 mx-auto mb-3 text-[hsl(80,12%,37%)] opacity-60" />
           <h3 className="text-sm font-semibold mb-1.5">Start Tracking Your Cycle</h3>
@@ -186,7 +186,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
   return (
     <div className="space-y-4 widget-card">
       {/* Main Cycle Card */}
-      <Card className={`rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
+      <Card className={`rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500 bg-gradient-to-br ${phaseColors[insights.phase]}`}>
         <div className="flex items-start justify-between mb-3">
           <div>
             <div className="flex flex-col items-center text-center gap-1.5 mb-2">
@@ -306,7 +306,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Recommendations Card */}
-      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
+      <Card className="rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex flex-col items-center text-center gap-1.5 mb-3">
           <Sparkles className="w-3.5 h-3.5 text-primary" />
           <h4 className="font-semibold text-[0.6875rem]">Personalized Recommendations</h4>
@@ -322,7 +322,7 @@ export function CycleInsightsWidget({ userId, onCycleUpdate }: CycleInsightsWidg
       </Card>
 
       {/* Common Symptoms Card */}
-      <Card className="rounded-3xl bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_-8px_rgba(168,181,160,0.15)] hover:shadow-[0_16px_48px_-12px_rgba(168,181,160,0.25)] hover:scale-[1.01] transition-all duration-500">
+      <Card className="rounded-3xl bg-[hsl(35,40%,94%)] backdrop-blur-md border border-black/10 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.12)] hover:scale-[1.01] transition-all duration-500">
         <div className="flex flex-col items-center text-center gap-1.5 mb-2.5">
           <Heart className="w-3.5 h-3.5 text-[hsl(100,15%,67%)]" />
           <h4 className="font-semibold text-[0.6875rem]">What to Expect</h4>
