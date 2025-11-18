@@ -1,9 +1,8 @@
 "use client";
 
-import { Bell, Search, Camera } from 'lucide-react';
+import { Bell, Camera } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -71,22 +70,10 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b border-border/50 shadow-sm" style={{ backgroundColor: 'hsl(38 50% 94%)' }}>
         <div className="flex items-center justify-between px-4 md:px-6 py-2">
-          {/* Search Bar */}
-          <div className="flex-1 max-w-xs hidden md:block">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Search wellness data, rituals..."
-                className="pl-9 h-9 text-sm bg-muted/50 border-border focus-visible:ring-1 focus-visible:ring-primary/20"
-              />
-            </div>
-          </div>
-
-          {/* Logo/Brand on Mobile */}
-          <div className="md:hidden flex-1">
+          {/* Logo/Brand */}
+          <div className="flex-1">
             <h2 className="text-lg font-['Cormorant_Garamond'] font-semibold text-foreground">rooted</h2>
           </div>
 
@@ -154,8 +141,8 @@ export function DashboardHeader() {
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full p-1">
                   <div className="text-right hidden sm:block">
-                    <p className="text-sm font-medium leading-tight text-foreground">{userName}</p>
-                    <p className="text-xs text-muted-foreground leading-tight">Member</p>
+                    <p className="text-sm font-['Cormorant_Garamond'] font-semibold leading-tight text-foreground">{userName}</p>
+                    <p className="text-xs font-['Cormorant_Garamond'] text-muted-foreground leading-tight">Member</p>
                   </div>
                   <Avatar className="w-9 h-9 border-2 border-border hover:border-primary/50 transition-colors">
                     {profilePicture && <AvatarImage src={profilePicture} alt={userName} />}
