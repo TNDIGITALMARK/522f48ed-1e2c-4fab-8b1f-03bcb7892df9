@@ -106,49 +106,49 @@ export default function DashboardPage() {
             {/* Important Tasks with integrated Wellness Bars */}
             <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
 
+            {/* Widget Header - Single Line */}
+            <div className="flex gap-3 overflow-x-auto pb-2 mb-8">
+              <Link href="/cycle" className="block flex-shrink-0">
+                <div className="bg-card hover:bg-card/80 border border-border rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Calendar className="w-4 h-4 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Cycle Tracking</h3>
+                </div>
+              </Link>
+
+              <Link href="/workout" className="block flex-shrink-0">
+                <div className="bg-card hover:bg-card/80 border border-border rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                  <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Activity className="w-4 h-4 text-accent" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Workout</h3>
+                </div>
+              </Link>
+
+              <Link href="/wellness" className="block flex-shrink-0">
+                <div className="bg-card hover:bg-card/80 border border-border rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                  <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Heart className="w-4 h-4 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Wellness Score</h3>
+                </div>
+              </Link>
+
+              <Link href="/community" className="block flex-shrink-0">
+                <div className="bg-card hover:bg-card/80 border border-border rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
+                  <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                    <Users className="w-4 h-4 text-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Community</h3>
+                </div>
+              </Link>
+            </div>
+
             {/* Main Dashboard Widgets - Split into two columns */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* LEFT SIDE - Calendar with header sections */}
+              {/* LEFT SIDE - Calendar */}
               <div className="lg:col-span-1 space-y-4">
-                {/* Header Sections - Thin Rectangles Above Calendar */}
-                <div className="grid grid-cols-2 gap-3">
-                  <Link href="/cycle" className="block">
-                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
-                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <Calendar className="w-4 h-4 text-primary" />
-                      </div>
-                      <h3 className="font-semibold text-foreground text-sm leading-tight">Cycle Tracking</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/workout" className="block">
-                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
-                      <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <Activity className="w-4 h-4 text-accent" />
-                      </div>
-                      <h3 className="font-semibold text-foreground text-sm leading-tight">Today's Workout</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/wellness" className="block">
-                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
-                      <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <Heart className="w-4 h-4 text-primary" />
-                      </div>
-                      <h3 className="font-semibold text-foreground text-sm leading-tight">Wellness Score</h3>
-                    </div>
-                  </Link>
-
-                  <Link href="/community" className="block">
-                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
-                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                        <Users className="w-4 h-4 text-foreground" />
-                      </div>
-                      <h3 className="font-semibold text-foreground text-sm leading-tight">Community</h3>
-                    </div>
-                  </Link>
-                </div>
-
                 {/* Calendar */}
                 <MonthlyCalendar />
               </div>
