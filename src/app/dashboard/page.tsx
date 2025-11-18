@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import { ExpandableSidebar } from '@/components/expandable-sidebar';
 import { EventsSidebar } from '@/components/events-sidebar';
 import { TasksSidebar } from '@/components/tasks-sidebar';
-import { GoalsPanel } from '@/components/goals-panel';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
 import { DashboardHeader } from '@/components/dashboard-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles, CheckCircle2, Apple, Brain, Moon } from 'lucide-react';
+import { Calendar, Heart, Activity, Users, Sparkles, CheckCircle2, Apple, Brain, Moon } from 'lucide-react';
 import Link from 'next/link';
 import { DashboardSettings } from '@/components/dashboard-settings';
 import { useWellnessGoals } from '@/hooks/use-wellness-goals';
@@ -27,7 +26,6 @@ const GOAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = 
 
 export default function DashboardPage() {
   const [currentMonth, setCurrentMonth] = useState('');
-  const [userName] = useState('Brooklyn');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isTasksSidebarOpen, setIsTasksSidebarOpen] = useState(false);
   const { goals, isLoading: goalsLoading } = useWellnessGoals();
@@ -60,9 +58,9 @@ export default function DashboardPage() {
             </h1>
 
             <div className="text-center flex-1">
-              <p className="text-sm text-muted-foreground font-light tracking-wide mb-2">
-                Hi {userName}
-              </p>
+              <h2 className="text-2xl font-semibold font-['Cormorant_Garamond'] text-foreground mb-2">
+                Wellness Home
+              </h2>
               {!goalsLoading && goals.length > 0 && (
                 <div className="flex items-center justify-center gap-1.5 flex-wrap">
                   {goals.slice(0, 4).map((goalId) => {
@@ -236,31 +234,6 @@ export default function DashboardPage() {
                     )}
                   </div>
                 </Card>
-
-                {/* Weekly Progress Card */}
-                <Card className="p-6 bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <TrendingUp className="w-5 h-5 text-secondary" />
-                    <h2 className="text-xl font-semibold font-['Cormorant_Garamond']">This Week</h2>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                      <span className="text-xs text-foreground">Workouts Completed</span>
-                      <span className="text-xl font-bold text-primary">3/5</span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                      <span className="text-xs text-foreground">Water Intake</span>
-                      <span className="text-xl font-bold text-secondary">64oz</span>
-                    </div>
-                    <div className="flex justify-between items-center p-3 bg-background/50 rounded-lg">
-                      <span className="text-xs text-foreground">Sleep Average</span>
-                      <span className="text-xl font-bold text-accent-foreground">7.5h</span>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Goals Panel - Daily/Weekly/Monthly */}
-                <GoalsPanel />
               </div>
             </div>
 
