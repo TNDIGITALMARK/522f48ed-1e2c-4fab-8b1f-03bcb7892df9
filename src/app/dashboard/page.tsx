@@ -39,16 +39,20 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
-      }}
-    >
+    <div className="min-h-screen relative">
+      {/* Botanical background with reduced opacity - subtle flower and root patterns */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer */}
+      <div className="fixed inset-0 -z-20 bg-white" />
       {/* Dashboard Header */}
       <DashboardHeader />
 
