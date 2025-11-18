@@ -22,8 +22,9 @@ const MOCK_USER_ID = 'demo-user-001';
 export function DashboardHeader() {
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
-  const [userName, setUserName] = useState('Sarah Thompson');
+  const [userName, setUserName] = useState('Brooklyn Thomlinson');
   const [isUploading, setIsUploading] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load profile data
@@ -31,13 +32,13 @@ export function DashboardHeader() {
     const profile = getUserProfile(MOCK_USER_ID);
     if (profile) {
       setProfilePicture(profile.profilePicture || null);
-      setUserName(profile.name || 'Sarah Thompson');
+      setUserName(profile.name || 'Brooklyn Thomlinson');
     }
 
     // Subscribe to profile updates
     const unsubscribe = subscribeToProfile(MOCK_USER_ID, (updatedProfile) => {
       setProfilePicture(updatedProfile.profilePicture || null);
-      setUserName(updatedProfile.name || 'Sarah Thompson');
+      setUserName(updatedProfile.name || 'Brooklyn Thomlinson');
     });
 
     return unsubscribe;
@@ -70,39 +71,95 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-10 bg-card/95 backdrop-blur-md border-b border-border/50 shadow-sm">
-        <div className="flex items-center justify-between px-4 py-0.5">
+      <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border/50 shadow-sm">
+        <div className="flex items-center justify-between px-4 md:px-6 py-2">
           {/* Search Bar */}
-          <div className="flex-1 max-w-xs">
+          <div className="flex-1 max-w-xs hidden md:block">
             <div className="relative">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-2.5 h-2.5 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search wellness data, rituals..."
-                className="pl-6 py-0 h-6 text-[10px] bg-muted/50 border-0 focus-visible:ring-1 focus-visible:ring-primary/20"
+                className="pl-9 h-9 text-sm bg-muted/50 border-border focus-visible:ring-1 focus-visible:ring-primary/20"
               />
             </div>
           </div>
 
+          {/* Logo/Brand on Mobile */}
+          <div className="md:hidden flex-1">
+            <h2 className="text-lg font-['Cormorant_Garamond'] font-semibold text-foreground">rooted</h2>
+          </div>
+
           {/* Right Actions */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2 md:gap-3">
             {/* Notifications */}
-            <Button variant="ghost" size="icon" className="relative rounded-full h-6 w-6">
-              <Bell className="w-3 h-3" />
-              <span className="absolute top-0 right-0 w-1 h-1 bg-secondary rounded-full" />
-            </Button>
+            <DropdownMenu open={showNotifications} onOpenChange={setShowNotifications}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative rounded-full h-9 w-9 hover:bg-primary/10"
+                >
+                  <Bell className="w-4 h-4" />
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-secondary rounded-full animate-pulse" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-80">
+                <DropdownMenuLabel className="flex items-center justify-between">
+                  <span>Notifications</span>
+                  <span className="text-xs text-muted-foreground font-normal">3 new</span>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <div className="max-h-[400px] overflow-y-auto">
+                  <DropdownMenuItem className="flex flex-col items-start gap-1 p-3 cursor-pointer">
+                    <div className="flex items-center gap-2 w-full">
+                      <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0" />
+                      <span className="text-sm font-medium">Cycle Phase Update</span>
+                      <span className="text-xs text-muted-foreground ml-auto">2m ago</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground pl-4">
+                      You've entered your follicular phase. Energy levels may increase.
+                    </p>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex flex-col items-start gap-1 p-3 cursor-pointer">
+                    <div className="flex items-center gap-2 w-full">
+                      <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0" />
+                      <span className="text-sm font-medium">Daily Goal Reminder</span>
+                      <span className="text-xs text-muted-foreground ml-auto">1h ago</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground pl-4">
+                      You're 2 workouts away from your weekly goal!
+                    </p>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex flex-col items-start gap-1 p-3 cursor-pointer">
+                    <div className="flex items-center gap-2 w-full">
+                      <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0" />
+                      <span className="text-sm font-medium">New Community Post</span>
+                      <span className="text-xs text-muted-foreground ml-auto">3h ago</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground pl-4">
+                      Sarah shared a new wellness tip in the community.
+                    </p>
+                  </DropdownMenuItem>
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="text-center justify-center text-xs text-primary">
+                  View All Notifications
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="flex items-center gap-1 hover:opacity-80 transition-opacity">
-                  <div className="text-right hidden md:block">
-                    <p className="text-[9px] font-medium leading-tight">{userName}</p>
-                    <p className="text-[7px] text-muted-foreground leading-tight">Premium Member</p>
+                <button className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full p-1">
+                  <div className="text-right hidden sm:block">
+                    <p className="text-sm font-medium leading-tight text-foreground">{userName}</p>
+                    <p className="text-xs text-muted-foreground leading-tight">Member</p>
                   </div>
-                  <Avatar className="w-6 h-6">
+                  <Avatar className="w-9 h-9 border-2 border-border hover:border-primary/50 transition-colors">
                     {profilePicture && <AvatarImage src={profilePicture} alt={userName} />}
-                    <AvatarFallback className="bg-primary text-primary-foreground text-[9px]">
+                    <AvatarFallback className="bg-primary text-primary-foreground text-sm font-semibold">
                       {getInitials()}
                     </AvatarFallback>
                   </Avatar>

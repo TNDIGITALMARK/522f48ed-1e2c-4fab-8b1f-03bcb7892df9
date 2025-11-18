@@ -8,6 +8,7 @@ import { GoalsPanel } from '@/components/goals-panel';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
+import { DashboardHeader } from '@/components/dashboard-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, TrendingUp, Users, Sparkles, CheckCircle2, Apple, Brain, Moon } from 'lucide-react';
@@ -39,6 +40,9 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background relative">
+      {/* Dashboard Header */}
+      <DashboardHeader />
+
       {/* Left Expandable Sidebar */}
       <ExpandableSidebar />
 
@@ -46,7 +50,7 @@ export default function DashboardPage() {
       <TasksSidebar isOpen={isTasksSidebarOpen} onOpenChange={setIsTasksSidebarOpen} />
 
       {/* Main Content Area */}
-      <div className="min-h-screen p-8">
+      <div className="min-h-screen p-8 pt-16">
         {/* Header Section */}
         <div className="max-w-7xl mx-auto">
           {/* Month at top left, greeting in center */}
