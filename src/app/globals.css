@@ -905,7 +905,7 @@ label {
   border-radius: 1.25rem;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(62, 53, 48, 0.10);
-  border: 1px solid #000000; /* Fine line black */
+  border: 0; /* No border - removed outline */
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
   opacity: 1;
 }
