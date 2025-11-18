@@ -42,7 +42,7 @@ export default function DashboardPage() {
     <div
       className="min-h-screen relative"
       style={{
-        backgroundImage: `url('https://77e93381c682217fcef0325458269ad5.r2.cloudflarestorage.com/phoenix/users/F7oiAnbgkFO4Kaxftd6EI6aD3WX2/projects/522f48ed-1e2c-4fab-8b1f-03bcb7892df9/imageContext/0df0ffa6-6ded-4f1e-aa29-43fd7524f2d2.JPG')`,
+        backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
