@@ -7,6 +7,8 @@ import { TasksSidebar } from '@/components/tasks-sidebar';
 import { MonthlyCalendar } from '@/components/monthly-calendar';
 import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
+import { TodaysFocusWidget } from '@/components/todays-focus-widget';
+import { DailyRootsWidget } from '@/components/daily-roots-widget';
 import { DashboardHeader } from '@/components/dashboard-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -153,105 +155,15 @@ export default function DashboardPage() {
                 <MonthlyCalendar />
               </div>
 
-              {/* RIGHT SIDE - Focus, Progress, and Goals */}
+              {/* RIGHT SIDE - Focus & Streak Tracker */}
               <div className="lg:col-span-1 space-y-8">
-                {/* Today's Focus Card - Personalized based on wellness goals */}
-                <Card className="p-6 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Sparkles className="w-5 h-5 text-primary" />
-                    <h2 className="text-xl font-semibold font-['Cormorant_Garamond']">Today's Focus</h2>
-                  </div>
-                  <div className="space-y-3">
-                    {goals.includes('fitness') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
-                          <Activity className="w-3.5 h-3.5" />
-                          Movement & Strength
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Your body is ready for movement today. Focus on exercises that energize and strengthen you.
-                        </p>
-                      </div>
-                    )}
-                    {goals.includes('nutrition') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
-                          <Apple className="w-3.5 h-3.5" />
-                          Nutrition Tip
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Prioritize whole foods and stay hydrated. Your nutrition choices today support your goals.
-                        </p>
-                      </div>
-                    )}
-                    {goals.includes('mental') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
-                          <Brain className="w-3.5 h-3.5" />
-                          Mindfulness Moment
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Take time for stillness today. Even 5 minutes of meditation can ground your mind.
-                        </p>
-                      </div>
-                    )}
-                    {goals.includes('sleep') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
-                          <Moon className="w-3.5 h-3.5" />
-                          Rest & Recovery
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Quality rest is essential. Create a calming evening routine for better sleep tonight.
-                        </p>
-                      </div>
-                    )}
-                    {goals.includes('cycle') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm flex items-center gap-2">
-                          <Heart className="w-3.5 h-3.5" />
-                          Cycle Awareness
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          Listen to your body's rhythms. Align your activities with your natural cycle.
-                        </p>
-                      </div>
-                    )}
-                    {(goals.includes('holistic') || goals.length === 0) && !goals.includes('fitness') && !goals.includes('nutrition') && (
-                      <div className="p-3 bg-background/50 rounded-lg">
-                        <h3 className="font-medium text-foreground mb-1 text-sm">Morning Intention</h3>
-                        <p className="text-xs text-muted-foreground">
-                          Start your day with gratitude and balance. Your wellness journey is uniquely yours.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </Card>
+                {/* AI-Curated Today's Focus - Based on cycle phase with wellness quote */}
+                <TodaysFocusWidget />
+
+                {/* Daily Roots - App usage streak tracker */}
+                <DailyRootsWidget />
               </div>
             </div>
-
-            {/* Activity Calendar Preview */}
-            <Card className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold font-['Cormorant_Garamond']">Activity Calendar</h2>
-                <Link href="/cycle">
-                  <Button variant="ghost" size="sm" className="gap-2">
-                    View Full Calendar
-                    <Calendar className="w-4 h-4" />
-                  </Button>
-                </Link>
-              </div>
-              <div className="grid grid-cols-7 gap-2">
-                {Array.from({ length: 14 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="aspect-square rounded-lg border border-border bg-muted/20 hover:bg-muted/40 transition-colors cursor-pointer flex items-center justify-center"
-                  >
-                    <span className="text-xs text-muted-foreground">{i + 1}</span>
-                  </div>
-                ))}
-              </div>
-            </Card>
 
             {/* Community Section */}
             <Card className="p-8 bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
