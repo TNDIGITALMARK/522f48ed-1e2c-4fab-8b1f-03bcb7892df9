@@ -106,57 +106,50 @@ export default function DashboardPage() {
             {/* Important Tasks with integrated Wellness Bars */}
             <ImportantTasksWidget onOpenSidebar={() => setIsSidebarOpen(true)} />
 
-            {/* Quick Stats Row - Half Circle Widgets */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Link href="/cycle">
-                <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Calendar className="w-5 h-5 text-black" />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="font-medium text-foreground text-[0.625rem]">Cycle Tracking</h3>
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/workout">
-                <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Activity className="w-5 h-5 text-black" />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="font-medium text-foreground text-[0.625rem]">Today's Workout</h3>
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/wellness">
-                <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Heart className="w-5 h-5 text-black" />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="font-medium text-foreground text-[0.625rem]">Wellness Score</h3>
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/community">
-                <div className="relative overflow-hidden bg-white rounded-t-full aspect-[2/1] hover:shadow-bloom transition-all duration-300 cursor-pointer group border border-border p-4 flex flex-col items-center justify-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Users className="w-5 h-5 text-black" />
-                  </div>
-                  <div className="text-center">
-                    <h3 className="font-medium text-foreground text-[0.625rem]">Community</h3>
-                  </div>
-                </div>
-              </Link>
-            </div>
-
             {/* Main Dashboard Widgets - Split into two columns */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* LEFT SIDE - Calendar with integrated schedule */}
-              <div className="lg:col-span-1">
+              {/* LEFT SIDE - Calendar with header sections */}
+              <div className="lg:col-span-1 space-y-4">
+                {/* Header Sections - Thin Rectangles Above Calendar */}
+                <div className="grid grid-cols-2 gap-3">
+                  <Link href="/cycle" className="block">
+                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
+                      <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <Calendar className="w-4 h-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm leading-tight">Cycle Tracking</h3>
+                    </div>
+                  </Link>
+
+                  <Link href="/workout" className="block">
+                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
+                      <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <Activity className="w-4 h-4 text-accent" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm leading-tight">Today's Workout</h3>
+                    </div>
+                  </Link>
+
+                  <Link href="/wellness" className="block">
+                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
+                      <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <Heart className="w-4 h-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm leading-tight">Wellness Score</h3>
+                    </div>
+                  </Link>
+
+                  <Link href="/community" className="block">
+                    <div className="bg-card hover:bg-card/80 border border-border rounded-xl p-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 h-full">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                        <Users className="w-4 h-4 text-foreground" />
+                      </div>
+                      <h3 className="font-semibold text-foreground text-sm leading-tight">Community</h3>
+                    </div>
+                  </Link>
+                </div>
+
+                {/* Calendar */}
                 <MonthlyCalendar />
               </div>
 
