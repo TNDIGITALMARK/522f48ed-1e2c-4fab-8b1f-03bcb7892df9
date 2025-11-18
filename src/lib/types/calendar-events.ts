@@ -40,31 +40,63 @@ export interface UpdateCalendarEventInput {
   all_day?: boolean;
 }
 
-// Predefined colors for each category
-export const CATEGORY_COLORS: Record<EventCategory, string[]> = {
-  school: [
-    '#60A5FA', // Blue
-    '#3B82F6', // Darker Blue
-    '#2563EB', // Deep Blue
-    '#1D4ED8', // Navy Blue
+// Color schemes for events
+export type ColorScheme = 'brown' | 'blue' | 'pink' | 'green' | 'custom';
+
+// Predefined color schemes with curated hex codes
+export const COLOR_SCHEMES: Record<ColorScheme, string[]> = {
+  brown: [
+    '#8B6F47', // Warm brown
+    '#A0826D', // Light brown
+    '#6B5446', // Dark brown
+    '#9B7653', // Medium brown
+    '#7A5C4D', // Deep brown
   ],
-  work: [
-    '#F59E0B', // Amber
-    '#D97706', // Orange
-    '#B45309', // Dark Orange
-    '#92400E', // Brown-Orange
+  blue: [
+    '#60A5FA', // Sky blue
+    '#3B82F6', // Blue
+    '#2563EB', // Deep blue
+    '#1D4ED8', // Navy blue
+    '#4F9CE8', // Medium blue
   ],
-  personal: [
-    '#10B981', // Green
-    '#059669', // Emerald
-    '#047857', // Dark Emerald
-    '#065F46', // Forest Green
+  pink: [
+    '#F472B6', // Pink
+    '#EC4899', // Hot pink
+    '#DB2777', // Deep pink
+    '#BE185D', // Dark pink
+    '#E879B9', // Light pink
   ],
+  green: [
+    '#10B981', // Emerald
+    '#059669', // Green
+    '#047857', // Dark emerald
+    '#065F46', // Forest green
+    '#34D399', // Light green
+  ],
+  custom: [], // User-defined colors
 };
 
-// Default color for each category
+// Get default color for a scheme
+export function getDefaultColorForScheme(scheme: ColorScheme): string {
+  const colors = COLOR_SCHEMES[scheme];
+  return colors[0] || '#6B7280'; // Fallback to gray
+}
+
+// Get all colors for a scheme
+export function getColorsForScheme(scheme: ColorScheme): string[] {
+  return COLOR_SCHEMES[scheme];
+}
+
+// Predefined colors for each category (legacy support)
+export const CATEGORY_COLORS: Record<EventCategory, string[]> = {
+  school: COLOR_SCHEMES.blue,
+  work: COLOR_SCHEMES.brown,
+  personal: COLOR_SCHEMES.green,
+};
+
+// Default color for each category (legacy support)
 export const DEFAULT_CATEGORY_COLORS: Record<EventCategory, string> = {
-  school: '#60A5FA', // Light Blue
-  work: '#F59E0B', // Amber
-  personal: '#10B981', // Green
+  school: getDefaultColorForScheme('blue'),
+  work: getDefaultColorForScheme('brown'),
+  personal: getDefaultColorForScheme('green'),
 };

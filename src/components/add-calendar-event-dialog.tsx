@@ -23,8 +23,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { createCalendarEvent } from '@/lib/supabase/calendar-events';
-import type { EventCategory } from '@/lib/types/calendar-events';
+import type { EventCategory, ColorScheme } from '@/lib/types/calendar-events';
 import { DEFAULT_CATEGORY_COLORS, CATEGORY_COLORS } from '@/lib/types/calendar-events';
+import { ColorSchemePicker } from './color-scheme-picker';
 import { toast } from 'sonner';
 
 interface AddCalendarEventDialogProps {
@@ -46,6 +47,7 @@ export function AddCalendarEventDialog({
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState<EventCategory>('personal');
   const [color, setColor] = useState(DEFAULT_CATEGORY_COLORS.personal);
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('brown');
   const [startDate, setStartDate] = useState(
     selectedDate
       ? selectedDate.toISOString().split('T')[0]
@@ -170,25 +172,15 @@ export function AddCalendarEventDialog({
               </Select>
             </div>
 
-            {/* Color Picker */}
+            {/* Color Scheme Picker */}
             <div className="space-y-2">
               <Label>Event Color</Label>
-              <div className="flex gap-2 flex-wrap">
-                {CATEGORY_COLORS[category].map((colorOption) => (
-                  <button
-                    key={colorOption}
-                    type="button"
-                    onClick={() => setColor(colorOption)}
-                    className={`w-10 h-10 rounded-lg transition-all ${
-                      color === colorOption
-                        ? 'ring-2 ring-offset-2 ring-foreground scale-110'
-                        : 'hover:scale-105'
-                    }`}
-                    style={{ backgroundColor: colorOption }}
-                    aria-label={`Select color ${colorOption}`}
-                  />
-                ))}
-              </div>
+              <ColorSchemePicker
+                value={color}
+                onChange={setColor}
+                selectedScheme={colorScheme}
+                onSchemeChange={setColorScheme}
+              />
             </div>
 
             {/* Date */}

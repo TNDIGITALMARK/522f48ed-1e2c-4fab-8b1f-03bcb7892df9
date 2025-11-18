@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Plus, Clock, MapPin, Calendar as CalendarIco
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AddCalendarEventDialog } from './add-calendar-event-dialog';
+import { WeeklyCalendarView } from './weekly-calendar-view';
 import { getCalendarEventsByMonth } from '@/lib/supabase/calendar-events';
 import type { CalendarEvent } from '@/lib/types/calendar-events';
 
@@ -25,6 +26,8 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [expandedEvents, setExpandedEvents] = useState(false);
+  const [showWeeklyView, setShowWeeklyView] = useState(false);
+  const [weekStartDate, setWeekStartDate] = useState<Date | null>(null);
 
   // Get calendar data
   const calendarData = useMemo(() => {
@@ -135,6 +138,27 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
     );
   };
 
+  const handleWeekdayClick = (dayOfWeek: number) => {
+    // dayOfWeek: 0 = Sunday, 1 = Monday, etc.
+    // Find the first occurrence of this weekday in the current month
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Find first day of month that matches the clicked weekday
+    let date = new Date(year, month, 1);
+    while (date.getDay() !== dayOfWeek) {
+      date.setDate(date.getDate() + 1);
+    }
+
+    // Calculate the week start (Sunday) for this date
+    const weekStart = new Date(date);
+    weekStart.setDate(date.getDate() - date.getDay());
+    weekStart.setHours(0, 0, 0, 0);
+
+    setWeekStartDate(weekStart);
+    setShowWeeklyView(true);
+  };
+
   // Get upcoming events (next 7 days)
   const upcomingEvents = useMemo(() => {
     const today = new Date();
@@ -151,8 +175,18 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
   }, [events]);
 
   return (
-    <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-border ${className}`}>
-      {/* Header */}
+    <>
+      {/* Weekly View Overlay */}
+      {showWeeklyView && weekStartDate && (
+        <WeeklyCalendarView
+          selectedWeekStart={weekStartDate}
+          onClose={() => setShowWeeklyView(false)}
+          onEventCreated={handleEventCreated}
+        />
+      )}
+
+      <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-border ${className}`}>
+        {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-semibold font-['Cormorant_Garamond'] text-foreground">
           {monthName}
@@ -187,15 +221,17 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
         </div>
       </div>
 
-      {/* Weekday headers */}
+      {/* Weekday headers - Clickable to open weekly view */}
       <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-          <div
+        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+          <button
             key={day}
-            className="text-center text-xs font-medium text-muted-foreground py-2"
+            onClick={() => handleWeekdayClick(index)}
+            className="text-center text-xs font-medium text-muted-foreground py-2 hover:bg-primary/10 hover:text-primary rounded transition-colors cursor-pointer"
+            title={`Click to view weekly calendar starting from ${day}`}
           >
             {day}
-          </div>
+          </button>
         ))}
       </div>
 
@@ -334,6 +370,7 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
           )}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
