@@ -154,7 +154,7 @@ export default function CyclePage() {
           <TabsContent value="today" className="space-y-6">
 
         {/* Current Cycle Status with Animated Hormone Wave */}
-        <Card className="mb-6 overflow-hidden relative bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+        <Card className="magazine-feature-card mb-6 overflow-hidden relative bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
@@ -247,7 +247,7 @@ export default function CyclePage() {
         {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
           const PhaseIcon = phase.icon;
           return (
-            <Card key={phase.name} className="mb-6 bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+            <Card key={phase.name} className="magazine-feature-card mb-6 bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl p-6">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
                   <PhaseIcon className="w-7 h-7 text-secondary-foreground" />

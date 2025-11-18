@@ -170,7 +170,7 @@ export function CycleInsightsGraphs({
   return (
     <div className="space-y-6">
       {/* Common Patterns Card */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <div className="flex items-start gap-3 mb-4">
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center flex-shrink-0">
             <Sparkles className="w-5 h-5 text-primary" />
@@ -197,7 +197,7 @@ export function CycleInsightsGraphs({
       </Card>
 
       {/* Hormone Levels Chart */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl p-6">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
             <Activity className="w-5 h-5 text-primary" />
@@ -247,7 +247,7 @@ export function CycleInsightsGraphs({
       </Card>
 
       {/* Cycle Length Over Time */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-primary" />
@@ -318,7 +318,7 @@ export function CycleInsightsGraphs({
       </Card>
 
       {/* Insights Summary */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl p-6">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
             <Calendar className="w-5 h-5 text-primary" />

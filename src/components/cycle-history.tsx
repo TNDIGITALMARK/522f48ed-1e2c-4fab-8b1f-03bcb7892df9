@@ -138,7 +138,7 @@ export function CycleHistory() {
   return (
     <div className="space-y-6">
       {/* Header with Stats */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Cycle History</h2>
           <Badge variant="secondary" className="text-sm">
@@ -209,7 +209,7 @@ export function CycleHistory() {
         </h3>
 
         {currentData?.cycles.map((cycle, index) => (
-          <Card key={index} className="p-5 hover:shadow-lg transition-shadow">
+          <Card key={index} className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 p-5 hover:shadow-bloom-lg transition-shadow">
             <div className="space-y-4">
               {/* Cycle Header */}
               <div className="flex items-center justify-between">

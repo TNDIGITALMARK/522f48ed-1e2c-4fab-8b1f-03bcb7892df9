@@ -129,7 +129,7 @@ export function AISymptomTracker({
           <Heart className="w-5 h-5 text-primary" />
           How are you feeling today?
         </h3>
-        <Card className="calendar-container overflow-hidden">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 overflow-hidden">
           <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
             {moodOptions.map((mood) => (
               <button
@@ -163,7 +163,7 @@ export function AISymptomTracker({
             </Badge>
           )}
         </div>
-        <Card className="calendar-container overflow-hidden">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 overflow-hidden">
           <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
             {symptoms.map((symptom) => {
               const isSelected = selectedSymptoms.includes(symptom);
@@ -205,7 +205,7 @@ export function AISymptomTracker({
 
       {/* Quick AI Insight */}
       {showInsight && symptomInsight && (
-        <Card className="calendar-container">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
               <TrendingUp className="w-5 h-5 text-secondary" />

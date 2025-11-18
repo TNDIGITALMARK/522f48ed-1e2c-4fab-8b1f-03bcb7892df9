@@ -76,7 +76,7 @@ export function AICycleInsights({
 
   if (loading) {
     return (
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <div className="flex items-center justify-center py-12">
           <div className="text-center">
             <RefreshCw className="w-8 h-8 mx-auto mb-3 text-primary animate-spin" />
@@ -89,7 +89,7 @@ export function AICycleInsights({
 
   if (error) {
     return (
-      <Card className="bg-[hsl(35,40%,94%)] border border-destructive/50 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-destructive/50 rounded-xl p-6">
         <div className="text-center py-8">
           <p className="text-destructive mb-4">{error}</p>
           <Button onClick={fetchInsights} variant="outline" size="sm">
@@ -120,7 +120,7 @@ export function AICycleInsights({
       </div>
 
       {/* Phase Analysis */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
           <Heart className="w-5 h-5 text-secondary" />
           What's Happening in Your Body
@@ -130,7 +130,7 @@ export function AICycleInsights({
 
       {/* Symptom Insights */}
       {symptoms.length > 0 && (
-        <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
           <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-primary" />
             Understanding Your Symptoms
@@ -140,7 +140,7 @@ export function AICycleInsights({
       )}
 
       {/* Affirmation */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6 text-center">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl p-6 text-center">
         <div className="py-4">
           <Sparkles className="w-8 h-8 mx-auto mb-3 text-accent" />
           <p className="text-lg font-medium italic text-foreground">
@@ -152,7 +152,7 @@ export function AICycleInsights({
       {/* Recommendations */}
       <div className="grid md:grid-cols-3 gap-4">
         {/* Nutrition */}
-        <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl p-6">
           <h4 className="font-semibold mb-3 flex items-center gap-2">
             <Utensils className="w-5 h-5 text-secondary" />
             Nutrition Focus
@@ -168,7 +168,7 @@ export function AICycleInsights({
         </Card>
 
         {/* Workout */}
-        <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
           <h4 className="font-semibold mb-3 flex items-center gap-2">
             <Zap className="w-5 h-5 text-primary" />
             Workout Guidance
@@ -184,7 +184,7 @@ export function AICycleInsights({
         </Card>
 
         {/* Self-Care */}
-        <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-accent/30 rounded-xl p-6">
           <h4 className="font-semibold mb-3 flex items-center gap-2">
             <Heart className="w-5 h-5 text-accent" />
             Self-Care Practices
@@ -201,7 +201,7 @@ export function AICycleInsights({
       </div>
 
       {/* Wellness Tips */}
-      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
+      <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl p-6">
         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
           <Lightbulb className="w-5 h-5 text-secondary" />
           Today's Wellness Tips
