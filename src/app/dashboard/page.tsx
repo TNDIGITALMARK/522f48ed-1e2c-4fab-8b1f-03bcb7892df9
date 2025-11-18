@@ -66,46 +66,42 @@ export default function DashboardPage() {
       <div className="min-h-screen p-8 pt-16">
         {/* Header Section */}
         <div className="max-w-7xl mx-auto">
-          {/* Month at top left, greeting in center */}
-          <div className="flex items-start justify-between mb-12">
-            <h1 className="text-4xl font-bold text-foreground font-['Cormorant_Garamond']">
-              {currentMonth}
-            </h1>
-
-            <div className="text-center flex-1">
-              <h2 className="text-2xl font-semibold font-['Cormorant_Garamond'] text-foreground mb-2">
-                Wellness Home
-              </h2>
-              {!goalsLoading && goals.length > 0 && (
-                <div className="flex items-center justify-center gap-1.5 flex-wrap">
-                  {goals.slice(0, 4).map((goalId) => {
-                    const Icon = GOAL_ICONS[goalId] || Sparkles;
-                    return (
-                      <div
-                        key={goalId}
-                        className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center"
-                        title={`${goalId} goal active`}
-                      >
-                        <Icon className="w-3.5 h-3.5 text-primary" />
-                      </div>
-                    );
-                  })}
-                  {goals.length > 4 && (
-                    <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-medium text-primary">
-                      +{goals.length - 4}
+          {/* Greeting centered at top */}
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold font-['Cormorant_Garamond'] text-foreground mb-2">
+              Wellness Home
+            </h2>
+            {!goalsLoading && goals.length > 0 && (
+              <div className="flex items-center justify-center gap-1.5 flex-wrap">
+                {goals.slice(0, 4).map((goalId) => {
+                  const Icon = GOAL_ICONS[goalId] || Sparkles;
+                  return (
+                    <div
+                      key={goalId}
+                      className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center"
+                      title={`${goalId} goal active`}
+                    >
+                      <Icon className="w-3.5 h-3.5 text-primary" />
                     </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div className="w-32"></div> {/* Spacer for balance */}
+                  );
+                })}
+                {goals.length > 4 && (
+                  <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-xs font-medium text-primary">
+                    +{goals.length - 4}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Dashboard Content Grid - No boxes, clean layout */}
           <div className="space-y-12">
             {/* Monthly Vision Board with Tasks Button */}
             <div className="relative">
+              {/* Month label above vision board - smaller size */}
+              <h3 className="text-lg font-medium text-foreground font-['Cormorant_Garamond'] mb-3">
+                {currentMonth}
+              </h3>
               <VisionBoardWidget />
               <Button
                 onClick={() => setIsTasksSidebarOpen(true)}
