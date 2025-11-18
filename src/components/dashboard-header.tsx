@@ -70,11 +70,11 @@ export function DashboardHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b border-border/50 shadow-sm" style={{ backgroundColor: 'hsl(38 50% 94%)' }}>
+      <header className="sticky top-0 z-50 backdrop-blur-md border-b border-border/50 shadow-sm" style={{ backgroundColor: 'hsl(0 0% 98%)' }}>
         <div className="flex items-center justify-between px-4 md:px-6 py-2">
           {/* Logo/Brand */}
           <div className="flex-1">
-            <h2 className="text-lg font-['Cormorant_Garamond'] font-semibold text-foreground">rooted</h2>
+            <h2 className="text-lg font-['Inter'] font-semibold text-foreground">rooted</h2>
           </div>
 
           {/* Right Actions */}
@@ -141,10 +141,10 @@ export function DashboardHeader() {
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-2 hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-full p-1">
                   <div className="text-right hidden sm:block">
-                    <p className="text-sm font-['Cormorant_Garamond'] font-semibold leading-tight text-foreground">{userName}</p>
-                    <p className="text-xs font-['Cormorant_Garamond'] text-muted-foreground leading-tight">Member</p>
+                    <p className="text-sm font-['Inter'] font-semibold leading-tight text-foreground">{userName}</p>
+                    <p className="text-xs font-['Inter'] text-muted-foreground leading-tight">Member</p>
                   </div>
-                  <Avatar className="w-9 h-9 border-2 border-border hover:border-primary/50 transition-colors">
+                  <Avatar className="w-9 h-9 border-2 border-transparent hover:border-primary/50 transition-colors">
                     {profilePicture && <AvatarImage src={profilePicture} alt={userName} />}
                     <AvatarFallback className="bg-primary text-primary-foreground text-sm font-semibold">
                       {getInitials()}
