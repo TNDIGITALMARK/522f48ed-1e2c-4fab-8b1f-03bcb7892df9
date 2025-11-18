@@ -206,9 +206,9 @@ export default function NutritionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
+    <div className="min-h-screen bg-textile-beige pb-24">
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">rooted</span>
@@ -221,7 +221,7 @@ export default function NutritionPage() {
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title - Above Animation */}
-        <div className="mb-6 animate-fade-in-up animation-delay-200 text-center">
+        <div className="mb-6 text-center">
           <h1 className="text-4xl mb-2">Smart Nutrition</h1>
           <p className="text-muted-foreground text-lg">
             Your personalized meal planner synced to your cycle
@@ -230,7 +230,7 @@ export default function NutritionPage() {
       </main>
 
       {/* Full-width Food Animation - spans entire viewport */}
-      <div className="w-full mb-8 animate-fade-in-up animation-delay-400">
+      <div className="w-full mb-8">
         <NutritionScrollAnimation />
       </div>
 

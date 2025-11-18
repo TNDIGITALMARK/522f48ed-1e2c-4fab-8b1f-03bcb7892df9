@@ -1,7 +1,5 @@
 "use client";
 
-import { motion } from 'framer-motion';
-
 // Line-art food icon components inspired by the reference image
 // Baby-sized icons for visually appealing presentation
 const FoodIcon = ({ path, viewBox = "0 0 24 24" }: { path: string; viewBox?: string }) => (
@@ -87,39 +85,20 @@ const FOOD_ICONS = [
 ];
 
 export function NutritionScrollAnimation() {
-  // Create 3 rows with different icon sets
+  // Create 3 rows with different icon sets - static display without animation
   const row1Icons = FOOD_ICONS.slice(0, 15);
   const row2Icons = FOOD_ICONS.slice(15, 30);
   const row3Icons = FOOD_ICONS.slice(30, 45);
 
-  // Duplicate arrays for seamless looping
-  const row1Complete = [...row1Icons, ...row1Icons, ...row1Icons];
-  const row2Complete = [...row2Icons, ...row2Icons, ...row2Icons];
-  const row3Complete = [...row3Icons, ...row3Icons, ...row3Icons];
-
   return (
     <div className="w-full relative -mx-6">
-      {/* Full-width container - clean background without gradient */}
-      <div className="relative py-8 overflow-hidden"
-           style={{ backgroundColor: 'transparent' }}>
+      {/* Full-width container - clean background matching home page */}
+      <div className="relative py-8 overflow-hidden bg-textile-beige">
 
-        {/* Row 1 - Scroll left to right */}
-        <div className="relative h-16 overflow-hidden mb-4">
-          <motion.div
-            className="absolute flex items-center gap-12 whitespace-nowrap"
-            animate={{
-              x: ['-33.33%', '0%'],
-            }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            style={{
-              willChange: 'transform',
-            }}
-          >
-            {row1Complete.map((food, index) => (
+        {/* Row 1 - Static display */}
+        <div className="relative h-16 mb-4 flex items-center justify-center">
+          <div className="flex items-center gap-12 flex-wrap justify-center px-6">
+            {row1Icons.map((food, index) => (
               <div
                 key={`row1-${food.id}-${index}`}
                 className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
@@ -127,26 +106,13 @@ export function NutritionScrollAnimation() {
                 <FoodIcon path={food.path} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Row 2 - Scroll right to left (opposite direction) */}
-        <div className="relative h-16 overflow-hidden mb-4">
-          <motion.div
-            className="absolute flex items-center gap-12 whitespace-nowrap"
-            animate={{
-              x: ['0%', '-33.33%'],
-            }}
-            transition={{
-              duration: 45,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            style={{
-              willChange: 'transform',
-            }}
-          >
-            {row2Complete.map((food, index) => (
+        {/* Row 2 - Static display */}
+        <div className="relative h-16 mb-4 flex items-center justify-center">
+          <div className="flex items-center gap-12 flex-wrap justify-center px-6">
+            {row2Icons.map((food, index) => (
               <div
                 key={`row2-${food.id}-${index}`}
                 className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
@@ -154,26 +120,13 @@ export function NutritionScrollAnimation() {
                 <FoodIcon path={food.path} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Row 3 - Scroll left to right (medium speed) */}
-        <div className="relative h-16 overflow-hidden">
-          <motion.div
-            className="absolute flex items-center gap-12 whitespace-nowrap"
-            animate={{
-              x: ['-33.33%', '0%'],
-            }}
-            transition={{
-              duration: 35,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-            style={{
-              willChange: 'transform',
-            }}
-          >
-            {row3Complete.map((food, index) => (
+        {/* Row 3 - Static display */}
+        <div className="relative h-16 flex items-center justify-center">
+          <div className="flex items-center gap-12 flex-wrap justify-center px-6">
+            {row3Icons.map((food, index) => (
               <div
                 key={`row3-${food.id}-${index}`}
                 className="flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity"
@@ -181,23 +134,12 @@ export function NutritionScrollAnimation() {
                 <FoodIcon path={food.path} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Magnifying glass overlay - searching effect */}
+        {/* Static magnifying glass - no animation */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-          <motion.div
-            className="relative"
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.9, 1, 0.9],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
+          <div className="relative">
             <svg
               width="120"
               height="120"
@@ -212,22 +154,7 @@ export function NutritionScrollAnimation() {
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35" />
             </svg>
-
-            {/* Scanning beam effect inside magnifying glass */}
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-              animate={{
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-secondary/40 to-transparent" />
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
