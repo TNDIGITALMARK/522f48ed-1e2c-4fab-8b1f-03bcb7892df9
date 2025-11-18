@@ -230,19 +230,6 @@ export default function CyclePage() {
           />
         </div>
 
-        {/* AI-Powered Cycle Insights */}
-        <div className="mb-8">
-          <AICycleInsights
-            cyclePhase={currentPhase}
-            symptoms={selectedSymptoms}
-            mood={{
-              rating: selectedMood,
-              label: moodOptions.find(m => m.value === selectedMood)?.label || 'Neutral'
-            }}
-            cycleDay={currentCycleDay}
-          />
-        </div>
-
         {/* Cycle Insights */}
         {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
           const PhaseIcon = phase.icon;
@@ -295,6 +282,19 @@ export default function CyclePage() {
 
           {/* Insights Tab */}
           <TabsContent value="insights" className="space-y-6">
+            {/* AI-Powered Cycle Insights */}
+            <div className="mb-8">
+              <AICycleInsights
+                cyclePhase={currentPhase}
+                symptoms={selectedSymptoms}
+                mood={{
+                  rating: selectedMood,
+                  label: moodOptions.find(m => m.value === selectedMood)?.label || 'Neutral'
+                }}
+                cycleDay={currentCycleDay}
+              />
+            </div>
+
             <CycleInsightsGraphs
               cycleDay={currentCycleDay}
               cycleLength={cycleLength}

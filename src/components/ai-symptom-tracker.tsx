@@ -123,32 +123,6 @@ export function AISymptomTracker({
 
   return (
     <div className="space-y-6">
-      {/* Mood Tracker */}
-      <div>
-        <h3 className="text-xl mb-4 flex items-center gap-2">
-          <Heart className="w-5 h-5 text-primary" />
-          How are you feeling today?
-        </h3>
-        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 overflow-hidden">
-          <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide">
-            {moodOptions.map((mood) => (
-              <button
-                key={mood.label}
-                onClick={() => onMoodChange(mood.value)}
-                className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-all flex-shrink-0 snap-center min-w-[120px] ${
-                  selectedMood === mood.value
-                    ? 'bg-primary/10 ring-2 ring-primary'
-                    : 'bg-muted/30 hover:bg-muted/50'
-                }`}
-              >
-                <span className="text-3xl">{mood.emoji}</span>
-                <span className="text-xs font-medium">{mood.label}</span>
-              </button>
-            ))}
-          </div>
-        </Card>
-      </div>
-
       {/* Symptoms Tracker */}
       <div>
         <div className="flex items-center justify-between mb-4">
