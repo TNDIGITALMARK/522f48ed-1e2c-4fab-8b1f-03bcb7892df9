@@ -1,20 +1,23 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 /**
- * Rooted Balance Circle Component
+ * Rooted Balance Rectangle Carousel Component
  *
- * A circular diagram showing the "smart cycle" phases in a rectangular card
- * that matches the height and styling of the todo list.
+ * A swipeable horizontal carousel showing cycle phases in small rectangles
+ * that move left when swiped. Replaces the circular diagram with an
+ * interactive rectangular card carousel.
  *
  * Design features:
- * - Circular diagram divided into colored sections (sage green, navy, brown, beige, dark green)
- * - "smart cycle" text in center (replacing "circle" with "cycle")
- * - Rectangle card background with reduced opacity
+ * - Small rectangles arranged horizontally in a carousel
+ * - Smooth swipe/drag interaction for horizontal scrolling
+ * - Auto-scroll animation on left swipe
+ * - Colored rectangles (sage green, navy, brown, beige, dark green)
+ * - Responsive touch and mouse events
  * - Small "Rooted Balance" title in left corner
- * - Uses exact colors from the rooted color palette
  */
 
 export function RootedBalanceCircle() {
@@ -27,61 +30,114 @@ export function RootedBalanceCircle() {
     darkGreen: 'hsl(140 25% 25%)', // Dark green
   };
 
-  const sections = [
-    { label: 'Cycle Phase 1', color: colors.sage, startAngle: 0, endAngle: 72 },
-    { label: 'Cycle Phase 2', color: colors.navy, startAngle: 72, endAngle: 144 },
-    { label: 'Cycle Phase 3', color: colors.brown, startAngle: 144, endAngle: 216 },
-    { label: 'Cycle Phase 4', color: colors.beige, startAngle: 216, endAngle: 288 },
-    { label: 'Cycle Phase 5', color: colors.darkGreen, startAngle: 288, endAngle: 360 },
+  const phases = [
+    { label: 'Cycle Phase 1', color: colors.sage, description: 'Renewal & Rest' },
+    { label: 'Cycle Phase 2', color: colors.navy, description: 'Energy Rising' },
+    { label: 'Cycle Phase 3', color: colors.brown, description: 'Peak Power' },
+    { label: 'Cycle Phase 4', color: colors.beige, description: 'Gentle Transition' },
+    { label: 'Cycle Phase 5', color: colors.darkGreen, description: 'Grounding' },
   ];
 
-  // SVG circle parameters
-  const centerX = 200;
-  const centerY = 200;
-  const radius = 150;
-  const innerRadius = 50;
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // Helper function to convert degrees to radians
-  const toRadians = (degrees: number) => (degrees * Math.PI) / 180;
-
-  // Helper function to create arc path
-  const createArcPath = (startAngle: number, endAngle: number) => {
-    const startRad = toRadians(startAngle - 90); // -90 to start from top
-    const endRad = toRadians(endAngle - 90);
-
-    const x1 = centerX + radius * Math.cos(startRad);
-    const y1 = centerY + radius * Math.sin(startRad);
-    const x2 = centerX + radius * Math.cos(endRad);
-    const y2 = centerY + radius * Math.sin(endRad);
-
-    const x3 = centerX + innerRadius * Math.cos(endRad);
-    const y3 = centerY + innerRadius * Math.sin(endRad);
-    const x4 = centerX + innerRadius * Math.cos(startRad);
-    const y4 = centerY + innerRadius * Math.sin(startRad);
-
-    const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
-
-    return `
-      M ${x1} ${y1}
-      A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}
-      L ${x3} ${y3}
-      A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x4} ${y4}
-      Z
-    `;
+  // Handle mouse down (start drag)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.pageX - (carouselRef.current?.offsetLeft || 0));
+    setScrollLeft(carouselRef.current?.scrollLeft || 0);
   };
 
+  // Handle mouse move (dragging)
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - (carouselRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 2; // Multiply by 2 for faster scroll
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  // Handle mouse up (stop drag)
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Handle touch start
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0));
+    setScrollLeft(carouselRef.current?.scrollLeft || 0);
+  };
+
+  // Handle touch move
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 2;
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Scroll left button handler
+  const scrollLeftButton = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: -220, behavior: 'smooth' });
+    }
+  };
+
+  // Scroll right button handler
+  const scrollRightButton = () => {
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({ left: 220, behavior: 'smooth' });
+    }
+  };
+
+  // Track scroll position for button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (carouselRef.current) {
+        const position = carouselRef.current.scrollLeft;
+        const maxScroll = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+
+        setScrollPosition(position);
+        setIsAtStart(position <= 10);
+        setIsAtEnd(position >= maxScroll - 10);
+      }
+    };
+
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial check
+      return () => carousel.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
   return (
-    <Card className="bloom-card relative overflow-hidden max-w-md mx-auto">
-      {/* Smaller rectangle background with reduced opacity */}
+    <Card className="bloom-card relative overflow-hidden max-w-4xl mx-auto">
+      {/* Subtle background tint */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           backgroundColor: colors.sage,
-          opacity: 0.1, // Subtle background tint
+          opacity: 0.05,
         }}
       />
 
-      {/* Rooted Balance title in small font in left corner */}
+      {/* Rooted Balance title in left corner */}
       <div className="absolute top-4 left-4 z-20">
         <h2
           className="text-xs font-light tracking-widest uppercase"
@@ -95,95 +151,109 @@ export function RootedBalanceCircle() {
         </h2>
       </div>
 
-      {/* Center the circle in a more compact space */}
-      <div className="relative z-10 flex items-center justify-center py-6 px-4 min-h-[320px]">
-        <div className="relative">
-          <svg
-            width="280"
-            height="280"
-            viewBox="0 0 400 400"
-            className="drop-shadow-lg max-w-full h-auto"
-          >
-            {/* Draw each section */}
-            {sections.map((section, index) => (
-              <path
-                key={index}
-                d={createArcPath(section.startAngle, section.endAngle)}
-                fill={section.color}
-                stroke="hsl(38 50% 94%)" // Cream border between sections
-                strokeWidth="2"
-                className="transition-all duration-300 hover:opacity-90"
-              />
-            ))}
+      {/* Navigation buttons */}
+      <div className="absolute top-4 right-4 z-20 flex gap-2">
+        <button
+          onClick={scrollLeftButton}
+          disabled={isAtStart}
+          className={`p-2 rounded-full bg-white/80 hover:bg-white transition-all shadow-sm hover:shadow-md ${
+            isAtStart ? 'opacity-40 cursor-not-allowed' : 'hover:scale-110'
+          }`}
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-5 h-5" style={{ color: colors.brown }} />
+        </button>
+        <button
+          onClick={scrollRightButton}
+          disabled={isAtEnd}
+          className={`p-2 rounded-full bg-white/80 hover:bg-white transition-all shadow-sm hover:shadow-md ${
+            isAtEnd ? 'opacity-40 cursor-not-allowed' : 'hover:scale-110'
+          }`}
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="w-5 h-5" style={{ color: colors.brown }} />
+        </button>
+      </div>
 
-            {/* Center circle - white background */}
-            <circle
-              cx={centerX}
-              cy={centerY}
-              r={innerRadius}
-              fill="hsl(0 0% 100%)"
-              stroke={colors.brown}
-              strokeWidth="2"
-            />
-
-            {/* "smart cycle" text in center */}
-            <text
-              x={centerX}
-              y={centerY - 8}
-              textAnchor="middle"
+      {/* Scrollable carousel container */}
+      <div className="relative z-10 pt-16 pb-8 px-6">
+        <div
+          ref={carouselRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className="flex gap-4 overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+          style={{
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          {phases.map((phase, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 interactive-card"
               style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '16px',
-                fontWeight: 600,
-                fill: colors.brown,
-                letterSpacing: '0.05em'
+                scrollSnapAlign: 'start',
+                width: '200px',
               }}
             >
-              smart
-            </text>
-            <text
-              x={centerX}
-              y={centerY + 12}
-              textAnchor="middle"
-              style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '18px',
-                fontWeight: 700,
-                fill: colors.brown,
-                letterSpacing: '0.05em'
-              }}
-            >
-              cycle
-            </text>
-          </svg>
-
-          {/* Phase labels around the circle - scaled for smaller size */}
-          <div className="absolute inset-0 flex items-center justify-center scale-[0.7]">
-            {sections.map((section, index) => {
-              const angle = toRadians(((section.startAngle + section.endAngle) / 2) - 90);
-              const labelRadius = radius + 40;
-              const x = centerX + labelRadius * Math.cos(angle);
-              const y = centerY + labelRadius * Math.sin(angle);
-
-              return (
-                <div
-                  key={index}
-                  className="absolute text-[11px] font-medium"
-                  style={{
-                    left: `${x}px`,
-                    top: `${y}px`,
-                    transform: 'translate(-50%, -50%)',
-                    color: section.color,
-                    fontFamily: "'DM Sans', sans-serif",
-                    textAlign: 'center',
-                    width: '80px'
-                  }}
-                >
-                  {section.label}
+              <div
+                className="rounded-2xl p-6 h-full shadow-bloom-sm hover:shadow-bloom transition-all duration-300"
+                style={{
+                  backgroundColor: phase.color,
+                  minHeight: '180px',
+                }}
+              >
+                <div className="flex flex-col h-full justify-between">
+                  <div>
+                    <h3
+                      className="font-semibold text-lg mb-2"
+                      style={{
+                        fontFamily: "'Cormorant Garamond', Georgia, serif",
+                        color: index === 3 ? colors.brown : 'white', // Beige needs dark text
+                      }}
+                    >
+                      {phase.label}
+                    </h3>
+                    <p
+                      className="text-sm opacity-90"
+                      style={{
+                        fontFamily: "'DM Sans', sans-serif",
+                        color: index === 3 ? colors.brown : 'white',
+                      }}
+                    >
+                      {phase.description}
+                    </p>
+                  </div>
+                  <div
+                    className="text-3xl font-bold opacity-20"
+                    style={{
+                      color: index === 3 ? colors.brown : 'white',
+                    }}
+                  >
+                    {index + 1}
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Swipe hint indicator */}
+        <div className="mt-4 text-center">
+          <p
+            className="text-xs opacity-60 swipe-indicator"
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              color: colors.brown,
+            }}
+          >
+            ← Swipe to explore →
+          </p>
         </div>
       </div>
     </Card>
