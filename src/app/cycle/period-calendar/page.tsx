@@ -105,7 +105,21 @@ export default function PeriodCalendarPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+    <div className="min-h-screen relative pb-24">
+      {/* Botanical background with reduced opacity - matching homepage */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer - matching homepage */}
+      <div className="fixed inset-0 -z-20 bg-white" />
+
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
@@ -135,7 +149,7 @@ export default function PeriodCalendarPage() {
         </div>
 
         {/* Calendar Card */}
-        <Card className="calendar-container animate-fade-in-up animation-delay-400">
+        <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6 animate-fade-in-up animation-delay-400">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-2xl font-semibold">

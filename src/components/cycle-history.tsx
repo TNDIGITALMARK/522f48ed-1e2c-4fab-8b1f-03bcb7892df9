@@ -138,7 +138,7 @@ export function CycleHistory() {
   return (
     <div className="space-y-6">
       {/* Header with Stats */}
-      <Card className="calendar-container">
+      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Cycle History</h2>
           <Badge variant="secondary" className="text-sm">

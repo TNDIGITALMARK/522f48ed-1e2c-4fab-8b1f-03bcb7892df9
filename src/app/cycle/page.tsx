@@ -100,7 +100,21 @@ export default function CyclePage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
+    <div className="min-h-screen relative pb-24">
+      {/* Botanical background with reduced opacity - matching homepage */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer - matching homepage */}
+      <div className="fixed inset-0 -z-20 bg-white" />
+
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
@@ -140,7 +154,7 @@ export default function CyclePage() {
           <TabsContent value="today" className="space-y-6">
 
         {/* Current Cycle Status with Animated Hormone Wave */}
-        <Card className="calendar-container mb-6 overflow-hidden relative">
+        <Card className="mb-6 overflow-hidden relative bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
           {/* Animated background gradient pulse */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl animate-pulse-slow" style={{ backgroundColor: 'hsl(35 40% 94% / 0.25)' }} />
           <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none hidden lg:block">
@@ -233,7 +247,7 @@ export default function CyclePage() {
         {cyclePhases.filter(phase => phase.name === currentPhase).map((phase) => {
           const PhaseIcon = phase.icon;
           return (
-            <Card key={phase.name} className="calendar-container textile-overlay-cream mb-6">
+            <Card key={phase.name} className="mb-6 bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
                   <PhaseIcon className="w-7 h-7 text-secondary-foreground" />

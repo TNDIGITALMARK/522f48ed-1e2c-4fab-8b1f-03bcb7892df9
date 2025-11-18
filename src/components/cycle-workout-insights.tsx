@@ -186,7 +186,7 @@ export function CycleWorkoutInsights({ userId }: CycleWorkoutInsightsProps) {
 
   if (!cycle || !insights) {
     return (
-      <Card className="calendar-container">
+      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
         <div className="text-center py-8">
           <Sparkles className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
           <h3 className="text-lg font-semibold mb-2">Track Your Cycle</h3>
@@ -203,7 +203,7 @@ export function CycleWorkoutInsights({ userId }: CycleWorkoutInsightsProps) {
   return (
     <div className="space-y-6">
       {/* Header Section */}
-      <Card className="calendar-container">
+      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
         <div className="flex items-start gap-4">
           <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0">
             <Dumbbell className="w-7 h-7 text-primary-foreground" />
@@ -221,7 +221,7 @@ export function CycleWorkoutInsights({ userId }: CycleWorkoutInsightsProps) {
       </Card>
 
       {/* Phase Insight Card */}
-      <Card className="calendar-container">
+      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
         <div className="flex items-start gap-3 mb-4">
           <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center flex-shrink-0">
             <Sparkles className="w-5 h-5 text-accent-foreground" />
@@ -347,7 +347,7 @@ export function CycleWorkoutInsights({ userId }: CycleWorkoutInsightsProps) {
       </div>
 
       {/* Bottom Tip */}
-      <Card className="calendar-container">
+      <Card className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center flex-shrink-0">
             <Heart className="w-5 h-5 text-accent-foreground" />
