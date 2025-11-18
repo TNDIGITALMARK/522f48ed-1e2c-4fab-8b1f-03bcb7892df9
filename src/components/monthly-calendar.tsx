@@ -185,7 +185,7 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
         />
       )}
 
-      <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-border ${className}`}>
+      <div className={`bg-white rounded-2xl p-6 shadow-bloom border border-black ${className}`}>
         {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-semibold font-['Cormorant_Garamond'] text-foreground">

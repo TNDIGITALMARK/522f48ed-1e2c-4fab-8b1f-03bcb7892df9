@@ -905,7 +905,7 @@ label {
   border-radius: 1.25rem;
   padding: 1.5rem;
   box-shadow: 0 4px 20px rgba(62, 53, 48, 0.10);
-  border: 1px solid hsl(var(--border) / 0.4);
+  border: 1px solid #000000; /* Fine line black */
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
   opacity: 1;
 }
@@ -930,7 +930,7 @@ label {
   min-height: 48px;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 1.5px solid hsl(var(--foreground) / 0.4); /* Reduced opacity from 0.6 to 0.4 */
+  border: 1px solid #000000; /* Fine line black */
   background: hsl(var(--calendar-container-bg)); /* Match calendar container color */
   cursor: pointer;
   transition: all 0.15s ease;
@@ -946,6 +946,7 @@ label {
 /* Widget card base styling - Global widget font size reduction */
 .widget-card {
   font-size: 0.875rem; /* Base widget text */
+  border: 1px solid #000000 !important; /* Fine line black - override all widget borders */
 }
 
 .widget-card h3,
@@ -967,17 +968,17 @@ label {
 }
 
 .calendar-day:hover {
-  border-color: hsl(var(--foreground) / 0.4);
+  border-color: #000000; /* Fine line black */
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 /* Today indicator - Bold and minimal with container color */
 .calendar-day.today {
-  border-color: hsl(var(--foreground));
+  border-color: #000000; /* Fine line black */
   border-width: 2px;
   background: hsl(var(--calendar-container-bg)); /* Keep container color */
-  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.1);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-day.today .day-number {
@@ -988,30 +989,30 @@ label {
 /* Selected day - Clean emphasis with container color */
 .calendar-day.selected {
   background: hsl(var(--calendar-container-bg)); /* Keep container color */
-  border-color: hsl(var(--foreground));
+  border-color: #000000; /* Fine line black */
   border-width: 2px;
-  box-shadow: 0 0 0 2px hsl(var(--foreground) / 0.15);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15);
 }
 
 /* Period phase indicators */
 .calendar-day.menstruation {
   background: linear-gradient(135deg, hsl(var(--cycle-menstruation)) 0%, hsl(var(--cycle-menstruation) / 0.5) 100%);
-  border-color: hsl(var(--foreground) / 0.4); /* Reduced opacity */
+  border-color: #000000; /* Fine line black */
 }
 
 .calendar-day.follicular {
   background: linear-gradient(135deg, hsl(var(--cycle-follicular)) 0%, hsl(var(--cycle-follicular) / 0.5) 100%);
-  border-color: hsl(var(--foreground) / 0.4); /* Reduced opacity */
+  border-color: #000000; /* Fine line black */
 }
 
 .calendar-day.ovulation {
   background: linear-gradient(135deg, hsl(var(--cycle-ovulation)) 0%, hsl(var(--cycle-ovulation) / 0.5) 100%);
-  border-color: hsl(var(--foreground) / 0.4); /* Reduced opacity */
+  border-color: #000000; /* Fine line black */
 }
 
 .calendar-day.luteal {
   background: linear-gradient(135deg, hsl(var(--cycle-luteal)) 0%, hsl(var(--cycle-luteal) / 0.5) 100%);
-  border-color: hsl(var(--foreground) / 0.4); /* Reduced opacity */
+  border-color: #000000; /* Fine line black */
 }
 
 /* Event dots indicator */
@@ -1103,7 +1104,7 @@ label {
   width: 20px;
   height: 20px;
   border-radius: 0.5rem;
-  border: 2px solid hsl(var(--foreground) / 0.4); /* Reduced opacity */
+  border: 1px solid #000000; /* Fine line black */
 }
 
 /* Event modal styling */
