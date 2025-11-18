@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface NutritionStep {
   id: string;
@@ -111,9 +110,9 @@ export function SwipeableNutritionCarousel({ steps, className = '' }: SwipeableN
           <button
             onClick={goToPrevious}
             disabled={currentIndex === 0}
-            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-full bg-card border border-border text-sm font-medium hover:bg-muted transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronLeft className="w-5 h-5" />
+            Previous
           </button>
           <span className="text-sm text-muted-foreground min-w-[3rem] text-center">
             {currentIndex + 1} / {steps.length}
@@ -121,9 +120,9 @@ export function SwipeableNutritionCarousel({ steps, className = '' }: SwipeableN
           <button
             onClick={goToNext}
             disabled={currentIndex === steps.length - 1}
-            className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-full bg-card border border-border text-sm font-medium hover:bg-muted transition-all disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <ChevronRight className="w-5 h-5" />
+            Next
           </button>
         </div>
       </div>

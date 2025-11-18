@@ -8,7 +8,7 @@ import { FoodQuiz } from '@/components/food-quiz';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function NutritionQuizPage() {
   const router = useRouter();
@@ -44,10 +44,6 @@ export default function NutritionQuizPage() {
 
         <main className="max-w-3xl mx-auto px-6 py-16">
           <Card className="bloom-card text-center p-12">
-            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-              <Sparkles className="w-10 h-10 text-primary" />
-            </div>
-
             <h1 className="text-4xl mb-4">Quiz Complete!</h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-lg mx-auto">
               We've captured your food preferences and we're ready to create personalized meal plans

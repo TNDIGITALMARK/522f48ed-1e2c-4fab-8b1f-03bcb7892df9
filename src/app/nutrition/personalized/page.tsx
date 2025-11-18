@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
-import { NutritionScrollAnimation } from '@/components/nutrition-scroll-animation';
 
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -15,7 +14,6 @@ import {
   generateGroceryList,
   type FoodPreferences
 } from '@/lib/food-preferences';
-import { ChefHat, ShoppingCart, Sparkles, TrendingUp } from 'lucide-react';
 
 export default function PersonalizedNutritionPage() {
   const router = useRouter();
@@ -70,16 +68,10 @@ export default function PersonalizedNutritionPage() {
         </div>
       </header>
 
-      {/* Full-width Food Animation - spans entire viewport */}
-      <div className="w-full mb-8 animate-fade-in-up animation-delay-200">
-        <NutritionScrollAnimation />
-      </div>
-
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-6 h-6 text-primary" />
+          <div className="mb-2">
             <Badge className="bg-primary/10 text-primary border-primary/20">
               Personalized Plan
             </Badge>
@@ -92,21 +84,16 @@ export default function PersonalizedNutritionPage() {
 
         {/* Phase-Specific Info */}
         <Card className="magazine-feature-card texture-fabric bg-gradient-to-br from-primary/10 to-secondary/5 border-none mb-6">
-          <div className="flex items-start gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-              <TrendingUp className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-1">
-                {mealPlan.phaseInfo.description}
-              </h3>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {mealPlan.phaseInfo.focus.map((focus: string) => (
-                  <Badge key={focus} variant="secondary" className="text-xs">
-                    {focus}
-                  </Badge>
-                ))}
-              </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-1">
+              {mealPlan.phaseInfo.description}
+            </h3>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {mealPlan.phaseInfo.focus.map((focus: string) => (
+                <Badge key={focus} variant="secondary" className="text-xs">
+                  {focus}
+                </Badge>
+              ))}
             </div>
           </div>
         </Card>
@@ -132,8 +119,7 @@ export default function PersonalizedNutritionPage() {
 
         {/* Personalized Meals */}
         <div className="mb-8">
-          <h3 className="text-2xl mb-4 flex items-center gap-2">
-            <ChefHat className="w-6 h-6 text-primary" />
+          <h3 className="text-2xl mb-4">
             Today's Meal Suggestions
           </h3>
           <div className="space-y-4">
@@ -189,8 +175,7 @@ export default function PersonalizedNutritionPage() {
         {/* Generated Grocery List */}
         <Card className="magazine-feature-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-2xl font-semibold flex items-center gap-2">
-              <ShoppingCart className="w-6 h-6 text-primary" />
+            <h3 className="text-2xl font-semibold">
               Your Grocery List
             </h3>
             <Badge variant="secondary">{groceryList.length} items</Badge>

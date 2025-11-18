@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Apple, Flame, Droplets, TrendingUp, ScanLine, ChefHat, Calendar, ShoppingCart, Plus, X, Check } from 'lucide-react';
+import { Plus, X, Check } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FoodLookupDialog } from '@/components/food-lookup-dialog';
@@ -18,7 +18,6 @@ import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
 import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
-import { NutritionScrollAnimation } from '@/components/nutrition-scroll-animation';
 
 const MOCK_USER_ID = 'demo-user-001';
 
@@ -220,21 +219,13 @@ export default function NutritionPage() {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-8">
-        {/* Page Title - Above Animation */}
+        {/* Page Title */}
         <div className="mb-6 text-center">
           <h1 className="text-4xl mb-2">Smart Nutrition</h1>
           <p className="text-muted-foreground text-lg">
             Your personalized meal planner synced to your cycle
           </p>
         </div>
-      </main>
-
-      {/* Full-width Food Animation - spans entire viewport */}
-      <div className="w-full mb-8">
-        <NutritionScrollAnimation />
-      </div>
-
-      <main className="max-w-4xl mx-auto px-6 py-0 pb-8">
 
         {/* Food Quiz CTA */}
         <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 mb-6">
@@ -318,16 +309,11 @@ export default function NutritionPage() {
         {/* Macros Today */}
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           <Card className="magazine-feature-card bg-white/60 p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center">
-                <Flame className="w-6 h-6 text-secondary" />
-              </div>
-              <div>
-                <h4 className="font-semibold">Protein</h4>
-                <p className="text-sm text-muted-foreground">
-                  {weeklyProgress.protein.current}g / {weeklyProgress.protein.target}g
-                </p>
-              </div>
+            <div className="mb-3">
+              <h4 className="font-semibold text-lg">Protein</h4>
+              <p className="text-sm text-muted-foreground">
+                {weeklyProgress.protein.current}g / {weeklyProgress.protein.target}g
+              </p>
             </div>
             <Progress
               value={(weeklyProgress.protein.current / weeklyProgress.protein.target) * 100}
@@ -336,16 +322,11 @@ export default function NutritionPage() {
           </Card>
 
           <Card className="magazine-feature-card bg-white/60 p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Apple className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h4 className="font-semibold">Fiber</h4>
-                <p className="text-sm text-muted-foreground">
-                  {weeklyProgress.fiber.current}g / {weeklyProgress.fiber.target}g
-                </p>
-              </div>
+            <div className="mb-3">
+              <h4 className="font-semibold text-lg">Fiber</h4>
+              <p className="text-sm text-muted-foreground">
+                {weeklyProgress.fiber.current}g / {weeklyProgress.fiber.target}g
+              </p>
             </div>
             <Progress
               value={(weeklyProgress.fiber.current / weeklyProgress.fiber.target) * 100}
@@ -354,16 +335,11 @@ export default function NutritionPage() {
           </Card>
 
           <Card className="magazine-feature-card bg-white/60 p-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                <Droplets className="w-6 h-6 text-accent-foreground" />
-              </div>
-              <div>
-                <h4 className="font-semibold">Hydration</h4>
-                <p className="text-sm text-muted-foreground">
-                  6 / 8 glasses
-                </p>
-              </div>
+            <div className="mb-3">
+              <h4 className="font-semibold text-lg">Hydration</h4>
+              <p className="text-sm text-muted-foreground">
+                6 / 8 glasses
+              </p>
             </div>
             <Progress value={75} className="h-2" />
           </Card>
@@ -372,9 +348,6 @@ export default function NutritionPage() {
         {/* rooted Score Scanner CTA */}
         <Card className="magazine-feature-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20 mb-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center flex-shrink-0">
-              <ScanLine className="w-7 h-7 text-secondary-foreground" />
-            </div>
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-1">rooted Score Scanner</h3>
               <p className="text-sm text-muted-foreground">
@@ -400,17 +373,12 @@ export default function NutritionPage() {
 
         {/* Phase-Based Nutrition Tip */}
         <Card className="magazine-feature-card bg-gradient-to-br from-accent/10 to-primary/5 border-2 border-accent/15">
-          <div className="flex items-start gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-              <TrendingUp className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Follicular Phase Nutrition Tip</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                You're entering your follicular phase — higher carb meals and lean proteins will fuel your rising energy best!
-                Focus on whole grains, lean meats, and plenty of colorful vegetables. This is also a great time to try new recipes and meal prep for the week ahead.
-              </p>
-            </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Follicular Phase Nutrition Tip</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              You're entering your follicular phase — higher carb meals and lean proteins will fuel your rising energy best!
+              Focus on whole grains, lean meats, and plenty of colorful vegetables. This is also a great time to try new recipes and meal prep for the week ahead.
+            </p>
           </div>
         </Card>
           </TabsContent>
@@ -420,8 +388,7 @@ export default function NutritionPage() {
             <Card className="magazine-feature-card bg-white/60">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-2xl font-semibold flex items-center gap-2">
-                    <ShoppingCart className="w-6 h-6 text-primary" />
+                  <h3 className="text-2xl font-semibold">
                     My Grocery List
                   </h3>
                   <p className="text-muted-foreground mt-1">
@@ -513,8 +480,7 @@ export default function NutritionPage() {
 
               {groceryItems.length === 0 && (
                 <div className="text-center py-12">
-                  <ShoppingCart className="w-16 h-16 mx-auto text-muted-foreground/30 mb-4" />
-                  <p className="text-muted-foreground">Your grocery list is empty</p>
+                  <p className="text-muted-foreground text-lg font-semibold">Your grocery list is empty</p>
                   <p className="text-sm text-muted-foreground mt-1">Add items to get started</p>
                 </div>
               )}
@@ -525,8 +491,7 @@ export default function NutritionPage() {
           <TabsContent value="meals" className="space-y-6">
             <Card className="magazine-feature-card bg-white/60">
               <div className="mb-6">
-                <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
-                  <Calendar className="w-6 h-6 text-primary" />
+                <h3 className="text-2xl font-semibold mb-2">
                   Weekly Meal Plan
                 </h3>
                 <p className="text-muted-foreground">
