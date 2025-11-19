@@ -17,7 +17,6 @@ import { FoodLookupDialog } from '@/components/food-lookup-dialog';
 import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
-import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
 import { LoggedFood } from '@/components/food-log-entry';
 import { MealLoggingCarousel } from '@/components/meal-logging-carousel';
 import { CyclePhaseMealWidget } from '@/components/cycle-phase-meal-widget';
@@ -442,17 +441,6 @@ export default function NutritionPage() {
           </div>
         </Card>
 
-        {/* Swipeable Meal Exploration Carousel */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-2xl font-semibold">Swipe to Explore Meals</h3>
-            <Badge variant="secondary" className="text-xs">
-              Personalized for You
-            </Badge>
-          </div>
-
-          <SwipeableNutritionCarousel steps={mealSuggestions} />
-        </div>
           </TabsContent>
 
           {/* GROCERY LIST TAB */}
