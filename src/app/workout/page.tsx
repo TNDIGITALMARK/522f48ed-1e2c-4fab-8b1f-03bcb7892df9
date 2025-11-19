@@ -649,9 +649,17 @@ export default function WorkoutPage() {
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <Play className="w-7 h-7 text-secondary" />
-                              </div>
+                              <Button
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
+                                  loggingTab?.click();
+                                }}
+                                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4 py-1.5 h-auto text-xs font-semibold"
+                              >
+                                log
+                              </Button>
                               <div className="flex-1">
                                 <h4 className="text-lg font-semibold">{workout.title}</h4>
                                 <p className="text-sm text-muted-foreground">{workout.description}</p>
