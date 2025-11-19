@@ -349,7 +349,7 @@ export default function WorkoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige pb-24">
+    <div className="min-h-screen bg-white pb-24">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
@@ -362,7 +362,7 @@ export default function WorkoutPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-8">
+      <main className="max-w-4xl mx-auto px-6 py-8 textile-overlay-cream">
         {/* Page Title */}
         <div className="mb-8 animate-fade-in-up animation-delay-200">
           <h1 className="text-4xl mb-2">Workout Sync</h1>
