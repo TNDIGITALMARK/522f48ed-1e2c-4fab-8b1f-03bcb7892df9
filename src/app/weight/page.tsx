@@ -2,6 +2,7 @@
 
 
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -173,16 +174,7 @@ export default function WeightTrackingPage() {
 
   return (
     <div className="min-h-screen bg-background pb-24">
-      <header className="bg-white border-b border-border px-6 py-4 animate-fade-in-up">
-        <div className="max-w-4xl mx-auto">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         <div className="mb-8 animate-fade-in-up animation-delay-200">

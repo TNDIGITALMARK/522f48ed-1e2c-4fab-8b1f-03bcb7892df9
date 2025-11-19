@@ -1,6 +1,7 @@
 "use client";
 
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';

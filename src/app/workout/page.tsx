@@ -1,6 +1,7 @@
 "use client";
 
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -365,13 +366,7 @@ export default function WorkoutPage() {
       <div className="fixed inset-0 -z-20 bg-white" />
 
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
-        <div className="max-w-4xl mx-auto">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}

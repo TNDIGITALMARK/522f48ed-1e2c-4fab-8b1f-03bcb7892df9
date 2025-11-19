@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 import { AnimatedHeroBackground } from '@/components/animated-hero-background';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -180,16 +181,7 @@ export default function CommunityPage() {
       </div>
 
       {/* Header */}
-      <header className="relative z-40 bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 animate-fade-in-up sticky top-0 shadow-bloom-sm">
-        <div className="max-w-4xl mx-auto">
-          <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
-            <span className="text-foreground">ROOTED</span>
-          </div>
-          <div className="text-xs text-muted-foreground font-light tracking-wide">
-            Grounded in Nature
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       <main className="relative z-10 max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}

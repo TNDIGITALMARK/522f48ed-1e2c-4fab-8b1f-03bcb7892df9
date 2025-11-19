@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { RootedHeader } from '@/components/rooted-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -59,48 +60,7 @@ export default function WellnessDashboard() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-semibold text-sm">B</span>
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold italic font-['Playfair_Display']">rooted</h1>
-                <p className="text-xs text-muted-foreground">by Rooted</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 max-w-md mx-8">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input
-                type="text"
-                placeholder="Search wellness data, meals..."
-                className="pl-10 bg-muted/30 border-border/50"
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full"></span>
-            </Button>
-            <div className="flex items-center gap-2">
-              <div className="text-right">
-                <p className="text-sm font-medium">Sarah Thompson</p>
-                <p className="text-xs text-muted-foreground">Premium Member</p>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                <User className="w-5 h-5 text-accent-foreground" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-8">

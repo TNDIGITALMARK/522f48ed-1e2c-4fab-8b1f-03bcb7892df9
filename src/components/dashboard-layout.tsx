@@ -2,7 +2,7 @@
 
 import { ReactNode } from 'react';
 import { DashboardSidebar } from './dashboard-sidebar';
-import { DashboardHeader } from './dashboard-header';
+import { RootedHeader } from './rooted-header';
 import { DashboardMobileNav } from './dashboard-mobile-nav';
 
 interface DashboardLayoutProps {
@@ -22,13 +22,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Main Content Area */}
       <div className="lg:ml-64">
-        {/* Desktop Header - hidden on mobile */}
-        <div className="hidden lg:block">
-          <DashboardHeader />
-        </div>
+        {/* Rooted Header - visible on all screen sizes */}
+        <RootedHeader />
 
         {/* Page Content */}
-        <main className="p-4 md:p-6 lg:p-8 mt-[44px] lg:mt-0">
+        <main className="p-4 md:p-6 lg:p-8">
           {children}
         </main>
       </div>

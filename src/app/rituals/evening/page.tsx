@@ -1,6 +1,7 @@
 "use client";
 
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -69,16 +70,7 @@ export default function EveningPage() {
   return (
     <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Back Button */}

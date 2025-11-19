@@ -9,7 +9,6 @@ import { ImportantTasksWidget } from '@/components/important-tasks-widget';
 import { VisionBoardWidget } from '@/components/vision-board-widget';
 import { TodaysFocusWidget } from '@/components/todays-focus-widget';
 import { DailyRootsWidget } from '@/components/daily-roots-widget';
-import { DashboardHeader } from '@/components/dashboard-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, Heart, Activity, Users, Sparkles, CheckCircle2, Apple, Brain, Moon } from 'lucide-react';
@@ -53,8 +52,6 @@ export default function DashboardPage() {
       />
       {/* Pure white background layer */}
       <div className="fixed inset-0 -z-20 bg-white" />
-      {/* Dashboard Header */}
-      <DashboardHeader />
 
       {/* Left Expandable Sidebar */}
       <ExpandableSidebar />

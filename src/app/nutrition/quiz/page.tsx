@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
+import { RootedHeader } from '@/components/rooted-header';
 
 import { FoodQuiz } from '@/components/food-quiz';
 import { Card } from '@/components/ui/card';
@@ -31,16 +32,7 @@ export default function NutritionQuizPage() {
   if (quizComplete) {
     return (
       <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
-        <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
-          </div>
-          </div>
-        </header>
+        <RootedHeader />
 
         <main className="max-w-3xl mx-auto px-6 py-16">
           <Card className="bloom-card text-center p-12">
@@ -80,16 +72,7 @@ export default function NutritionQuizPage() {
   if (showQuiz) {
     return (
       <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
-        <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
-          </div>
-          </div>
-        </header>
+        <RootedHeader />
 
         <main className="max-w-4xl mx-auto px-6 py-12">
           <FoodQuiz
@@ -105,16 +88,7 @@ export default function NutritionQuizPage() {
 
   return (
     <div className="min-h-screen bg-textile-beige textile-overlay-cream pb-24">
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 shadow-bloom-sm px-6 py-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
-          </div>
-        </div>
-      </header>
+      <RootedHeader />
 
       <main className="max-w-3xl mx-auto px-6 py-16">
         <div className="text-center mb-12">
