@@ -349,7 +349,7 @@ export default function WorkoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="min-h-screen bg-textile-beige pb-24">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
@@ -388,7 +388,7 @@ export default function WorkoutPage() {
         </div>
 
         {/* Weekly Progress */}
-        <Card className="magazine-feature-card texture-fabric mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+        <Card className="magazine-feature-card texture-fabric mb-6 border-2 border-border/40">
           <h3 className="text-xl font-semibold mb-4">This Week's Progress</h3>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
@@ -441,7 +441,7 @@ export default function WorkoutPage() {
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
-          <Card className="magazine-feature-card card-marble mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+          <Card className="magazine-feature-card card-marble mb-6 border-2 border-border/40">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Weight & Goals</h3>
               <Link href="/weight">
@@ -492,7 +492,7 @@ export default function WorkoutPage() {
         )}
 
         {/* Recent Logged Workouts - Expandable Widget */}
-        <Card className="magazine-feature-card texture-fabric border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+        <Card className="magazine-feature-card texture-fabric border-2 border-border/40">
           <button
             onClick={() => setExpandedWorkouts(prev => {
               const newSet = new Set(prev);
@@ -659,7 +659,7 @@ export default function WorkoutPage() {
         </Card>
 
         {/* Phase-Based Training Info */}
-        <Card className="magazine-feature-card textile-overlay-green border-2 border-border/40 mt-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+        <Card className="magazine-feature-card textile-overlay-green border-2 border-border/40 mt-6">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary-foreground" />
@@ -832,7 +832,7 @@ export default function WorkoutPage() {
 
               {/* CARDIO SUB-TAB */}
               <TabsContent value="cardio" className="space-y-6">
-            <Card className="bloom-card border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+            <Card className="bloom-card border-2 border-border/40">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
@@ -954,7 +954,7 @@ export default function WorkoutPage() {
 
               {/* WEIGHTS SUB-TAB */}
               <TabsContent value="weights" className="space-y-6">
-            <Card className="bloom-card border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+            <Card className="bloom-card border-2 border-border/40">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
