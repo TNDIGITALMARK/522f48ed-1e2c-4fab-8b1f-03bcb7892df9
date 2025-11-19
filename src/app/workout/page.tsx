@@ -409,57 +409,6 @@ export default function WorkoutPage() {
           </Card>
         )}
 
-        {/* Recommended Workouts for Current Phase */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl flex items-center gap-2">
-              <Zap className="w-5 h-5 text-secondary" />
-              Recommended for You
-            </h3>
-            <Badge variant="secondary" className="text-xs">
-              {currentPhase} Phase
-            </Badge>
-          </div>
-
-          <div className="space-y-4">
-            {workouts.map((workout, index) => (
-              <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-all group cursor-pointer">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <Play className="w-7 h-7 text-secondary" />
-                      </div>
-                      <div>
-                        <h4 className="text-lg font-semibold">{workout.title}</h4>
-                        <p className="text-sm text-muted-foreground">{workout.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center p-3 bg-muted/30 rounded-lg">
-                    <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
-                    <p className="text-sm font-semibold">{workout.duration}</p>
-                    <p className="text-xs text-muted-foreground">Duration</p>
-                  </div>
-                  <div className="text-center p-3 bg-muted/30 rounded-lg">
-                    <Heart className="w-4 h-4 mx-auto mb-1 text-secondary" />
-                    <p className="text-sm font-semibold">{workout.intensity}</p>
-                    <p className="text-xs text-muted-foreground">Intensity</p>
-                  </div>
-                  <div className="text-center p-3 bg-muted/30 rounded-lg">
-                    <Flame className="w-4 h-4 mx-auto mb-1 text-accent-foreground" />
-                    <p className="text-sm font-semibold">{workout.calories}</p>
-                    <p className="text-xs text-muted-foreground">Est. Calories</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* Recent Logged Workouts */}
         <div>
           <h3 className="text-xl mb-4 flex items-center gap-2">
@@ -598,6 +547,57 @@ export default function WorkoutPage() {
 
           {/* WELLNESS JOURNEY TAB */}
           <TabsContent value="journey" className="space-y-6">
+            {/* Recommended Workouts for Current Phase */}
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl flex items-center gap-2">
+                  <Zap className="w-5 h-5 text-secondary" />
+                  Recommended for You
+                </h3>
+                <Badge variant="secondary" className="text-xs">
+                  {currentPhase} Phase
+                </Badge>
+              </div>
+
+              <div className="space-y-4">
+                {workouts.map((workout, index) => (
+                  <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-all group cursor-pointer">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Play className="w-7 h-7 text-secondary" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-semibold">{workout.title}</h4>
+                            <p className="text-sm text-muted-foreground">{workout.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-3 bg-muted/30 rounded-lg">
+                        <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
+                        <p className="text-sm font-semibold">{workout.duration}</p>
+                        <p className="text-xs text-muted-foreground">Duration</p>
+                      </div>
+                      <div className="text-center p-3 bg-muted/30 rounded-lg">
+                        <Heart className="w-4 h-4 mx-auto mb-1 text-secondary" />
+                        <p className="text-sm font-semibold">{workout.intensity}</p>
+                        <p className="text-xs text-muted-foreground">Intensity</p>
+                      </div>
+                      <div className="text-center p-3 bg-muted/30 rounded-lg">
+                        <Flame className="w-4 h-4 mx-auto mb-1 text-accent-foreground" />
+                        <p className="text-sm font-semibold">{workout.calories}</p>
+                        <p className="text-xs text-muted-foreground">Est. Calories</p>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
             <WellnessJourneyPlanner
               onJourneyCreated={handleJourneyCreated}
               existingJourneys={wellnessJourneys}
