@@ -27,7 +27,7 @@ export function FriendRequestsPanel({
 }: FriendRequestsPanelProps) {
   if (requests.length === 0) {
     return (
-      <Card className="magazine-feature-card p-6 text-center">
+      <Card className="magazine-feature-card p-6 text-center bg-white/90 backdrop-blur-sm shadow-bloom-sm">
         <div className="w-16 h-16 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-3">
           <UserPlus className="w-8 h-8 text-muted-foreground opacity-50" strokeWidth={1.5} />
         </div>
@@ -37,7 +37,7 @@ export function FriendRequestsPanel({
   }
 
   return (
-    <Card className="magazine-feature-card p-6">
+    <Card className="magazine-feature-card p-6 bg-white/90 backdrop-blur-sm shadow-bloom-sm">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Friend Requests</h3>
         <Badge variant="secondary">{requests.length}</Badge>
@@ -47,7 +47,7 @@ export function FriendRequestsPanel({
         {requests.map((request) => (
           <div
             key={request.id}
-            className="flex items-start gap-3 p-4 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors"
+            className="flex items-start gap-3 p-4 rounded-xl bg-white/50 backdrop-blur-sm hover:bg-white/70 transition-colors border border-border/30"
           >
             <Avatar className="w-12 h-12 border-2 border-primary/10 flex-shrink-0">
               <AvatarFallback className="bg-primary text-primary-foreground font-semibold">

@@ -101,7 +101,7 @@ export function SocialFeed({
         const isOwnPost = post.author_id === currentUserId;
 
         return (
-          <Card key={post.id} className="magazine-feature-card overflow-hidden">
+          <Card key={post.id} className="magazine-feature-card overflow-hidden bg-white/90 backdrop-blur-sm shadow-bloom-sm hover:shadow-bloom transition-all">
             {/* Post Header */}
             <div className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/navigation';
-
+import { AnimatedHeroBackground } from '@/components/animated-hero-background';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SocialFeed } from '@/components/social-feed';
@@ -179,9 +179,14 @@ export default function CommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige pb-24">
+    <div className="min-h-screen bg-background pb-24">
+      {/* Animated Hero Background with Flower Roots */}
+      <div className="fixed inset-0 z-0">
+        <AnimatedHeroBackground />
+      </div>
+
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 animate-fade-in-up sticky top-0 z-40 shadow-bloom-sm">
+      <header className="relative z-40 bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 animate-fade-in-up sticky top-0 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
             <span className="text-foreground">ROOTED</span>
@@ -192,7 +197,7 @@ export default function CommunityPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-8">
+      <main className="relative z-10 max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
         <div className="mb-8 animate-fade-in-up animation-delay-200">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full mb-4 border border-primary/20">
@@ -207,7 +212,7 @@ export default function CommunityPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up animation-delay-400">
-          <Card className="magazine-feature-card p-5 text-center bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20">
+          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-primary/20 shadow-bloom-sm hover:shadow-bloom transition-all">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
               <Users className="w-6 h-6 text-primary" strokeWidth={1.5} />
             </div>
@@ -215,16 +220,16 @@ export default function CommunityPage() {
             <p className="text-sm text-muted-foreground">Friends</p>
           </Card>
 
-          <Card className="magazine-feature-card p-5 text-center bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20">
-            <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-2">
+          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-secondary/20 shadow-bloom-sm hover:shadow-bloom transition-all">
+            <div className="w-12 h-12 rounded-full bg-secondary/15 flex items-center justify-center mx-auto mb-2">
               <MessageCircle className="w-6 h-6 text-secondary" strokeWidth={1.5} />
             </div>
             <div className="text-2xl font-bold text-secondary mb-1">{stats.posts}</div>
             <p className="text-sm text-muted-foreground">Posts</p>
           </Card>
 
-          <Card className="magazine-feature-card p-5 text-center bg-gradient-to-br from-accent/15 to-accent/5 border-2 border-accent/20">
-            <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-2">
+          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-accent/20 shadow-bloom-sm hover:shadow-bloom transition-all">
+            <div className="w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-2">
               <Heart className="w-6 h-6 text-accent-foreground" strokeWidth={1.5} />
             </div>
             <div className="text-2xl font-bold text-accent-foreground mb-1">{stats.likes}</div>
@@ -235,7 +240,7 @@ export default function CommunityPage() {
         {/* Create Post Button */}
         <Button
           onClick={() => setCreatePostOpen(true)}
-          className="w-full mb-8 h-14 text-lg gap-2 shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground animate-fade-in-up animation-delay-600"
+          className="w-full mb-8 h-14 text-lg gap-2 shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground animate-fade-in-up animation-delay-600 backdrop-blur-sm"
           size="lg"
         >
           <Plus className="w-5 h-5" strokeWidth={2} />
@@ -287,7 +292,7 @@ export default function CommunityPage() {
           </TabsContent>
 
           <TabsContent value="discover">
-            <Card className="magazine-feature-card p-8 text-center">
+            <Card className="magazine-feature-card p-8 text-center bg-white/90 backdrop-blur-sm shadow-bloom-sm">
               <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-4">
                 <Search className="w-10 h-10 text-muted-foreground opacity-50" strokeWidth={1.5} />
               </div>
@@ -295,7 +300,7 @@ export default function CommunityPage() {
               <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
                 Find and connect with others on their wellness journey
               </p>
-              <Button variant="outline" className="gap-2 rounded-full">
+              <Button variant="outline" className="gap-2 rounded-full backdrop-blur-sm">
                 <Search className="w-4 h-4" strokeWidth={1.5} />
                 Search Users
               </Button>
@@ -304,7 +309,7 @@ export default function CommunityPage() {
         </Tabs>
 
         {/* Tips Card */}
-        <Card className="mt-8 p-6 bg-gradient-to-br from-primary/12 to-secondary/8 border-2 border-primary/20 magazine-feature-card">
+        <Card className="mt-8 p-6 bg-white/90 backdrop-blur-sm border border-primary/20 magazine-feature-card shadow-bloom-sm">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
               <Sparkles className="w-6 h-6 text-primary" strokeWidth={1.5} />
