@@ -8,7 +8,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { AppleHealthSync } from '@/components/apple-health-sync';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
@@ -373,9 +372,8 @@ export default function WorkoutPage() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="overview" className="w-full animate-fade-in-up animation-delay-400">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
+          <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="health">Apple Health</TabsTrigger>
             <TabsTrigger value="journey">Plan Journey</TabsTrigger>
             <TabsTrigger value="logging">Logging</TabsTrigger>
           </TabsList>
@@ -434,11 +432,6 @@ export default function WorkoutPage() {
             </div>
           </div>
         </Card>
-
-        {/* Apple Health Sync Widget */}
-        <div className="mb-6">
-          <AppleHealthSync />
-        </div>
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
@@ -675,11 +668,6 @@ export default function WorkoutPage() {
             </div>
           </div>
         </Card>
-          </TabsContent>
-
-          {/* APPLE HEALTH TAB */}
-          <TabsContent value="health" className="space-y-6">
-            <AppleHealthSync />
           </TabsContent>
 
           {/* WELLNESS JOURNEY TAB */}
