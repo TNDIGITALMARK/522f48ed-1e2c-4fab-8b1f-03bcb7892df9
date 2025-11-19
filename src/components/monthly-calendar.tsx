@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Plus, Clock, MapPin, Calendar as CalendarIco
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AddCalendarEventDialog } from './add-calendar-event-dialog';
+import { ScanCalendarEventsDialog } from './scan-calendar-events-dialog';
 import { WeeklyCalendarView } from './weekly-calendar-view';
 import { getCalendarEventsByMonth } from '@/lib/supabase/calendar-events';
 import type { CalendarEvent } from '@/lib/types/calendar-events';
@@ -202,6 +203,10 @@ export function MonthlyCalendar({ className = '' }: MonthlyCalendarProps) {
               </Button>
             }
           />
+          <ScanCalendarEventsDialog
+            onEventsCreated={handleEventCreated}
+          />
+          <div className="w-px h-5 bg-border mx-1" />
           <Button
             variant="ghost"
             size="sm"
