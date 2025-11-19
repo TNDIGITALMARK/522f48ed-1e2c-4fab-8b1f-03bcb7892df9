@@ -399,7 +399,7 @@ export default function WorkoutPage() {
         </div>
 
         {/* Weekly Progress */}
-        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl mb-6">
+        <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl mb-6">
           <h3 className="text-xl font-semibold mb-4">This Week's Progress</h3>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
@@ -452,7 +452,7 @@ export default function WorkoutPage() {
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
-          <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl mb-6">
+          <Card className="magazine-feature-card bg-white border border-secondary/20 rounded-xl mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Weight & Goals</h3>
               <Link href="/weight">
@@ -503,7 +503,7 @@ export default function WorkoutPage() {
         )}
 
         {/* Recent Logged Workouts - Expandable Widget */}
-        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl">
+        <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl">
           <button
             onClick={() => setExpandedWorkouts(prev => {
               const newSet = new Set(prev);
@@ -670,7 +670,7 @@ export default function WorkoutPage() {
         </Card>
 
         {/* Phase-Based Training Info */}
-        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl mt-6">
+        <Card className="magazine-feature-card bg-white border border-secondary/20 rounded-xl mt-6">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary-foreground" />
@@ -843,7 +843,7 @@ export default function WorkoutPage() {
 
               {/* CARDIO SUB-TAB */}
               <TabsContent value="cardio" className="space-y-6">
-            <Card className="bloom-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl">
+            <Card className="bloom-card bg-white border border-secondary/20 rounded-xl">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
@@ -965,7 +965,7 @@ export default function WorkoutPage() {
 
               {/* WEIGHTS SUB-TAB */}
               <TabsContent value="weights" className="space-y-6">
-            <Card className="bloom-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl">
+            <Card className="bloom-card bg-white border border-primary/20 rounded-xl">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
