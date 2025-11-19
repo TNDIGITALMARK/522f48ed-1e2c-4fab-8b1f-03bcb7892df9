@@ -349,20 +349,31 @@ export default function WorkoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="min-h-screen relative pb-24">
+      {/* Botanical background with reduced opacity - matching cycle and home pages */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer - matching cycle and home pages */}
+      <div className="fixed inset-0 -z-20 bg-white" />
+
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up shadow-bloom-sm">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
           </div>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-8 textile-overlay-cream">
+      <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
         <div className="mb-8 animate-fade-in-up animation-delay-200">
           <h1 className="text-4xl mb-2">Workout Sync</h1>
@@ -388,7 +399,7 @@ export default function WorkoutPage() {
         </div>
 
         {/* Weekly Progress */}
-        <Card className="magazine-feature-card texture-fabric mb-6 border-2 border-border/40">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl mb-6">
           <h3 className="text-xl font-semibold mb-4">This Week's Progress</h3>
 
           <div className="grid grid-cols-3 gap-6 mb-6">
@@ -441,7 +452,7 @@ export default function WorkoutPage() {
 
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
-          <Card className="magazine-feature-card card-marble mb-6 border-2 border-border/40">
+          <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl mb-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-semibold">Weight & Goals</h3>
               <Link href="/weight">
@@ -492,7 +503,7 @@ export default function WorkoutPage() {
         )}
 
         {/* Recent Logged Workouts - Expandable Widget */}
-        <Card className="magazine-feature-card texture-fabric border-2 border-border/40">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl">
           <button
             onClick={() => setExpandedWorkouts(prev => {
               const newSet = new Set(prev);
@@ -659,7 +670,7 @@ export default function WorkoutPage() {
         </Card>
 
         {/* Phase-Based Training Info */}
-        <Card className="magazine-feature-card textile-overlay-green border-2 border-border/40 mt-6">
+        <Card className="magazine-feature-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl mt-6">
           <div className="flex items-start gap-3">
             <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
               <Heart className="w-6 h-6 text-primary-foreground" />
@@ -832,7 +843,7 @@ export default function WorkoutPage() {
 
               {/* CARDIO SUB-TAB */}
               <TabsContent value="cardio" className="space-y-6">
-            <Card className="bloom-card border-2 border-border/40">
+            <Card className="bloom-card bg-[hsl(35,40%,94%)] border border-secondary/20 rounded-xl">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
@@ -954,7 +965,7 @@ export default function WorkoutPage() {
 
               {/* WEIGHTS SUB-TAB */}
               <TabsContent value="weights" className="space-y-6">
-            <Card className="bloom-card border-2 border-border/40">
+            <Card className="bloom-card bg-[hsl(35,40%,94%)] border border-primary/20 rounded-xl">
               <div className="mb-6 flex items-start justify-between">
                 <div>
                   <h3 className="text-2xl font-semibold flex items-center gap-2 mb-2">
