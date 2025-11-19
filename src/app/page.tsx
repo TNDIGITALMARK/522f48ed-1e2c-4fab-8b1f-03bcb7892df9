@@ -45,45 +45,30 @@ const features = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-textile-beige">
-      {/* Header/Navigation */}
+      {/* Header - Matches workout page styling */}
       <header className="relative z-40 bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 animate-fade-in-up sticky top-0 shadow-bloom-sm">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/generated/rooted-logo-uppercase.png"
-              alt="Rooted Logo"
-              width={48}
-              height={48}
-              className="object-contain"
-            />
-            <div>
-              <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
-                <span className="text-foreground">ROOTED</span>
-              </div>
-              <div className="text-xs text-muted-foreground font-light tracking-wide">
-                Grounded in Nature
-              </div>
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          {/* Logo/Brand - Left side */}
+          <div>
+            <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-wider">
+              <span className="text-foreground">ROOTED</span>
+            </div>
+            <div className="text-xs text-muted-foreground font-light tracking-wide">
+              Grounded in Nature
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="text-foreground hover:text-primary transition-colors font-medium">
+
+          {/* Navigation - Right side */}
+          <nav className="flex items-center gap-6">
+            <Link href="#features" className="hidden md:inline-block text-foreground hover:text-primary transition-colors font-medium text-sm">
               Features
             </Link>
-            <Link href="#testimonials" className="text-foreground hover:text-primary transition-colors font-medium">
-              Testimonials
-            </Link>
-            <Link href="#pricing" className="text-foreground hover:text-primary transition-colors font-medium">
-              Pricing
-            </Link>
-            <Link href="#contact" className="text-foreground hover:text-primary transition-colors font-medium">
-              Contact
+            <Link href="/dashboard">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 py-2 shadow-bloom-sm hover:shadow-bloom transition-all text-sm">
+                Get Started
+              </Button>
             </Link>
           </nav>
-          <Link href="/dashboard">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 py-2.5 shadow-bloom-sm hover:shadow-bloom transition-all">
-              Download App
-            </Button>
-          </Link>
         </div>
       </header>
 
