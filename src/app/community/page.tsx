@@ -42,11 +42,6 @@ export default function CommunityPage() {
   const [posts, setPosts] = useState<any[]>([]);
   const [friendRequests, setFriendRequests] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [stats, setStats] = useState({
-    friends: 12,
-    posts: 24,
-    likes: 156
-  });
 
   // Load initial data
   useEffect(() => {
@@ -171,7 +166,6 @@ export default function CommunityPage() {
 
   const handleAcceptRequest = async (requestId: string, senderId: string) => {
     setFriendRequests(friendRequests.filter(req => req.id !== requestId));
-    setStats(prev => ({ ...prev, friends: prev.friends + 1 }));
   };
 
   const handleRejectRequest = async (requestId: string) => {
@@ -208,33 +202,6 @@ export default function CommunityPage() {
           <p className="text-muted-foreground text-lg">
             Share your wellness journey with friends, connect with others, and inspire each other
           </p>
-        </div>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up animation-delay-400">
-          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-primary/20 shadow-bloom-sm hover:shadow-bloom transition-all">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
-              <Users className="w-6 h-6 text-primary" strokeWidth={1.5} />
-            </div>
-            <div className="text-2xl font-bold text-primary mb-1">{stats.friends}</div>
-            <p className="text-sm text-muted-foreground">Friends</p>
-          </Card>
-
-          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-secondary/20 shadow-bloom-sm hover:shadow-bloom transition-all">
-            <div className="w-12 h-12 rounded-full bg-secondary/15 flex items-center justify-center mx-auto mb-2">
-              <MessageCircle className="w-6 h-6 text-secondary" strokeWidth={1.5} />
-            </div>
-            <div className="text-2xl font-bold text-secondary mb-1">{stats.posts}</div>
-            <p className="text-sm text-muted-foreground">Posts</p>
-          </Card>
-
-          <Card className="magazine-feature-card p-5 text-center bg-white/90 backdrop-blur-sm border border-accent/20 shadow-bloom-sm hover:shadow-bloom transition-all">
-            <div className="w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center mx-auto mb-2">
-              <Heart className="w-6 h-6 text-accent-foreground" strokeWidth={1.5} />
-            </div>
-            <div className="text-2xl font-bold text-accent-foreground mb-1">{stats.likes}</div>
-            <p className="text-sm text-muted-foreground">Likes</p>
-          </Card>
         </div>
 
         {/* Create Post Button */}
