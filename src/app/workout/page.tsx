@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target } from 'lucide-react';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { AppleHealthSync } from '@/components/apple-health-sync';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -26,6 +26,14 @@ const phaseWorkouts = {
       intensity: 'Low',
       calories: 80,
       description: 'Restorative poses to ease cramps and support your body',
+      exercises: [
+        { name: 'Child\'s Pose', sets: '3 min', reps: 'Hold', notes: 'Deep breathing, relaxation' },
+        { name: 'Cat-Cow Stretch', sets: '2', reps: '10', notes: 'Gentle spinal mobility' },
+        { name: 'Supine Twist', sets: '2', reps: '30 sec/side', notes: 'Releases lower back tension' },
+        { name: 'Legs Up the Wall', sets: '5 min', reps: 'Hold', notes: 'Reduces bloating, calms nervous system' },
+        { name: 'Savasana', sets: '3 min', reps: 'Rest', notes: 'Deep relaxation and recovery' },
+      ],
+      benefits: ['Reduces cramps', 'Eases bloating', 'Calms nervous system', 'Improves circulation'],
     },
     {
       title: 'Mindful Walking',
@@ -33,6 +41,12 @@ const phaseWorkouts = {
       intensity: 'Low',
       calories: 100,
       description: 'Light movement outdoors to boost mood gently',
+      exercises: [
+        { name: 'Warm-up Walk', sets: '5 min', reps: 'Slow pace', notes: 'Gentle start, focus on breathing' },
+        { name: 'Steady Walk', sets: '10 min', reps: 'Comfortable pace', notes: 'Maintain consistent rhythm' },
+        { name: 'Cool-down Walk', sets: '5 min', reps: 'Slow pace', notes: 'Gradual decrease in intensity' },
+      ],
+      benefits: ['Boosts mood', 'Gentle cardio', 'Reduces fatigue', 'Supports mental clarity'],
     },
   ],
   Follicular: [
@@ -42,6 +56,15 @@ const phaseWorkouts = {
       intensity: 'Medium',
       calories: 250,
       description: 'Build strength with compound movements',
+      exercises: [
+        { name: 'Goblet Squats', sets: '3', reps: '12', notes: 'Focus on depth and control' },
+        { name: 'Push-ups', sets: '3', reps: '10-12', notes: 'Modify on knees if needed' },
+        { name: 'Dumbbell Rows', sets: '3', reps: '12/arm', notes: 'Keep core engaged' },
+        { name: 'Lunges', sets: '3', reps: '10/leg', notes: 'Alternate legs, control descent' },
+        { name: 'Plank Hold', sets: '3', reps: '45 sec', notes: 'Maintain neutral spine' },
+        { name: 'Shoulder Press', sets: '3', reps: '10', notes: 'Slow and controlled' },
+      ],
+      benefits: ['Builds strength', 'Increases energy', 'Improves confidence', 'Enhanced muscle recovery'],
     },
     {
       title: 'HIIT Cardio Blast',
@@ -49,6 +72,14 @@ const phaseWorkouts = {
       intensity: 'High',
       calories: 280,
       description: 'High-energy intervals to match your rising energy',
+      exercises: [
+        { name: 'Jumping Jacks', sets: '4', reps: '30 sec', notes: 'Explosive movement, full body' },
+        { name: 'Burpees', sets: '4', reps: '20 sec', notes: 'High intensity, modify as needed' },
+        { name: 'Mountain Climbers', sets: '4', reps: '30 sec', notes: 'Keep hips low, fast pace' },
+        { name: 'High Knees', sets: '4', reps: '30 sec', notes: 'Drive knees up, quick tempo' },
+        { name: 'Rest Intervals', sets: '4', reps: '30 sec', notes: 'Active recovery between rounds' },
+      ],
+      benefits: ['Maximizes calorie burn', 'Boosts metabolism', 'Improves endurance', 'Leverages peak energy'],
     },
   ],
   Ovulation: [
@@ -58,6 +89,15 @@ const phaseWorkouts = {
       intensity: 'High',
       calories: 400,
       description: 'Challenge yourself with heavy weights and complex moves',
+      exercises: [
+        { name: 'Barbell Squats', sets: '4', reps: '6-8', notes: 'Heavy weight, focus on form' },
+        { name: 'Deadlifts', sets: '4', reps: '6-8', notes: 'Hip hinge, maintain neutral spine' },
+        { name: 'Bench Press', sets: '4', reps: '6-8', notes: 'Chest and triceps, controlled reps' },
+        { name: 'Pull-ups', sets: '3', reps: '8-10', notes: 'Full range of motion, use assistance if needed' },
+        { name: 'Overhead Press', sets: '3', reps: '8', notes: 'Shoulder strength, core stability' },
+        { name: 'Bulgarian Split Squats', sets: '3', reps: '10/leg', notes: 'Single leg strength, balance' },
+      ],
+      benefits: ['Peak strength gains', 'Maximum power output', 'PR opportunities', 'Optimal muscle building'],
     },
     {
       title: 'Peak HIIT Challenge',
@@ -65,6 +105,14 @@ const phaseWorkouts = {
       intensity: 'High',
       calories: 350,
       description: 'Maximum intensity cardio for your peak phase',
+      exercises: [
+        { name: 'Sprint Intervals', sets: '6', reps: '30 sec', notes: 'All-out effort, explosive' },
+        { name: 'Box Jumps', sets: '5', reps: '10', notes: 'Plyometric power, soft landing' },
+        { name: 'Battle Ropes', sets: '5', reps: '40 sec', notes: 'Full body engagement, intensity' },
+        { name: 'Tuck Jumps', sets: '5', reps: '12', notes: 'Maximum vertical, soft landing' },
+        { name: 'Rest/Recovery', sets: '6', reps: '60 sec', notes: 'Between sprint intervals' },
+      ],
+      benefits: ['Maximum calorie burn', 'Peak cardiovascular performance', 'Enhanced explosiveness', 'Optimal for PRs'],
     },
   ],
   Luteal: [
@@ -74,6 +122,15 @@ const phaseWorkouts = {
       intensity: 'Low-Medium',
       calories: 180,
       description: 'Low-impact strength and mobility work',
+      exercises: [
+        { name: 'Hundred', sets: '2', reps: '100 breaths', notes: 'Core activation, breathing focus' },
+        { name: 'Roll Up', sets: '3', reps: '10', notes: 'Spinal articulation, control' },
+        { name: 'Single Leg Stretch', sets: '2', reps: '12/leg', notes: 'Core stability, coordination' },
+        { name: 'Spine Twist', sets: '2', reps: '10', notes: 'Rotation, posture' },
+        { name: 'Side Leg Lifts', sets: '2', reps: '15/side', notes: 'Hip strength, balance' },
+        { name: 'Bridge', sets: '3', reps: '12', notes: 'Glute activation, spinal support' },
+      ],
+      benefits: ['Maintains strength', 'Improves flexibility', 'Low stress on body', 'Supports digestion'],
     },
     {
       title: 'Yin Yoga & Stretch',
@@ -81,6 +138,14 @@ const phaseWorkouts = {
       intensity: 'Low',
       calories: 120,
       description: 'Deep stretching and relaxation',
+      exercises: [
+        { name: 'Dragon Pose', sets: '2', reps: '3 min/side', notes: 'Hip flexor stretch, deep hold' },
+        { name: 'Seated Forward Fold', sets: '1', reps: '5 min', notes: 'Hamstring and spine stretch' },
+        { name: 'Butterfly Pose', sets: '1', reps: '4 min', notes: 'Hip opening, groin stretch' },
+        { name: 'Reclining Twist', sets: '2', reps: '3 min/side', notes: 'Spinal release, relaxation' },
+        { name: 'Supported Bridge', sets: '1', reps: '5 min', notes: 'Gentle backbend, restorative' },
+      ],
+      benefits: ['Deep relaxation', 'Reduces stress', 'Improves flexibility', 'Supports sleep quality'],
     },
   ],
 };
@@ -225,6 +290,7 @@ export default function WorkoutPage() {
   const [showCardioLogDialog, setShowCardioLogDialog] = useState(false);
   const [cardioLogs, setCardioLogs] = useState<CardioLog[]>([]);
   const [wellnessJourneys, setWellnessJourneys] = useState<WellnessJourney[]>([]);
+  const [expandedWorkouts, setExpandedWorkouts] = useState<Set<number>>(new Set());
 
   const handleLogWorkout = (exerciseName?: string, exerciseSets?: number, exerciseReps?: number, exerciseWeight?: number, manualCalories?: number) => {
     const today = new Date().toISOString().split('T')[0];
@@ -268,6 +334,18 @@ export default function WorkoutPage() {
 
   const handleJourneyCreated = (journey: WellnessJourney) => {
     setWellnessJourneys([...wellnessJourneys, journey]);
+  };
+
+  const toggleWorkoutExpanded = (index: number) => {
+    setExpandedWorkouts(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
   };
 
   return (
@@ -560,41 +638,120 @@ export default function WorkoutPage() {
               </div>
 
               <div className="space-y-4">
-                {workouts.map((workout, index) => (
-                  <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-all group cursor-pointer">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <Play className="w-7 h-7 text-secondary" />
+                {workouts.map((workout, index) => {
+                  const isExpanded = expandedWorkouts.has(index);
+                  return (
+                    <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-all group">
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => toggleWorkoutExpanded(index)}
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-secondary/20 to-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <Play className="w-7 h-7 text-secondary" />
+                              </div>
+                              <div className="flex-1">
+                                <h4 className="text-lg font-semibold">{workout.title}</h4>
+                                <p className="text-sm text-muted-foreground">{workout.description}</p>
+                              </div>
+                              <div className="ml-auto">
+                                {isExpanded ? (
+                                  <ChevronUp className="w-5 h-5 text-primary" />
+                                ) : (
+                                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                                )}
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="text-lg font-semibold">{workout.title}</h4>
-                            <p className="text-sm text-muted-foreground">{workout.description}</p>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-4">
+                          <div className="text-center p-3 bg-muted/30 rounded-lg">
+                            <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
+                            <p className="text-sm font-semibold">{workout.duration}</p>
+                            <p className="text-xs text-muted-foreground">Duration</p>
+                          </div>
+                          <div className="text-center p-3 bg-muted/30 rounded-lg">
+                            <Heart className="w-4 h-4 mx-auto mb-1 text-secondary" />
+                            <p className="text-sm font-semibold">{workout.intensity}</p>
+                            <p className="text-xs text-muted-foreground">Intensity</p>
+                          </div>
+                          <div className="text-center p-3 bg-muted/30 rounded-lg">
+                            <Flame className="w-4 h-4 mx-auto mb-1 text-accent-foreground" />
+                            <p className="text-sm font-semibold">{workout.calories}</p>
+                            <p className="text-xs text-muted-foreground">Est. Calories</p>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-3 bg-muted/30 rounded-lg">
-                        <Clock className="w-4 h-4 mx-auto mb-1 text-primary" />
-                        <p className="text-sm font-semibold">{workout.duration}</p>
-                        <p className="text-xs text-muted-foreground">Duration</p>
-                      </div>
-                      <div className="text-center p-3 bg-muted/30 rounded-lg">
-                        <Heart className="w-4 h-4 mx-auto mb-1 text-secondary" />
-                        <p className="text-sm font-semibold">{workout.intensity}</p>
-                        <p className="text-xs text-muted-foreground">Intensity</p>
-                      </div>
-                      <div className="text-center p-3 bg-muted/30 rounded-lg">
-                        <Flame className="w-4 h-4 mx-auto mb-1 text-accent-foreground" />
-                        <p className="text-sm font-semibold">{workout.calories}</p>
-                        <p className="text-xs text-muted-foreground">Est. Calories</p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
+                      {/* Expandable Exercise Details */}
+                      {isExpanded && (
+                        <div className="mt-6 pt-6 border-t border-border/40 space-y-4 animate-fade-in-up">
+                          {/* Benefits Section */}
+                          {workout.benefits && (
+                            <div className="mb-4">
+                              <h5 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                                <Zap className="w-4 h-4 text-secondary" />
+                                Key Benefits
+                              </h5>
+                              <div className="flex flex-wrap gap-2">
+                                {workout.benefits.map((benefit, idx) => (
+                                  <Badge key={idx} variant="secondary" className="text-xs">
+                                    {benefit}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Exercise List */}
+                          <div>
+                            <h5 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                              <ListChecks className="w-4 h-4 text-primary" />
+                              Exercise Breakdown
+                            </h5>
+                            <div className="space-y-3">
+                              {workout.exercises?.map((exercise, exerciseIdx) => (
+                                <div
+                                  key={exerciseIdx}
+                                  className="p-4 bg-muted/20 rounded-xl border border-border/30 hover:border-primary/30 transition-colors"
+                                >
+                                  <div className="flex items-start justify-between mb-2">
+                                    <div className="flex-1">
+                                      <h6 className="font-semibold text-sm">{exercise.name}</h6>
+                                      <p className="text-xs text-muted-foreground mt-1">{exercise.notes}</p>
+                                    </div>
+                                    <Badge variant="outline" className="text-xs ml-2">
+                                      {exercise.sets} × {exercise.reps}
+                                    </Badge>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Phase Alignment Info */}
+                          <div className="p-4 bg-primary/5 rounded-xl border border-primary/20">
+                            <div className="flex items-start gap-3">
+                              <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                              <div>
+                                <h5 className="font-semibold text-sm mb-1">Why This Works for {currentPhase} Phase</h5>
+                                <p className="text-sm text-muted-foreground">
+                                  {currentPhase === 'Menstruation' && 'Gentle, restorative movements support your body during menstruation when energy levels are naturally lower.'}
+                                  {currentPhase === 'Follicular' && 'Your rising estrogen levels mean better recovery and higher energy - perfect for building strength and intensity.'}
+                                  {currentPhase === 'Ovulation' && 'Peak hormone levels give you maximum strength, endurance, and pain tolerance - ideal for PRs and intense training.'}
+                                  {currentPhase === 'Luteal' && 'Progesterone is rising, so focus on sustainability with moderate intensity and recovery-focused activities.'}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </Card>
+                  );
+                })}
               </div>
             </div>
 
