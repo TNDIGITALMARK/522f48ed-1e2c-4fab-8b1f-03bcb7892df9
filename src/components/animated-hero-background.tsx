@@ -50,46 +50,6 @@ export function AnimatedHeroBackground() {
 
       {/* REALISTIC ROOT SYSTEM - Growing from trunk, spreading horizontally across screen */}
 
-      {/* Three vertical trunk lines from which roots emerge */}
-      <svg
-        className={`absolute inset-0 w-full h-full transition-opacity duration-[2500ms] ${
-          mounted ? 'opacity-25' : 'opacity-0'
-        }`}
-      >
-        {/* Left trunk line */}
-        <line
-          x1="35%"
-          y1="0"
-          x2="35%"
-          y2="30%"
-          stroke="hsl(80 12% 37%)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-
-        {/* Center trunk line */}
-        <line
-          x1="50%"
-          y1="0"
-          x2="50%"
-          y2="30%"
-          stroke="hsl(80 12% 37%)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-
-        {/* Right trunk line */}
-        <line
-          x1="65%"
-          y1="0"
-          x2="65%"
-          y2="30%"
-          stroke="hsl(80 12% 37%)"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-      </svg>
-
       {/* MAJOR ROOT BRANCHES - Thick, gnarled roots spreading horizontally */}
 
       {/* Left major root - spreading to far left */}
@@ -99,7 +59,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 35% 30% Q 30% 35%, 25% 40% Q 18% 45%, 10% 50% Q 5% 52%, 0% 55%"
+          d="M 35% 15% Q 30% 25%, 25% 35% Q 18% 45%, 10% 50% Q 5% 52%, 0% 55%"
           fill="none"
           stroke="hsl(80 12% 37%)"
           strokeWidth="6"
@@ -108,7 +68,7 @@ export function AnimatedHeroBackground() {
         />
         {/* Secondary branch from major root */}
         <path
-          d="M 25% 40% Q 22% 50%, 18% 60% Q 15% 68%, 12% 75%"
+          d="M 25% 35% Q 22% 50%, 18% 60% Q 15% 68%, 12% 75%"
           fill="none"
           stroke="hsl(80 12% 42%)"
           strokeWidth="4"
@@ -123,7 +83,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 35% 30% Q 32% 38%, 28% 45% Q 22% 52%, 15% 58% Q 10% 62%, 5% 68%"
+          d="M 35% 15% Q 32% 30%, 28% 42% Q 22% 52%, 15% 58% Q 10% 62%, 5% 68%"
           fill="none"
           stroke="hsl(80 12% 35%)"
           strokeWidth="5"
@@ -139,7 +99,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 50% 30% Q 42% 38%, 35% 45% Q 28% 52%, 20% 60% Q 15% 65%, 8% 72%"
+          d="M 50% 15% Q 42% 30%, 35% 42% Q 28% 52%, 20% 60% Q 15% 65%, 8% 72%"
           fill="none"
           stroke="hsl(80 12% 38%)"
           strokeWidth="7"
@@ -148,7 +108,7 @@ export function AnimatedHeroBackground() {
         />
         {/* Secondary branch */}
         <path
-          d="M 35% 45% Q 30% 55%, 25% 65% Q 22% 72%, 18% 80%"
+          d="M 35% 42% Q 30% 55%, 25% 65% Q 22% 72%, 18% 80%"
           fill="none"
           stroke="hsl(80 12% 40%)"
           strokeWidth="3.5"
@@ -163,7 +123,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 50% 30% Q 58% 38%, 65% 45% Q 72% 52%, 80% 60% Q 85% 65%, 92% 72%"
+          d="M 50% 15% Q 58% 30%, 65% 42% Q 72% 52%, 80% 60% Q 85% 65%, 92% 72%"
           fill="none"
           stroke="hsl(80 12% 38%)"
           strokeWidth="7"
@@ -172,7 +132,7 @@ export function AnimatedHeroBackground() {
         />
         {/* Secondary branch */}
         <path
-          d="M 65% 45% Q 70% 55%, 75% 65% Q 78% 72%, 82% 80%"
+          d="M 65% 42% Q 70% 55%, 75% 65% Q 78% 72%, 82% 80%"
           fill="none"
           stroke="hsl(80 12% 40%)"
           strokeWidth="3.5"
@@ -187,7 +147,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 65% 30% Q 70% 35%, 75% 40% Q 82% 45%, 90% 50% Q 95% 52%, 100% 55%"
+          d="M 65% 15% Q 70% 25%, 75% 35% Q 82% 45%, 90% 50% Q 95% 52%, 100% 55%"
           fill="none"
           stroke="hsl(80 12% 37%)"
           strokeWidth="6"
@@ -196,7 +156,7 @@ export function AnimatedHeroBackground() {
         />
         {/* Secondary branch */}
         <path
-          d="M 75% 40% Q 78% 50%, 82% 60% Q 85% 68%, 88% 75%"
+          d="M 75% 35% Q 78% 50%, 82% 60% Q 85% 68%, 88% 75%"
           fill="none"
           stroke="hsl(80 12% 42%)"
           strokeWidth="4"
@@ -211,7 +171,7 @@ export function AnimatedHeroBackground() {
         }`}
       >
         <path
-          d="M 65% 30% Q 68% 38%, 72% 45% Q 78% 52%, 85% 58% Q 90% 62%, 95% 68%"
+          d="M 65% 15% Q 68% 30%, 72% 42% Q 78% 52%, 85% 58% Q 90% 62%, 95% 68%"
           fill="none"
           stroke="hsl(80 12% 35%)"
           strokeWidth="5"
