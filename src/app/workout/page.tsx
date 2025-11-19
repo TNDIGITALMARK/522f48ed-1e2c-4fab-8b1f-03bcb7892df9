@@ -16,6 +16,7 @@ import type { CardioLog } from '@/lib/cardio-machines';
 import { getLatestWeight, getActiveGoal, formatWeight, getGoalTypeInfo } from '@/lib/weight-tracking';
 import Link from 'next/link';
 import { WellnessJourneyPlanner, type WellnessJourney } from '@/components/wellness-journey-planner';
+import { AppleHealthSync } from '@/components/apple-health-sync';
 
 const phaseWorkouts = {
   Menstruation: [
@@ -380,6 +381,11 @@ export default function WorkoutPage() {
 
           {/* OVERVIEW TAB */}
           <TabsContent value="overview" className="space-y-6">
+
+        {/* Apple Health Sync */}
+        <div className="mb-6">
+          <AppleHealthSync />
+        </div>
 
         {/* Weekly Progress */}
         <Card className="magazine-feature-card texture-fabric mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
