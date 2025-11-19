@@ -435,6 +435,11 @@ export default function WorkoutPage() {
           </div>
         </Card>
 
+        {/* Apple Health Sync Widget */}
+        <div className="mb-6">
+          <AppleHealthSync />
+        </div>
+
         {/* Weight & Goals Widget */}
         {(latestWeight || activeGoal) && (
           <Card className="magazine-feature-card card-marble mb-6 border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
@@ -487,118 +492,172 @@ export default function WorkoutPage() {
           </Card>
         )}
 
-        {/* Recent Logged Workouts */}
-        <div>
-          <h3 className="text-xl mb-4 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-primary" />
-            Recent Logged Workouts
-          </h3>
-
-          <div className="space-y-3">
-            {/* Show Weight Training Logs */}
-            {workoutLogs.slice(0, 3).map((log) => (
-              <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Dumbbell className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">{log.exercise}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant="outline">Weights</Badge>
-                </div>
-                <div className="flex gap-4 text-sm">
-                  <span className="text-muted-foreground">
-                    {log.sets} sets × {log.reps} reps @ {log.weight} lbs
-                  </span>
-                  {log.calories && (
-                    <span className="text-secondary font-medium">
-                      {log.calories} cal
-                    </span>
-                  )}
-                </div>
-              </Card>
-            ))}
-
-            {/* Show Cardio Logs */}
-            {cardioLogs.slice(0, 3).map((log) => (
-              <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                      <Activity className="w-5 h-5 text-secondary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">{log.machineName}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {new Date(log.workoutDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant="outline">Cardio</Badge>
-                </div>
-                <div className="flex gap-4 text-sm">
-                  <span className="text-muted-foreground">
-                    {log.durationMinutes} min
-                  </span>
-                  <span className="text-secondary font-medium">
-                    {Math.round(log.caloriesBurned)} cal
-                  </span>
-                  {log.distance && (
-                    <span className="text-muted-foreground">
-                      {log.distance} {log.distanceUnit}
-                    </span>
-                  )}
-                </div>
-              </Card>
-            ))}
-
-            {/* Show empty state if no logs */}
-            {workoutLogs.length === 0 && cardioLogs.length === 0 && (
-              <div className="text-center py-12 bg-muted/10 rounded-xl">
-                <Dumbbell className="w-12 h-12 mx-auto mb-3 text-muted-foreground opacity-50" />
-                <p className="text-muted-foreground mb-4">No workouts logged yet</p>
-                <p className="text-sm text-muted-foreground mb-6">
-                  Start logging your workouts to see them here
-                </p>
-                <div className="flex gap-3 justify-center">
-                  <Button
-                    onClick={() => {
-                      // Switch to logging tab, weights sub-tab
-                      const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
-                      loggingTab?.click();
-                    }}
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Log Weights
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      // Switch to logging tab, cardio sub-tab
-                      const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
-                      loggingTab?.click();
-                      setTimeout(() => {
-                        const cardioTab = document.querySelector('[value="cardio"]') as HTMLElement;
-                        cardioTab?.click();
-                      }, 100);
-                    }}
-                    variant="outline"
-                    className="rounded-full"
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Log Cardio
-                  </Button>
-                </div>
+        {/* Recent Logged Workouts - Expandable Widget */}
+        <Card className="magazine-feature-card texture-fabric border-2 border-border/40" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
+          <button
+            onClick={() => setExpandedWorkouts(prev => {
+              const newSet = new Set(prev);
+              if (newSet.has(-1)) {
+                newSet.delete(-1);
+              } else {
+                newSet.add(-1);
+              }
+              return newSet;
+            })}
+            className="w-full text-left"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-semibold flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-primary" />
+                Recent Logged Workouts
+              </h3>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs">
+                  {workoutLogs.length + cardioLogs.length} total
+                </Badge>
+                {expandedWorkouts.has(-1) ? (
+                  <ChevronUp className="w-5 h-5 text-primary" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-muted-foreground" />
+                )}
               </div>
-            )}
-          </div>
-        </div>
+            </div>
+          </button>
+
+          {/* Collapsed View - Show just count and summary */}
+          {!expandedWorkouts.has(-1) && (
+            <div className="flex items-center gap-4 py-2">
+              <div className="flex-1">
+                <p className="text-sm text-muted-foreground">
+                  {workoutLogs.length > 0 || cardioLogs.length > 0 ? (
+                    <>Click to view your {workoutLogs.length} weight training and {cardioLogs.length} cardio sessions</>
+                  ) : (
+                    <>No workouts logged yet. Click to start tracking!</>
+                  )}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Expanded View - Show all workout logs */}
+          {expandedWorkouts.has(-1) && (
+            <div className="space-y-3 mt-2">
+              {/* Show Weight Training Logs */}
+              {workoutLogs.slice(0, 5).map((log) => (
+                <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Dumbbell className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{log.exercise}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(log.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge variant="outline">Weights</Badge>
+                  </div>
+                  <div className="flex gap-4 text-sm">
+                    <span className="text-muted-foreground">
+                      {log.sets} sets × {log.reps} reps @ {log.weight} lbs
+                    </span>
+                    {log.calories && (
+                      <span className="text-secondary font-medium">
+                        {log.calories} cal
+                      </span>
+                    )}
+                  </div>
+                </Card>
+              ))}
+
+              {/* Show Cardio Logs */}
+              {cardioLogs.slice(0, 5).map((log) => (
+                <Card key={log.id} className="p-4 hover:shadow-bloom-sm transition-shadow">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <Activity className="w-5 h-5 text-secondary" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">{log.machineName}</h4>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(log.workoutDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge variant="outline">Cardio</Badge>
+                  </div>
+                  <div className="flex gap-4 text-sm">
+                    <span className="text-muted-foreground">
+                      {log.durationMinutes} min
+                    </span>
+                    <span className="text-secondary font-medium">
+                      {Math.round(log.caloriesBurned)} cal
+                    </span>
+                    {log.distance && (
+                      <span className="text-muted-foreground">
+                        {log.distance} {log.distanceUnit}
+                      </span>
+                    )}
+                  </div>
+                </Card>
+              ))}
+
+              {/* Show empty state if no logs */}
+              {workoutLogs.length === 0 && cardioLogs.length === 0 && (
+                <div className="text-center py-8 bg-muted/10 rounded-xl">
+                  <Dumbbell className="w-12 h-12 mx-auto mb-3 text-muted-foreground opacity-50" />
+                  <p className="text-muted-foreground mb-4">No workouts logged yet</p>
+                  <p className="text-sm text-muted-foreground mb-6">
+                    Start logging your workouts to see them here
+                  </p>
+                  <div className="flex gap-3 justify-center">
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Switch to logging tab, weights sub-tab
+                        const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
+                        loggingTab?.click();
+                      }}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Log Weights
+                    </Button>
+                    <Button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Switch to logging tab, cardio sub-tab
+                        const loggingTab = document.querySelector('[value="logging"]') as HTMLElement;
+                        loggingTab?.click();
+                        setTimeout(() => {
+                          const cardioTab = document.querySelector('[value="cardio"]') as HTMLElement;
+                          cardioTab?.click();
+                        }, 100);
+                      }}
+                      variant="outline"
+                      className="rounded-full"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Log Cardio
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {/* View All Link */}
+              {(workoutLogs.length > 5 || cardioLogs.length > 5) && (
+                <div className="pt-2 text-center">
+                  <p className="text-sm text-muted-foreground">
+                    Showing {Math.min(5, workoutLogs.length + cardioLogs.length)} of {workoutLogs.length + cardioLogs.length} workouts
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+        </Card>
 
         {/* Phase-Based Training Info */}
         <Card className="magazine-feature-card textile-overlay-green border-2 border-border/40 mt-6" style={{ backgroundColor: 'hsl(35 40% 94% / 0.35)' }}>
