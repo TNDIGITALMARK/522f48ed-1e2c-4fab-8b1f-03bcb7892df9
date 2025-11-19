@@ -138,12 +138,12 @@ export default function DashboardPage() {
                 </div>
               </Link>
 
-              <Link href="/wellness" className="block flex-shrink-0">
+              <Link href="/nutrition" className="block flex-shrink-0">
                 <div className="bg-[hsl(35,40%,94%)] hover:bg-[hsl(35,40%,92%)] border border-black/10 rounded-xl px-4 py-3 transition-all duration-300 cursor-pointer group hover:shadow-md flex items-center gap-2.5 min-w-[160px]">
                   <div className="w-8 h-8 rounded-lg bg-secondary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                    <Heart className="w-4 h-4 text-primary" />
+                    <Apple className="w-4 h-4 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Wellness Score</h3>
+                  <h3 className="font-semibold text-foreground text-sm leading-tight whitespace-nowrap">Nutrition</h3>
                 </div>
               </Link>
 
