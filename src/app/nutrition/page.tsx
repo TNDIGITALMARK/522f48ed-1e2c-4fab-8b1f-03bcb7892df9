@@ -18,7 +18,8 @@ import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
 import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
-import { FoodLogEntry, LoggedFood } from '@/components/food-log-entry';
+import { LoggedFood } from '@/components/food-log-entry';
+import { MealLoggingCarousel } from '@/components/meal-logging-carousel';
 import { CyclePhaseMealWidget } from '@/components/cycle-phase-meal-widget';
 
 const MOCK_USER_ID = 'demo-user-001';
@@ -111,9 +112,9 @@ export default function NutritionPage() {
   const [foodLookupOpen, setFoodLookupOpen] = useState(false);
   const [selectedMealSlot, setSelectedMealSlot] = useState<{ day: string; mealType: string } | null>(null);
 
-  // Food log state for today
-  const [todaysFoods, setTodaysFoods] = useState<LoggedFood[]>([]);
-  const [isFoodLogOpen, setIsFoodLogOpen] = useState(false);
+  // Food log state for today - with meal types
+  const [todaysFoods, setTodaysFoods] = useState<(LoggedFood & { mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack' })[]>([]);
+  const [currentMealType, setCurrentMealType] = useState<'breakfast' | 'lunch' | 'dinner' | 'snack'>('breakfast');
 
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const caloriesRemaining = weeklyProgress.targetCalories - weeklyProgress.currentCalories;
@@ -165,9 +166,9 @@ export default function NutritionPage() {
     setFoodLookupOpen(true);
   };
 
-  // Open food lookup for today's log
-  const handleOpenFoodLog = () => {
-    setIsFoodLogOpen(true);
+  // Open food lookup for today's log with meal type
+  const handleOpenFoodLog = (mealType: 'breakfast' | 'lunch' | 'dinner' | 'snack') => {
+    setCurrentMealType(mealType);
     setFoodLookupOpen(true);
   };
 
@@ -199,8 +200,8 @@ export default function NutritionPage() {
     };
   }) => {
     // Check if we're adding to today's log or to meal planning
-    if (isFoodLogOpen) {
-      // Add to today's food log
+    if (!selectedMealSlot) {
+      // Add to today's food log with meal type
       const rootedScore = calculateRootedScore(food.nutrition);
       const currentTime = new Date().toLocaleTimeString('en-US', {
         hour: 'numeric',
@@ -208,7 +209,7 @@ export default function NutritionPage() {
         hour12: true,
       });
 
-      const newLoggedFood: LoggedFood = {
+      const newLoggedFood = {
         id: Date.now().toString(),
         name: food.name,
         calories: food.nutrition.calories,
@@ -219,10 +220,10 @@ export default function NutritionPage() {
         rootedScore,
         servingSize: `${food.servingSize.label} × ${food.quantity}`,
         time: currentTime,
+        mealType: currentMealType,
       };
 
       setTodaysFoods((prev) => [...prev, newLoggedFood]);
-      setIsFoodLogOpen(false);
     } else if (selectedMealSlot) {
       // Add to meal planning
       const { day, mealType } = selectedMealSlot;
@@ -326,8 +327,8 @@ export default function NutritionPage() {
           {/* OVERVIEW TAB */}
           <TabsContent value="overview" className="space-y-6">
 
-        {/* Food Log - What I Ate Today */}
-        <FoodLogEntry
+        {/* Meal Logging Carousel - Swipeable meal sections */}
+        <MealLoggingCarousel
           date={new Date().toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
