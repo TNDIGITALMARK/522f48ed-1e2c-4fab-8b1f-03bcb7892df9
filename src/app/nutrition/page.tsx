@@ -326,6 +326,21 @@ export default function NutritionPage() {
           {/* OVERVIEW TAB */}
           <TabsContent value="overview" className="space-y-6">
 
+        {/* rooted Score Scanner CTA */}
+        <Card className="magazine-feature-card bg-white border border-secondary/20 rounded-xl mb-6">
+          <div className="flex items-center gap-4">
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold mb-1">rooted Score Scanner</h3>
+              <p className="text-sm text-muted-foreground">
+                Scan food labels to get instant nutrition scores (0-100) for protein, fiber, sugar, and ingredients
+              </p>
+            </div>
+            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6">
+              Scan Now
+            </Button>
+          </div>
+        </Card>
+
         {/* Meal Logging Carousel - Swipeable meal sections */}
         <MealLoggingCarousel
           date={new Date().toLocaleDateString('en-US', {
@@ -425,21 +440,6 @@ export default function NutritionPage() {
             <Progress value={75} className="h-2" />
           </Card>
         </div>
-
-        {/* rooted Score Scanner CTA */}
-        <Card className="magazine-feature-card bg-white border border-secondary/20 rounded-xl mb-6">
-          <div className="flex items-center gap-4">
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold mb-1">rooted Score Scanner</h3>
-              <p className="text-sm text-muted-foreground">
-                Scan food labels to get instant nutrition scores (0-100) for protein, fiber, sugar, and ingredients
-              </p>
-            </div>
-            <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-6">
-              Scan Now
-            </Button>
-          </div>
-        </Card>
 
           </TabsContent>
 
