@@ -80,7 +80,7 @@ export function SocialFeed({
     return (
       <div className="text-center py-16">
         <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-4">
-          <MessageCircle className="w-10 h-10 text-muted-foreground opacity-50" />
+          <MessageCircle className="w-10 h-10 text-muted-foreground opacity-50" strokeWidth={1.5} />
         </div>
         <h3 className="text-xl font-semibold mb-2">No posts yet</h3>
         <p className="text-muted-foreground max-w-sm mx-auto">
@@ -101,7 +101,7 @@ export function SocialFeed({
         const isOwnPost = post.author_id === currentUserId;
 
         return (
-          <Card key={post.id} className="overflow-hidden border-none shadow-bloom">
+          <Card key={post.id} className="magazine-feature-card overflow-hidden">
             {/* Post Header */}
             <div className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export function SocialFeed({
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="h-8 w-8">
-                    <MoreVertical className="w-4 h-4" />
+                    <MoreVertical className="w-4 h-4" strokeWidth={1.5} />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -135,13 +135,13 @@ export function SocialFeed({
                       onClick={() => onDelete(post.id)}
                       className="text-destructive focus:text-destructive"
                     >
-                      <Trash2 className="w-4 h-4 mr-2" />
+                      <Trash2 className="w-4 h-4 mr-2" strokeWidth={1.5} />
                       Delete Post
                     </DropdownMenuItem>
                   )}
                   {!isOwnPost && (
                     <DropdownMenuItem>
-                      <Flag className="w-4 h-4 mr-2" />
+                      <Flag className="w-4 h-4 mr-2" strokeWidth={1.5} />
                       Report
                     </DropdownMenuItem>
                   )}
@@ -204,27 +204,27 @@ export function SocialFeed({
                 <Button
                   variant={post.is_liked ? "default" : "outline"}
                   size="sm"
-                  className="flex-1 gap-2"
+                  className="flex-1 gap-2 rounded-full"
                   onClick={() => post.is_liked ? onUnlike(post.id) : onLike(post.id)}
                 >
-                  <Heart className={`w-4 h-4 ${post.is_liked ? 'fill-current' : ''}`} />
+                  <Heart className={`w-4 h-4 ${post.is_liked ? 'fill-current' : ''}`} strokeWidth={1.5} />
                   {post.is_liked ? 'Liked' : 'Like'}
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="flex-1 gap-2"
+                  className="flex-1 gap-2 rounded-full"
                   onClick={() => onComment(post.id)}
                 >
-                  <MessageCircle className="w-4 h-4" />
+                  <MessageCircle className="w-4 h-4" strokeWidth={1.5} />
                   Comment
                 </Button>
                 <Button
                   variant="outline"
                   size="icon"
-                  className="h-9 w-9"
+                  className="h-9 w-9 rounded-full"
                 >
-                  <Share2 className="w-4 h-4" />
+                  <Share2 className="w-4 h-4" strokeWidth={1.5} />
                 </Button>
               </div>
             </div>

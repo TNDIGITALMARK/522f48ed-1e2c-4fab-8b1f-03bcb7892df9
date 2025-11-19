@@ -27,9 +27,9 @@ export function FriendRequestsPanel({
 }: FriendRequestsPanelProps) {
   if (requests.length === 0) {
     return (
-      <Card className="p-6 text-center">
+      <Card className="magazine-feature-card p-6 text-center">
         <div className="w-16 h-16 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-3">
-          <UserPlus className="w-8 h-8 text-muted-foreground opacity-50" />
+          <UserPlus className="w-8 h-8 text-muted-foreground opacity-50" strokeWidth={1.5} />
         </div>
         <p className="text-sm text-muted-foreground">No pending friend requests</p>
       </Card>
@@ -37,7 +37,7 @@ export function FriendRequestsPanel({
   }
 
   return (
-    <Card className="p-6">
+    <Card className="magazine-feature-card p-6">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Friend Requests</h3>
         <Badge variant="secondary">{requests.length}</Badge>
@@ -68,19 +68,19 @@ export function FriendRequestsPanel({
               <div className="flex gap-2">
                 <Button
                   size="sm"
-                  className="flex-1 gap-2"
+                  className="flex-1 gap-2 rounded-full bg-primary hover:bg-primary/90"
                   onClick={() => onAccept(request.id, request.sender_id)}
                 >
-                  <Check className="w-4 h-4" />
+                  <Check className="w-4 h-4" strokeWidth={2} />
                   Accept
                 </Button>
                 <Button
                   size="sm"
                   variant="outline"
-                  className="flex-1 gap-2"
+                  className="flex-1 gap-2 rounded-full"
                   onClick={() => onReject(request.id)}
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-4 h-4" strokeWidth={2} />
                   Decline
                 </Button>
               </div>

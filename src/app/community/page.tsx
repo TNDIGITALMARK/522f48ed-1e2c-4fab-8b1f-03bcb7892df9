@@ -179,14 +179,14 @@ export default function CommunityPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-pearl textile-overlay-green pb-24">
+    <div className="min-h-screen bg-textile-beige pb-24">
       {/* Header */}
       <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 animate-fade-in-up sticky top-0 z-40 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
-          <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
-            <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
+          <div className="font-['Cormorant_Garamond'] text-2xl font-semibold tracking-tight">
+            <span className="text-foreground">ROOTED</span>
+            <span className="text-xs text-muted-foreground font-light ml-2 tracking-wide">
+              Grounded in Nature
             </span>
           </div>
         </div>
@@ -195,9 +195,9 @@ export default function CommunityPage() {
       <main className="max-w-4xl mx-auto px-6 py-8">
         {/* Page Title */}
         <div className="mb-8 animate-fade-in-up animation-delay-200">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full mb-4 border border-purple-200">
-            <Users className="w-4 h-4 text-purple-700" />
-            <span className="text-sm font-medium text-purple-900">Connect & Share</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full mb-4 border border-primary/20">
+            <Users className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-foreground">Connect & Share</span>
           </div>
           <h1 className="text-4xl mb-2">Community</h1>
           <p className="text-muted-foreground text-lg">
@@ -206,28 +206,28 @@ export default function CommunityPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <Card className="p-5 text-center hover:shadow-bloom transition-shadow">
+        <div className="grid grid-cols-3 gap-4 mb-8 animate-fade-in-up animation-delay-400">
+          <Card className="magazine-feature-card p-5 text-center">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2">
-              <Users className="w-6 h-6 text-primary" />
+              <Users className="w-6 h-6 text-primary" strokeWidth={1.5} />
             </div>
             <div className="text-2xl font-bold text-primary mb-1">{stats.friends}</div>
             <p className="text-sm text-muted-foreground">Friends</p>
           </Card>
 
-          <Card className="p-5 text-center hover:shadow-bloom transition-shadow">
+          <Card className="magazine-feature-card p-5 text-center">
             <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-2">
-              <MessageCircle className="w-6 h-6 text-secondary-foreground" />
+              <MessageCircle className="w-6 h-6 text-foreground" strokeWidth={1.5} />
             </div>
-            <div className="text-2xl font-bold text-secondary-foreground mb-1">{stats.posts}</div>
+            <div className="text-2xl font-bold text-foreground mb-1">{stats.posts}</div>
             <p className="text-sm text-muted-foreground">Posts</p>
           </Card>
 
-          <Card className="p-5 text-center hover:shadow-bloom transition-shadow">
+          <Card className="magazine-feature-card p-5 text-center">
             <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-2">
-              <Heart className="w-6 h-6 text-accent-foreground" />
+              <Heart className="w-6 h-6 text-accent" strokeWidth={1.5} />
             </div>
-            <div className="text-2xl font-bold text-accent-foreground mb-1">{stats.likes}</div>
+            <div className="text-2xl font-bold text-accent mb-1">{stats.likes}</div>
             <p className="text-sm text-muted-foreground">Likes</p>
           </Card>
         </div>
@@ -235,22 +235,22 @@ export default function CommunityPage() {
         {/* Create Post Button */}
         <Button
           onClick={() => setCreatePostOpen(true)}
-          className="w-full mb-8 h-14 text-lg gap-2 shadow-bloom hover:shadow-bloom-lg transition-all"
+          className="w-full mb-8 h-14 text-lg gap-2 shadow-bloom hover:shadow-bloom-lg transition-all rounded-full bg-primary hover:bg-primary/90 text-primary-foreground animate-fade-in-up animation-delay-600"
           size="lg"
         >
-          <Plus className="w-5 h-5" />
+          <Plus className="w-5 h-5" strokeWidth={2} />
           Create Post
         </Button>
 
         {/* Tabs */}
-        <Tabs defaultValue="feed" className="w-full">
+        <Tabs defaultValue="feed" className="w-full animate-fade-in-up animation-delay-800">
           <TabsList className="grid w-full grid-cols-3 mb-6">
             <TabsTrigger value="feed">
-              <TrendingUp className="w-4 h-4 mr-2" />
+              <TrendingUp className="w-4 h-4 mr-2" strokeWidth={1.5} />
               Feed
             </TabsTrigger>
             <TabsTrigger value="requests" className="relative">
-              <UserPlus className="w-4 h-4 mr-2" />
+              <UserPlus className="w-4 h-4 mr-2" strokeWidth={1.5} />
               Requests
               {friendRequests.length > 0 && (
                 <Badge
@@ -262,7 +262,7 @@ export default function CommunityPage() {
               )}
             </TabsTrigger>
             <TabsTrigger value="discover">
-              <Search className="w-4 h-4 mr-2" />
+              <Search className="w-4 h-4 mr-2" strokeWidth={1.5} />
               Discover
             </TabsTrigger>
           </TabsList>
@@ -287,16 +287,16 @@ export default function CommunityPage() {
           </TabsContent>
 
           <TabsContent value="discover">
-            <Card className="p-8 text-center">
+            <Card className="magazine-feature-card p-8 text-center">
               <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-4">
-                <Search className="w-10 h-10 text-muted-foreground opacity-50" />
+                <Search className="w-10 h-10 text-muted-foreground opacity-50" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Discover People</h3>
               <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
                 Find and connect with others on their wellness journey
               </p>
-              <Button variant="outline" className="gap-2">
-                <Search className="w-4 h-4" />
+              <Button variant="outline" className="gap-2 rounded-full">
+                <Search className="w-4 h-4" strokeWidth={1.5} />
                 Search Users
               </Button>
             </Card>
@@ -304,10 +304,10 @@ export default function CommunityPage() {
         </Tabs>
 
         {/* Tips Card */}
-        <Card className="mt-8 p-6 bg-gradient-to-br from-accent/20 to-accent/5 border-none">
+        <Card className="mt-8 p-6 bg-gradient-to-br from-primary/12 to-secondary/8 border border-primary/20 magazine-feature-card">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-6 h-6 text-accent-foreground" />
+            <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-6 h-6 text-primary" strokeWidth={1.5} />
             </div>
             <div>
               <h3 className="font-semibold mb-2 text-lg">Share Your Wellness Journey</h3>
