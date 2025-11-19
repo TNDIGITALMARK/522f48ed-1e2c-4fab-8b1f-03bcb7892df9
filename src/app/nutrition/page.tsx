@@ -505,63 +505,72 @@ export default function NutritionPage() {
                 <h3 className="text-2xl font-semibold mb-2">
                   Weekly Meal Plan
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground flex items-center gap-2">
                   Plan your meals for the week ahead
+                  <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full font-medium">
+                    ← Scroll →
+                  </span>
                 </p>
               </div>
 
-              <div className="space-y-6">
-                {weekDays.map((day) => (
-                  <div key={day} className="border-l-4 border-primary/30 pl-4 py-2">
-                    <h4 className="text-lg font-semibold mb-3">{day}</h4>
-                    <div className="grid md:grid-cols-3 gap-3">
-                      {['breakfast', 'lunch', 'dinner'].map((mealType) => {
-                        const meal = weekMeals[day]?.[mealType];
-                        return (
-                          <div
-                            key={mealType}
-                            onClick={() => !meal && handleOpenFoodLookup(day, mealType)}
-                            className="p-4 bg-muted/20 rounded-lg border border-border hover:border-primary/50 transition-all cursor-pointer group"
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <Badge variant="outline" className="text-xs capitalize">
-                                {mealType}
-                              </Badge>
-                              {meal && (
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleRemoveMeal(day, mealType);
-                                  }}
-                                  className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                                >
-                                  <X className="w-3 h-3" />
-                                </Button>
+              {/* Horizontal scrolling container */}
+              <div className="overflow-x-auto scrollbar-hide pb-4 -mx-6 px-6 relative">
+                {/* Subtle gradient fade indicators for scrolling */}
+                <div className="absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
+                <div className="absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none z-10" />
+                <div className="flex gap-4 min-w-max">
+                  {weekDays.map((day) => (
+                    <div key={day} className="flex-shrink-0 w-80 border-l-4 border-primary/30 pl-4 py-2">
+                      <h4 className="text-lg font-semibold mb-3">{day}</h4>
+                      <div className="space-y-3">
+                        {['breakfast', 'lunch', 'dinner'].map((mealType) => {
+                          const meal = weekMeals[day]?.[mealType];
+                          return (
+                            <div
+                              key={mealType}
+                              onClick={() => !meal && handleOpenFoodLookup(day, mealType)}
+                              className="p-4 bg-muted/20 rounded-lg border border-border hover:border-primary/50 transition-all cursor-pointer group"
+                            >
+                              <div className="flex items-center justify-between mb-2">
+                                <Badge variant="outline" className="text-xs capitalize">
+                                  {mealType}
+                                </Badge>
+                                {meal && (
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleRemoveMeal(day, mealType);
+                                    }}
+                                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                                  >
+                                    <X className="w-3 h-3" />
+                                  </Button>
+                                )}
+                              </div>
+                              {meal ? (
+                                <div>
+                                  <p className="font-semibold text-sm mb-1">{meal.name}</p>
+                                  <div className="flex gap-2 text-xs text-muted-foreground">
+                                    <span>{meal.calories} cal</span>
+                                    <span>•</span>
+                                    <span>{meal.protein}g protein</span>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="text-center py-2">
+                                  <Plus className="w-5 h-5 mx-auto text-muted-foreground/50 mb-1" />
+                                  <p className="text-xs text-muted-foreground">Add meal</p>
+                                </div>
                               )}
                             </div>
-                            {meal ? (
-                              <div>
-                                <p className="font-semibold text-sm mb-1">{meal.name}</p>
-                                <div className="flex gap-2 text-xs text-muted-foreground">
-                                  <span>{meal.calories} cal</span>
-                                  <span>•</span>
-                                  <span>{meal.protein}g protein</span>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="text-center py-2">
-                                <Plus className="w-5 h-5 mx-auto text-muted-foreground/50 mb-1" />
-                                <p className="text-xs text-muted-foreground">Add meal</p>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
               <div className="mt-6 space-y-3">
