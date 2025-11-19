@@ -31,10 +31,10 @@ interface MealLoggingCarouselProps {
 type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
 
 const MEAL_CONFIG = {
-  breakfast: { icon: '🍳', label: 'Breakfast', color: 'bg-amber-500/10 border-amber-500/20' },
-  lunch: { icon: '🥗', label: 'Lunch', color: 'bg-emerald-500/10 border-emerald-500/20' },
-  dinner: { icon: '🍽️', label: 'Dinner', color: 'bg-blue-500/10 border-blue-500/20' },
-  snack: { icon: '🍎', label: 'Snacks', color: 'bg-purple-500/10 border-purple-500/20' },
+  breakfast: { icon: '', label: 'Breakfast', color: 'bg-amber-500/10 border-amber-500/20' },
+  lunch: { icon: '', label: 'Lunch', color: 'bg-emerald-500/10 border-emerald-500/20' },
+  dinner: { icon: '', label: 'Dinner', color: 'bg-blue-500/10 border-blue-500/20' },
+  snack: { icon: '', label: 'Snacks', color: 'bg-purple-500/10 border-purple-500/20' },
 } as const;
 
 export function MealLoggingCarousel({ date, meals, onAddFood, onRemoveFood }: MealLoggingCarouselProps) {
@@ -104,7 +104,6 @@ export function MealLoggingCarousel({ date, meals, onAddFood, onRemoveFood }: Me
             {/* Meal Type Header */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
-                <div className="text-4xl">{config.icon}</div>
                 <div>
                   <h3 className="text-2xl font-semibold">{config.label}</h3>
                   <p className="text-sm text-muted-foreground">
@@ -167,7 +166,6 @@ export function MealLoggingCarousel({ date, meals, onAddFood, onRemoveFood }: Me
             <div className="space-y-3 max-h-[300px] overflow-y-auto scrollbar-hide">
               {mealList.length === 0 ? (
                 <div className="text-center py-12 border-2 border-dashed border-border rounded-xl bg-muted/10">
-                  <div className="text-5xl mb-3">{config.icon}</div>
                   <p className="text-lg font-semibold text-muted-foreground mb-1">
                     No {config.label.toLowerCase()} logged
                   </p>
@@ -354,7 +352,6 @@ export function MealLoggingCarousel({ date, meals, onAddFood, onRemoveFood }: Me
                     : 'bg-muted/30 text-muted-foreground hover:bg-muted/50'
                 }`}
               >
-                <span className="text-sm">{config.icon}</span>
                 <span className="text-xs font-semibold">{config.label}</span>
               </button>
             );

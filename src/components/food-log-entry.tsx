@@ -128,7 +128,6 @@ export function FoodLogEntry({ date, meals, onAddFood, onRemoveFood }: FoodLogEn
         <div className="space-y-3">
           {meals.length === 0 ? (
             <div className="text-center py-12 border-2 border-dashed border-border rounded-xl bg-muted/10">
-              <div className="text-4xl mb-3">🍽️</div>
               <p className="text-lg font-semibold text-muted-foreground mb-1">
                 No foods logged yet
               </p>
