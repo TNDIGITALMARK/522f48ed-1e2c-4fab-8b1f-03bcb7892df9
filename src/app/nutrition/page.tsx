@@ -205,15 +205,26 @@ export default function NutritionPage() {
   };
 
   return (
-    <div className="min-h-screen bg-textile-beige pb-24">
+    <div className="min-h-screen relative pb-24">
+      {/* Botanical background with reduced opacity - matching home, cycle, and workout pages */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer - matching home, cycle, and workout pages */}
+      <div className="fixed inset-0 -z-20 bg-white" />
+
       {/* Header */}
-      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-4 shadow-bloom-sm">
+      <header className="bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 sticky top-0 z-50 shadow-bloom-sm">
         <div className="max-w-4xl mx-auto">
           <div className="font-['Playfair_Display'] text-2xl font-semibold tracking-tight">
             <span className="text-foreground italic">rooted</span>
-            <span className="text-sm text-muted-foreground font-light ml-2">
-              by <span className="font-medium">Rooted</span>
-            </span>
           </div>
         </div>
       </header>
@@ -228,7 +239,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Food Quiz CTA */}
-        <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 mb-6">
+        <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl mb-6">
           <div className="flex items-center gap-4">
             <div className="text-5xl">🍽️</div>
             <div className="flex-1">
@@ -259,7 +270,7 @@ export default function NutritionPage() {
           <TabsContent value="overview" className="space-y-6">
 
         {/* Weekly Calorie Balance */}
-        <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 mb-6">
+        <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl mb-6">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-xl font-semibold mb-1">Weekly Balance</h3>
@@ -308,7 +319,7 @@ export default function NutritionPage() {
 
         {/* Macros Today */}
         <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <Card className="magazine-feature-card bg-white/60 p-5">
+          <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl p-5">
             <div className="mb-3">
               <h4 className="font-semibold text-lg">Protein</h4>
               <p className="text-sm text-muted-foreground">
@@ -321,7 +332,7 @@ export default function NutritionPage() {
             />
           </Card>
 
-          <Card className="magazine-feature-card bg-white/60 p-5">
+          <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl p-5">
             <div className="mb-3">
               <h4 className="font-semibold text-lg">Fiber</h4>
               <p className="text-sm text-muted-foreground">
@@ -334,7 +345,7 @@ export default function NutritionPage() {
             />
           </Card>
 
-          <Card className="magazine-feature-card bg-white/60 p-5">
+          <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl p-5">
             <div className="mb-3">
               <h4 className="font-semibold text-lg">Hydration</h4>
               <p className="text-sm text-muted-foreground">
@@ -346,7 +357,7 @@ export default function NutritionPage() {
         </div>
 
         {/* rooted Score Scanner CTA */}
-        <Card className="magazine-feature-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20 mb-6">
+        <Card className="magazine-feature-card bg-white border border-secondary/20 rounded-xl mb-6">
           <div className="flex items-center gap-4">
             <div className="flex-1">
               <h3 className="text-lg font-semibold mb-1">rooted Score Scanner</h3>
@@ -372,7 +383,7 @@ export default function NutritionPage() {
         </div>
 
         {/* Phase-Based Nutrition Tip */}
-        <Card className="magazine-feature-card bg-gradient-to-br from-accent/10 to-primary/5 border-2 border-accent/15">
+        <Card className="magazine-feature-card bg-white border border-accent/15 rounded-xl">
           <div>
             <h3 className="text-lg font-semibold mb-2">Follicular Phase Nutrition Tip</h3>
             <p className="text-muted-foreground leading-relaxed">
@@ -385,7 +396,7 @@ export default function NutritionPage() {
 
           {/* GROCERY LIST TAB */}
           <TabsContent value="grocery" className="space-y-6">
-            <Card className="magazine-feature-card bg-white/60">
+            <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl">
               <div className="flex items-center justify-between mb-6">
                 <div>
                   <h3 className="text-2xl font-semibold">
@@ -489,7 +500,7 @@ export default function NutritionPage() {
 
           {/* MEAL PLANNING TAB */}
           <TabsContent value="meals" className="space-y-6">
-            <Card className="magazine-feature-card bg-white/60">
+            <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl">
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold mb-2">
                   Weekly Meal Plan
@@ -577,7 +588,7 @@ export default function NutritionPage() {
 
           {/* AI MEAL IDEAS TAB */}
           <TabsContent value="ai-meals" className="space-y-6">
-            <Card className="magazine-feature-card bg-white/60">
+            <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl">
               <Tabs defaultValue="breakfast" className="w-full">
                 <TabsList className="grid w-full grid-cols-5 mb-6">
                   <TabsTrigger value="breakfast">Breakfast</TabsTrigger>
