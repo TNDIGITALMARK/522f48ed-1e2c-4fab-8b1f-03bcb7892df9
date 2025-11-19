@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Sprout, Flame, TrendingUp, Calendar } from 'lucide-react';
-import { format, subDays, startOfDay, isSameDay, differenceInDays } from 'date-fns';
+import { format, startOfDay, differenceInDays } from 'date-fns';
 
 interface DailyRootsData {
   dates: string[]; // ISO date strings of days app was used
@@ -127,113 +126,73 @@ export function DailyRootsWidget() {
     setRootsData(data);
   }, []);
 
-  // Generate last 14 days for visual display
-  const last14Days = Array.from({ length: 14 }, (_, i) => {
-    const date = subDays(new Date(), 13 - i);
-    const dateStr = format(startOfDay(date), 'yyyy-MM-dd');
-    return {
-      date,
-      dateStr,
-      visited: rootsData.dates.includes(dateStr),
-      isToday: isSameDay(date, new Date()),
-    };
-  });
-
   return (
-    <Card className="p-6 widget-card">
-      <div className="flex items-center gap-3 mb-5">
-        <Sprout className="w-5 h-5 text-primary" />
-        <h2 className="text-xl font-semibold font-['Cormorant_Garamond']">Daily Roots</h2>
+    <Card className="p-4 widget-card">
+      <div className="flex items-center gap-2 mb-3">
+        <Sprout className="w-4 h-4 text-primary" />
+        <h2 className="text-base font-semibold font-['Cormorant_Garamond']">Daily Roots</h2>
       </div>
 
-      <p className="text-sm text-muted-foreground mb-6">
-        Your consistency creates lasting growth. Every day you return, your wellness roots grow stronger.
+      <p className="text-xs text-muted-foreground mb-4">
+        Your consistency creates lasting growth.
       </p>
 
-      {/* Streak Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-6">
-        <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-3 text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <Flame className="w-4 h-4 text-primary" />
-            <span className="text-2xl font-bold text-primary">{rootsData.currentStreak}</span>
+      {/* Streak Stats - Compact Version */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-2 text-center">
+          <div className="flex items-center justify-center gap-1 mb-0.5">
+            <Flame className="w-3 h-3 text-primary" />
+            <span className="text-xl font-bold text-primary">{rootsData.currentStreak}</span>
           </div>
-          <p className="text-xs text-muted-foreground font-medium">Current Streak</p>
+          <p className="text-[0.625rem] text-muted-foreground font-medium">Current</p>
         </div>
 
-        <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-lg p-3 text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <TrendingUp className="w-4 h-4 text-accent" />
-            <span className="text-2xl font-bold text-accent-foreground">{rootsData.longestStreak}</span>
+        <div className="bg-gradient-to-br from-accent/10 to-accent/5 rounded-lg p-2 text-center">
+          <div className="flex items-center justify-center gap-1 mb-0.5">
+            <TrendingUp className="w-3 h-3 text-accent" />
+            <span className="text-xl font-bold text-accent-foreground">{rootsData.longestStreak}</span>
           </div>
-          <p className="text-xs text-muted-foreground font-medium">Longest Streak</p>
+          <p className="text-[0.625rem] text-muted-foreground font-medium">Longest</p>
         </div>
 
-        <div className="bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-lg p-3 text-center">
-          <div className="flex items-center justify-center gap-1 mb-1">
-            <Calendar className="w-4 h-4 text-primary" />
-            <span className="text-2xl font-bold text-foreground">{rootsData.totalDays}</span>
+        <div className="bg-gradient-to-br from-secondary/20 to-secondary/10 rounded-lg p-2 text-center">
+          <div className="flex items-center justify-center gap-1 mb-0.5">
+            <Calendar className="w-3 h-3 text-primary" />
+            <span className="text-xl font-bold text-foreground">{rootsData.totalDays}</span>
           </div>
-          <p className="text-xs text-muted-foreground font-medium">Total Days</p>
+          <p className="text-[0.625rem] text-muted-foreground font-medium">Total</p>
         </div>
       </div>
 
-      {/* Visual Streak Calendar - Last 14 Days */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-medium text-foreground">Last 14 Days</h3>
-        <div className="grid grid-cols-7 gap-2">
-          {last14Days.map((day, index) => (
-            <div key={index} className="flex flex-col items-center gap-1">
-              <div
-                className={`
-                  w-full aspect-square rounded-lg border-2 transition-all duration-300
-                  flex items-center justify-center
-                  ${
-                    day.visited
-                      ? 'bg-primary/20 border-primary shadow-sm'
-                      : 'bg-muted/20 border-border/40'
-                  }
-                  ${day.isToday ? 'ring-2 ring-primary ring-offset-2' : ''}
-                `}
-              >
-                {day.visited && <Sprout className="w-3 h-3 text-primary" />}
-              </div>
-              <span className="text-xs text-muted-foreground font-medium">
-                {format(day.date, 'EEE')[0]}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Encouragement Message */}
+      {/* Encouragement Message - Compact */}
       {rootsData.currentStreak > 0 && (
-        <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
-          <p className="text-sm text-foreground/90 font-medium text-center">
-            {rootsData.currentStreak === 1 && "🌱 You're planting seeds of consistency!"}
+        <div className="mt-3 p-2 bg-primary/5 rounded-lg border border-primary/20">
+          <p className="text-xs text-foreground/90 font-medium text-center">
+            {rootsData.currentStreak === 1 && "🌱 Seeds of consistency!"}
             {rootsData.currentStreak >= 2 && rootsData.currentStreak <= 6 &&
-              `🌿 ${rootsData.currentStreak} days strong! Your roots are taking hold.`}
+              `🌿 ${rootsData.currentStreak} days strong!`}
             {rootsData.currentStreak >= 7 && rootsData.currentStreak <= 13 &&
-              `🌳 ${rootsData.currentStreak} day streak! You're growing steadily.`}
+              `🌳 ${rootsData.currentStreak} day streak!`}
             {rootsData.currentStreak >= 14 && rootsData.currentStreak <= 29 &&
-              `🌲 ${rootsData.currentStreak} days! Your wellness practice is deeply rooted.`}
+              `🌲 ${rootsData.currentStreak} days!`}
             {rootsData.currentStreak >= 30 &&
-              `🌳✨ ${rootsData.currentStreak} day streak! You're a wellness warrior. Your roots run deep.`}
+              `🌳✨ ${rootsData.currentStreak} days!`}
           </p>
         </div>
       )}
 
       {rootsData.currentStreak === 0 && rootsData.totalDays > 0 && (
-        <div className="mt-6 p-4 bg-muted/30 rounded-lg border border-border/40">
-          <p className="text-sm text-muted-foreground text-center">
-            Welcome back! Start a new streak today. Every return strengthens your roots.
+        <div className="mt-3 p-2 bg-muted/30 rounded-lg border border-border/40">
+          <p className="text-xs text-muted-foreground text-center">
+            Welcome back! Start a new streak today.
           </p>
         </div>
       )}
 
       {rootsData.totalDays === 0 && (
-        <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
-          <p className="text-sm text-foreground/90 text-center">
-            🌱 Welcome to Daily Roots! Your journey to consistent wellness starts today.
+        <div className="mt-3 p-2 bg-primary/5 rounded-lg border border-primary/20">
+          <p className="text-xs text-foreground/90 text-center">
+            🌱 Welcome! Your journey starts today.
           </p>
         </div>
       )}
