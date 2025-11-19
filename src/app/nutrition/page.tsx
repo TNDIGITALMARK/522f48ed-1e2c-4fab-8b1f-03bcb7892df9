@@ -18,6 +18,8 @@ import { AIMealSuggestions } from '@/components/ai-meal-suggestions';
 import { PantryItem } from '@/components/pantry-items-manager';
 import { useNutritionData, useCalorieRecommendation } from '@/hooks/use-user-profile';
 import { SwipeableNutritionCarousel } from '@/components/swipeable-nutrition-carousel';
+import { FoodLogEntry, LoggedFood } from '@/components/food-log-entry';
+import { CyclePhaseMealWidget } from '@/components/cycle-phase-meal-widget';
 
 const MOCK_USER_ID = 'demo-user-001';
 
@@ -109,6 +111,10 @@ export default function NutritionPage() {
   const [foodLookupOpen, setFoodLookupOpen] = useState(false);
   const [selectedMealSlot, setSelectedMealSlot] = useState<{ day: string; mealType: string } | null>(null);
 
+  // Food log state for today
+  const [todaysFoods, setTodaysFoods] = useState<LoggedFood[]>([]);
+  const [isFoodLogOpen, setIsFoodLogOpen] = useState(false);
+
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   const caloriesRemaining = weeklyProgress.targetCalories - weeklyProgress.currentCalories;
   const weekProgress = (weeklyProgress.currentCalories / weeklyProgress.targetCalories) * 100;
@@ -159,6 +165,27 @@ export default function NutritionPage() {
     setFoodLookupOpen(true);
   };
 
+  // Open food lookup for today's log
+  const handleOpenFoodLog = () => {
+    setIsFoodLogOpen(true);
+    setFoodLookupOpen(true);
+  };
+
+  // Calculate rooted score based on nutrition values
+  const calculateRootedScore = (nutrition: {
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+    fiber: number;
+  }) => {
+    // Simple scoring algorithm: higher protein and fiber = better score
+    const proteinScore = Math.min((nutrition.protein / nutrition.calories) * 100 * 20, 40);
+    const fiberScore = Math.min(nutrition.fiber * 5, 30);
+    const balanceScore = 30; // Base score for logging food
+    return Math.round(proteinScore + fiberScore + balanceScore);
+  };
+
   const handleAddFood = (food: {
     name: string;
     servingSize: any;
@@ -171,26 +198,56 @@ export default function NutritionPage() {
       fiber: number;
     };
   }) => {
-    if (!selectedMealSlot) return;
+    // Check if we're adding to today's log or to meal planning
+    if (isFoodLogOpen) {
+      // Add to today's food log
+      const rootedScore = calculateRootedScore(food.nutrition);
+      const currentTime = new Date().toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+      });
 
-    const { day, mealType } = selectedMealSlot;
+      const newLoggedFood: LoggedFood = {
+        id: Date.now().toString(),
+        name: food.name,
+        calories: food.nutrition.calories,
+        protein: food.nutrition.protein,
+        carbs: food.nutrition.carbs,
+        fat: food.nutrition.fat,
+        fiber: food.nutrition.fiber,
+        rootedScore,
+        servingSize: `${food.servingSize.label} × ${food.quantity}`,
+        time: currentTime,
+      };
 
-    setWeekMeals((prev) => ({
-      ...prev,
-      [day]: {
-        ...prev[day],
-        [mealType]: {
-          name: `${food.name} (${food.servingSize.label} × ${food.quantity})`,
-          calories: food.nutrition.calories,
-          protein: food.nutrition.protein,
-          carbs: food.nutrition.carbs,
-          fat: food.nutrition.fat,
-          fiber: food.nutrition.fiber,
+      setTodaysFoods((prev) => [...prev, newLoggedFood]);
+      setIsFoodLogOpen(false);
+    } else if (selectedMealSlot) {
+      // Add to meal planning
+      const { day, mealType } = selectedMealSlot;
+
+      setWeekMeals((prev) => ({
+        ...prev,
+        [day]: {
+          ...prev[day],
+          [mealType]: {
+            name: `${food.name} (${food.servingSize.label} × ${food.quantity})`,
+            calories: food.nutrition.calories,
+            protein: food.nutrition.protein,
+            carbs: food.nutrition.carbs,
+            fat: food.nutrition.fat,
+            fiber: food.nutrition.fiber,
+          },
         },
-      },
-    }));
+      }));
 
-    setSelectedMealSlot(null);
+      setSelectedMealSlot(null);
+    }
+  };
+
+  const handleRemoveFood = (foodId: string) => {
+    setTodaysFoods((prev) => prev.filter((food) => food.id !== foodId));
   };
 
   const handleRemoveMeal = (day: string, mealType: string) => {
@@ -268,6 +325,19 @@ export default function NutritionPage() {
 
           {/* OVERVIEW TAB */}
           <TabsContent value="overview" className="space-y-6">
+
+        {/* Food Log - What I Ate Today */}
+        <FoodLogEntry
+          date={new Date().toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+          meals={todaysFoods}
+          onAddFood={handleOpenFoodLog}
+          onRemoveFood={handleRemoveFood}
+        />
 
         {/* Weekly Calorie Balance */}
         <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl mb-6">
@@ -371,27 +441,17 @@ export default function NutritionPage() {
           </div>
         </Card>
 
-        {/* Swipeable AI Meal Suggestions Carousel */}
+        {/* Swipeable Meal Exploration Carousel */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-4">
+            <h3 className="text-2xl font-semibold">Swipe to Explore Meals</h3>
             <Badge variant="secondary" className="text-xs">
-              Follicular Phase · Personalized for You
+              Personalized for You
             </Badge>
           </div>
 
           <SwipeableNutritionCarousel steps={mealSuggestions} />
         </div>
-
-        {/* Phase-Based Nutrition Tip */}
-        <Card className="magazine-feature-card bg-white border border-accent/15 rounded-xl">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Follicular Phase Nutrition Tip</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              You're entering your follicular phase — higher carb meals and lean proteins will fuel your rising energy best!
-              Focus on whole grains, lean meats, and plenty of colorful vegetables. This is also a great time to try new recipes and meal prep for the week ahead.
-            </p>
-          </div>
-        </Card>
           </TabsContent>
 
           {/* GROCERY LIST TAB */}
@@ -500,6 +560,12 @@ export default function NutritionPage() {
 
           {/* MEAL PLANNING TAB */}
           <TabsContent value="meals" className="space-y-6">
+            {/* Cycle Phase Meal Suggestions Widget */}
+            <CyclePhaseMealWidget
+              phase="Follicular Phase"
+              meals={mealSuggestions}
+            />
+
             <Card className="magazine-feature-card bg-white border border-primary/20 rounded-xl">
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold mb-2">
