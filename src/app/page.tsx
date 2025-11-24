@@ -44,9 +44,23 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-textile-beige">
-      {/* Header - Matches workout page styling */}
-      <header className="relative z-40 bg-card/95 backdrop-blur-md border-b-2 border-border/50 px-6 py-5 animate-fade-in-up sticky top-0 shadow-bloom-sm">
+    <div className="min-h-screen relative">
+      {/* Botanical background with reduced opacity - matches dashboard */}
+      <div
+        className="fixed inset-0 -z-10"
+        style={{
+          backgroundImage: `url('/backgrounds/botanical-pattern.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.15
+        }}
+      />
+      {/* Pure white background layer */}
+      <div className="fixed inset-0 -z-20 bg-white" />
+
+      {/* Header - Matches dashboard styling */}
+      <header className="relative z-40 bg-white/95 backdrop-blur-md border-b border-black/10 px-6 py-5 sticky top-0">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           {/* Logo/Brand - Left side */}
           <div>
@@ -64,7 +78,7 @@ export default function HomePage() {
               Features
             </Link>
             <Link href="/dashboard">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 py-2 shadow-bloom-sm hover:shadow-bloom transition-all text-sm">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 py-2 shadow-sm hover:shadow-md transition-all text-sm">
                 Get Started
               </Button>
             </Link>
@@ -72,45 +86,45 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section with Animated Background */}
-      <section className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 overflow-hidden textile-overlay-cream">
+      {/* Hero Section - Clean, minimal */}
+      <section className="relative max-w-6xl mx-auto px-6 py-16 md:py-24 overflow-hidden">
         {/* Animated Background Layer */}
         <AnimatedHeroBackground />
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <div className="inline-block mb-6 px-8 py-3.5 bg-gradient-to-r from-primary/12 to-secondary/12 rounded-full backdrop-blur-sm border border-primary/20 animate-fade-in-scale shadow-bloom-sm">
+          <div className="inline-block mb-6 px-8 py-3.5 bg-[hsl(35,40%,94%)] rounded-full border border-black/10">
             <span className="text-base font-semibold text-primary">Wellness Grounded in Nature</span>
           </div>
-          <h1 className="text-5xl md:text-7xl mb-8 leading-tight animate-fade-in-up">
+          <h1 className="text-5xl md:text-7xl mb-8 leading-tight">
             Ground Yourself in Natural Wellness
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed animate-fade-in-up animation-delay-200 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed max-w-2xl mx-auto">
             Rooted empowers you to reconnect with nature and your body through holistic wellness — blending organic nutrition, mindful movement, and sustainable daily rituals.
           </p>
-          <p className="text-lg md:text-xl mb-10 leading-relaxed text-foreground/80 animate-fade-in-up animation-delay-400">
+          <p className="text-lg md:text-xl mb-10 leading-relaxed text-foreground/80">
             Build wellness practices that are <strong>rooted in nature</strong>, grounded in self-care.
           </p>
-          <div className="flex flex-wrap gap-5 justify-center animate-fade-in-up animation-delay-600">
+          <div className="flex flex-wrap gap-5 justify-center">
             <Link href="/dashboard">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-12 py-7 text-lg font-semibold shadow-bloom hover:shadow-bloom-lg transition-all hover:scale-105">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-12 py-7 text-lg font-semibold shadow-sm hover:shadow-md transition-all hover:scale-105">
                 Start Your Journey
                 <ArrowRight className="ml-2 w-6 h-6" strokeWidth={1.5} />
               </Button>
             </Link>
             <Link href="#features">
-              <Button size="lg" variant="outline" className="rounded-full px-12 py-7 text-lg font-semibold border-2 border-primary/30 backdrop-blur-sm bg-card/90 hover:bg-card hover:border-primary/50 transition-all hover:scale-105 shadow-bloom-sm">
+              <Button size="lg" variant="outline" className="rounded-full px-12 py-7 text-lg font-semibold border border-black/10 bg-white hover:bg-[hsl(35,40%,94%)] transition-all hover:scale-105">
                 Learn More
               </Button>
             </Link>
           </div>
 
           {/* Oval button for meal plan personalization */}
-          <div className="mt-8 text-center animate-fade-in-up animation-delay-800">
+          <div className="mt-8 text-center">
             <Link href="/nutrition/quiz">
               <Button
                 variant="outline"
-                className="rounded-full px-8 py-3 text-sm font-medium border-2 border-primary/30 backdrop-blur-sm bg-card/90 hover:bg-card hover:border-primary/50 transition-all hover:scale-105 shadow-bloom-sm"
+                className="rounded-full px-8 py-3 text-sm font-medium border border-black/10 bg-white hover:bg-[hsl(35,40%,94%)] transition-all hover:scale-105"
               >
                 <Utensils className="w-4 h-4 mr-2" strokeWidth={1.5} />
                 Personalize your meal plans
@@ -121,8 +135,8 @@ export default function HomePage() {
       </section>
 
       {/* Mission Statement */}
-      <section className="texture-fabric py-20 textile-overlay-cream section-spacing">
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <section className="py-20 section-spacing">
+        <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="inline-block mb-6">
             <Heart className="w-16 h-16 text-primary mx-auto" strokeWidth={1.5} />
           </div>
@@ -132,41 +146,41 @@ export default function HomePage() {
             rooted promotes wellness, body neutrality, and self-awareness through a holistic, cycle-synced, and sociologically informed lens.
           </p>
           <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div>
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
               <div className="flex justify-center mb-4">
                 <Heart className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Body Neutrality</h3>
-              <p className="text-muted-foreground">Progress without before/after photos</p>
+              <p className="text-muted-foreground text-sm">Progress without before/after photos</p>
             </div>
-            <div>
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
               <div className="flex justify-center mb-4">
                 <TrendingUp className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Empowerment</h3>
-              <p className="text-muted-foreground">Build agency through cycle education</p>
+              <p className="text-muted-foreground text-sm">Build agency through cycle education</p>
             </div>
-            <div>
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
               <div className="flex justify-center mb-4">
                 <Users className="w-10 h-10 text-accent-foreground" strokeWidth={1.5} />
               </div>
               <h3 className="text-lg font-semibold mb-2">Community</h3>
-              <p className="text-muted-foreground">Collective empowerment over competition</p>
+              <p className="text-muted-foreground text-sm">Collective empowerment over competition</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Rooted Balance Circle Section */}
-      <section className="relative section-spacing bg-textile-beige">
+      <section className="relative section-spacing">
         <div className="max-w-6xl mx-auto px-6">
           <RootedBalanceCircle />
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="section-spacing-lg bg-textile-pearl textile-overlay-green">
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <section id="features" className="section-spacing-lg">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl mb-4">Smart, Intuitive Wellness</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -174,17 +188,17 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="magazine-grid-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="magazine-feature-card text-center p-8 relative z-10">
+                <div key={index} className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-8 text-center hover:shadow-md transition-shadow">
                   <div className="flex justify-center mb-5">
                     <Icon className="w-12 h-12 text-primary" strokeWidth={1.5} />
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-[0.95rem]">{feature.description}</p>
-                </Card>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{feature.description}</p>
+                </div>
               );
             })}
           </div>
@@ -192,10 +206,10 @@ export default function HomePage() {
       </section>
 
       {/* Weight & Goals Tracking Section */}
-      <section className="section-spacing-lg bg-textile-beige textile-overlay-cream">
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <section className="section-spacing-lg">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-full border border-secondary/20">
+            <div className="inline-block mb-4 px-5 py-2 bg-[hsl(35,40%,94%)] rounded-full border border-black/10">
               <span className="text-sm font-semibold text-secondary">Track Your Progress</span>
             </div>
             <h2 className="text-4xl md:text-5xl mb-4">Weight & Goals at Your Fingertips</h2>
@@ -204,9 +218,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="magazine-grid-2 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {/* Current Weight Card */}
-            <Card className="magazine-feature-card bg-gradient-to-br from-primary/12 to-primary/5 border-2 border-primary/20 p-8">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
@@ -220,7 +234,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-white/60 rounded-xl border border-primary/10">
+              <div className="flex items-center gap-3 p-4 bg-white rounded-xl border border-black/10">
                 <TrendingDown className="w-5 h-5 text-secondary flex-shrink-0" strokeWidth={1.5} />
                 <div className="flex-1">
                   <p className="text-sm font-medium">3.2 lbs lost</p>
@@ -232,23 +246,23 @@ export default function HomePage() {
               </div>
 
               <div className="mt-6 grid grid-cols-3 gap-3">
-                <div className="text-center p-3 bg-white/60 rounded-lg">
+                <div className="text-center p-3 bg-white rounded-lg border border-black/5">
                   <p className="text-xs text-muted-foreground mb-1">7 Days</p>
                   <p className="text-lg font-bold text-primary">-0.8</p>
                 </div>
-                <div className="text-center p-3 bg-white/60 rounded-lg">
+                <div className="text-center p-3 bg-white rounded-lg border border-black/5">
                   <p className="text-xs text-muted-foreground mb-1">30 Days</p>
                   <p className="text-lg font-bold text-secondary">-3.2</p>
                 </div>
-                <div className="text-center p-3 bg-white/60 rounded-lg">
+                <div className="text-center p-3 bg-white rounded-lg border border-black/5">
                   <p className="text-xs text-muted-foreground mb-1">Logs</p>
                   <p className="text-lg font-bold text-accent-foreground">24</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Active Goal Card */}
-            <Card className="magazine-feature-card bg-gradient-to-br from-secondary/12 to-secondary/5 border-2 border-secondary/20 p-8">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-8">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-3">
@@ -292,19 +306,19 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 p-3 bg-white/60 rounded-lg border border-secondary/10">
+                <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-black/10">
                   <Sparkles className="w-4 h-4 text-secondary flex-shrink-0" strokeWidth={1.5} />
                   <p className="text-xs text-muted-foreground">
                     <strong className="text-foreground">Weekly Target:</strong> 1.5 lbs per week
                   </p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Features Grid */}
-          <div className="magazine-grid-3">
-            <div className="magazine-feature-card text-center p-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-4">
                 <Scale className="w-10 h-10 text-primary" strokeWidth={1.5} />
               </div>
@@ -314,7 +328,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bloom-card hover:shadow-bloom-lg transition-all duration-300 text-center">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-4">
                 <Target className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
@@ -324,7 +338,7 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="magazine-feature-card text-center p-8">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-4">
                 <TrendingUp className="w-10 h-10 text-secondary" strokeWidth={1.5} />
               </div>
@@ -337,7 +351,7 @@ export default function HomePage() {
 
           <div className="mt-12 text-center">
             <Link href="/weight">
-              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 shadow-bloom">
+              <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full px-8 shadow-sm hover:shadow-md transition-shadow">
                 <Scale className="w-5 h-5 mr-2" strokeWidth={1.5} />
                 Start Tracking
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={1.5} />
@@ -348,14 +362,10 @@ export default function HomePage() {
       </section>
 
       {/* Smart Weekly Calorie System */}
-      <section className="relative overflow-hidden section-spacing-xl texture-fabric textile-overlay-cream">
-        {/* Decorative darker sage green accent elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(120 25% 55% / 0.12) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, hsl(110 30% 28% / 0.10) 0%, transparent 70%)' }} />
-
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <section className="relative overflow-hidden section-spacing-xl">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <div className="inline-block mb-4 px-5 py-2 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full border border-primary/20">
+            <div className="inline-block mb-4 px-5 py-2 bg-[hsl(35,40%,94%)] rounded-full border border-black/10">
               <span className="text-sm font-semibold text-primary">Intelligent Nutrition</span>
             </div>
             <h2 className="text-4xl md:text-5xl mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
@@ -366,38 +376,38 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="magazine-grid-2 items-start mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start mb-12">
             <div className="space-y-6">
-              <div className="magazine-feature-card bg-gradient-to-br from-card to-primary/8 p-6">
+              <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
                 <div className="flex gap-4 items-start">
                   <Calendar className="w-8 h-8 text-primary flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Verified Plans? No Problem</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
                       Going out this week? Our AI automatically rebalances your meal plans around drinking, eating out, and special events while keeping you on track with your fitness goals.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="magazine-feature-card bg-gradient-to-br from-card to-secondary/8 p-6">
+              <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
                 <div className="flex gap-4 items-start">
                   <Activity className="w-8 h-8 text-secondary flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Cycle-Synced Intelligence</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
                       Integrates cycle tracking to adjust nutrition needs based on where you are hormonally — because your body's needs change throughout the month.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="magazine-feature-card bg-gradient-to-br from-card to-accent/10 p-6">
+              <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-6">
                 <div className="flex gap-4 items-start">
                   <TrendingUp className="w-8 h-8 text-accent-foreground flex-shrink-0" strokeWidth={1.5} />
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold mb-2">Healthy Balance of Living</h4>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
                       Fitness goals shouldn't mean sacrificing your social life. Find the sweet spot between wellness and enjoying life's moments.
                     </p>
                   </div>
@@ -405,7 +415,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="magazine-feature-card bg-gradient-to-br from-card via-primary/8 to-secondary/8 border-2 border-primary/25 p-8">
+            <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl p-8">
               <div className="text-center mb-8">
                 <div className="inline-flex items-center gap-2 mb-3">
                   <Sparkles className="w-5 h-5 text-primary" strokeWidth={1.5} />
@@ -417,7 +427,7 @@ export default function HomePage() {
 
               <div className="space-y-5">
                 <div className="relative">
-                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                  <div className="bg-white rounded-2xl p-6 border border-black/10 hover:shadow-md transition-shadow duration-300">
                     <div className="flex items-start gap-4">
                       <div className="text-3xl font-bold text-primary flex-shrink-0">
                         1
@@ -433,7 +443,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative">
-                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                  <div className="bg-white rounded-2xl p-6 border border-black/10 hover:shadow-md transition-shadow duration-300">
                     <div className="flex items-start gap-4">
                       <div className="text-3xl font-bold text-secondary flex-shrink-0">
                         2
@@ -449,7 +459,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="relative">
-                  <div className="bg-white rounded-2xl p-6 shadow-bloom-sm hover:shadow-bloom transition-shadow duration-300">
+                  <div className="bg-white rounded-2xl p-6 border border-black/10 hover:shadow-md transition-shadow duration-300">
                     <div className="flex items-start gap-4">
                       <div className="text-3xl font-bold text-accent-foreground flex-shrink-0">
                         3
@@ -465,7 +475,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="mt-8 p-4 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl border border-primary/20">
+              <div className="mt-8 p-4 bg-[hsl(35,40%,94%)] rounded-xl border border-black/10">
                 <p className="text-sm text-center text-foreground/80 italic">
                   <Heart className="w-4 h-4 inline-block mr-1 text-secondary" strokeWidth={1.5} />
                   "Because wellness is about balance, not perfection"
@@ -475,8 +485,8 @@ export default function HomePage() {
           </div>
 
           {/* Additional benefits row */}
-          <div className="magazine-grid mt-12">
-            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+            <div className="text-center p-6 rounded-2xl bg-[hsl(35,40%,94%)] border border-black/10 hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-3">
                 <Award className="w-8 h-8 text-primary" strokeWidth={1.5} />
               </div>
@@ -484,7 +494,7 @@ export default function HomePage() {
               <p className="text-xs text-muted-foreground">Flexible daily goals that balance out over 7 days</p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-secondary/10">
+            <div className="text-center p-6 rounded-2xl bg-[hsl(35,40%,94%)] border border-black/10 hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-3">
                 <Brain className="w-8 h-8 text-secondary" strokeWidth={1.5} />
               </div>
@@ -492,7 +502,7 @@ export default function HomePage() {
               <p className="text-xs text-muted-foreground">Learns your patterns and preferences over time</p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-accent/20">
+            <div className="text-center p-6 rounded-2xl bg-[hsl(35,40%,94%)] border border-black/10 hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-3">
                 <Heart className="w-8 h-8 text-accent-foreground" strokeWidth={1.5} />
               </div>
@@ -500,7 +510,7 @@ export default function HomePage() {
               <p className="text-xs text-muted-foreground">Enjoy life's moments without derailing progress</p>
             </div>
 
-            <div className="text-center p-6 rounded-2xl bg-white/50 backdrop-blur-sm border border-primary/10">
+            <div className="text-center p-6 rounded-2xl bg-[hsl(35,40%,94%)] border border-black/10 hover:shadow-md transition-shadow">
               <div className="flex justify-center mb-3">
                 <Activity className="w-8 h-8 text-primary" strokeWidth={1.5} />
               </div>
@@ -513,7 +523,7 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section className="max-w-6xl mx-auto px-6 section-spacing-lg">
-        <Card className="magazine-feature-card bg-gradient-to-br from-secondary/15 via-accent/8 to-primary/12 border-2 border-accent/20 text-center p-12">
+        <div className="bg-[hsl(35,40%,94%)] border border-black/10 rounded-xl text-center p-12">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-4xl mb-6">Ready to Get Started?</h2>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -521,13 +531,13 @@ export default function HomePage() {
               holistic care designed just for them.
             </p>
             <Link href="/dashboard">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-bloom-lg">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 shadow-sm hover:shadow-md transition-shadow">
                 Start Your Free Trial
                 <ArrowRight className="ml-2 w-5 h-5" strokeWidth={1.5} />
               </Button>
             </Link>
           </div>
-        </Card>
+        </div>
       </section>
 
     </div>
