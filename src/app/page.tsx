@@ -197,8 +197,10 @@ function MissionSection() {
             transitionDelay: '400ms',
           }}
         >
-          To help women redefine fitness — not as punishment or perfection, but as a lifelong relationship with their body.
-          rooted promotes wellness, body neutrality, and self-awareness through a holistic, cycle-synced, and sociologically informed lens.
+          Our mission is to empower women's wellness. As women, we are constantly balancing countless responsibilities and roles.
+          rooted is here to help you balance and refine wellness—not as another task on your to-do list, but as a gentle, nurturing practice
+          that works with your body's natural rhythms. We promote self-awareness, body neutrality, and holistic health through a
+          cycle-synced approach that honors where you are in your journey.
         </p>
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           {[
