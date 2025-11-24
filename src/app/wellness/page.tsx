@@ -271,6 +271,101 @@ export default function WellnessDashboard() {
           </div>
         </div>
 
+        {/* Smart Calendar Widget */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4">Smart Intuitive Wellness Calendar</h3>
+          <Card className="calendar-container widget-card p-8 rounded-3xl">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h4 className="text-lg font-semibold mb-1">Your Wellness Schedule</h4>
+                <p className="text-sm text-muted-foreground">AI-powered recommendations based on your cycle</p>
+              </div>
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <CalendarDays className="w-6 h-6 text-primary" />
+              </div>
+            </div>
+
+            {/* Weekly Overview */}
+            <div className="space-y-4">
+              {/* Day 1 - Today */}
+              <div className="flex items-center gap-4 p-4 bg-background rounded-2xl border border-foreground/10 hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 w-16 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Today</p>
+                  <p className="text-2xl font-bold">{today.getDate()}</p>
+                  <p className="text-xs text-muted-foreground">{today.toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                </div>
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-accent"></div>
+                    <p className="text-sm font-medium">Morning yoga flow</p>
+                    <span className="text-xs text-muted-foreground ml-auto">7:00 AM</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary"></div>
+                    <p className="text-sm font-medium">Balanced breakfast prep</p>
+                    <span className="text-xs text-muted-foreground ml-auto">8:30 AM</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
+                    <p className="text-sm font-medium">Afternoon meditation</p>
+                    <span className="text-xs text-muted-foreground ml-auto">2:00 PM</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Day 2 - Tomorrow */}
+              <div className="flex items-center gap-4 p-4 bg-background rounded-2xl border border-foreground/10 hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 w-16 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Tomorrow</p>
+                  <p className="text-2xl font-bold">{new Date(today.getTime() + 86400000).getDate()}</p>
+                  <p className="text-xs text-muted-foreground">{new Date(today.getTime() + 86400000).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                </div>
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-accent"></div>
+                    <p className="text-sm font-medium">Strength training session</p>
+                    <span className="text-xs text-muted-foreground ml-auto">6:30 AM</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-secondary"></div>
+                    <p className="text-sm font-medium">Meal planning time</p>
+                    <span className="text-xs text-muted-foreground ml-auto">12:00 PM</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Day 3 */}
+              <div className="flex items-center gap-4 p-4 bg-background rounded-2xl border border-foreground/10 hover:shadow-md transition-shadow">
+                <div className="flex-shrink-0 w-16 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">{new Date(today.getTime() + 172800000).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                  <p className="text-2xl font-bold">{new Date(today.getTime() + 172800000).getDate()}</p>
+                </div>
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-accent"></div>
+                    <p className="text-sm font-medium">Gentle stretching routine</p>
+                    <span className="text-xs text-muted-foreground ml-auto">7:30 AM</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-primary"></div>
+                    <p className="text-sm font-medium">Evening journaling</p>
+                    <span className="text-xs text-muted-foreground ml-auto">8:00 PM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex justify-center">
+              <Button
+                variant="outline"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground rounded-full border-none"
+              >
+                View Full Calendar
+              </Button>
+            </div>
+          </Card>
+        </div>
+
         {/* Bottom Navigation */}
         <div className="flex justify-center gap-4 mt-8">
           <Button className="bg-foreground hover:bg-foreground/90 text-background rounded-full px-8 flex items-center gap-2">
