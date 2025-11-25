@@ -26,11 +26,13 @@ import type { CalendarEvent, EventCategory } from '@/lib/types/calendar-events';
 import { DEFAULT_CATEGORY_COLORS, type ColorScheme } from '@/lib/types/calendar-events';
 import { ColorSchemePicker } from '@/components/color-scheme-picker';
 import { toast } from 'sonner';
+import { getCalorieTotalsByDateRange, type DailyCalorieTotals } from '@/lib/supabase/nutrition-queries';
 
 interface WeeklyCalendarViewProps {
   selectedWeekStart: Date;
   onClose: () => void;
   onEventCreated?: () => void;
+  userId?: string; // User ID for loading food log data
 }
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
@@ -38,13 +40,15 @@ const HOURS = Array.from({ length: 24 }, (_, i) => i);
 export function WeeklyCalendarView({
   selectedWeekStart,
   onClose,
-  onEventCreated
+  onEventCreated,
+  userId = 'demo-user' // Default user ID for demo purposes
 }: WeeklyCalendarViewProps) {
   const [currentWeekStart, setCurrentWeekStart] = useState(selectedWeekStart);
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<{ date: Date; hour: number } | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [calorieTotals, setCalorieTotals] = useState<Map<string, DailyCalorieTotals>>(new Map());
 
   // Form state
   const [title, setTitle] = useState('');
@@ -65,24 +69,29 @@ export function WeeklyCalendarView({
     return dates;
   }, [currentWeekStart]);
 
-  // Load events for current week
+  // Load events and calorie data for current week
   useEffect(() => {
-    async function loadEvents() {
+    async function loadWeekData() {
       try {
-        const startDate = weekDates[0].toISOString();
-        const endDate = new Date(weekDates[6]);
-        endDate.setHours(23, 59, 59);
+        const startDate = weekDates[0].toISOString().split('T')[0]; // YYYY-MM-DD format
+        const endDate = weekDates[6].toISOString().split('T')[0];
+
+        // Load calendar events
         const weekEvents = await getCalendarEventsByDateRange(
-          startDate,
-          endDate.toISOString()
+          weekDates[0].toISOString(),
+          new Date(weekDates[6].setHours(23, 59, 59)).toISOString()
         );
         setEvents(weekEvents);
+
+        // Load calorie totals
+        const totals = await getCalorieTotalsByDateRange(userId, startDate, endDate);
+        setCalorieTotals(totals);
       } catch (error) {
-        console.error('Failed to load events:', error);
+        console.error('Failed to load week data:', error);
       }
     }
-    loadEvents();
-  }, [weekDates]);
+    loadWeekData();
+  }, [weekDates, userId]);
 
   const goToPreviousWeek = () => {
     const newDate = new Date(currentWeekStart);
@@ -113,22 +122,25 @@ export function WeeklyCalendarView({
   const handleEventCreated = () => {
     setIsDialogOpen(false);
     setSelectedSlot(null);
-    // Reload events
-    async function reloadEvents() {
+    // Reload events and calorie data
+    async function reloadWeekData() {
       try {
-        const startDate = weekDates[0].toISOString();
-        const endDate = new Date(weekDates[6]);
-        endDate.setHours(23, 59, 59);
+        const startDate = weekDates[0].toISOString().split('T')[0];
+        const endDate = weekDates[6].toISOString().split('T')[0];
+
         const weekEvents = await getCalendarEventsByDateRange(
-          startDate,
-          endDate.toISOString()
+          weekDates[0].toISOString(),
+          new Date(weekDates[6].setHours(23, 59, 59)).toISOString()
         );
         setEvents(weekEvents);
+
+        const totals = await getCalorieTotalsByDateRange(userId, startDate, endDate);
+        setCalorieTotals(totals);
       } catch (error) {
-        console.error('Failed to reload events:', error);
+        console.error('Failed to reload week data:', error);
       }
     }
-    reloadEvents();
+    reloadWeekData();
     onEventCreated?.();
   };
 
@@ -286,6 +298,10 @@ export function WeeklyCalendarView({
                 date.getMonth() === new Date().getMonth() &&
                 date.getFullYear() === new Date().getFullYear();
 
+              const dateKey = date.toISOString().split('T')[0];
+              const dailyTotal = calorieTotals.get(dateKey);
+              const hasCalorieData = dailyTotal && dailyTotal.totalCalories > 0;
+
               return (
                 <div
                   key={idx}
@@ -303,6 +319,18 @@ export function WeeklyCalendarView({
                   >
                     {date.getDate()}
                   </div>
+                  {hasCalorieData && (
+                    <div className="mt-2 px-2 py-1 rounded-full bg-primary/10 border border-primary/20">
+                      <div className="text-xs font-semibold text-primary">
+                        {Math.round(dailyTotal.totalCalories)} cal
+                      </div>
+                      {dailyTotal.mealCount > 0 && (
+                        <div className="text-[10px] text-muted-foreground">
+                          {dailyTotal.mealCount} {dailyTotal.mealCount === 1 ? 'meal' : 'meals'}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}

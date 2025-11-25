@@ -336,6 +336,110 @@ export async function deleteAIMealSuggestion(id: string): Promise<void> {
 }
 
 // ============================================
+// Daily Calorie Totals
+// ============================================
+
+export interface DailyCalorieTotals {
+  date: string;
+  totalCalories: number;
+  totalProtein: number;
+  totalCarbs: number;
+  totalFat: number;
+  totalFiber: number;
+  mealCount: number;
+}
+
+/**
+ * Get calorie totals for multiple dates
+ * Used by the weekly calendar view to display daily totals
+ */
+export async function getCalorieTotalsByDateRange(
+  userId: string,
+  startDate: string,
+  endDate: string
+): Promise<Map<string, DailyCalorieTotals>> {
+  // Get user meals for the date range
+  const userMeals = await getUserMealsByDateRange(userId, startDate, endDate);
+
+  if (userMeals.length === 0) {
+    return new Map();
+  }
+
+  // Get food IDs and fetch food details
+  const foodIds = [...new Set(userMeals.map(meal => meal.food_id))];
+
+  const { data: foods, error } = await supabase
+    .from('foods')
+    .select('*')
+    .in('id', foodIds);
+
+  if (error) throw error;
+
+  // Create a map of food_id -> Food for quick lookup
+  const foodMap = new Map<string, Food>();
+  foods?.forEach(food => {
+    foodMap.set(food.id, food);
+  });
+
+  // Calculate totals grouped by date
+  const dailyTotals = new Map<string, DailyCalorieTotals>();
+
+  userMeals.forEach(meal => {
+    const food = foodMap.get(meal.food_id);
+    if (!food) return;
+
+    const servings = meal.servings || 1;
+    const calories = (food.calories || 0) * servings;
+    const protein = (food.protein || 0) * servings;
+    const carbs = (food.carbs || 0) * servings;
+    const fat = (food.fat || 0) * servings;
+    const fiber = (food.fiber || 0) * servings;
+
+    if (dailyTotals.has(meal.date)) {
+      const existing = dailyTotals.get(meal.date)!;
+      existing.totalCalories += calories;
+      existing.totalProtein += protein;
+      existing.totalCarbs += carbs;
+      existing.totalFat += fat;
+      existing.totalFiber += fiber;
+      existing.mealCount += 1;
+    } else {
+      dailyTotals.set(meal.date, {
+        date: meal.date,
+        totalCalories: calories,
+        totalProtein: protein,
+        totalCarbs: carbs,
+        totalFat: fat,
+        totalFiber: fiber,
+        mealCount: 1,
+      });
+    }
+  });
+
+  return dailyTotals;
+}
+
+/**
+ * Get calorie total for a single date
+ */
+export async function getCalorieTotalsForDate(
+  userId: string,
+  date: string
+): Promise<DailyCalorieTotals> {
+  const totalsMap = await getCalorieTotalsByDateRange(userId, date, date);
+
+  return totalsMap.get(date) || {
+    date,
+    totalCalories: 0,
+    totalProtein: 0,
+    totalCarbs: 0,
+    totalFat: 0,
+    totalFiber: 0,
+    mealCount: 0,
+  };
+}
+
+// ============================================
 // Helper Functions
 // ============================================
 
