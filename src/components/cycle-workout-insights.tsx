@@ -249,9 +249,9 @@ export function CycleWorkoutInsights({ userId }: CycleWorkoutInsightsProps) {
         </div>
       </Card>
 
-      {/* Workout Recommendations Grid */}
+      {/* Workout Recommendations Grid - Now with Dropdown Menu */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Choose Your Workout</h3>
+        <h3 className="text-lg font-semibold">Recommended For You</h3>
 
         {recommendations.map((workout, index) => {
           const Icon = workout.icon;

@@ -20,7 +20,9 @@ import {
   Heart,
   MessageCircle,
   TrendingUp,
-  Sparkles
+  Sparkles,
+  Target,
+  Award
 } from 'lucide-react';
 import {
   getFeedPosts,
@@ -42,6 +44,7 @@ export default function CommunityPage() {
   const [createPostOpen, setCreatePostOpen] = useState(false);
   const [posts, setPosts] = useState<any[]>([]);
   const [friendRequests, setFriendRequests] = useState<any[]>([]);
+  const [sharedJourneys, setSharedJourneys] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // Load initial data
@@ -113,6 +116,40 @@ export default function CommunityPage() {
           sender_name: 'Ashley Davis',
           message: null,
           created_at: new Date(Date.now() - 172800000).toISOString()
+        }
+      ]);
+
+      // Mock shared wellness journeys
+      setSharedJourneys([
+        {
+          id: 'journey_1',
+          user_id: 'user_456',
+          user_name: 'Sarah Johnson',
+          title: 'Half Marathon Training',
+          goalType: 'half-marathon',
+          targetDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString(),
+          currentLevel: 'intermediate',
+          weeklyCommitment: 5,
+          progress: 45,
+          milestones: 4,
+          completedMilestones: 2,
+          focusAreas: ['Endurance Running', 'Speed Work', 'Long Runs'],
+          created_at: new Date(Date.now() - 604800000).toISOString()
+        },
+        {
+          id: 'journey_2',
+          user_id: 'user_789',
+          user_name: 'Emma Williams',
+          title: 'HYROX Competition Prep',
+          goalType: 'hyrox',
+          targetDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(),
+          currentLevel: 'advanced',
+          weeklyCommitment: 8,
+          progress: 30,
+          milestones: 4,
+          completedMilestones: 1,
+          focusAreas: ['Running Intervals', 'Functional Strength', 'Rowing'],
+          created_at: new Date(Date.now() - 259200000).toISOString()
         }
       ]);
     } catch (error) {
@@ -208,10 +245,22 @@ export default function CommunityPage() {
 
         {/* Tabs */}
         <Tabs defaultValue="feed" className="w-full animate-fade-in-up animation-delay-800">
-          <TabsList className="grid w-full grid-cols-3 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="feed">
               <TrendingUp className="w-4 h-4 mr-2" strokeWidth={1.5} />
               Feed
+            </TabsTrigger>
+            <TabsTrigger value="journeys" className="relative">
+              <Target className="w-4 h-4 mr-2" strokeWidth={1.5} />
+              Journeys
+              {sharedJourneys.length > 0 && (
+                <Badge
+                  variant="secondary"
+                  className="absolute -top-1 -right-1 w-5 h-5 p-0 flex items-center justify-center text-xs"
+                >
+                  {sharedJourneys.length}
+                </Badge>
+              )}
             </TabsTrigger>
             <TabsTrigger value="requests" className="relative">
               <UserPlus className="w-4 h-4 mr-2" strokeWidth={1.5} />
@@ -240,6 +289,111 @@ export default function CommunityPage() {
               onComment={handleCommentPost}
               onDelete={handleDeletePost}
             />
+          </TabsContent>
+
+          <TabsContent value="journeys">
+            <div className="space-y-4">
+              {sharedJourneys.length === 0 ? (
+                <Card className="magazine-feature-card p-8 text-center bg-white/90 backdrop-blur-sm shadow-bloom-sm">
+                  <div className="w-20 h-20 rounded-full bg-muted/30 flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-10 h-10 text-muted-foreground opacity-50" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">No Shared Journeys Yet</h3>
+                  <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                    When your friends share their wellness journeys, you'll see them here!
+                  </p>
+                </Card>
+              ) : (
+                <>
+                  <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">Friends' Wellness Journeys</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Cheer on your friends and start fitness challenges together!
+                    </p>
+                  </div>
+
+                  {sharedJourneys.map((journey) => (
+                    <Card key={journey.id} className="bloom-card hover:shadow-bloom-lg transition-all bg-white/90 backdrop-blur-sm">
+                      <div className="flex items-start gap-4 mb-4">
+                        <Avatar className="w-12 h-12">
+                          <AvatarFallback className="bg-primary text-primary-foreground">
+                            {journey.user_name.split(' ').map((n: string) => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between mb-1">
+                            <h4 className="font-semibold">{journey.user_name}</h4>
+                            <span className="text-xs text-muted-foreground">
+                              {new Date(journey.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                            </span>
+                          </div>
+                          <p className="text-sm text-muted-foreground">shared a wellness journey</p>
+                        </div>
+                      </div>
+
+                      <div className="p-4 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-xl border border-primary/20">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                              <Target className="w-5 h-5 text-primary" />
+                            </div>
+                            <div>
+                              <h5 className="font-bold">{journey.title}</h5>
+                              <p className="text-xs text-muted-foreground">
+                                Target: {new Date(journey.targetDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                              </p>
+                            </div>
+                          </div>
+                          <Badge variant="outline" className="capitalize">
+                            {journey.currentLevel}
+                          </Badge>
+                        </div>
+
+                        <div className="mb-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium">Progress</span>
+                            <span className="text-sm font-bold text-primary">{journey.progress}%</span>
+                          </div>
+                          <div className="h-2 bg-muted/30 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-primary to-secondary transition-all"
+                              style={{ width: `${journey.progress}%` }}
+                            />
+                          </div>
+                          <div className="flex items-center justify-between mt-2">
+                            <span className="text-xs text-muted-foreground">
+                              {journey.completedMilestones} of {journey.milestones} milestones
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {journey.weeklyCommitment}h/week
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {journey.focusAreas.map((area: string, idx: number) => (
+                            <Badge key={idx} variant="secondary" className="text-xs">
+                              {area}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1 rounded-full">
+                            <Heart className="w-4 h-4 mr-2" />
+                            Cheer On
+                          </Button>
+                          <Button variant="outline" size="sm" className="flex-1 rounded-full">
+                            <Award className="w-4 h-4 mr-2" />
+                            Join Challenge
+                          </Button>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </>
+              )}
+            </div>
           </TabsContent>
 
           <TabsContent value="requests">

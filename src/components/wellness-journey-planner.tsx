@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Target, TrendingUp, Calendar, MapPin, Award, Clock, Plus, CheckCircle2, Zap, Info } from 'lucide-react';
+import { Target, TrendingUp, Calendar, MapPin, Award, Clock, Plus, CheckCircle2, Zap, Info, Share2, Users } from 'lucide-react';
 import { toast } from 'sonner';
 
 export interface WellnessJourney {
@@ -153,10 +153,12 @@ const JOURNEY_TEMPLATES = {
 interface WellnessJourneyPlannerProps {
   onJourneyCreated?: (journey: WellnessJourney) => void;
   existingJourneys?: WellnessJourney[];
+  onShareWithFriends?: (journey: WellnessJourney) => void;
 }
 
-export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = [] }: WellnessJourneyPlannerProps) {
+export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = [], onShareWithFriends }: WellnessJourneyPlannerProps) {
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
   const [selectedGoalType, setSelectedGoalType] = useState<keyof typeof JOURNEY_TEMPLATES | 'custom'>('half-marathon');
   const [customTitle, setCustomTitle] = useState('');
   const [targetDate, setTargetDate] = useState('');
@@ -165,6 +167,7 @@ export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = []
   const [notes, setNotes] = useState('');
   const [journeys, setJourneys] = useState<WellnessJourney[]>(existingJourneys);
   const [expandedJourney, setExpandedJourney] = useState<string | null>(null);
+  const [journeyToShare, setJourneyToShare] = useState<WellnessJourney | null>(null);
 
   const selectedTemplate = selectedGoalType !== 'custom' ? JOURNEY_TEMPLATES[selectedGoalType] : null;
 
@@ -212,6 +215,22 @@ export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = []
     setCustomTitle('');
     setTargetDate('');
     setNotes('');
+  };
+
+  const handleShareJourney = (journey: WellnessJourney) => {
+    setJourneyToShare(journey);
+    setShowShareDialog(true);
+  };
+
+  const handleConfirmShare = () => {
+    if (journeyToShare) {
+      onShareWithFriends?.(journeyToShare);
+      toast.success('Journey shared!', {
+        description: 'Your friends can now see your wellness journey in the Community tab',
+      });
+      setShowShareDialog(false);
+      setJourneyToShare(null);
+    }
   };
 
   const calculateMilestoneDate = (targetDate: string, totalMilestones: number, milestoneIndex: number): string => {
@@ -268,9 +287,20 @@ export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = []
                 </p>
               </div>
             </div>
-            <Badge variant="default" className="bg-primary text-primary-foreground">
-              Active
-            </Badge>
+            <div className="flex items-center gap-2">
+              <Badge variant="default" className="bg-primary text-primary-foreground">
+                Active
+              </Badge>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full"
+                onClick={() => handleShareJourney(activeJourney)}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share with Friends
+              </Button>
+            </div>
           </div>
 
           {/* Progress Bar */}
@@ -713,6 +743,76 @@ export function WellnessJourneyPlanner({ onJourneyCreated, existingJourneys = []
           </DialogContent>
         </Dialog>
       )}
+
+      {/* Share with Friends Dialog */}
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl flex items-center gap-2">
+              <Users className="w-6 h-6 text-primary" />
+              Share Wellness Journey
+            </DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            {journeyToShare && (
+              <>
+                <div className="p-4 bg-secondary/10 rounded-xl border border-secondary/20">
+                  <h4 className="font-semibold mb-2">{journeyToShare.title}</h4>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Target: {new Date(journeyToShare.targetDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Badge variant="outline">{journeyToShare.currentLevel}</Badge>
+                    <span className="text-muted-foreground">•</span>
+                    <span className="text-muted-foreground">{journeyToShare.weeklyCommitment}h/week</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <h4 className="font-semibold text-sm">What will be shared:</h4>
+                  <ul className="text-sm text-muted-foreground space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Your journey title, goal type, and target date</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Progress updates and milestone completions</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Focus areas and training commitment</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Your friends will see this journey in the Community tab</strong> and can cheer you on, share their own journeys, and start fitness challenges together!
+                  </p>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    className="flex-1 rounded-full"
+                    onClick={() => setShowShareDialog(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
+                    onClick={handleConfirmShare}
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Share Journey
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
