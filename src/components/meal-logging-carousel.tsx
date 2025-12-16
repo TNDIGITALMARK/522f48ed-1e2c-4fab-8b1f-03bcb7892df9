@@ -252,7 +252,7 @@ export function MealLoggingCarousel({ date, meals, onAddFood, onRemoveFood }: Me
                 : 'bg-muted text-muted-foreground'
             }`}
           >
-            rooted Score: {averageScore}
+            Score: {averageScore}
           </div>
         )}
       </div>

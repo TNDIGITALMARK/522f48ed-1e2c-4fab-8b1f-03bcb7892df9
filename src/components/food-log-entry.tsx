@@ -63,7 +63,7 @@ export function FoodLogEntry({ date, meals, onAddFood, onRemoveFood }: FoodLogEn
                   : 'bg-muted text-muted-foreground'
               }`}
             >
-              rooted Score: {averageScore}
+              Score: {averageScore}
             </div>
           )}
         </div>

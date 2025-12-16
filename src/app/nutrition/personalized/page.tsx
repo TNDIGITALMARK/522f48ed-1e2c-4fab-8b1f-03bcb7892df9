@@ -133,7 +133,7 @@ export default function PersonalizedNutritionPage() {
                     }`}>
                       {meal.bloomScore}
                     </div>
-                    <span className="text-xs text-muted-foreground">rooted Score</span>
+                    <span className="text-xs text-muted-foreground">Score</span>
                   </div>
                 </div>
 
