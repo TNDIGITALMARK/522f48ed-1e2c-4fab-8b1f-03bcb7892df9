@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target, ChevronDown, ChevronUp } from 'lucide-react';
+import { Dumbbell, Heart, Zap, Clock, Flame, CheckCircle2, Play, ListChecks, Plus, TrendingUp, Info, Activity, Scale, Target, ChevronDown, ChevronUp, Filter } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -292,6 +292,7 @@ export default function WorkoutPage() {
   const [cardioLogs, setCardioLogs] = useState<CardioLog[]>([]);
   const [wellnessJourneys, setWellnessJourneys] = useState<WellnessJourney[]>([]);
   const [expandedWorkouts, setExpandedWorkouts] = useState<Set<number>>(new Set());
+  const [workoutFilter, setWorkoutFilter] = useState<'all' | 'fullbody' | 'hiit'>('all');
 
   const handleLogWorkout = (exerciseName?: string, exerciseSets?: number, exerciseReps?: number, exerciseWeight?: number, manualCalories?: number) => {
     const today = new Date().toISOString().split('T')[0];
@@ -348,6 +349,32 @@ export default function WorkoutPage() {
       return newSet;
     });
   };
+
+  // Filter workouts based on selected filter
+  const getFilteredWorkouts = () => {
+    if (workoutFilter === 'all') {
+      return workouts;
+    }
+
+    if (workoutFilter === 'fullbody') {
+      return workouts.filter(w =>
+        w.title.toLowerCase().includes('full body') ||
+        w.title.toLowerCase().includes('strength')
+      );
+    }
+
+    if (workoutFilter === 'hiit') {
+      return workouts.filter(w =>
+        w.title.toLowerCase().includes('hiit') ||
+        w.title.toLowerCase().includes('cardio') ||
+        w.title.toLowerCase().includes('blast')
+      );
+    }
+
+    return workouts;
+  };
+
+  const filteredWorkouts = getFilteredWorkouts();
 
   return (
     <div className="min-h-screen relative pb-24">
@@ -691,13 +718,45 @@ export default function WorkoutPage() {
                   <Zap className="w-5 h-5 text-secondary" />
                   Recommended for You
                 </h3>
-                <Badge variant="secondary" className="text-xs">
-                  {currentPhase} Phase
-                </Badge>
+                <div className="flex items-center gap-3">
+                  <Badge variant="secondary" className="text-xs">
+                    {currentPhase} Phase
+                  </Badge>
+
+                  {/* Workout Type Filter Dropdown */}
+                  <div className="relative">
+                    <select
+                      value={workoutFilter}
+                      onChange={(e) => setWorkoutFilter(e.target.value as 'all' | 'fullbody' | 'hiit')}
+                      className="appearance-none bg-white border border-border rounded-full pl-4 pr-10 py-2 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all cursor-pointer hover:border-primary/50"
+                    >
+                      <option value="all">All Workouts</option>
+                      <option value="fullbody">Full Body</option>
+                      <option value="hiit">HIIT</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                {workouts.map((workout, index) => {
+              {filteredWorkouts.length === 0 ? (
+                <Card className="bloom-card p-8 text-center">
+                  <Filter className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-50" />
+                  <h4 className="text-lg font-semibold mb-2">No workouts match this filter</h4>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Try selecting a different workout type or view all workouts
+                  </p>
+                  <Button
+                    onClick={() => setWorkoutFilter('all')}
+                    variant="outline"
+                    className="rounded-full"
+                  >
+                    View All Workouts
+                  </Button>
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {filteredWorkouts.map((workout, index) => {
                   const isExpanded = expandedWorkouts.has(index);
                   return (
                     <Card key={index} className="bloom-card hover:shadow-bloom-lg transition-all group">
@@ -820,6 +879,7 @@ export default function WorkoutPage() {
                   );
                 })}
               </div>
+              )}
             </div>
 
             <WellnessJourneyPlanner
