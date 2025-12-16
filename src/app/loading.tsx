@@ -61,9 +61,7 @@ export default function Loading() {
             </p>
             <button
               onClick={handleReload}
-              className="group px-6 py-3 bg-secondary text-secondary-foreground rounded-2xl font-semibold
-                       hover:bg-secondary/90 transition-all duration-300 hover:-translate-y-1
-                       hover:shadow-lg flex items-center gap-2 mx-auto"
+              className="group px-6 py-3 bg-secondary text-secondary-foreground rounded-2xl font-semibold hover:bg-secondary/90 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex items-center gap-2 mx-auto"
             >
               <RefreshCw className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
               Reload Page
